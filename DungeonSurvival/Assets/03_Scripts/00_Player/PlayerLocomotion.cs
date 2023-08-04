@@ -9,7 +9,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] float moveSpeed = 3;
 
     CharacterController controller;
-    Vector3 velocity;
+    Animator anim;
 
     [SerializeField] float characterGravity = 9;
 
@@ -17,6 +17,7 @@ public class PlayerLocomotion : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -34,10 +35,9 @@ public class PlayerLocomotion : MonoBehaviour
             transform.rotation = rotation;
         }
 
-        direction *= moveSpeed;
-        direction.y = -characterGravity;
-        velocity = direction * Time.deltaTime;
+        float speed = direction.sqrMagnitude;
+        anim.SetFloat("Speed", speed, 0.1f, Time.deltaTime * moveSpeed);
 
-        controller.Move(velocity);
+        controller.Move(Vector3.down * characterGravity);
     }
 }
