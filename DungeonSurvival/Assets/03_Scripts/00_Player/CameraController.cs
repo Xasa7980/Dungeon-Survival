@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public static CameraController current { get; private set; }
+    public static Camera uiCamera { get; private set; }
 
     [SerializeField] Transform target;
     [SerializeField] float followSpeed = 5;
@@ -12,6 +13,7 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         current = this;
+        uiCamera = GameObject.FindGameObjectWithTag("UI_Cam").GetComponent<Camera>();
     }
 
     // Update is called once per frame
