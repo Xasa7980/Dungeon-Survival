@@ -16,48 +16,48 @@ public abstract class Interactable : MonoBehaviour
 
     [Tooltip("Prioridad de la interaccion. Determina si sera mas deseable para el personaje que otra." +
         "A menor valor mayor prioridad")]
-    [SerializeField, Range(0, 100)] int _priority = 0;
+    [FoldoutGroup("Interactable"), SerializeField, Range(0, 100)] int _priority = 0;
     public int priority => _priority;
 
-    [SerializeField] InteractionType _interactionType;
+    [FoldoutGroup("Interactable"), SerializeField] InteractionType _interactionType;
     public InteractionType interactionType => _interactionType;
-    [ShowIf("interactionType", InteractionType.Continue), SerializeField] float _interactionTime = 3;
+    [FoldoutGroup("Interactable"), ShowIf("interactionType", InteractionType.Continue), SerializeField] float _interactionTime = 3;
     public float interactionTime => _interactionTime;
     float interactionProgress = 0;
     public bool finished => interactionProgress > interactionTime;
 
-    [FoldoutGroup("Animations"), SerializeField, HideIf("interactionType", InteractionType.Automatic)]
+    [FoldoutGroup("Interactable/Animations"), SerializeField, HideIf("interactionType", InteractionType.Automatic)]
     bool _disallowRootMotion;
     public bool disallowRootMotion => _disallowRootMotion;
-    [FoldoutGroup("Animations"), SerializeField, ShowIf("interactionType", InteractionType.Single)]
+    [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("interactionType", InteractionType.Single)]
     AnimationClip interactionClip;
-    [FoldoutGroup("Animations"), SerializeField, ShowIf("interactionType", InteractionType.Continue)]
+    [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("interactionType", InteractionType.Continue)]
     AnimationClip continuousInteractionClip;
-    [FoldoutGroup("Animations"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
+    [FoldoutGroup("Interactable/Animations"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
     bool hasStartAnimation;
-    [FoldoutGroup("Animations"), SerializeField, ShowIf("@this.hasStartAnimation && interactionType != InteractionType.Automatic")]
+    [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("@this.hasStartAnimation && interactionType != InteractionType.Automatic")]
     AnimationClip interactionEnterClip;
-    [FoldoutGroup("Animations"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
+    [FoldoutGroup("Interactable/Animations"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
     bool hasExitAnimation;
-    [FoldoutGroup("Animations"), SerializeField, ShowIf("@hasExitAnimation && interactionType != InteractionType.Automatic")]
+    [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("@hasExitAnimation && interactionType != InteractionType.Automatic")]
     AnimationClip interactionExitClip;
 
-    [FoldoutGroup("HUD"), SerializeField]
+    [FoldoutGroup("Interactable/HUD"), SerializeField]
     GameObject canvas;
-    [FoldoutGroup("HUD"), ShowIf("interactionType", InteractionType.Continue), SerializeField]
+    [FoldoutGroup("Interactable/HUD"), ShowIf("interactionType", InteractionType.Continue), SerializeField]
     Image interactionProgressBar;
-    [FoldoutGroup("HUD"), SerializeField]
+    [FoldoutGroup("Interactable/HUD"), SerializeField]
     float appearSpeed = 1;
 
     float appearPercent;
 
-    [FoldoutGroup("Events"), SerializeField]
+    [FoldoutGroup("Interactable/Events"), SerializeField]
     UnityEvent OnInteractionStart = new UnityEvent();
-    [FoldoutGroup("Events"), ShowIf("interactionType", InteractionType.Continue), SerializeField]
+    [FoldoutGroup("Interactable/Events"), ShowIf("interactionType", InteractionType.Continue), SerializeField]
     UnityEvent OnInteractionUpdate = new UnityEvent();
-    [FoldoutGroup("Events"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
+    [FoldoutGroup("Interactable/Events"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
     UnityEvent OnInteractionStop = new UnityEvent();
-    [FoldoutGroup("Events"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
+    [FoldoutGroup("Interactable/Events"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
     UnityEvent OnInteractionFinish = new UnityEvent();
 
     protected virtual void Start()
