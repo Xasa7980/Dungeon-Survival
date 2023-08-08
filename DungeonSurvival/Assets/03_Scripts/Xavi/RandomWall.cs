@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class RandomWall : MonoBehaviour
+public class randomwall : MonoBehaviour
 {
     public float amountToCreate;
     public GameObject[] walls;
@@ -32,7 +32,8 @@ public class RandomWall : MonoBehaviour
         {
             total += item;
         }
-        float randNum = Random.value * total;
+        float randNum = Random.Range(0,total);
+
         for (int i = 0; i < rating.Length; i++)
         {
             if(randNum < rating[i])
