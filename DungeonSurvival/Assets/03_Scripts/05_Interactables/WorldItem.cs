@@ -22,6 +22,7 @@ public class WorldItem : Interactable
         else
         {
             Debug.Log("Inventory is full");
+            _canInteract = true;
         }
     }
 }

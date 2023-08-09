@@ -93,6 +93,8 @@ public class PlayerInteraction : MonoBehaviour
 
     void UpdateSurroundings()
     {
+        if (interacting) return;
+
         Collider[] interactions = Physics.OverlapBox(interactionArea.position, interactionArea.size,
             interactionArea.rotation, interactionMask);
 
@@ -106,6 +108,8 @@ public class PlayerInteraction : MonoBehaviour
             {
                 if (c.TryGetComponent(out Interactable target))
                 {
+                    if (!target.canInteract) continue;
+
                     //Si no hay ninguna interaccion asignada se asigna una
                     if (nearest == null)
                     {
@@ -138,7 +142,10 @@ public class PlayerInteraction : MonoBehaviour
         //Si existe solo un objeto interactuable se asigna automaticamente
         else if (interactions.Length == 1 && interactions[0].TryGetComponent(out Interactable target))
         {
-            possibleInteraction = target;
+            if (target.canInteract)
+                possibleInteraction = target;
+            else
+                possibleInteraction = null;
         }
         else
         {
