@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class randomwall : MonoBehaviour
+public class RandomWall : MonoBehaviour
 {
     public float amountToCreate;
     public GameObject[] walls;
