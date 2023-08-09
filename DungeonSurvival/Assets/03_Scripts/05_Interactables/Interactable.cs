@@ -7,6 +7,9 @@ using UnityEngine.Events;
 
 public abstract class Interactable : MonoBehaviour
 {
+    protected bool _canInteract = true;
+    public bool canInteract => _canInteract;
+
     public enum InteractionType
     {
         Automatic,
@@ -14,49 +17,66 @@ public abstract class Interactable : MonoBehaviour
         Continue
     }
 
+    [PropertyOrder(100)]
     [Tooltip("Prioridad de la interaccion. Determina si sera mas deseable para el personaje que otra." +
         "A menor valor mayor prioridad")]
     [FoldoutGroup("Interactable"), SerializeField, Range(0, 100)] int _priority = 0;
     public int priority => _priority;
 
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable"), SerializeField] InteractionType _interactionType;
     public InteractionType interactionType => _interactionType;
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable"), ShowIf("interactionType", InteractionType.Continue), SerializeField] float _interactionTime = 3;
     public float interactionTime => _interactionTime;
     float interactionProgress = 0;
     public bool finished => interactionProgress > interactionTime;
 
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Animations"), SerializeField, HideIf("interactionType", InteractionType.Automatic)]
     bool _disallowRootMotion;
     public bool disallowRootMotion => _disallowRootMotion;
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("interactionType", InteractionType.Single)]
     AnimationClip interactionClip;
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("interactionType", InteractionType.Continue)]
     AnimationClip continuousInteractionClip;
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Animations"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
     bool hasStartAnimation;
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("@this.hasStartAnimation && interactionType != InteractionType.Automatic")]
     AnimationClip interactionEnterClip;
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Animations"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
     bool hasExitAnimation;
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("@hasExitAnimation && interactionType != InteractionType.Automatic")]
     AnimationClip interactionExitClip;
 
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/HUD"), SerializeField]
     GameObject canvas;
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/HUD"), ShowIf("interactionType", InteractionType.Continue), SerializeField]
     Image interactionProgressBar;
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/HUD"), SerializeField]
     float appearSpeed = 1;
 
     float appearPercent;
 
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Events"), SerializeField]
     UnityEvent OnInteractionStart = new UnityEvent();
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Events"), ShowIf("interactionType", InteractionType.Continue), SerializeField]
     UnityEvent OnInteractionUpdate = new UnityEvent();
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Events"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
     UnityEvent OnInteractionStop = new UnityEvent();
+    [PropertyOrder(100)]
     [FoldoutGroup("Interactable/Events"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
     UnityEvent OnInteractionFinish = new UnityEvent();
 
@@ -113,6 +133,7 @@ public abstract class Interactable : MonoBehaviour
     /// <param name="interactor"></param>
     public virtual void FinishInteraction()
     {
+        _canInteract = false;
         OnInteractionFinish.Invoke();
         interactionProgress = 0;
         if (interactionProgressBar)
