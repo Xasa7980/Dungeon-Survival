@@ -15,13 +15,14 @@ public class RandomWall : MonoBehaviour
     void GetWall()
     {
         GameObject obj = new GameObject();
+        Transform spawner = transform.GetChild(0);
         for (int i = 0; i < amountToCreate; i++)
         {
             List<GameObject> gOs = new();
-            gOs.Add(Instantiate(walls[(int)RarityRating()], obj.transform));
+            gOs.Add(Instantiate(walls[(int)RarityRating()], Vector3.zero, spawner.transform.rotation, obj.transform));
             foreach (var item in gOs)
             {
-                item.transform.position = transform.GetChild(0).position + transform.right * i * 5;
+                item.transform.position = spawner.position + transform.right * i * 5;
                 item.SetActive(true);
             }
         }
