@@ -30,7 +30,7 @@ public class RoomCreatorTool : EditorWindow
 
     void LoadAssets()
     {
-        string[] paths = AssetDatabase.GetSubFolders("Assets/!!_Prefabs/04_Environment");
+        string[] paths = AssetDatabase.GetSubFolders("Assets/!!_Prefabs/04_Dungeon Creator Library");
         this.categories = new Category[paths.Length];
 
         for (int c = 0; c < paths.Length; c++)
