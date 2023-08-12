@@ -12,7 +12,6 @@ public abstract class Interactable : MonoBehaviour
 
     public enum InteractionType
     {
-        Automatic,
         Single,
         Continue
     }
@@ -33,7 +32,7 @@ public abstract class Interactable : MonoBehaviour
     public bool finished => interactionProgress > interactionTime;
 
     [PropertyOrder(100)]
-    [FoldoutGroup("Interactable/Animations"), SerializeField, HideIf("interactionType", InteractionType.Automatic)]
+    [FoldoutGroup("Interactable/Animations"), SerializeField]
     bool _disallowRootMotion;
     public bool disallowRootMotion => _disallowRootMotion;
     [PropertyOrder(100)]
@@ -43,16 +42,16 @@ public abstract class Interactable : MonoBehaviour
     [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("interactionType", InteractionType.Continue)]
     AnimationClip continuousInteractionClip;
     [PropertyOrder(100)]
-    [FoldoutGroup("Interactable/Animations"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
+    [FoldoutGroup("Interactable/Animations"), SerializeField]
     bool hasStartAnimation;
     [PropertyOrder(100)]
-    [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("@this.hasStartAnimation && interactionType != InteractionType.Automatic")]
+    [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("hasStartAnimation")]
     AnimationClip interactionEnterClip;
     [PropertyOrder(100)]
-    [FoldoutGroup("Interactable/Animations"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
+    [FoldoutGroup("Interactable/Animations"), SerializeField]
     bool hasExitAnimation;
     [PropertyOrder(100)]
-    [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("@hasExitAnimation && interactionType != InteractionType.Automatic")]
+    [FoldoutGroup("Interactable/Animations"), SerializeField, ShowIf("hasExitAnimation")]
     AnimationClip interactionExitClip;
 
     [PropertyOrder(100)]
@@ -64,6 +63,7 @@ public abstract class Interactable : MonoBehaviour
     [PropertyOrder(100)]
     [FoldoutGroup("Interactable/HUD"), SerializeField]
     float appearSpeed = 1;
+    Coroutine HUDCoroutine;
 
     float appearPercent;
 
@@ -74,10 +74,10 @@ public abstract class Interactable : MonoBehaviour
     [FoldoutGroup("Interactable/Events"), ShowIf("interactionType", InteractionType.Continue), SerializeField]
     UnityEvent OnInteractionUpdate = new UnityEvent();
     [PropertyOrder(100)]
-    [FoldoutGroup("Interactable/Events"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
+    [FoldoutGroup("Interactable/Events"), ShowIf("interactionType", InteractionType.Continue), SerializeField]
     UnityEvent OnInteractionStop = new UnityEvent();
     [PropertyOrder(100)]
-    [FoldoutGroup("Interactable/Events"), HideIf("interactionType", InteractionType.Automatic), SerializeField]
+    [FoldoutGroup("Interactable/Events"), SerializeField]
     UnityEvent OnInteractionFinish = new UnityEvent();
 
     protected virtual void Start()
@@ -164,14 +164,18 @@ public abstract class Interactable : MonoBehaviour
 
     public virtual void SetFocus()
     {
-        StopAllCoroutines();
-        StartCoroutine(Appear());
+        if (HUDCoroutine != null)
+            StopCoroutine(HUDCoroutine);
+
+        HUDCoroutine = StartCoroutine(Appear());
     }
 
     public virtual void RemoveFocus()
     {
-        StopAllCoroutines();
-        StartCoroutine(Hide());
+        if (HUDCoroutine != null)
+            StopCoroutine(HUDCoroutine);
+
+        HUDCoroutine = StartCoroutine(Hide());
     }
 
     IEnumerator Appear()
