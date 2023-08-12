@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3213241992085986430}
   - component: {fileID: 3213241992084699050}
   - component: {fileID: 3213241992083713254}
-  - component: {fileID: 3202671679743475630}
+  - component: {fileID: 8355326237874182362}
   m_Layer: 0
   m_Name: SM_Env_Border Wall_Alcove_Small_02
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3202671679743475630
-MeshCollider:
+--- !u!65 &8355326237874182362
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,7 +94,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43786541711061890, guid: f7222d688edace7428517127b88f95c0, type: 2}
+  serializedVersion: 2
+  m_Size: {x: 5.182335, y: 5.19798, z: 1.628273}
+  m_Center: {x: -2.471943, y: 2.56452, z: -0.42400742}

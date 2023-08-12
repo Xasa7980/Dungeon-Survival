@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 99907250919161073}
   - component: {fileID: 99907250922051697}
   - component: {fileID: 99907250921276987}
-  - component: {fileID: 111333350789192731}
   m_Layer: 0
   m_Name: SM_Env_Wall_Window_01 (1)
   m_TagString: Untagged
@@ -86,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &111333350789192731
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 99907250918845099}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.2076435, y: 5.068245, z: 0.5225506}
-  m_Center: {x: -2.4830198, y: 2.4805264, z: 0.14643383}
 --- !u!1 &3769025407213017562
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,8 +181,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.2076435, y: 5.068245, z: 0.5225506}
-  m_Center: {x: -2.4830198, y: 2.4805264, z: 0.14643383}
+  m_Size: {x: 5.2076435, y: 5.068245, z: 0.6}
+  m_Center: {x: -2.4830198, y: 2.4805264, z: 0}
 --- !u!1 &3769025408871598006
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +194,6 @@ GameObject:
   - component: {fileID: 3769025408871406500}
   - component: {fileID: 3769025408868488378}
   - component: {fileID: 3769025408869550592}
-  - component: {fileID: 3794523818727310380}
   m_Layer: 0
   m_Name: SM_Env_Wall_Window_Bars_02
   m_TagString: Untagged
@@ -281,20 +266,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3794523818727310380
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3769025408871598006}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43401602442143996, guid: ed3e62e17a5f5d64ba6d3c0d2d8b5f14, type: 2}
 --- !u!1 &3769025409287552662
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +277,6 @@ GameObject:
   - component: {fileID: 3769025409287742084}
   - component: {fileID: 3769025409290661274}
   - component: {fileID: 3769025409289597728}
-  - component: {fileID: 3794523818546429196}
   m_Layer: 0
   m_Name: SM_Env_Wall_Window_Bars_02 (1)
   m_TagString: Untagged
@@ -379,17 +349,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3794523818546429196
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3769025409287552662}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43401602442143996, guid: ed3e62e17a5f5d64ba6d3c0d2d8b5f14, type: 2}

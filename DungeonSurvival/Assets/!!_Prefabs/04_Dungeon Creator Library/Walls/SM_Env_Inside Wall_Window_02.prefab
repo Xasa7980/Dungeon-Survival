@@ -96,8 +96,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.233831, y: 5.144465, z: 0.61455536}
-  m_Center: {x: -2.4988277, y: 2.5303214, z: 0.059318542}
+  m_Size: {x: 5.233831, y: 5.144465, z: 0.6}
+  m_Center: {x: -2.4988277, y: 2.5303214, z: 0}
 --- !u!1 &1581885765663458371
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 6852613597898431529}
   - component: {fileID: 4585623277731241912}
   - component: {fileID: 6565261892033265590}
-  - component: {fileID: 3479645152453145722}
   m_Layer: 0
   m_Name: SM_Env_Wall_Window_Bars_02
   m_TagString: Untagged
@@ -182,20 +181,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3479645152453145722
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581885765663458371}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43401602442143996, guid: ed3e62e17a5f5d64ba6d3c0d2d8b5f14, type: 2}
 --- !u!1 &7367201307260916457
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +192,6 @@ GameObject:
   - component: {fileID: 4804146884509622584}
   - component: {fileID: 6430397235075620387}
   - component: {fileID: 3310278700614003543}
-  - component: {fileID: 4200876245852501212}
   m_Layer: 0
   m_Name: SM_Env_Wall_Window_02 (1)
   m_TagString: Untagged
@@ -281,16 +265,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4200876245852501212
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7367201307260916457}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.233831, y: 5.144465, z: 0.61455536}
-  m_Center: {x: -2.4988277, y: 2.5303214, z: 0.059318542}
