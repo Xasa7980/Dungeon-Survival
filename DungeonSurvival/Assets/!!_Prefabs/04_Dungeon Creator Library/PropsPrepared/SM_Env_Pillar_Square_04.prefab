@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5087660316276731668}
   - component: {fileID: 5087660316279573234}
   - component: {fileID: 5087660316278558416}
-  - component: {fileID: 5077930579815689756}
+  - component: {fileID: 5835533911637719529}
   m_Layer: 0
   m_Name: SM_Env_Pillar_Square_04
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5077930579815689756
-MeshCollider:
+--- !u!65 &5835533911637719529
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,7 +94,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43959367545659918, guid: 79930b0bba1e80f4f914f77d0117fa0e, type: 2}
+  serializedVersion: 2
+  m_Size: {x: 0.9, y: 2.4, z: 0.7}
+  m_Center: {x: 0, y: 1.2, z: 0}
