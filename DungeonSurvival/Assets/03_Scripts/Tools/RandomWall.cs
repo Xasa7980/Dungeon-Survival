@@ -12,7 +12,7 @@ public class RandomWall : MonoBehaviour
     {
         GetWall();
     }
-    void GetWall()
+    void GetWall()//Creo gameObject , lo meto en lista los hijos a instanciar.
     {
         GameObject obj = new GameObject();
         Transform spawner = transform.GetChild(0);
