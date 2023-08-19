@@ -10,7 +10,11 @@ public class RoomCreatorTool : EditorWindow
 {
     static RoomCreatorTool window;
 
-    Category[] categories;
+    string[] categoryNames;
+    string currentCategoryName;
+
+    List<GameObject> assets = new List<GameObject>();
+    List<Texture2D> previews = new List<Texture2D>();
 
     Vector2 scroll = Vector2.zero;
 
@@ -25,36 +29,46 @@ public class RoomCreatorTool : EditorWindow
     {
         window = (RoomCreatorTool)EditorWindow.GetWindow(typeof(RoomCreatorTool), false);
         window.Show();
+        window.LoadCategories();
         window.LoadAssets();
+        window.minSize = new Vector2(400, 600);
     }
 
-    void LoadAssets()
+    private void OnFocus()
+    {
+        LoadCategories();
+        LoadAssets();
+    }
+
+    void LoadCategories()
     {
         string[] paths = AssetDatabase.GetSubFolders("Assets/!!_Prefabs/04_Dungeon Creator Library");
-        this.categories = new Category[paths.Length];
+        categoryNames = new string[paths.Length];
 
         for (int c = 0; c < paths.Length; c++)
         {
             string[] sections = paths[c].Split("/");
-            string[] assetsPath = Directory.GetFiles(paths[c], "*.prefab", SearchOption.TopDirectoryOnly);
+            categoryNames[c] = sections[sections.Length - 1];
+        }
+        if (currentCategoryName == "")
+        {
+            currentCategoryName = categoryNames[0];
+        }
+    }
 
-            List<GameObject> assets = new List<GameObject>();
-            List<Texture2D> previews = new List<Texture2D>();
-            foreach (string s in assetsPath)
-            {
-                GameObject asset = AssetDatabase.LoadAssetAtPath<GameObject>(s);
-                assets.Add(asset);
-                previews.Add(GetAssetPreview(asset));
-            }
+    void LoadAssets()
+    {
+        //string path = AssetDatabase.GetSubFolders("");
+        string[] assetsPath = Directory.GetFiles("Assets/!!_Prefabs/04_Dungeon Creator Library/" + currentCategoryName + "/", "*.prefab", SearchOption.TopDirectoryOnly);
 
-            Category category = new Category()
-            {
-                name = sections[sections.Length - 1],
-                assets = assets,
-                previews = previews
-            };
+        assets.Clear();
+        previews.Clear();
 
-            this.categories[c] = category;
+        foreach (string s in assetsPath)
+        {
+            GameObject asset = AssetDatabase.LoadAssetAtPath<GameObject>(s);
+            assets.Add(asset);
+            previews.Add(GetAssetPreview(asset));
         }
     }
 
@@ -63,81 +77,103 @@ public class RoomCreatorTool : EditorWindow
         Event e = Event.current;
 
         EditorGUILayout.BeginHorizontal(GUILayout.Height(30));
-        if (GUILayout.Button("Update"))
-            LoadAssets();
+        {
+            if (GUILayout.Button("Update"))
+                LoadAssets();
 
-        GUILayout.FlexibleSpace();
+            GUILayout.FlexibleSpace();
 
-        zoom = GUILayout.HorizontalSlider(zoom, 0, 1, GUILayout.Width(50));
+            zoom = GUILayout.HorizontalSlider(zoom, 0, 1, GUILayout.Width(50));
 
-        GUILayout.Space(10);
+            GUILayout.Space(10);
+        }
         EditorGUILayout.EndHorizontal();
 
         float cellWidth = Mathf.Lerp(minCellWidth, maxCellWidth, zoom);
         float cellHeight = Mathf.Lerp(minCellHeight, maxCellHeight, zoom);
-        int columnCount = Mathf.FloorToInt((position.width - cellWidth * 0.75f) / cellWidth);
+        int columnCount = Mathf.FloorToInt((position.width - cellWidth * 0.75f - 200) / cellWidth);
 
-        scroll = GUILayout.BeginScrollView(scroll);
-        foreach (Category category in categories)
+        GUILayout.BeginHorizontal();
         {
-            GUILayout.BeginHorizontal("box");
-            if (GUILayout.Button(category.expanded ? "-" : "+", GUILayout.Width(30)))
+            GUILayout.BeginVertical("box", GUILayout.Width(200));
             {
-                category.expanded = !category.expanded;
-            }
-            EditorGUILayout.LabelField(category.name);
-            GUILayout.EndHorizontal();
-
-            if (!category.expanded) continue;
-
-            int rowCount = Mathf.FloorToInt((float)category.assets.Count / columnCount);
-            int assetCount = 0;
-
-            for (int r = 0; r <= rowCount; r++)
-            {
-                EditorGUILayout.BeginHorizontal();
-                for (int c = 0; c < columnCount; c++)
+                foreach (string category in categoryNames)
                 {
-                    if (GUILayout.Button(category.previews[assetCount],
-                        GUILayout.Width(cellWidth), GUILayout.Height(cellHeight)))
+                    if (GUILayout.Button(category, GUILayout.Width(200), GUILayout.Height(25)))
                     {
-                        GameObject asset = category.assets[assetCount];
-
-                        if (e.button == 0)
-                        {
-                            //Select prefab and prepared the scene for placing mode
-                            PrefabPlacer.StartPlacing(asset, category.name);
-                        }
-
-                        if(e.button == 1)
-                        {
-                            GenericMenu menu = new GenericMenu();
-
-                            menu.AddItem(new GUIContent("Inspect Asset"), false,
-                                () => PopUpAssetInspector.Create(asset));
-
-                            menu.AddItem(new GUIContent("Select Prefab"), false,
-                                () => SelectPrefabInProject(asset));
-
-                            menu.AddItem(new GUIContent("Select Scene Instances"), false,
-                                () => SelectSceneInstances(asset));
-
-                            menu.ShowAsContext();
-                        }
+                        currentCategoryName = category;
+                        LoadAssets();
                     }
-
-                    assetCount++;
-
-                    if (assetCount == category.assets.Count)
-                        break;
                 }
-                EditorGUILayout.EndHorizontal();
-
-                if (assetCount == category.assets.Count)
-                    break;
             }
+            GUILayout.EndVertical();
+
+            GUILayout.BeginVertical("box");
+            {
+                EditorGUILayout.LabelField(currentCategoryName,
+                    new GUIStyle
+                    {
+                        fontSize = 24,
+                        fontStyle = FontStyle.Bold,
+                        alignment = TextAnchor.MiddleCenter
+                    });
+
+                GUILayout.Space(10);
+
+                scroll = GUILayout.BeginScrollView(scroll);
+                {
+                    int rowCount = Mathf.FloorToInt((float)assets.Count / columnCount);
+                    int assetCount = 0;
+
+                    for (int r = 0; r <= rowCount; r++)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        for (int c = 0; c < columnCount; c++)
+                        {
+                            if (GUILayout.Button(previews[assetCount],
+                                GUILayout.Width(cellWidth), GUILayout.Height(cellHeight)))
+                            {
+                                GameObject asset = assets[assetCount];
+
+                                if (e.button == 0)
+                                {
+                                    //Select prefab and prepared the scene for placing mode
+                                    PrefabPlacer.StartPlacing(asset, currentCategoryName);
+                                }
+
+                                if (e.button == 1)
+                                {
+                                    GenericMenu menu = new GenericMenu();
+
+                                    menu.AddItem(new GUIContent("Inspect Asset"), false,
+                                        () => PopUpAssetInspector.Create(asset));
+
+                                    menu.AddItem(new GUIContent("Select Prefab"), false,
+                                        () => SelectPrefabInProject(asset));
+
+                                    menu.AddItem(new GUIContent("Select Scene Instances"), false,
+                                        () => SelectSceneInstances(asset));
+
+                                    menu.ShowAsContext();
+                                }
+                            }
+
+                            assetCount++;
+
+                            if (assetCount == assets.Count)
+                                break;
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+                        if (assetCount == assets.Count)
+                            break;
+                    }
+                }
+                EditorGUILayout.EndScrollView();
+            }
+            GUILayout.EndVertical();
         }
-        EditorGUILayout.EndScrollView();
+        GUILayout.EndHorizontal();
     }
 
     Texture2D GetAssetPreview(GameObject asset)
@@ -164,8 +200,8 @@ public class RoomCreatorTool : EditorWindow
     class Category
     {
         public string name;
-        public List<GameObject> assets;
-        public List<Texture2D> previews;
+        //public List<GameObject> assets;
+        //public List<Texture2D> previews;
         public bool expanded = true;
     }
 }
