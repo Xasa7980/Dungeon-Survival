@@ -61,6 +61,8 @@ public class PrefabPlacer : EditorWindow
     {
         if (prefab == null) return;
 
+        HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
+
         Event e = Event.current;
 
         if ((e.type == EventType.MouseDown && e.button == 1) &&
@@ -91,6 +93,7 @@ public class PrefabPlacer : EditorWindow
         {
             Place();
             e.Use();
+            Selection.activeGameObject = null;
         }
 
         if (e.type == EventType.MouseUp && e.button == 0)
