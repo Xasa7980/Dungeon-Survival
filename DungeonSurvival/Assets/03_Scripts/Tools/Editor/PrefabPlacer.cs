@@ -10,17 +10,20 @@ public class PrefabPlacer : EditorWindow
 
     static PrefabPlacer window;
 
-    static float gridSize = 5;
+    static float gridSize = 2.5f;
     static float gridHeight = 0;
     static Vector2 offset = Vector2.zero;
 
     GameObject placeHolder;
 
-    bool ignoreMouseEvents = false;
-
     public static void StartPlacing(GameObject asset, string categoryName)
     {
-        window = (PrefabPlacer)EditorWindow.GetWindow(typeof(PrefabPlacer), false);
+        if (!window)
+            window = (PrefabPlacer)EditorWindow.GetWindow(typeof(PrefabPlacer), false);
+
+        if(window.placeHolder)
+            DestroyImmediate(window.placeHolder);
+
         window.categoryName = categoryName;
         window.prefab = asset;
         window.Show();
@@ -101,6 +104,13 @@ public class PrefabPlacer : EditorWindow
             e.Use();
         }
 
+        if(e.control && e.isScrollWheel)
+        {
+            gridHeight += -0.25f * Mathf.Clamp(e.delta.y, -1, 1);
+            Repaint();
+            e.Use();
+        }
+
         Handles.color = Color.green;
         Handles.DrawWireCube(assetPosition + Vector3.up * gridSize / 2, Vector3.one * gridSize);
 
@@ -108,13 +118,13 @@ public class PrefabPlacer : EditorWindow
 
         if(e.type == EventType.KeyDown && e.keyCode == KeyCode.Comma)
         {
-            placeHolder.transform.Rotate(Vector3.up, 90);
+            placeHolder.transform.Rotate(Vector3.up * 90, Space.World);
             e.Use();
         }
 
         if (e.type == EventType.KeyDown && e.keyCode == KeyCode.Period)
         {
-            placeHolder.transform.Rotate(Vector3.up, -90);
+            placeHolder.transform.Rotate(Vector3.up * -90, Space.World);
             e.Use();
         }
 
