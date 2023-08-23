@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(BoxCollider))]
 public class PlayerDetectionArea : MonoBehaviour
 {
+#if UNITY_EDITOR
+    [SerializeField] Color gizmoColor;
+    BoxCollider detector;
+#endif
+
     public bool playerInside { get; private set; }
 
     [SerializeField] UnityEvent onPlayerEnter = new UnityEvent();
@@ -36,4 +42,19 @@ public class PlayerDetectionArea : MonoBehaviour
             onPlayerExit.Invoke();
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!detector)
+            detector = GetComponent<BoxCollider>();
+
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.color = gizmoColor;
+        Gizmos.DrawCube(detector.center, detector.size);
+
+        if (!detector.isTrigger)
+            detector.isTrigger = true;
+    }
+#endif
 }
