@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4422680750258866094}
   - component: {fileID: 4433740345885126502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StoneFence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +57,10 @@ PrefabInstance:
     - target: {fileID: 147884, guid: 68c36969be1a05e4ba39680b7d1b04b8, type: 3}
       propertyPath: m_Name
       value: SM_Env_Wall_Trim_Edge_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 147884, guid: 68c36969be1a05e4ba39680b7d1b04b8, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 469326, guid: 68c36969be1a05e4ba39680b7d1b04b8, type: 3}
       propertyPath: m_RootOrder
@@ -122,6 +126,10 @@ PrefabInstance:
     - target: {fileID: 147884, guid: 68c36969be1a05e4ba39680b7d1b04b8, type: 3}
       propertyPath: m_Name
       value: SM_Env_Wall_Trim_Edge_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 147884, guid: 68c36969be1a05e4ba39680b7d1b04b8, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 469326, guid: 68c36969be1a05e4ba39680b7d1b04b8, type: 3}
       propertyPath: m_RootOrder
