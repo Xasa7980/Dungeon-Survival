@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerLocomotion : MonoBehaviour
 {
+    public static PlayerLocomotion current { get; private set; }
+
     [SerializeField] float turnSpeed = 5;
     [SerializeField] float moveSpeed = 3;
 
@@ -12,6 +14,11 @@ public class PlayerLocomotion : MonoBehaviour
     Animator anim;
 
     [SerializeField] float characterGravity = 9;
+
+    private void Awake()
+    {
+        current = this;
+    }
 
     // Start is called before the first frame update
     void Start()

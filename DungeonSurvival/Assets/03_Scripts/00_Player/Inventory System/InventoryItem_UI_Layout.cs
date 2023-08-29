@@ -14,6 +14,9 @@ public class InventoryItem_UI_Layout : MonoBehaviour
 
     [SerializeField] KeyCode _key;
 
+    public Item item { get; private set; }
+    public bool empty => item == null;
+
     private void Start()
     {
         _icon.gameObject.SetActive(false);
@@ -46,6 +49,9 @@ public class InventoryItem_UI_Layout : MonoBehaviour
                 amountCounter.text = item.currentStack.ToString();
             }
         }
+
+
+        this.item = item == null ? null : item.item;
     }
 
     public void UpdateStack(InventoryItem item)
