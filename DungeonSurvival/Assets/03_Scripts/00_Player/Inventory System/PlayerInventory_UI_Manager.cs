@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class PlayerInventory_UI_Manager : MonoBehaviour
 {
@@ -21,6 +21,14 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
         }
     }
 
+    [FoldoutGroup("Equip Slots"), SerializeField] EquipedItem_UI_Layout primaryWeapon;
+    [FoldoutGroup("Equip Slots"), SerializeField] EquipedItem_UI_Layout secundaryWeapon;
+    [FoldoutGroup("Equip Slots"), SerializeField] EquipedItem_UI_Layout backpack;
+
+    [FoldoutGroup("Backpack"), SerializeField] InventoryItem_UI_Layout slotPrefab;
+    [FoldoutGroup("Backpack"), SerializeField] Transform backpackContainer;
+    InventoryItem_UI_Layout[] backpackSlots;
+
     private void Awake()
     {
         current = this;
@@ -29,6 +37,7 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
     private void Start()
     {
         slots = inventoryBar.GetComponentsInChildren<InventoryItem_UI_Layout>();
+        backpackSlots = backpackContainer.GetComponentsInChildren<InventoryItem_UI_Layout>();
     }
 
     private void Update()
@@ -48,6 +57,19 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
             else
                 currentSelectedIndex = slots.Length - 1;
         }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (!slots[currentSelectedIndex].empty)
+            {
+                switch (slots[currentSelectedIndex].item)
+                {
+                    case Item_Backpack backpack:
+                        PlayerInventory.current.EquipBackpack(backpack);
+                        break;
+                }
+            }
+        }
     }
 
     public void SelectItem(int index) => currentSelectedIndex = index;
@@ -57,5 +79,38 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
         slots[index].SetItem(item);
     }
 
+    public void EquipBackpack(Item_Backpack backpack)
+    {
+        if (backpackSlots != null)
+        {
+            foreach(InventoryItem_UI_Layout s in backpackSlots)
+            {
+                if (s != null)
+                    Destroy(s.gameObject);
+            }
+        }
+
+        this.backpack.Equip(backpack);
+        backpackSlots = new InventoryItem_UI_Layout[backpack.maxItems];
+
+        for (int i = 0; i < backpackSlots.Length; i++)
+        {
+            InventoryItem iItem = backpack.allItems[i];
+
+            InventoryItem_UI_Layout slot = Instantiate(slotPrefab, backpackContainer);
+            slot.transform.Find("Key").gameObject.SetActive(false);
+            backpackSlots[i] = slot;
+
+            if (iItem != null)
+                iItem.UpdateSlot(slot);
+        }
+    }
+
+    public void AddItemToBackpack(int index, InventoryItem item)
+    {
+        backpackSlots[index].SetItem(item);
+    }
+
     public InventoryItem_UI_Layout GetSlot(int index) => slots[index];
+    public InventoryItem_UI_Layout GetBackpackSlot(int index) => backpackSlots[index];
 }

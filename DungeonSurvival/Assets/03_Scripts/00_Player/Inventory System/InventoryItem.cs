@@ -21,6 +21,12 @@ public class InventoryItem
         currentStack = 1;
     }
 
+    public void UpdateSlot(InventoryItem_UI_Layout slot)
+    {
+        this.slot = slot;
+        slot.SetItem(this);
+    }
+
     /// <summary>
     /// Añade un item al stack siempre y cuando este no este lleno
     /// </summary>
