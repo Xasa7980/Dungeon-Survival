@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : MonoBehaviour, iInventory
 {
-    static PlayerInventory current;
+    public static PlayerInventory current { get; private set; }
 
     [SerializeField] int maxItems = 9;
-    [SerializeField] InventoryItem[] allItems;
+    public InventoryItem[] allItems { get; private set; }
+
+    Item_Backpack backpack;
+
+    public int keys { get; private set; }
 
     private void Awake()
     {
@@ -20,94 +24,135 @@ public class PlayerInventory : MonoBehaviour
         allItems = new InventoryItem[maxItems];
     }
 
-    /// <summary>
-    /// Tratar de agregar un item nuevo al inventario
-    /// </summary>
-    /// <param name="item">Item a agregar</param>
-    /// <returns>Falso si el inventario esta lleno</returns>
-    public static bool TryAddItem(Item item)
+    public void AddKey()
     {
-        if (item.stackable)
-        {
-            InventoryItem[] stacks = current.allItems.Where(i => i != null && i.item == item).ToArray();
-            InventoryItem stack = stacks.FirstOrDefault(i => !i.isFull);
+        keys++;
+    }
 
-            if(stack != null)
-            {
-                if (stack.TryAdd())
-                {
-                    return true;
-                }
-            }
-
-            for (int i = 0; i < current.allItems.Length; i++)
-            {
-                if (current.allItems[i] == null)
-                {
-                    current.allItems[i] = new InventoryItem(item, PlayerInventory_UI_Manager.current.GetSlot(i));
-                    PlayerInventory_UI_Manager.current.AddItem(i, current.allItems[i]);
-                    return true;
-                }
-            }
-        }
-        else
+    public bool TryUseKey()
+    {
+        if (keys > 0)
         {
-            for (int i = 0; i < current.allItems.Length; i++)
-            {
-                if (current.allItems[i] == null)
-                {
-                    current.allItems[i] = new InventoryItem(item, PlayerInventory_UI_Manager.current.GetSlot(i));
-                    PlayerInventory_UI_Manager.current.AddItem(i, current.allItems[i]);
-                    return true;
-                }
-            }
+            keys--;
+            return true;
         }
 
         return false;
     }
 
-    /// <summary>
-    /// Intentar remover un item espeifico del inventario
-    /// </summary>
-    /// <param name="item">Item a remover</param>
-    /// <returns>Falso si el item no existe en el inventario</returns>
-    public static bool TryRemoveItem(Item item)
+    public void EquipBackpack(Item_Backpack backpack)
     {
-        InventoryItem instance = current.allItems.FirstOrDefault(i => i.item == item);
+        if (this.backpack != null)
+            UnequipBackpack();
 
-        if(instance != null)
+        //this.TryRemoveItem(backpack);
+        Item_Backpack backpackInstance = backpack.CreateInstance() as Item_Backpack;
+        this.backpack = backpackInstance;
+        backpackInstance.Init();
+        PlayerInventory_UI_Manager.current.EquipBackpack(backpackInstance);
+        backpackInstance.EquipOnPlayer(PlayerHolsterHandler.current.backpack);
+    }
+
+    public void UnequipBackpack()
+    {
+        //if (!this.TryAddItem(backpack))
+        //{
+        backpack.InstantiateInWorld(PlayerLocomotion.current.transform.position, backpack);
+        //}
+        //else
+        //{
+        //    foreach (InventoryItem i in backpack.allItems)
+        //    {
+        //        if (i != null)
+        //        {
+        //            DropItem(i.item);
+        //        }
+        //    }
+        //}
+
+        Destroy(PlayerHolsterHandler.current.backpack.GetChild(0).gameObject);
+
+        backpack = null;
+    }
+
+    void DropItem(Item item)
+    {
+        Vector3 position = Random.insideUnitSphere * 2;
+        position.y = 0;
+
+        item.InstantiateInWorld(PlayerLocomotion.current.transform.position + position);
+    }
+
+    //public bool TryAddItem(Item item)
+    //{
+    //    iInventory.
+    //}
+
+    public bool TryAddItem(Item item)
+    {
+        if (!((iInventory)this).TryAddItem(item, out int index))
         {
-            if (instance.stackable)
+            if (backpack != null)
             {
-                if (!instance.TryRemove())
-                {
-                    for (int i = 0; i < current.allItems.Length; i++)
-                    {
-                        if (current.allItems[i] == instance)
-                        {
-                            current.allItems[i] = null;
-                            PlayerInventory_UI_Manager.current.AddItem(i, null);
-                            return true;
-                        }
-                    }
-                }
+                return TryAddItemToBackPack(item);
             }
             else
+                return false;
+        }
+
+        if (index >= 0)
+            PlayerInventory_UI_Manager.current.AddItem(index, allItems[index]);
+
+        return true;
+    }
+
+    public bool TryRemoveItem(Item item)
+    {
+        if (!((iInventory)this).TryRemoveItem(item, out int index))
+        {
+            if (backpack != null)
             {
-                for (int i = 0; i < current.allItems.Length; i++)
-                {
-                    if (current.allItems[i] == instance)
-                    {
-                        current.allItems[i] = null;
-                        PlayerInventory_UI_Manager.current.AddItem(i, null);
-                        return true;
-                    }
-                }
+                return TryRemoveItemFromBackpack(item);
+            }
+            else
+                return false;
+        }
+
+        if (index >= 0)
+            PlayerInventory_UI_Manager.current.AddItem(index, null);
+
+        return true;
+    }
+
+    bool TryAddItemToBackPack(Item item)
+    {
+        if (((iInventory)backpack).TryAddItem(item, out int index, true))
+        {
+            //Update backpack UI here
+            if(index >= 0)
+            {
+                PlayerInventory_UI_Manager.current.AddItemToBackpack(index, backpack.allItems[index]);
             }
 
             return true;
         }
+        else
+            return false;
+    }
 
-        return false;
+    bool TryRemoveItemFromBackpack(Item item)
+    {
+        if (((iInventory)backpack).TryRemoveItem(item, out int index))
+        {
+            //Update backpack UI here
+            if (index >= 0)
+            {
+                PlayerInventory_UI_Manager.current.AddItemToBackpack(index, null);
+            }
+
+            return true;
+        }
+        else
+            return false;
     }
 }
