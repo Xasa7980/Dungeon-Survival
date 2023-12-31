@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 462032}
   - component: {fileID: 3337338}
   - component: {fileID: 2392810}
+  - component: {fileID: 3344135580525875203}
   m_Layer: 7
   m_Name: SM_Env_Rubble_Pebbles_20
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3344135580525875203
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179920}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 63b080f188bd92446b2de42b27fd58f9, type: 3}
