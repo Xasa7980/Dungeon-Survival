@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 414204}
   - component: {fileID: 3347970}
   - component: {fileID: 2320784}
-  - component: {fileID: 64460189020533112}
   m_Layer: 8
   m_Name: SM_Env_Mushroom_Giant_01
   m_TagString: Untagged
@@ -84,17 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64460189020533112
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131856}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43829991749841974, guid: 6c7c4c642766699419833a3b08698140, type: 2}

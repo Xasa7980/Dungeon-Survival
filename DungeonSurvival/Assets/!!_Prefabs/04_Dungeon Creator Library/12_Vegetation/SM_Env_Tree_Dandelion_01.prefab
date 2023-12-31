@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3395112}
   - component: {fileID: 2356012}
   - component: {fileID: 64830104466970200}
-  - component: {fileID: 64740734681543058}
   m_Layer: 8
   m_Name: SM_Env_Tree_Dandelion_01
   m_TagString: Untagged
@@ -99,17 +98,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43248860658929972, guid: 1c258a311b27cb94a81f1f1195f9d226, type: 2}
---- !u!64 &64740734681543058
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141366}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43193620392976906, guid: 1c258a311b27cb94a81f1f1195f9d226, type: 2}

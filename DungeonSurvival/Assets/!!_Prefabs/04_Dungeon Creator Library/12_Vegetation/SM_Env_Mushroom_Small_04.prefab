@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 462204}
   - component: {fileID: 3323934}
   - component: {fileID: 2329220}
-  - component: {fileID: 64657446150173850}
   m_Layer: 8
   m_Name: SM_Env_Mushroom_Small_04
   m_TagString: Untagged
@@ -84,17 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64657446150173850
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 138052}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43563778005790958, guid: 9d63a4813d8ee2e479202058811026f9, type: 2}
