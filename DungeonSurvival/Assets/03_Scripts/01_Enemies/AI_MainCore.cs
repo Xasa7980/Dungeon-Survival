@@ -24,15 +24,10 @@ public class AI_MainCore : MonoBehaviour
     [SerializeField] private MonoBehaviour nearDieBehaviour;
     [SerializeField] private MonoBehaviour deathBehaviour;
     [SerializeField] private MonoBehaviour actualBehaviour;
-
-    [SerializeField] private float patrolTimerMax = 10;
-    [SerializeField] private float idleTimerMax = 3;
-    private float patrolTimer;
-    private float idleTimer;
     
 
     private State state;
-
+    private Transform threat;
     private void Awake ( )
     {
         instance = this;
@@ -48,24 +43,10 @@ public class AI_MainCore : MonoBehaviour
             case State.Idle:
                 //Do Nothing
                 SetNewBehaviour(idleBehaviour);
-                idleTimer += Time.deltaTime;
-
-                if(idleTimer > idleTimerMax)
-                {
-                    idleTimer = 0;
-                    state = State.Patrol;
-                }
                 break;
             case State.Patrol:
                 //Start Patrolling
                 SetNewBehaviour(patrolBehaviour);
-                patrolTimer += Time.deltaTime;
-
-                if (patrolTimer > patrolTimerMax)
-                {
-                    patrolTimer = 0;
-                    state = State.Idle;
-                }
                 break;
             case State.Chasing:
                 //Start chasing the player
@@ -89,7 +70,7 @@ public class AI_MainCore : MonoBehaviour
         }
     }
     public MonoBehaviour GetActualBehaviur { get { return actualBehaviour; } }
-    public void SetNewBehaviour (MonoBehaviour newBehaviour )
+    private void SetNewBehaviour (MonoBehaviour newBehaviour )
     {
         if(actualBehaviour != newBehaviour)
         {
@@ -102,8 +83,21 @@ public class AI_MainCore : MonoBehaviour
             return;
         }
     }
-    public State SetState ( State state )
+    public void SetState ( State state )
     {
-        return this.state = state;
+        this.state = state;
+    }
+    public State GetCuurentState ( )
+    {
+        return state;
+    }
+
+    internal void SetThreat ( Transform threatTransform )
+    {
+        threat = threatTransform;
+    }
+    internal Transform GetThreat ( )
+    {
+        return threat;
     }
 }
