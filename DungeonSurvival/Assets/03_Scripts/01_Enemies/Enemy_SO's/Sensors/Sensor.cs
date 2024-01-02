@@ -27,6 +27,6 @@ public abstract class Sensor : MonoBehaviour
         return true;
     }
 
-    [SerializeField] protected UnityEvent OnThreatDetected = new UnityEvent();
-    [SerializeField] protected UnityEvent OnAttackRange = new UnityEvent();
+    [SerializeField] protected UnityEvent OnThreatIsDetected = new UnityEvent();
+    [SerializeField] protected UnityEvent OnThreatIsInAttackRange = new UnityEvent();
 }

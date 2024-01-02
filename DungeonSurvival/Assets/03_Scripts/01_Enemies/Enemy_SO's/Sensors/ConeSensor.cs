@@ -35,7 +35,7 @@ public class ConeSensor : Sensor
 
         if (nearest)
         {
-            OnThreatDetected.Invoke();
+            OnThreatIsDetected.Invoke();
         }
 
         return nearest;

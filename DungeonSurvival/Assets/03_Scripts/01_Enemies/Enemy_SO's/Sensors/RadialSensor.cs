@@ -6,29 +6,42 @@ public class RadialSensor : Sensor
 {
     [SerializeField, Range(0, 360)] float detectionAngle = 60;
     public float DetectionRadius => detectionRadius;
+    private Transform threat;
     private void Update ( )
     {
         if (ThreatsDetected())
         {
-            OnThreatDetected?.Invoke();
             AI_MainCore.instance.SetState(State.Chasing);
+
             Transform threatTransform = GetNearestThreat();
+            Transform mainCoreThreat = AI_MainCore.instance.GetThreat();
+            if (mainCoreThreat != threatTransform)
+            {
+                AI_MainCore.instance.SetThreat(threatTransform);
+            }
+
+            OnThreatIsDetected?.Invoke();
+
             float distanceXBetweenThread = threatTransform.position.x - transform.position.x;
             float distanceZBetweenThread = threatTransform.position.z - transform.position.z;
-            bool inAttackRange = distanceXBetweenThread < 2 & distanceZBetweenThread < 2;
-            if (inAttackRange)
+            bool inAttackRange = distanceXBetweenThread < 0.25f & distanceZBetweenThread < 0.25f;
+
+            if (!inAttackRange)
             {
-                print("attacking");
-                AI_MainCore.instance.SetState(State.Hostile);
-                OnAttackRange.Invoke();
+                //Player detected and is not in attack range
+                AI_MainCore.instance.SetState(State.Chasing);
+                return;
             }
             else
             {
-                print("chasing");
-                AI_MainCore.instance.SetState(State.Chasing);
-                OnThreatDetected.Invoke();
+                //Player detected and is in attack range
+                AI_MainCore.instance.SetState(State.Hostile);
+                OnThreatIsInAttackRange.Invoke();
             }
-
+        }
+        else
+        {
+            //AI_MainCore.instance.SetState (State.Idle);
         }
     }
     public override bool ThreatsDetected()
