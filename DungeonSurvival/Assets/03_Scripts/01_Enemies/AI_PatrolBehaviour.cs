@@ -7,24 +7,39 @@ using UnityEngine.AI;
 public class AI_PatrolBehaviour : MonoBehaviour
 {
     public event EventHandler OnDestinationReached;
+    public static event EventHandler<OnWalkActionEventArgs> OnWalkAction;
+    public class OnWalkActionEventArgs : EventArgs
+    {
+        public bool isWalking;
+    }
 
     [SerializeField] private float positionRange = 30f;
-    [SerializeField] private NavMeshAgent navAgent;
+    
+    private NavMeshAgent navAgent;
+    private AI_MainCore ai_MainCore;
+    private bool isWalking;
+    private void Awake ( )
+    {
+        ai_MainCore = GetComponent<AI_MainCore>();
+        navAgent = GetComponent<NavMeshAgent>();
+    }
     private void OnEnable ( )
     {
-        Patrolling();
+        SettingDestiny();
     }
     private void Update ( )
     {
         if(navAgent.isPathStale )
         {
             print("IsPathStale");
-            Patrolling();
+            //Path is invalid
+            SettingDestiny();
         }
         if (navAgent.pathStatus == NavMeshPathStatus.PathInvalid)
         {
             print("Path Invalid");
-            AI_MainCore.instance.SetState(State.Idle);
+            //Path is invalid
+            ai_MainCore.SetState(State.Idle);
             return;
         }
         else
@@ -34,15 +49,24 @@ public class AI_PatrolBehaviour : MonoBehaviour
                 print("PathCompleted");
                 //Path completed
                 OnDestinationReached?.Invoke(this, EventArgs.Empty);
-                AI_MainCore.instance.SetState(State.Idle);
+                ai_MainCore.SetState(State.Idle);
             }
             else
             {
                 print("Doing Path");
+                if(!isWalking)
+                {
+                    isWalking = true;
+                }
+                //Walking throught the path
+                OnWalkAction?.Invoke(this, new OnWalkActionEventArgs
+                {
+                    isWalking = isWalking,
+                });
             }
         }
     }
-    private void Patrolling()
+    private void SettingDestiny()
     {
         navAgent.SetDestination(GetRandomLocation());
     }
@@ -65,5 +89,13 @@ public class AI_PatrolBehaviour : MonoBehaviour
         }
 
         return finalPosition;
+    }
+    private void OnDisable ( )
+    {
+        isWalking = false;
+        OnWalkAction?.Invoke(this, new OnWalkActionEventArgs
+        {
+            isWalking = isWalking,
+        });
     }
 }

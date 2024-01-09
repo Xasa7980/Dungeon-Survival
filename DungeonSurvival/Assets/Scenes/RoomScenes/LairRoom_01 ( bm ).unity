@@ -780,14 +780,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2086730522}
     m_Modifications:
-    - target: {fileID: 163014, guid: 70ad07d06832dba42a3bb244ab822fd1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 175890, guid: 70ad07d06832dba42a3bb244ab822fd1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 194332, guid: 70ad07d06832dba42a3bb244ab822fd1, type: 3}
       propertyPath: m_Name
       value: Character_Goblin_Shaman
@@ -63701,7 +63693,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b120eee9d61104884e3db1ddb4f621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navAgent: {fileID: 2086730524}
   speedMultiplier: 2
 --- !u!114 &2086730519
 MonoBehaviour:
@@ -63716,7 +63707,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionRange: 20
-  navAgent: {fileID: 2086730524}
 --- !u!114 &2086730520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63793,6 +63783,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   detectionAngle: 145
+  rotationSpeed: 5
 --- !u!195 &2086730524
 NavMeshAgent:
   m_ObjectHideFlags: 0

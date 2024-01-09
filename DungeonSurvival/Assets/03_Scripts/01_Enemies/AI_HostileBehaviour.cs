@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class AI_HostileBehaviour : MonoBehaviour
 {
-    public event EventHandler OnBasicAttack;
+    public static event EventHandler OnBasicAttack;
 
-    public event EventHandler OnChargedAttack;
-    public event EventHandler OnChargingAttack;
+    public static event EventHandler OnChargedAttack;
+    public static event EventHandler OnChargingAttack;
 
-    public event EventHandler OnSpecialAttack;
+    public static event EventHandler OnSpecialAttack;
 
-    public event EventHandler OnSkillAttack;
-    public event EventHandler OnCastingSkill;
+    public static event EventHandler OnSkillAttack;
+    public static event EventHandler OnCastingSkill;
 
     [SerializeField] private CombatBehaviourSO combatBehaviourSO;
     [SerializeField] private float basicAtkTimerMax;

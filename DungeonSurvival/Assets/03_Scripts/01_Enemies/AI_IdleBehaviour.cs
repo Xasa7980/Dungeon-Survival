@@ -13,8 +13,10 @@ public class AI_IdleBehaviour : MonoBehaviour
 
     private float idleTime;
     private float recoveryTime;
+    private AI_MainCore ai_MainCore;
     private void Start ( )
     {
+        ai_MainCore = GetComponent<AI_MainCore>();
     }
     private void Update ( )
     {
@@ -41,7 +43,7 @@ public class AI_IdleBehaviour : MonoBehaviour
         if( idleTime > idleTimeMax)
         {
             idleTime = 0;
-            AI_MainCore.instance.SetState(State.Patrol);
+            ai_MainCore.SetState(State.Patrol);
         }
     }
 }

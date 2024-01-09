@@ -14,9 +14,6 @@ public enum State
 }
 public class AI_MainCore : MonoBehaviour
 {
-    public static AI_MainCore instance;
-
-  
     [SerializeField] private MonoBehaviour idleBehaviour;
     [SerializeField] private MonoBehaviour patrolBehaviour;
     [SerializeField] private MonoBehaviour chasingBehaviour;
@@ -28,10 +25,6 @@ public class AI_MainCore : MonoBehaviour
 
     private State state;
     private Transform threat;
-    private void Awake ( )
-    {
-        instance = this;
-    }
     private void Start ( )
     {
         state = State.Idle;
@@ -87,16 +80,16 @@ public class AI_MainCore : MonoBehaviour
     {
         this.state = state;
     }
-    public State GetCuurentState ( )
+    public State GetCurrentState ( )
     {
         return state;
     }
 
-    internal void SetThreat ( Transform threatTransform )
+    public void SetThreat ( Transform threatTransform )
     {
         threat = threatTransform;
     }
-    internal Transform GetThreat ( )
+    public Transform GetThreat ( )
     {
         return threat;
     }

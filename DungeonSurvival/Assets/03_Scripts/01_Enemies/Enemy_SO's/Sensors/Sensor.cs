@@ -13,7 +13,7 @@ public abstract class Sensor : MonoBehaviour
 
     public abstract Transform GetNearestThreat();
 
-    public abstract bool InRange(Vector3 position);
+    public abstract bool InAttackRange(Vector3 position);
 
     public bool DirectLineToTarget(Vector3 target)
     {

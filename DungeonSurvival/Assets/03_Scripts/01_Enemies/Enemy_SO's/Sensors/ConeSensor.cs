@@ -41,7 +41,7 @@ public class ConeSensor : Sensor
         return nearest;
     }
 
-    public override bool InRange(Vector3 position)
+    public override bool InAttackRange(Vector3 position)
     {
         Vector3 dir = (position - transform.position).normalized;
         float angle = Vector3.Angle(dir, transform.forward);
