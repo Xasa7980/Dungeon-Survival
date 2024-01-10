@@ -13,6 +13,7 @@ public class SkillDataSO : ScriptableObject
         Passive
     }
     
+
     public float durationTimerMax;
     public float castingTimerMax;
 }

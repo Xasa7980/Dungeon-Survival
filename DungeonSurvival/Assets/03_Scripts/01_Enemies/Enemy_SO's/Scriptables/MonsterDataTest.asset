@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ede8f378292d7f4f8087f0060364878, type: 3}
+  m_Name: MonsterDataTest
+  m_EditorClassIdentifier: 
+  monsterRank: 1
+  monsterName: Weapons
+  animationClipContainerSO: {fileID: 0}
+  combatBehaviourSO: {fileID: 0}
+  undeath:
+  - name: Weapons
+    disabled: 0
+    weapon: []
+    currentWeapon: {fileID: 0}
+    currentPartIndex: 0
+  beast:
+  - name: Weapons
+    disabled: 0
+    weapon: []
+    currentWeapon: {fileID: 0}
+    currentPartIndex: 0
+  humanoid:
+  - name: Weapons
+    disabled: 0
+    weapon: []
+    currentWeapon: {fileID: 0}
+    currentPartIndex: 0
+  spirit:
+  - name: Weapons
+    disabled: 0
+    weapon: []
+    currentWeapon: {fileID: 0}
+    currentPartIndex: 0
