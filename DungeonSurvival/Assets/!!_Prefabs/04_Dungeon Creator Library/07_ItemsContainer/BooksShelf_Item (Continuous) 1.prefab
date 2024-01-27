@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _priority: 0
+  _interactionObject: 0
   _interactionType: 2
   _interactionTime: 3
   _disallowRootMotion: 0
@@ -387,6 +388,7 @@ MonoBehaviour:
   OnInteractionFinish:
     m_PersistentCalls:
       m_Calls: []
+  _item: {fileID: 0}
 --- !u!1001 &807179618181340962
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,6 +10,13 @@ public abstract class Interactable : MonoBehaviour
     protected bool _canInteract = true;
     public bool canInteract => _canInteract;
 
+    public enum InteractionObject
+    {
+        Item,
+        ItemContainer,
+        EnviromentItem,
+        Npc
+    }
     public enum InteractionType
     {
         Single,
@@ -22,13 +29,18 @@ public abstract class Interactable : MonoBehaviour
     [FoldoutGroup("Interactable"), SerializeField, Range(0, 100)] int _priority = 0;
     public int priority => _priority;
 
+    [PropertyOrder(100),PropertySpace(SpaceBefore = 10)]
+    [FoldoutGroup("Interactable"), SerializeField] InteractionObject _interactionObject;
+    public InteractionObject interactionObject => _interactionObject;
+
     [PropertyOrder(100)]
     [FoldoutGroup("Interactable"), SerializeField] InteractionType _interactionType;
     public InteractionType interactionType => _interactionType;
+
     [PropertyOrder(100)]
-    [FoldoutGroup("Interactable"), ShowIf("interactionType", InteractionType.Continue), SerializeField] float _interactionTime = 3;
-    public float interactionTime => _interactionTime;
-    float interactionProgress = 0;
+    [FoldoutGroup("Interactable"), ShowIf("interactionType", InteractionType.Continue), SerializeField] float _interactionTime = 3; //Tiempo para realizar la interaccion
+    public float interactionTime => _interactionTime; //Getter del tiempo para realizar la interaccion
+    private float interactionProgress = 0; //Temporizador
     public bool finished => interactionProgress > interactionTime;
 
     [PropertyOrder(100)]

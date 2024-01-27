@@ -22,6 +22,9 @@ public class RadialSensor : Sensor
         {
             Vector3 directionToThreat = ai_MainCore.GetThreat().position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(directionToThreat);
+            lookRotation.x = 0f;
+            lookRotation.z = 0f;
+
             float angle = Quaternion.Angle(transform.rotation, lookRotation);
 
             // Si el ángulo es mayor a 1
@@ -41,6 +44,8 @@ public class RadialSensor : Sensor
             {
                 Vector3 directionToThreat = ai_MainCore.GetThreat().position - transform.position;
                 Quaternion lookRotation = Quaternion.LookRotation(directionToThreat);
+                lookRotation.x = 0f;
+                lookRotation.z = 0f;
                 float angle = Quaternion.Angle(transform.rotation, lookRotation);
 
                 if (angle > 1f)
@@ -158,9 +163,9 @@ public class RadialSensor : Sensor
 #if UNITY_EDITOR
         UnityEditor.Handles.color = Color.yellow;//AttackRange detector
         UnityEditor.Handles.DrawWireArc(transform.position, Vector3.up, Vector3.forward, 360, detectionRadius);
-        UnityEditor.Handles.DrawLine(transform.position, transform.position + MathOps.PlaneDirFromAngle((-detectionAngle / 2 + transform.rotation.eulerAngles.y)) * detectionRadius);
         UnityEditor.Handles.color = Color.red; //OutRange detector
         UnityEditor.Handles.DrawWireArc(transform.position, Vector3.up, Vector3.forward, 360, detectionRadius * detectionRadiusMultiplier);
+        UnityEditor.Handles.DrawLine(transform.position, transform.position + MathOps.PlaneDirFromAngle((-detectionAngle / 2 + transform.rotation.eulerAngles.y)) * (detectionRadius * detectionRadiusMultiplier));
         UnityEditor.Handles.DrawLine(transform.position, transform.position + MathOps.PlaneDirFromAngle((detectionAngle / 2 + transform.rotation.eulerAngles.y)) * (detectionRadius * detectionRadiusMultiplier));
 #endif
     }

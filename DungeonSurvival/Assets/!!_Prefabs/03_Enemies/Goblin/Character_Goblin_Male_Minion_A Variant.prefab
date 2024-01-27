@@ -1201,6 +1201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationClipContainerSO: {fileID: 11400000, guid: 2981ad30da545ea438f6aab4c896b280,
     type: 2}
+  characterCategory: 1
 --- !u!114 &5325823617740445646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,29 +1215,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfAttacks: 4
---- !u!114 &8666382595372907680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5602217112829762571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c216bba6893f5ad4699dc7b08346dc6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfAttacks: 4
---- !u!114 &7229168960328631642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5602217112829762571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 101350957e1fa2b45a8520e43a43fb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationClipContainerSO: {fileID: 0}
+  ai_MainCore: {fileID: 0}

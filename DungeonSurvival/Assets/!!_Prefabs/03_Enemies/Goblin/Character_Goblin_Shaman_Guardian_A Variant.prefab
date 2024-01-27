@@ -1138,38 +1138,6 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70ad07d06832dba42a3bb244ab822fd1, type: 3}
---- !u!1 &7428875834634522541 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 194332, guid: 70ad07d06832dba42a3bb244ab822fd1,
-    type: 3}
-  m_PrefabInstance: {fileID: 7428875834634352817}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2043061602096216104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428875834634522541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c216bba6893f5ad4699dc7b08346dc6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfAttacks: 4
---- !u!114 &3044028255110053410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428875834634522541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 101350957e1fa2b45a8520e43a43fb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationClipContainerSO: {fileID: 0}
 --- !u!4 &7649954057884780078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 951019941234671263, guid: 70ad07d06832dba42a3bb244ab822fd1,
