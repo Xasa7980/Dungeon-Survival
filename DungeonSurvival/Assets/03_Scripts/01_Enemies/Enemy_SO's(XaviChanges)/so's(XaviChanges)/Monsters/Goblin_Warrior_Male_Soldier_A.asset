@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a72c813720c12594d8418be5dcb47adb, type: 3}
+  m_Name: Goblin_Warrior_Male_Soldier_A
+  m_EditorClassIdentifier: 
+  monsterCategory: 1
+  monsterRank: 5
+  VIT: 50
+  INT: 50
+  STR: 50
+  RES: 50
+  elemRES: 50
+  weaponAttackRange: 1.5
+  extraAttackPoints: 6075
+  extraAttackSpeed: 25.5
+  extraDefensePoints: 13575
+  extraElementalPower: 288
+  extraHealthPoints: 10832
+  extraManaPoints: 18817

@@ -21,13 +21,15 @@ public class AI_MainCore : MonoBehaviour
     [SerializeField] private MonoBehaviour nearDieBehaviour;
     [SerializeField] private MonoBehaviour deathBehaviour;
     [SerializeField] private MonoBehaviour actualBehaviour;
-    
+    [SerializeField] private MonsterStats monsterStats;
 
     private State state;
     private Transform threat;
+
     private void Start ( )
     {
         state = State.Idle;
+        monsterStats = GetComponent<MonsterStats>();
     }
     private void Update ( )
     {
@@ -76,6 +78,7 @@ public class AI_MainCore : MonoBehaviour
             return;
         }
     }
+    #region Getters & Setters
     public void SetState ( State state )
     {
         this.state = state;
@@ -93,4 +96,29 @@ public class AI_MainCore : MonoBehaviour
     {
         return threat;
     }
+    public AI_IdleBehaviour GetIdleBehaviour ( )
+    {
+        return (AI_IdleBehaviour) idleBehaviour;
+    }
+    public AI_PatrolBehaviour GetPatrolBehaviour ( )
+    {
+        return (AI_PatrolBehaviour) patrolBehaviour;
+    }
+    public AI_ChasingBehaviour GetChasingBehaviour ( )
+    {
+        return (AI_ChasingBehaviour) chasingBehaviour;
+    }
+    public AI_HostileBehaviour GetHostileBehaviour ( )
+    {
+        return (AI_HostileBehaviour) hostileBehaviour;
+    }
+    public AI_NearDieBehaviour GetNearDieBehaviour ( )
+    {
+        return (AI_NearDieBehaviour) nearDieBehaviour;
+    }
+    public AI_DeathBehaviour GetDeathBehaviour ( )
+    {
+        return (AI_DeathBehaviour) deathBehaviour;
+    }
+    #endregion
 }

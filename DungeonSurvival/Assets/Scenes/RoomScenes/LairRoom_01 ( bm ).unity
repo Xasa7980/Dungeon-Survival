@@ -54999,6 +54999,12 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.10204733
       objectReference: {fileID: 0}
+    - target: {fileID: 4286753049376140477, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 009bf63a36ade4a4da4333869558e121,
+        type: 2}
     - target: {fileID: 5110829791759827709, guid: 14565c7c141bbba498505d7b3ef17d72,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -55358,6 +55364,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600716466886689681, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: attackCombo_resetTimeMax
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6833837226270473471, guid: 14565c7c141bbba498505d7b3ef17d72,
         type: 3}
@@ -68194,12 +68205,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatBehaviourSO: {fileID: 11400000, guid: e2a1f7650714a7f448dc54e7074c90ec, type: 2}
+  specialAttacksSO: {fileID: 0}
   basicAtkTimerMax: 1
   chargedAttackTimerMax: 2
-  rechargingAttackTimerMax: 2
+  chargingReleaseAttackMax: 0
   specialAtkTimerMax: 4
-  skillAtkTimerMax: 6
+  skillReleaseTimeMax: 0
+  skillCastingTimerMax: 0
   attackSpeed: 2
   timerMaxBetweenAttacks: 100
   attackRates:
@@ -68268,6 +68280,7 @@ MonoBehaviour:
   nearDieBehaviour: {fileID: 2086730516}
   deathBehaviour: {fileID: 2086730515}
   actualBehaviour: {fileID: 0}
+  monsterStats: {fileID: 0}
 --- !u!4 &2086730522
 Transform:
   m_ObjectHideFlags: 0
@@ -68311,6 +68324,7 @@ MonoBehaviour:
       m_Calls: []
   detectionAngle: 145
   rotationSpeed: 5
+  detectionRadiusMultiplier: 1.5
 --- !u!195 &2086730524
 NavMeshAgent:
   m_ObjectHideFlags: 0

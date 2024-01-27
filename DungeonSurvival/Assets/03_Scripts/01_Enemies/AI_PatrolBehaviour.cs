@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class AI_PatrolBehaviour : MonoBehaviour
 {
     public event EventHandler OnDestinationReached;
-    public static event EventHandler<OnWalkActionEventArgs> OnWalkAction;
+    public event EventHandler<OnWalkActionEventArgs> OnWalkAction;
     public class OnWalkActionEventArgs : EventArgs
     {
         public bool isWalking;

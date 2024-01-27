@@ -5,13 +5,14 @@ using UnityEngine;
 public class AnimationClipChecker : MonoBehaviour
 {
     [SerializeField] private AnimationClipContainerSO animationClipContainerSO;
+    private Animator animator;
     private void Awake ( )
     {
+        animator = GetComponent<Animator> ();
         InitializeAnimationsChecker();
     }
     private void InitializeAnimationsChecker ( )
     {
-        Animator animator = GetComponent<Animator> ();
         AnimatorOverrideController animatorOverrideController = new AnimatorOverrideController ( animator.runtimeAnimatorController);
 
         animator.runtimeAnimatorController = animatorOverrideController;

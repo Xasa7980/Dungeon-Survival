@@ -95,7 +95,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (interacting) return;
 
-        Collider[] interactions = Physics.OverlapBox(interactionArea.position, interactionArea.size,
+        Collider[] interactions = Physics.OverlapBox(interactionArea.objectPosition, interactionArea.size,
             interactionArea.rotation, interactionMask);
 
         //Si hay mas de una interacción habra que decidir cual es la mas adecuada

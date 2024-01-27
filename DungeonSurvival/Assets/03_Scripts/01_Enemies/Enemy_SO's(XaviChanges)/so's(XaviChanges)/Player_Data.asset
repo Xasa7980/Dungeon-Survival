@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe22a3054c00044caf789c855c51143, type: 3}
+  m_Name: Player_Data
+  m_EditorClassIdentifier: 
+  characterCategory: 0
+  VIT: 150
+  INT: 150
+  STR: 150
+  RES: 150
+  DEX: 1
+  AGI: 1
+  elemRES: 150
+  extraAttackPoints: 155
+  extraAttackSpeed: 155
+  extraDefensePoints: 155
+  extraElementalPower: 155
+  extraHealthPoints: 155
+  extraManaPoints: 155

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46175650a31d0146af00f2f3fd74f6f, type: 3}
+  m_Name: NewEquipmentData 61
+  m_EditorClassIdentifier: 
+  equipmentName: Austra
+  description: 
+  equipmentType: 1
+  equipmentElement: 2
+  equipmentRank: 4
+  equipmentCategory: 0
+  equipmentStats:
+    attackPoints: 194
+    attackRange: 0
+    attackSpeed: 65
+    elementalPower: 208
+    healthPoints: 1268
+    energyPoints: 287
+    criticalRate: 62
+    criticalDamage: 130
+  equipmentVisuals:
+    equipmentParticleEffects: {fileID: 1840808596326386111, guid: bec9d13c414dc1440b6dbe8d1cd5ab41,
+      type: 3}
+    equipmentSecondaryParticleEffect: {fileID: 8836206791571183091, guid: 904b6d599c671e143807811eca0c9b39,
+      type: 3}
+    colorKey_1: {r: 1.8443027, g: 0.21572624, b: 0, a: 1}
+    colorKey_2: {r: 7.129739, g: 0.35926294, b: 0, a: 1}
+    hasSlashEffect: 1
+    hasSecondaryParticleEffect: 1
+    slashMaterials:
+    - {fileID: 2100000, guid: 5986593e3c7583a43a77c4ce88bad9bb, type: 2}
+    - {fileID: 2100000, guid: bcc651ca277001445ae5a55641f0aef5, type: 2}
+    - {fileID: 2100000, guid: 4bee4a492cc614f4c8e6b9a20b3b7bf6, type: 2}
+    - {fileID: 2100000, guid: f10cf578735e8e0448945b2891ffd116, type: 2}
+    - {fileID: 2100000, guid: 7b20056bc7e29d4458a669feb4959052, type: 2}
+    - {fileID: 2100000, guid: da86311116c407b4db8dd2ea374eab80, type: 2}
+    - {fileID: 2100000, guid: d4ff6038e606bff45821300fc5464bbb, type: 2}
+    weaponSlashEffectMaterial: {fileID: 2100000, guid: bcc651ca277001445ae5a55641f0aef5,
+      type: 2}

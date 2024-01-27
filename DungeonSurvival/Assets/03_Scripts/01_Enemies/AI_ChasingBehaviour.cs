@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class AI_ChasingBehaviour : MonoBehaviour
 {
-    public static event EventHandler<OnRunActionEventArgs> OnRunAction;
+    public event EventHandler<OnRunActionEventArgs> OnRunAction;
     public class OnRunActionEventArgs : EventArgs
     {
         public bool isRunning;
@@ -26,6 +26,7 @@ public class AI_ChasingBehaviour : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         normalSpeed = navAgent.speed;
         navAgent.speed = normalSpeed * speedMultiplier;
+        navAgent.isStopped = false;
         navAgent.SetDestination(GetThreatLocation());
     }
     private void OnDisable ( )
@@ -42,7 +43,7 @@ public class AI_ChasingBehaviour : MonoBehaviour
     }
     private void Update ( )
     {
-        if(Vector3.Distance(transform.position, GetThreatLocation()) > 1.5f)
+        if(Vector3.Distance(transform.position, GetThreatLocation()) > navAgent.stoppingDistance)
         {
             if(!isRunning)
             {
@@ -56,9 +57,14 @@ public class AI_ChasingBehaviour : MonoBehaviour
             });
             navAgent.SetDestination(GetThreatLocation());
         }
-        else if (navAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+        else
         {
             navAgent.isStopped = true;
+            ai_MainCore.SetState(State.Idle);
+            return;
+        }
+        if (navAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+        {
             ai_MainCore.SetState(State.Idle);
             return;
         }
@@ -69,6 +75,16 @@ public class AI_ChasingBehaviour : MonoBehaviour
         {
             Vector3 threatPos = ai_MainCore.GetThreat().position;
             return threatPos;
+            //if(Vector3.Distance(ai_MainCore.GetThreat().position, transform.position) > navAgent.stoppingDistance)
+            //{
+            //    Vector3 threatPos = ai_MainCore.GetThreat().position;
+            //    return threatPos;
+            //}
+            //else
+            //{
+            //    Vector3 threatPos = ai_MainCore.GetThreat().position;
+            //    return threatPos;
+            //}
         }
         else
         {

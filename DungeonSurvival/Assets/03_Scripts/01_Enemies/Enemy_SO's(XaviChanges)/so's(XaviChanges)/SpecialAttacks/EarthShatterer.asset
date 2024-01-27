@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586f4f651c7671845bbeb04b06ecf29e, type: 3}
+  m_Name: EarthShatterer
+  m_EditorClassIdentifier: 
+  durationTimerMax: 0
+  castingTimerMax: 4
+  loading_Attack_Animation_Clip: {fileID: 7400000, guid: 1e2128c32894cd945b3a497503d34d94,
+    type: 2}
+  release_Attack_Animation_Clip: {fileID: 7400000, guid: 78c3af66bc37fa646acd58db3c5907b4,
+    type: 2}
+  hasEffectParticles: 1
+  hasEffectParticles_x2: 0
+  animation_Particles_01: {fileID: 4137053849332779374, guid: 6d6f69ed8223d284bb32369b0da88d66,
+    type: 3}
+  animation_Particles_02: {fileID: 0}

@@ -2,44 +2,76 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class AI_HostileBehaviour : MonoBehaviour
 {
-    public static event EventHandler OnBasicAttack;
+    //[SerializeField] protected UnityEvent OnBasicAttack;
+    //[SerializeField] protected UnityEvent OnChargedAttack;
+    //[SerializeField] protected UnityEvent OnChargingAttack;
+    //[SerializeField] protected UnityEvent OnSpecialAttack;
+    //[SerializeField] protected UnityEvent OnSkillAttack;
+    //[SerializeField] protected UnityEvent OnCastingSkill;
+    public event EventHandler OnEnterCombat;
+    public event EventHandler OnExitCombat;
 
-    public static event EventHandler OnChargedAttack;
-    public static event EventHandler OnChargingAttack;
+    public event EventHandler OnBasicAttack;
 
-    public static event EventHandler OnSpecialAttack;
+    public event EventHandler OnChargedAttack;
+    public event EventHandler<OnChargingAttackEventArgs> OnChargingAttack;
+    public class OnChargingAttackEventArgs : EventArgs
+    {
+        public float progressNormalized;
+    }
+    public event EventHandler OnSpecialAttack;
 
-    public static event EventHandler OnSkillAttack;
-    public static event EventHandler OnCastingSkill;
+    public event EventHandler OnSkillAttack;
+    public event EventHandler<OnCastingSkillEventArgs> OnCastingSkill;
+    public class OnCastingSkillEventArgs : EventArgs
+    {
+        public float progressNormalized;
+    }
 
-    [SerializeField] private CombatBehaviourSO combatBehaviourSO;
+    [SerializeField] private SpecialAttacksSO specialAttacksSO;
     [SerializeField] private float basicAtkTimerMax;
     [SerializeField] private float chargedAttackTimerMax;
-    [SerializeField] private float rechargingAttackTimerMax;
+    [SerializeField] private float chargingReleaseAttackMax;
     [SerializeField] private float specialAtkTimerMax;
-    [SerializeField] private float skillAtkTimerMax;
+    [SerializeField] private float skillReleaseTimeMax;
+    [SerializeField] private float skillCastingTimerMax;
     [SerializeField] private float attackSpeed;
     [SerializeField] private float timerMaxBetweenAttacks;
 
     [SerializeField] private List<float> attackRates = new List<float>();
 
     public AttackState attackState;
+    private NavMeshAgent navAgent;
+    private AI_MainCore ai_MainCore;
+
     private float basicAtkTimer;
     private float chargedAttackTimer;
-    private float rechargingAttackTimer;
+    private float chargingReleaseAttack;
     private float specialAtkTimer;
     private float specialCastingTimer;
-    private float skillAtkTimer;
+    private float skillReleaseTime;
     private float skillCastingTimer;
     private float timerBetweenAttacks;
 
     private bool releasingAttack;
-    private void Start ( )
+    private void OnEnable ( )
     {
+        ai_MainCore = GetComponent<AI_MainCore>();
+        navAgent = GetComponent<NavMeshAgent>();
+        navAgent.isStopped = true;
 
+        OnEnterCombat?.Invoke(this, EventArgs.Empty);
+        chargingReleaseAttack = chargingReleaseAttackMax;
+        skillCastingTimer = specialAttacksSO.castingTimerMax;
+    }
+    private void OnDisable ( )
+    {
+        OnExitCombat?.Invoke(this, EventArgs.Empty);
     }
     private void Update ( )
     {
@@ -63,22 +95,22 @@ public class AI_HostileBehaviour : MonoBehaviour
             float randomAttackIndex = GetRandomAttack();
             if (randomAttackIndex == attackRates[0])
             {
-                Debug.Log(randomAttackIndex);
+                //Deal dmg basic attack
                 attackState = AttackState.Basic;
             }
             if (randomAttackIndex == attackRates[1])
             {
-                Debug.Log(randomAttackIndex);
+                //Deal dmg charged attack
                 attackState = AttackState.Recharged;
             }
             if (randomAttackIndex == attackRates[2])
             {
-                Debug.Log(randomAttackIndex);
+                //Deal dmg special attack
                 attackState = AttackState.Special;
             }
             if (randomAttackIndex == attackRates[3])
             {
-                Debug.Log(randomAttackIndex);
+                //Deal dmg skill attack
                 attackState = AttackState.Skill;
             }
             releasingAttack = true;
@@ -90,87 +122,89 @@ public class AI_HostileBehaviour : MonoBehaviour
         {
             case AttackState.Basic:
 
-                basicAtkTimer += Time.deltaTime;
+                if (basicAtkTimer < basicAtkTimerMax) basicAtkTimer += Time.deltaTime;
 
-                if (basicAtkTimer > basicAtkTimerMax)
+                else
                 {
+                    //Release basic attack 
+
                     basicAtkTimer = 0;
                     timerBetweenAttacks = 0;
                     releasingAttack = false;
 
                     OnBasicAttack?.Invoke(this, EventArgs.Empty);
-
-                    //Do atk basic
                 }
                 break;
 
             case AttackState.Recharged:
 
-                chargedAttackTimer += Time.deltaTime;
-
-                if (chargedAttackTimer > chargedAttackTimerMax)
+                if(chargingReleaseAttack > 0) chargingReleaseAttack -= Time.deltaTime;
+                OnChargingAttack?.Invoke(this, new OnChargingAttackEventArgs
                 {
-                    rechargingAttackTimer += Time.deltaTime;
+                    progressNormalized = chargingReleaseAttack / chargingReleaseAttackMax
+                });
 
-                    OnChargedAttack?.Invoke(this, EventArgs.Empty);
+                if (chargingReleaseAttack <= 0)
+                {
+                    chargedAttackTimer += Time.deltaTime;
 
-                    if (rechargingAttackTimer > rechargingAttackTimerMax)
+                    if (chargedAttackTimer > chargedAttackTimerMax)
                     {
+                        //Release charged
+
                         chargedAttackTimer = 0;
-                        rechargingAttackTimer = 0;
                         timerBetweenAttacks = 0;
+                        chargingReleaseAttack = chargingReleaseAttackMax;
                         releasingAttack = false;
 
-                        OnChargingAttack?.Invoke(this, EventArgs.Empty);
-
-                        //Do recharged atk
+                        OnChargedAttack?.Invoke(this, EventArgs.Empty);
                     }
                 }
                 break;
 
             case AttackState.Special:
 
-                specialAtkTimer += Time.deltaTime;
+                if (specialAtkTimer < specialAtkTimerMax) specialAtkTimer += Time.deltaTime;
 
-                if (specialAtkTimer > specialAtkTimerMax)
+                else
                 {
                     specialCastingTimer += Time.deltaTime;
 
-                    if (specialCastingTimer > combatBehaviourSO.specialAtkData.castingTimerMax)
+                    if (specialCastingTimer > specialAttacksSO.castingTimerMax) 
                     {
+                        //Release special attack
+
                         specialAtkTimer = 0;
                         specialCastingTimer = 0;
                         timerBetweenAttacks = 0;
                         releasingAttack = false;
 
                         OnSpecialAttack?.Invoke(this, EventArgs.Empty);
-
-                        //Do special atk
-
                     }
                 }
                 break;
 
             case AttackState.Skill:
 
-                skillAtkTimer += Time.deltaTime;
-
-                if (skillAtkTimer > skillAtkTimerMax)
+                if (skillCastingTimer > 0) skillCastingTimer -= Time.deltaTime;
+                OnCastingSkill?.Invoke(this, new OnCastingSkillEventArgs
                 {
-                    skillCastingTimer += Time.deltaTime;
+                    progressNormalized = skillCastingTimer / specialAttacksSO.castingTimerMax
+                });
 
-                    OnSkillAttack?.Invoke(this, EventArgs.Empty);
-
-                    if (skillCastingTimer > combatBehaviourSO.skillAtkData.castingTimerMax)
+                if (skillCastingTimer <= 0)
+                {
+                    skillReleaseTime += Time.deltaTime;
+                    if (skillReleaseTime > skillReleaseTimeMax)
                     {
-                        skillCastingTimer = 0;
-                        skillAtkTimer = 0;
+                        //Release charged
+
+                        skillReleaseTime = 0;
                         timerBetweenAttacks = 0;
+                        skillCastingTimer = specialAttacksSO.castingTimerMax;
                         releasingAttack = false;
 
-                        OnCastingSkill?.Invoke(this, EventArgs.Empty);
-
-                        //Do skill atk
+                        OnSkillAttack?.Invoke(this, EventArgs.Empty);
                     }
                 }
                 break;
