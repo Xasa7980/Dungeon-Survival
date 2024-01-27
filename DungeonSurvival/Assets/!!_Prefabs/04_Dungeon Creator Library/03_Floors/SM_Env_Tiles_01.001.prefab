@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1349741003817734332}
   - component: {fileID: 8254573450296103985}
   - component: {fileID: 7459188621927633353}
+  - component: {fileID: 3955312915186971192}
   m_Layer: 7
   m_Name: SM_Env_Tiles_01.001
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3955312915186971192
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326228963481149510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5623329, y: 5, z: 0.12793195}
+  m_Center: {x: 1.2811531, y: 2.5, z: 0.06072598}

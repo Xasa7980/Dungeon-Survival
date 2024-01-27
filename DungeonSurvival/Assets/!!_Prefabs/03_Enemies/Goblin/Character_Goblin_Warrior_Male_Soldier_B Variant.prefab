@@ -123,7 +123,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 112422, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
       propertyPath: m_Name
-      value: Character_Goblin_Warrior_Male_Soldier_B
+      value: Character_Goblin_Warrior_Male_Soldier_B Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 403096, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.63248575
+      objectReference: {fileID: 0}
+    - target: {fileID: 403096, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.37547126
       objectReference: {fileID: 0}
     - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
       propertyPath: m_RootOrder
@@ -131,7 +139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -139,7 +147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -147,15 +155,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 407186, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -169,8 +177,260 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 474934, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.3754713
+      objectReference: {fileID: 0}
+    - target: {fileID: 474934, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.63248575
+      objectReference: {fileID: 0}
+    - target: {fileID: 9505110, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8e62663087438914b94fcffcaea46157, type: 2}
+    - target: {fileID: 5740739852803679223, guid: 8cd752dc36d412b4bba2efd06775153a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4998901
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740739852803679223, guid: 8cd752dc36d412b4bba2efd06775153a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.4714117
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740739852803679223, guid: 8cd752dc36d412b4bba2efd06775153a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.58038867
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740739852803679223, guid: 8cd752dc36d412b4bba2efd06775153a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.4370698
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390199465517584767, guid: 8cd752dc36d412b4bba2efd06775153a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.56570864
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390199465517584767, guid: 8cd752dc36d412b4bba2efd06775153a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.34012127
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cd752dc36d412b4bba2efd06775153a, type: 3}
+--- !u!1 &3829074933259616005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 112422, guid: 8cd752dc36d412b4bba2efd06775153a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3829074933259634723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1373647863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829074933259616005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246455474a0d74a4291b3cedc896ebdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonePaths:
+  - 
+  - Character_Ghost_01
+  - Character_Ghost_02
+  - Character_Goblin_Female
+  - Character_Goblin_Male
+  - Character_Goblin_Shaman
+  - Character_Goblin_WarChief
+  - Character_Goblin_Warrior_Female
+  - Character_Goblin_Warrior_Male
+  - Character_Hero_Knight_Female
+  - Character_Hero_Knight_Male
+  - Character_Rock_Golem
+  - Character_Skeleton_Knight
+  - Character_Skeleton_Slave_01
+  - Character_Skeleton_Soldier_01
+  - Character_Skeleton_Soldier_02
+  - Character_Tormented_Soul
+  - Root
+  - Root/Hips
+  - Root/Hips/SM_Item_Bag_Large
+  - Root/Hips/SM_Item_Bags
+  - Root/Hips/SM_Item_Bones
+  - Root/Hips/SM_Item_Horn
+  - Root/Hips/SM_Item_Shrooms
+  - Root/Hips/SM_Item_Shrunken_Head
+  - Root/Hips/Spine_01
+  - Root/Hips/Spine_01/Spine_02
+  - Root/Hips/Spine_01/Spine_02/SM_Item_Goblin_WarBanner
+  - Root/Hips/Spine_01/Spine_02/SM_Item_Shield
+  - Root/Hips/Spine_01/Spine_02/SM_Item_Sword
+  - Root/Hips/Spine_01/Spine_02/Spine_03
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Finger_01
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Finger_01/Finger_02
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Finger_01/Finger_02/Finger_03
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Finger_01/Finger_02/Finger_03/Finger_04
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/IndexFinger_01
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/IndexFinger_01/IndexFinger_02
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/IndexFinger_01/IndexFinger_02/IndexFinger_03
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/IndexFinger_01/IndexFinger_02/IndexFinger_03/IndexFinger_04
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Thumb_01
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Thumb_01/Thumb_02
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/Thumb_01/Thumb_02/Thumb_03
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Hand_L/L_Grabber
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Shield Grabber
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_L/Shoulder_L/Elbow_L/Shield Grabber/SM_Wep_Shield_Spike_01
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Finger_01
+    1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Finger_01
+    1/Finger_02 1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Finger_01
+    1/Finger_02 1/Finger_03 1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Finger_01
+    1/Finger_02 1/Finger_03 1/Finger_04 1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/IndexFinger_01
+    1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/IndexFinger_01
+    1/IndexFinger_02 1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/IndexFinger_01
+    1/IndexFinger_02 1/IndexFinger_03 1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/IndexFinger_01
+    1/IndexFinger_02 1/IndexFinger_03 1/IndexFinger_04 1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Thumb_01
+    1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Thumb_01
+    1/Thumb_02 1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/Thumb_01
+    1/Thumb_02 1/Thumb_03 1
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/R_Grabber
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R/R_Grabber/SM_Wep_Goblin_Halberd_01
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Neck
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/Eyebrows
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/Eyes
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/SM_Item_Goblin_Hair
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/SM_Item_Mask_01
+  - Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/SM_Item_Mask_02
+  - Root/Hips/UpperLeg_L
+  - Root/Hips/UpperLeg_L/LowerLeg_L
+  - Root/Hips/UpperLeg_L/LowerLeg_L/Ankle_L
+  - Root/Hips/UpperLeg_L/LowerLeg_L/Ankle_L/Ball_L
+  - Root/Hips/UpperLeg_L/LowerLeg_L/Ankle_L/Ball_L/Toes_L
+  - Root/Hips/UpperLeg_R
+  - Root/Hips/UpperLeg_R/LowerLeg_R
+  - Root/Hips/UpperLeg_R/LowerLeg_R/Ankle_R
+  - Root/Hips/UpperLeg_R/LowerLeg_R/Ankle_R/Ball_R
+  - Root/Hips/UpperLeg_R/LowerLeg_R/Ankle_R/Ball_R/Toes_R
+  showBones: 00000000190000001a0000001f000000200000002100000022000000310000003200000033000000340000004200000043000000490000004a0000004b0000004c0000004e0000004f0000005000000051000000
+  foldoutBones: 51000000500000004f0000004e0000004c0000004b0000004a000000490000004300000042000000400000003e0000003d0000003b0000003a00000039000000370000003600000035000000340000003300000032000000310000002f0000002c0000002b0000002900000028000000270000002500000024000000230000002200000021000000200000001f0000001e0000001a00000019000000120000001100000000000000
+  mirrorBones: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff31000000320000003300000034000000350000003600000037000000ffffffff390000003a0000003b000000ffffffff3d0000003e0000003f00000040000000ffffffffffffffff1f000000200000002100000022000000230000002400000025000000ffffffff270000002800000029000000ffffffff2b0000002c0000002d0000002e000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff4e0000004f000000500000005100000052000000490000004a0000004b0000004c0000004d000000
+  mirrorBlendShape: []
+  animatorIkData:
+  - enable: 0
+    _fixed: 0
+    autoRotation: 0
+    spaceType: 0
+    parent: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    headWeight: 1
+    eyesWeight: 0
+    swivelRotation: 0
+    swivelPosition: {x: 0, y: 0, z: 0}
+    parentPath: 
+  - enable: 0
+    _fixed: 0
+    autoRotation: 0
+    spaceType: 0
+    parent: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    headWeight: 1
+    eyesWeight: 0
+    swivelRotation: 0
+    swivelPosition: {x: 0, y: 0, z: 0}
+    parentPath: 
+  - enable: 0
+    _fixed: 0
+    autoRotation: 0
+    spaceType: 0
+    parent: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    headWeight: 1
+    eyesWeight: 0
+    swivelRotation: 0
+    swivelPosition: {x: 0, y: 0, z: 0}
+    parentPath: 
+  - enable: 0
+    _fixed: 0
+    autoRotation: 0
+    spaceType: 0
+    parent: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    headWeight: 1
+    eyesWeight: 0
+    swivelRotation: 0
+    swivelPosition: {x: 0, y: 0, z: 0}
+    parentPath: 
+  - enable: 0
+    _fixed: 0
+    autoRotation: 0
+    spaceType: 0
+    parent: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    headWeight: 1
+    eyesWeight: 0
+    swivelRotation: 0
+    swivelPosition: {x: 0, y: 0, z: 0}
+    parentPath: 
+  originalIkData: []
+  selectionData: []
+  lastSelectAnimationClip: {fileID: -6972005280777886564, guid: 17851aa1917e4b47b6c3fff922755eb9,
+    type: 3}
+  handPoseList: []
+  blendShapeList: []
+--- !u!114 &1789197328330831491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829074933259616005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c216bba6893f5ad4699dc7b08346dc6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfAttacks: 4
+--- !u!114 &7959988284572500468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829074933259616005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 101350957e1fa2b45a8520e43a43fb0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationClipContainerSO: {fileID: 0}
 --- !u!4 &5283126773216807913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8967498717355213770, guid: 8cd752dc36d412b4bba2efd06775153a,

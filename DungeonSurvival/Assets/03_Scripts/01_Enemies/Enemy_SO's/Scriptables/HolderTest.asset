@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0881d57fddb884840a87c8aed189974f, type: 3}
+  m_Name: HolderTest
+  m_EditorClassIdentifier: 
+  getRandomAttackComboAnimation: 0
+  basicAttackAnimationClips: []
+  eAttackBasic1Clip: {fileID: 7400000, guid: 64957b8025c959e479db6ff15e3cf5ca, type: 2}
+  eAttackBasic2Clip: {fileID: 7400000, guid: e0f7bfa6fb6e0f74895213cf835b4836, type: 2}
+  eAttackBasic3Clip: {fileID: 7400000, guid: 8b1e6701979f6de40b103b634d80d4f3, type: 2}
+  eAttackBasic4Clip: {fileID: 7400000, guid: 98b28076b1b8ceb44ae35d91ceca6d2b, type: 2}
+  eDeathBackClip: {fileID: 7400000, guid: a99053ef88b08254fbdae341a259da4a, type: 2}
+  eIdleClip: {fileID: 7400000, guid: 3e7c5abcd6328f141a20a25c293d62be, type: 2}
+  eIdleCombatClip: {fileID: 7400000, guid: 6286b35fd91558c4d8b709b23d7d6db7, type: 2}
+  eRunForwardClip: {fileID: 7400000, guid: 3e7c5abcd6328f141a20a25c293d62be, type: 2}
+  eWalkForwardClip: {fileID: 7400000, guid: 70e215cf2f7be3b43ac614dd0396ff6a, type: 2}
