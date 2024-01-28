@@ -182,13 +182,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3802825496918968244, guid: d349403b8e29ad04a961600232c93d78,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.5131
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802825496918968244, guid: d349403b8e29ad04a961600232c93d78,
+        type: 3}
       propertyPath: m_SizeDelta.y
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3802825496918968244, guid: d349403b8e29ad04a961600232c93d78,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.0066
       objectReference: {fileID: 0}
     - target: {fileID: 3802825497250847582, guid: d349403b8e29ad04a961600232c93d78,
         type: 3}
@@ -222,13 +227,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3802825497293950464, guid: d349403b8e29ad04a961600232c93d78,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.5131
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802825497293950464, guid: d349403b8e29ad04a961600232c93d78,
+        type: 3}
       propertyPath: m_SizeDelta.y
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3802825497293950464, guid: d349403b8e29ad04a961600232c93d78,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0422
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802825497293950464, guid: d349403b8e29ad04a961600232c93d78,
+        type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.0066
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802825497293950466, guid: d349403b8e29ad04a961600232c93d78,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802825497293950477, guid: d349403b8e29ad04a961600232c93d78,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3802825497420562024, guid: d349403b8e29ad04a961600232c93d78,
         type: 3}
@@ -259,6 +284,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FillClockwise
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802825497420562027, guid: d349403b8e29ad04a961600232c93d78,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3802825497421677776, guid: d349403b8e29ad04a961600232c93d78,
         type: 3}
@@ -375,6 +405,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP_MP_Frames
       objectReference: {fileID: 0}
+    - target: {fileID: 3802825497421677779, guid: d349403b8e29ad04a961600232c93d78,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802825497421677779, guid: d349403b8e29ad04a961600232c93d78,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802825497421677779, guid: d349403b8e29ad04a961600232c93d78,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d349403b8e29ad04a961600232c93d78, type: 3}
 --- !u!224 &1886601777527399814 stripped
@@ -383,6 +428,27 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3380188973694067030}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1886601777527399815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3802825497421677777, guid: d349403b8e29ad04a961600232c93d78,
+    type: 3}
+  m_PrefabInstance: {fileID: 3380188973694067030}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5598492061353263766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886601777527399815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 0.02, y: 0.02}
+  m_UseGraphicAlpha: 1
 --- !u!114 &1886601777528627005 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3802825497420562027, guid: d349403b8e29ad04a961600232c93d78,
