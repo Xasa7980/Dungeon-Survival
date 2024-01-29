@@ -37,7 +37,7 @@ public class AnimationClipChecker : MonoBehaviour
 
             animator.runtimeAnimatorController = animatorOverrideController;
 
-            animationClipContainerSO.GetMonsterAnimationContainer(animationClipContainerSO).ChangeCurrentAnimations(animatorOverrideController);
+            animationClipContainerSO.GetAnimationClipContainer(animationClipContainerSO).ChangeCurrentAnimations(animatorOverrideController);
         }
     }
 }

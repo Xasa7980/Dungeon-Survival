@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class AnimationClipContainerSO : ScriptableObject
 {
-    public event EventHandler OnChangeAnimation;
-
     public const string ATTACK_BASIC_1 = "E_Attack_Basic_1";
     public const string ATTACK_BASIC_2 = "E_Attack_Basic_2";
     public const string ATTACK_BASIC_3 = "E_Attack_Basic_3";
@@ -122,7 +120,7 @@ public class AnimationClipContainerSO : ScriptableObject
     private void SetSkillAttack() => attackCategory = AnimationAttackCategory.skill;
     #endregion
 
-    public EnemyAnimationContainerSO GetMonsterAnimationContainer ( AnimationClipContainerSO animationClipContainerSO )
+    public EnemyAnimationContainerSO GetAnimationClipContainer ( AnimationClipContainerSO animationClipContainerSO )
     {
         return (EnemyAnimationContainerSO)animationClipContainerSO;
     }

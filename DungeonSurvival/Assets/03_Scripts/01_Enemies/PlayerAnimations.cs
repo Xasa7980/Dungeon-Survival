@@ -43,6 +43,8 @@ public class PlayerAnimations : MonoBehaviour
         {
             if (GetCurrentAnimationInfo(ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME).normalizedTime > 0.85f)
             {
+                animator.SetLayerWeight(COMBAT_LAYER, 0f);
+
                 if (animationTriggered)
                 {
                     attackBasic_Index += 1;
