@@ -26,8 +26,8 @@ public class MeleeWeaponTrail : MonoBehaviour
 	[SerializeField]
 	float _emitTime = 0.0f;
 
-	[SerializeField]
-	Material _material;
+	[SerializeField] EquipmentDataHolder _equipmentDataHolder;
+	private Material _material => _equipmentDataHolder.slashMaterial;
 
 	[SerializeField]
 	float _lifeTime = 1.0f;
@@ -79,7 +79,11 @@ public class MeleeWeaponTrail : MonoBehaviour
 		public Vector3 tipPosition;
 	}
 
-	void Start ( )
+    private void Awake ( )
+    {
+        _equipmentDataHolder = GetComponentInParent<EquipmentDataHolder>();
+    }
+    void Start ( )
 	{
 		_lastPosition = transform.position;
 		_trailObject = new GameObject("Trail");

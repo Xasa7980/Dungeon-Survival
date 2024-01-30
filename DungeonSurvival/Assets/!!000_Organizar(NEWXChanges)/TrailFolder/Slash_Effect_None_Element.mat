@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Slash_Effect_Material
+  m_Name: Slash_Effect_None_Element
   m_Shader: {fileID: -6465566751694194690, guid: a16484e30b562684584990bce96e10e1,
     type: 3}
   m_ValidKeywords: []
@@ -53,8 +53,8 @@ Material:
     - _QueueOffset: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 2.0078433, g: 0, b: 23.968628, a: 1}
-    - _NormalColor: {r: 2.0078433, g: 0, b: 23.968628, a: 1}
+    - _EmissiveColor: {r: 1, g: 1, b: 1, a: 1}
+    - _NormalColor: {r: 1, g: 1, b: 1, a: 1}
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []
 --- !u!1002 &2100001

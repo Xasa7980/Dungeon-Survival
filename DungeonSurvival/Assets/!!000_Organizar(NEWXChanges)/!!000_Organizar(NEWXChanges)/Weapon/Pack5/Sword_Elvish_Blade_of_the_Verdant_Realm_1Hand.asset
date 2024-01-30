@@ -18,10 +18,12 @@ MonoBehaviour:
     of the mystical connection between the Elves and their woodland home. It slices
     through the air with the grace of a falling leaf and the precision of a hunter's
     arrow.
-  equipmentType: 0
-  equipmentElement: 0
-  equipmentRank: 0
+  equipmentType: 3
+  equipmentElement: 7
+  equipmentRank: 4
   equipmentCategory: 0
+  weaponHandlerType: 0
+  weaponRange: 0
   equipmentStats:
     attackPoints: 40
     attackRange: 0
@@ -31,12 +33,22 @@ MonoBehaviour:
     energyPoints: 83
     criticalRate: 30
     criticalDamage: 37
-  equipmentVisuals:
+  equipmentVisualEffects:
     equipmentParticleEffects: {fileID: 0}
     equipmentSecondaryParticleEffect: {fileID: 0}
-    colorKey_1: {r: 0, g: 0, b: 0, a: 0}
-    colorKey_2: {r: 0, g: 0, b: 0, a: 0}
+    emissiveColor: {r: 1, g: 1, b: 1, a: 1}
     hasSlashEffect: 0
     hasSecondaryParticleEffect: 0
-    slashMaterials: []
-    weaponSlashEffectMaterial: {fileID: 0}
+    hasDefaultParticleEffects: 0
+    slashMaterials:
+    - {fileID: 2100000, guid: 3297884f181cb2c41940da847c031306, type: 2}
+    - {fileID: 2100000, guid: d167bd781f831aa41ab13961d63f4c6d, type: 2}
+    - {fileID: 2100000, guid: f00911ce6e3a60a40a834c3dd81f2b23, type: 2}
+    - {fileID: 2100000, guid: 6ac0413284f34334081f00536c52ea88, type: 2}
+    - {fileID: 2100000, guid: 5f402d1520e5fa74fa21e08f85b71370, type: 2}
+    - {fileID: 2100000, guid: 733221398693ea142b66f59f80723b06, type: 2}
+    - {fileID: 2100000, guid: ea4367fcd114730488bf7e215965bdb2, type: 2}
+    - {fileID: 2100000, guid: 5c68d30f9fa6002449ae86ffffd7ae55, type: 2}
+    - {fileID: 2100000, guid: c4af5cbb6397940468eb8318f68b4676, type: 2}
+    weaponSlashMaterial: {fileID: 2100000, guid: 5c68d30f9fa6002449ae86ffffd7ae55,
+      type: 2}

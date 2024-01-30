@@ -13,7 +13,8 @@ public enum EquipmentElement
     Light,
     Thunder,
     Earth,
-    Wind
+    Wind,
+    Ice
 }
 public enum EquipmentType
 {
@@ -75,6 +76,7 @@ public class EquipmentDataSO : ScriptableObject
     public EquipmentElement equipmentElement;
     [OnValueChanged("SetEquipmentRankToStats")]public EquipmentRank equipmentRank;
     [OnValueChanged("SetEquipmentCategoryToStats"), OnValueChanged("SetEquipmentCategoryToVisuals")] public EquipmentCategory equipmentCategory;
+
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")]public WeaponHandler weaponHandlerType = WeaponHandler.Hand_1;
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")]public WeaponRange weaponRange = WeaponRange.Melee;
 
@@ -82,12 +84,13 @@ public class EquipmentDataSO : ScriptableObject
     public EquipmentStats equipmentStats;
 
     [GUIColor(0.3f, 1f, 0.8f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Visual Options")] 
-    public EquipmentVisuals equipmentVisuals;
+    public EquipmentVisualEffects equipmentVisualEffects;
 
     private string EquipmentInformation => equipmentType.ToString();
+
     private void SetEquipmentCategoryToStats() => equipmentStats.equipmentCategory = equipmentCategory;
     private void SetEquipmentRankToStats() => equipmentStats.equipmentRank = equipmentRank;
-    private void SetEquipmentCategoryToVisuals ( ) => equipmentVisuals.equipmentCategory = equipmentCategory;
+    private void SetEquipmentCategoryToVisuals ( ) => equipmentVisualEffects.equipmentCategory = equipmentCategory;
     private void OnValidate ( )
     {
         UpdateSlashColor();
@@ -101,64 +104,45 @@ public class EquipmentDataSO : ScriptableObject
         {
             case EquipmentElement.None:
 
-                equipmentVisuals.SetWeaponSlashMaterial(equipmentVisuals.slashMaterials[0]);
-
-                equipmentVisuals.colorKey_1 = new Color(1, 1, 1, 1);
-                equipmentVisuals.colorKey_2 = new Color(1, 1, 1, 1);
+                equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[0]);
                 break;
             case EquipmentElement.Water:
 
-                equipmentVisuals.SetWeaponSlashMaterial(equipmentVisuals.slashMaterials[0]);
-
-                equipmentVisuals.colorKey_1 = new Color(0, 0.372566968f, 7.9066987f, 1);
-                equipmentVisuals.colorKey_2 = new Color(0, 0.826963913f, 5.34031343f, 1);
+                equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[1]);
                 break;
 
             case EquipmentElement.Fire:
 
-                equipmentVisuals.SetWeaponSlashMaterial(equipmentVisuals.slashMaterials[1]);
-
-                equipmentVisuals.colorKey_1 = new Color(1.84430265f, 0.215726241f, 0, 1);
-                equipmentVisuals.colorKey_2 = new Color(7.12973881f, 0.359262943f, 0, 1);
+                equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[2]);
                 break;
 
             case EquipmentElement.Darkness:
 
-                equipmentVisuals.SetWeaponSlashMaterial(equipmentVisuals.slashMaterials[2]);
-
-                equipmentVisuals.colorKey_1 = new Color(0.223678052f, 0, 1.78942442f, 1);
-                equipmentVisuals.colorKey_2 = new Color(0.376470596f, 0, 2.50980401f, 1);
+                equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[3]);
                 break;
             case EquipmentElement.Light:
 
-                equipmentVisuals.SetWeaponSlashMaterial(equipmentVisuals.slashMaterials[3]);
-
-                equipmentVisuals.colorKey_1 = new Color(8, 8, 8, 1);
-                equipmentVisuals.colorKey_2 = new Color(10.6806269f, 10.6806269f, 10.6806269f, 1);
+                equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[4]);
                 break;
 
             case EquipmentElement.Thunder:
 
-                equipmentVisuals.SetWeaponSlashMaterial(equipmentVisuals.slashMaterials[4]);
-
-                equipmentVisuals.colorKey_1 = new Color(0, 0.47269088f, 7.12973881f, 1);
-                equipmentVisuals.colorKey_2 = new Color(0.272053272f, 3.51327181f, 5.34031343f, 1);
+                equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[5]);
                 break;
 
             case EquipmentElement.Earth:
 
-                equipmentVisuals.SetWeaponSlashMaterial(equipmentVisuals.slashMaterials[5]);
-
-                equipmentVisuals.colorKey_1 = new Color(1.06666672f, 0.313725501f, 0, 1);
-                equipmentVisuals.colorKey_2 = new Color(4, 2.13333344f, 0, 1);
+                equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[6]);
                 break;
 
             case EquipmentElement.Wind:
 
-                equipmentVisuals.SetWeaponSlashMaterial(equipmentVisuals.slashMaterials[6]);
+                equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[7]);
+                break;
+                
+            case EquipmentElement.Ice:
 
-                equipmentVisuals.colorKey_1 = new Color(0, 0.335925996f, 3.99999952f, 1);
-                equipmentVisuals.colorKey_2 = new Color(0.335078508f, 2.80628252f, 3.99999952f, 1);
+                equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[8]);
                 break;
 
             // Agrega casos para los otros elementos
@@ -192,29 +176,35 @@ public class EquipmentDataSO : ScriptableObject
     }
     public void EnableEffects(bool enable )
     {
-        if (equipmentVisuals.equipmentParticleEffects != null) equipmentVisuals.hasSlashEffect = enable;
-        
-        if(equipmentVisuals.equipmentParticleEffects != null) equipmentVisuals.equipmentParticleEffects.SetActive( enable );
-        
-        if (equipmentVisuals.hasSecondaryParticleEffect)
+        if (equipmentVisualEffects.equipmentParticleEffects != null)
         {
-            if (equipmentVisuals.equipmentSecondaryParticleEffect != null) equipmentVisuals.equipmentSecondaryParticleEffect.SetActive( enable );
+            equipmentVisualEffects.hasSlashEffect = enable;
         }
+        if (!equipmentVisualEffects.hasDefaultParticleEffects)
+        {
+            if (equipmentVisualEffects.hasSecondaryParticleEffect)
+            {
+                if (equipmentVisualEffects.equipmentSecondaryParticleEffect != null) equipmentVisualEffects.equipmentSecondaryParticleEffect.SetActive(enable);
+            }
+        }
+        else return;
     }
-    public void SetGradientWithColors ( Gradient gradient )
-    {
-        gradient.mode = GradientMode.Blend;
-
-        gradient.colorKeys[0].color = equipmentVisuals.colorKey_1;
-        gradient.colorKeys[1].color = equipmentVisuals.colorKey_2;
-    }
+    //public Color GetEmissiveColor (Material material )
+    //{
+    //    if (material.IsKeywordEnabled("_EMISSION"))
+    //    {
+    //        Color color = material.GetColor("_EmissionColor");
+    //        return color;
+    //    }
+    //    else return Color.white;
+    //}
     public void SetEquipment_SlashEffectMaterial ( ParticleSystemRenderer particleSystemRenderer )
     {
-        particleSystemRenderer.material = equipmentVisuals.weaponSlashEffectMaterial;
+        particleSystemRenderer.material = equipmentVisualEffects.weaponSlashMaterial;
     }
 
     [System.Serializable]
-    public class EquipmentVisuals
+    public class EquipmentVisualEffects
     {
         internal EquipmentCategory equipmentCategory;
 
@@ -223,17 +213,17 @@ public class EquipmentDataSO : ScriptableObject
         [InfoBox("This particle effect only is enabled when Equipment rank is high and the equipment has secondary particles",InfoMessageType.Warning)]
         public GameObject equipmentSecondaryParticleEffect;
 
-        public Color colorKey_1;
-        public Color colorKey_2;
+        public Color emissiveColor;
 
         [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public bool hasSlashEffect;
         [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public bool hasSecondaryParticleEffect;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public bool hasDefaultParticleEffects;
 
         [InfoBox("It requires an specific order on putting inside the materials, check EquipmentElement list", InfoMessageType.Warning)]
         [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public Material[] slashMaterials;
-        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public Material weaponSlashEffectMaterial;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public Material weaponSlashMaterial;
 
-        public void SetWeaponSlashMaterial ( Material material ) => weaponSlashEffectMaterial = material;
+        public void SetWeaponSlashMaterial ( Material material ) => weaponSlashMaterial = material;
     }
     [System.Serializable]
     public class EquipmentStats

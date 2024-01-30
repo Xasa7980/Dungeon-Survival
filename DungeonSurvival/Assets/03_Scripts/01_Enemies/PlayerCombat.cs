@@ -32,7 +32,7 @@ public class PlayerCombat : MonoBehaviour
         equipmentDataHolder_RightHand = rightWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
         equipmentDataHolder_LeftHand = leftWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
 
-        equipmentDataSO_RightHand = equipmentDataHolder_RightHand.GetEquipmentDataSO(); //HACER UNO PARA LOS RANGES QUE NO TENDRÁN AREA DRAWER EN EL ARCO SI NO EN LA FLECHA, LA FLECHA CALCULA DISTANCIAS
+        equipmentDataSO_RightHand = equipmentDataHolder_RightHand.GetEquipmentDataSO(); //HACER UNO PARA LOS RANGES QUE NO TENDRÁN AREA DRAWER EN EL ARCO SI NO EN LA FLECHA, LA FLECHA CALCULA DISTANCIAS ONTRIGGER ENTTER
         equipmentDataSO_LeftHand = equipmentDataHolder_LeftHand.GetEquipmentDataSO();
         rightDetectionArea = equipmentDataHolder_RightHand.GetDetectionArea();
         leftDetectionArea = equipmentDataHolder_LeftHand.GetDetectionArea();
