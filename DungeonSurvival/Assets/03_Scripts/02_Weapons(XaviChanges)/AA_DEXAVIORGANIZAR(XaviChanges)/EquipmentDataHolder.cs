@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class EquipmentDataHolder : MonoBehaviour
     [SerializeField] private EquipmentElement equipmentElement;
     [SerializeField] private EquipmentRank equipmentRank;
     [SerializeField] private EquipmentCategory equipmentCategory;
+    [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")][SerializeField] private WeaponHandler weaponHandlerType;
+    [SerializeField] private WeaponRange weaponRange;
     
     private AreaDrawer detectionArea;
     private void Awake ( )
@@ -21,6 +24,7 @@ public class EquipmentDataHolder : MonoBehaviour
         equipmentDataSO.equipmentElement = equipmentElement;
         equipmentDataSO.equipmentRank = equipmentRank;
         equipmentDataSO.equipmentCategory = equipmentCategory;
+        equipmentDataSO.weaponHandlerType = weaponHandlerType;
 
     }
 

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46175650a31d0146af00f2f3fd74f6f, type: 3}
+  m_Name: Dagger_Shadow_Ripper_1Hand
+  m_EditorClassIdentifier: 
+  equipmentName: Shadow_Ripper
+  description: This mythic dagger, with a blade that resembles a bolt of jagged darkness
+    and a hilt of twisted silver, is said to cleave the shadow from the soul. It's
+    a weapon that whispers of ancient, forbidden power.
+  equipmentType: 8
+  equipmentElement: 0
+  equipmentRank: 2
+  equipmentCategory: 0
+  weaponHandlerType: 0
+  weaponRange: 0
+  equipmentStats:
+    attackPoints: 40
+    attackRange: 0
+    attackSpeed: 2
+    elementalPower: 19
+    healthPoints: 802
+    energyPoints: 83
+    criticalRate: 30
+    criticalDamage: 37
+  equipmentVisuals:
+    equipmentParticleEffects: {fileID: 0}
+    equipmentSecondaryParticleEffect: {fileID: 0}
+    colorKey_1: {r: 0, g: 0, b: 0, a: 0}
+    colorKey_2: {r: 0, g: 0, b: 0, a: 0}
+    hasSlashEffect: 0
+    hasSecondaryParticleEffect: 0
+    slashMaterials: []
+    weaponSlashEffectMaterial: {fileID: 0}

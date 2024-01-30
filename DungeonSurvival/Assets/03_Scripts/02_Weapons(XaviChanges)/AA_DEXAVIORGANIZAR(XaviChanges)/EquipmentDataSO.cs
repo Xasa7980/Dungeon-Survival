@@ -17,8 +17,8 @@ public enum EquipmentElement
 }
 public enum EquipmentType
 {
-    Axe1Head,
-    Axe2Head,
+    Axe,
+    Bow,
     Hammer,
     Sword,
     Shield,
@@ -49,6 +49,16 @@ public enum EquipmentRank
     Mythic,
     Legendary,
 }
+public enum WeaponHandler
+{
+    Hand_1,
+    Hand_2
+}
+public enum WeaponRange
+{
+    Melee,
+    Ranged
+}
 [CreateAssetMenu(fileName = "NewEquipmentData", menuName = "Dungeon Survival/Equipment/Data")]
 public class EquipmentDataSO : ScriptableObject
 {
@@ -65,6 +75,8 @@ public class EquipmentDataSO : ScriptableObject
     public EquipmentElement equipmentElement;
     [OnValueChanged("SetEquipmentRankToStats")]public EquipmentRank equipmentRank;
     [OnValueChanged("SetEquipmentCategoryToStats"), OnValueChanged("SetEquipmentCategoryToVisuals")] public EquipmentCategory equipmentCategory;
+    [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")]public WeaponHandler weaponHandlerType = WeaponHandler.Hand_1;
+    [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")]public WeaponRange weaponRange = WeaponRange.Melee;
 
     [GUIColor(0.3f, 1f, 0.5f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Main Stats")] 
     public EquipmentStats equipmentStats;

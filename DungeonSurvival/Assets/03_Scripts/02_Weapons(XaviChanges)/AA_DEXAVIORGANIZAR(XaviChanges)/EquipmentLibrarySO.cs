@@ -9,8 +9,8 @@ public class EquipmentLibrarySO : ScriptableObject
 {
     private EquipmentType equipmentType;
 
-    [SerializeField, ShowIf("@equipmentType == EquipmentType.Axe1Head")] List<EquipmentPart> axe1Head = new List<EquipmentPart>();
-    [SerializeField, ShowIf("@equipmentType == EquipmentType.Axe2Head")] List<EquipmentPart> axe2Head = new List<EquipmentPart>();
+    [SerializeField, ShowIf("@equipmentType == EquipmentType.Axe")] List<EquipmentPart> axe = new List<EquipmentPart>();
+    [SerializeField, ShowIf("@equipmentType == EquipmentType.Bow")] List<EquipmentPart> bow = new List<EquipmentPart>();
     [SerializeField, ShowIf("@equipmentType == EquipmentType.Hammer")] List<EquipmentPart> hammer = new List<EquipmentPart>();
     [SerializeField, ShowIf("@equipmentType == EquipmentType.Sword")] List<EquipmentPart> sword = new List<EquipmentPart>();
     [SerializeField, ShowIf("@equipmentType == EquipmentType.Shield")] List<EquipmentPart> shield = new List<EquipmentPart>();
@@ -35,22 +35,22 @@ public class EquipmentLibrarySO : ScriptableObject
 
     [PropertyOrder(-5)]
     [HorizontalGroup("Toolbar")]
-    [Button("Axe1Head")]
+    [Button("Axe")]
     void SetAxe1HeadType ( )
         {
-            equipmentType = EquipmentType.Axe1Head;
-            tempList = axe1Head;
+            equipmentType = EquipmentType.Axe;
+            tempList = axe;
         }
 
     [PropertySpace(SpaceBefore = 5, SpaceAfter = 5)]
 
     [PropertyOrder(-5)]
     [HorizontalGroup("Toolbar")]
-    [Button("Axe2Head")]
+    [Button("Bow")]
     void SetAxe2HeadType ( )
     {
-        equipmentType = EquipmentType.Axe2Head;
-        tempList = axe2Head;
+        equipmentType = EquipmentType.Bow;
+        tempList = bow;
     }
 
     [PropertySpace(SpaceBefore = 5, SpaceAfter = 5)]
@@ -235,8 +235,8 @@ public class EquipmentLibrarySO : ScriptableObject
     [OnValueChanged("SortEquipment")]
     private void AddEquipmentClassifiedInList ( )
     {
-        axe1Head[0].parts.Clear();
-        axe2Head[0].parts.Clear();
+        axe[0].parts.Clear();
+        bow[0].parts.Clear();
         hammer[0].parts.Clear();
         sword[0].parts.Clear();
         shield[0].parts.Clear();
@@ -257,16 +257,16 @@ public class EquipmentLibrarySO : ScriptableObject
             EquipmentType type = item.GetComponent<EquipmentDataHolder>().GetEquipmentType();
             switch (type)
             {
-                case EquipmentType.Axe1Head:
+                case EquipmentType.Axe:
 
-                    if (axe1Head[0].parts.Contains(item)) continue;
-                    axe1Head[0].parts.Add(item);
+                    if (axe[0].parts.Contains(item)) continue;
+                    axe[0].parts.Add(item);
 
                     break;
-                case EquipmentType.Axe2Head:
+                case EquipmentType.Bow:
 
-                    if (axe2Head[0].parts.Contains(item)) continue;
-                    axe2Head[0].parts.Add(item);
+                    if (bow[0].parts.Contains(item)) continue;
+                    bow[0].parts.Add(item);
 
                     break;
                 case EquipmentType.Hammer:
