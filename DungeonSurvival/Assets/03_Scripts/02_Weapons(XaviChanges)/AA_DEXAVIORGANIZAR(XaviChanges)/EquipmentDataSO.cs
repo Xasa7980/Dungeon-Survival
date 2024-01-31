@@ -176,7 +176,7 @@ public class EquipmentDataSO : ScriptableObject
     }
     public void EnableEffects(bool enable )
     {
-        if (equipmentVisualEffects.equipmentParticleEffects != null)
+        if (equipmentVisualEffects.slashParticleEffect != null)
         {
             equipmentVisualEffects.hasSlashEffect = enable;
         }
@@ -208,8 +208,8 @@ public class EquipmentDataSO : ScriptableObject
     {
         internal EquipmentCategory equipmentCategory;
 
-        [InfoBox("This particle effect only is enabled when Equipment rank is high and the equipment has particles", InfoMessageType.Warning)]
-        public GameObject equipmentParticleEffects;
+        //[InfoBox("This particle effect only is enabled when Equipment rank is high and the equipment has particles", InfoMessageType.Warning)]
+        public List<Transform> slashParticleEffect;
         [InfoBox("This particle effect only is enabled when Equipment rank is high and the equipment has secondary particles",InfoMessageType.Warning)]
         public GameObject equipmentSecondaryParticleEffect;
 

@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2510351540349772852}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.536, y: 1, z: 1.11}
+  m_LocalPosition: {x: -0, y: -0.199, z: 0}
   m_LocalScale: {x: 1.7375095, y: 2.2785702, z: 1.7375095}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -119,6 +119,8 @@ MonoBehaviour:
   equipmentCategory: 0
   weaponHandlerType: 1
   weaponRange: 1
+  slashMaterial: {fileID: 2100000, guid: 3297884f181cb2c41940da847c031306, type: 2}
+  slashGameObject: []
 --- !u!114 &4758060119449864903
 MonoBehaviour:
   m_ObjectHideFlags: 0
