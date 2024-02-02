@@ -21,15 +21,18 @@ public class AI_MainCore : MonoBehaviour
     [SerializeField] private MonoBehaviour nearDieBehaviour;
     [SerializeField] private MonoBehaviour deathBehaviour;
     [SerializeField] private MonoBehaviour actualBehaviour;
-    [SerializeField] private MonsterStats monsterStats;
-
+    
     private State state;
+    private MonsterStats monsterStats;
     private Transform threat;
 
-    private void Start ( )
+    private void Awake ( )
     {
         state = State.Idle;
         monsterStats = GetComponent<MonsterStats>();
+    }
+    private void Start ( )
+    {
     }
     private void Update ( )
     {
@@ -119,6 +122,10 @@ public class AI_MainCore : MonoBehaviour
     public AI_DeathBehaviour GetDeathBehaviour ( )
     {
         return (AI_DeathBehaviour) deathBehaviour;
+    }
+    public MonsterStats GetMonsterStats ( )
+    {
+        return monsterStats;
     }
     #endregion
 }

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2963188763881758853}
   - component: {fileID: 2963188763881758852}
   - component: {fileID: 2963188763881758907}
+  - component: {fileID: -3722041114858624337}
   m_Layer: 9
   m_Name: Character_BR_FortGolem_A
   m_TagString: Untagged
@@ -219,6 +220,27 @@ CapsuleCollider:
   m_Height: 5.566163
   m_Direction: 1
   m_Center: {x: 0, y: 2.7830815, z: 0}
+--- !u!114 &-3722041114858624337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2963188763881758905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f536c188cd59d94abc1d7317555aa94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curLvl: 1
+  playerLvl: 1
+  lvlDif: 0
+  minExpGiven: 4
+  maxExpGiven: 10
+  monsterDataSO: {fileID: 0}
+  aI_MainCore: {fileID: 0}
+  rightWeaponHandler: {fileID: 0}
+  leftWeaponHandler: {fileID: 0}
 --- !u!1001 &2963188764193703739
 PrefabInstance:
   m_ObjectHideFlags: 0

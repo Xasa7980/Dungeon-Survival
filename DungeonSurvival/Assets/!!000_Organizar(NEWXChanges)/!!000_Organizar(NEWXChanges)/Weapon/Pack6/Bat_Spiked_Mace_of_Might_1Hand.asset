@@ -17,24 +17,24 @@ MonoBehaviour:
     spikes. Ideal for close combat, it delivers powerful strikes.
   equipmentType: 7
   equipmentElement: 0
-  equipmentRank: 2
-  equipmentCategory: 0
+  equipmentRank: 3
   weaponHandlerType: 0
   weaponRange: 0
   equipmentStats:
     attackPoints: 40
-    attackRange: 0
+    healthPoints: 802
+    manaPoints: 0
+    defensePoints: 0
     attackSpeed: 2
     elementalPower: 19
-    healthPoints: 802
-    energyPoints: 83
     criticalRate: 30
     criticalDamage: 37
   equipmentVisualEffects:
-    equipmentParticleEffects: {fileID: 0}
+    slashParticleEffect:
+    - {fileID: 2474167668344787855, guid: df964293a674d1c48b67c82d3c92b8fc, type: 3}
     equipmentSecondaryParticleEffect: {fileID: 0}
     emissiveColor: {r: 1, g: 1, b: 1, a: 1}
-    hasSlashEffect: 0
+    hasSlashEffect: 1
     hasSecondaryParticleEffect: 0
     hasDefaultParticleEffects: 0
     slashMaterials:
@@ -49,3 +49,11 @@ MonoBehaviour:
     - {fileID: 2100000, guid: c4af5cbb6397940468eb8318f68b4676, type: 2}
     weaponSlashMaterial: {fileID: 2100000, guid: 3297884f181cb2c41940da847c031306,
       type: 2}
+  equipmentAnimationClips:
+    basicAttackClips: []
+    chargedAttackClips: []
+    loadingChargedAttackClips: []
+    specialAttackClips: []
+    loadingSpecialAttackClips: []
+    skillAttackClips: []
+    loadingSkillAttackClips: []

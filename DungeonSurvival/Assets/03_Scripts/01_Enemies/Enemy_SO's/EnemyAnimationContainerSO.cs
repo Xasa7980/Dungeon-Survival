@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewAnimationsContainer", menuName = "Dungeon Survival/Animations/EnemyAnimations")]
 public class EnemyAnimationContainerSO : AnimationClipContainerSO
 {
+    public MonsterDataSO monsterDataSO;
+
     public AnimationClip eDeathBackClip;
     public AnimationClip eIdleClip;
     public AnimationClip eIdleCombatClip;
@@ -13,16 +15,18 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
 
     public const string E_DEATHBACK = "E_DeathBack";
     public const string E_IDLE = "E_Idle";
+    public const string E_IDLECOMBAT = "E_IdleCombat";
     public const string E_RUN_FORWARD = "E_Run_Forward";
     public const string E_WALK_FORWARD = "E_Walk_Forward";
-    public const string E_IDLECOMBAT = "E_IdleCombat";
-    
-    
-    public void ChangeCurrentAnimations ( AnimatorOverrideController animatorOverrideController )
+
+
+    public void ChangeCurrentAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
     {
-        LoadBasicAttackAnimationsOnOverride(animatorOverrideController);
-        LoadChargedAttackAnimationsOnOverride(animatorOverrideController);
-        LoadSkillAttackAnimationsOnOverride(animatorOverrideController);
+
+        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.basicAttackClips);
+        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.chargedAttackClips);
+        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.specialAttackClips);
+        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.skillAttackClips);
 
         animatorOverrideController[E_DEATHBACK] = eDeathBackClip;
         animatorOverrideController[E_IDLE] = eIdleClip;

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1370300964603142917}
   - component: {fileID: 1370300964603142916}
   - component: {fileID: 1370300964603142919}
+  - component: {fileID: -6593157755480541508}
   m_Layer: 9
   m_Name: Character_AncientQueen_B
   m_TagString: Untagged
@@ -219,6 +220,27 @@ CapsuleCollider:
   m_Height: 1.8630762
   m_Direction: 1
   m_Center: {x: 0, y: 0.9315381, z: 0}
+--- !u!114 &-6593157755480541508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370300964603142913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f536c188cd59d94abc1d7317555aa94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curLvl: 1
+  playerLvl: 1
+  lvlDif: 0
+  minExpGiven: 4
+  maxExpGiven: 10
+  monsterDataSO: {fileID: 0}
+  aI_MainCore: {fileID: 0}
+  rightWeaponHandler: {fileID: 0}
+  leftWeaponHandler: {fileID: 0}
 --- !u!1001 &1370300964571139267
 PrefabInstance:
   m_ObjectHideFlags: 0

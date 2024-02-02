@@ -7,12 +7,6 @@ using UnityEngine.Events;
 
 public class AI_HostileBehaviour : MonoBehaviour
 {
-    //[SerializeField] protected UnityEvent OnBasicAttack;
-    //[SerializeField] protected UnityEvent OnChargedAttack;
-    //[SerializeField] protected UnityEvent OnChargingAttack;
-    //[SerializeField] protected UnityEvent OnSpecialAttack;
-    //[SerializeField] protected UnityEvent OnSkillAttack;
-    //[SerializeField] protected UnityEvent OnCastingSkill;
     public event EventHandler OnEnterCombat;
     public event EventHandler OnExitCombat;
 
@@ -34,6 +28,7 @@ public class AI_HostileBehaviour : MonoBehaviour
     }
 
     [SerializeField] private SpecialAttacksSO specialAttacksSO;
+
     [SerializeField] private float basicAtkTimerMax;
     [SerializeField] private float chargedAttackTimerMax;
     [SerializeField] private float chargingReleaseAttackMax;
@@ -45,10 +40,11 @@ public class AI_HostileBehaviour : MonoBehaviour
 
     [SerializeField] private List<float> attackRates = new List<float>();
 
-    public AttackState attackState;
+    public AttackCategory attackState;
     private NavMeshAgent navAgent;
     private AI_MainCore ai_MainCore;
 
+    private MonsterStats monsterStats;
     private float basicAtkTimer;
     private float chargedAttackTimer;
     private float chargingReleaseAttack;
@@ -62,6 +58,7 @@ public class AI_HostileBehaviour : MonoBehaviour
     private void OnEnable ( )
     {
         ai_MainCore = GetComponent<AI_MainCore>();
+        monsterStats = ai_MainCore.GetMonsterStats();
         navAgent = GetComponent<NavMeshAgent>();
         navAgent.isStopped = true;
 
@@ -96,22 +93,22 @@ public class AI_HostileBehaviour : MonoBehaviour
             if (randomAttackIndex == attackRates[0])
             {
                 //Deal dmg basic attack
-                attackState = AttackState.Basic;
+                attackState = AttackCategory.basic;
             }
             if (randomAttackIndex == attackRates[1])
             {
                 //Deal dmg charged attack
-                attackState = AttackState.Recharged;
+                attackState = AttackCategory.charged;
             }
             if (randomAttackIndex == attackRates[2])
             {
                 //Deal dmg special attack
-                attackState = AttackState.Special;
+                attackState = AttackCategory.special;
             }
             if (randomAttackIndex == attackRates[3])
             {
                 //Deal dmg skill attack
-                attackState = AttackState.Skill;
+                attackState = AttackCategory.skill;
             }
             releasingAttack = true;
         }
@@ -120,7 +117,7 @@ public class AI_HostileBehaviour : MonoBehaviour
     {
         switch (attackState)
         {
-            case AttackState.Basic:
+            case AttackCategory.basic:
 
                 if (basicAtkTimer < basicAtkTimerMax) basicAtkTimer += Time.deltaTime;
 
@@ -136,9 +133,10 @@ public class AI_HostileBehaviour : MonoBehaviour
                 }
                 break;
 
-            case AttackState.Recharged:
+            case AttackCategory.charged:
 
                 if(chargingReleaseAttack > 0) chargingReleaseAttack -= Time.deltaTime;
+
                 OnChargingAttack?.Invoke(this, new OnChargingAttackEventArgs
                 {
                     progressNormalized = chargingReleaseAttack / chargingReleaseAttackMax
@@ -162,7 +160,7 @@ public class AI_HostileBehaviour : MonoBehaviour
                 }
                 break;
 
-            case AttackState.Special:
+            case AttackCategory.special:
 
                 if (specialAtkTimer < specialAtkTimerMax) specialAtkTimer += Time.deltaTime;
 
@@ -184,7 +182,7 @@ public class AI_HostileBehaviour : MonoBehaviour
                 }
                 break;
 
-            case AttackState.Skill:
+            case AttackCategory.skill:
 
                 if (skillCastingTimer > 0) skillCastingTimer -= Time.deltaTime;
                 OnCastingSkill?.Invoke(this, new OnCastingSkillEventArgs

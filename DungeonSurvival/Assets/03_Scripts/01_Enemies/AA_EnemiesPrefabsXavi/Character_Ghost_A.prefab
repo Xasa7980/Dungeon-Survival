@@ -2943,6 +2943,7 @@ GameObject:
   - component: {fileID: 5509924141921275627}
   - component: {fileID: 5509924141921275626}
   - component: {fileID: 5509924141921275625}
+  - component: {fileID: 4847485725375657109}
   m_Layer: 9
   m_Name: Character_Ghost_A
   m_TagString: Untagged
@@ -3143,6 +3144,27 @@ CapsuleCollider:
   m_Height: 1.8561898
   m_Direction: 1
   m_Center: {x: 0, y: 0.9280949, z: 0}
+--- !u!114 &4847485725375657109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5509924141921275639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f536c188cd59d94abc1d7317555aa94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curLvl: 1
+  playerLvl: 1
+  lvlDif: 0
+  minExpGiven: 4
+  maxExpGiven: 10
+  monsterDataSO: {fileID: 0}
+  aI_MainCore: {fileID: 0}
+  rightWeaponHandler: {fileID: 0}
+  leftWeaponHandler: {fileID: 0}
 --- !u!1 &5594373479298632870
 GameObject:
   m_ObjectHideFlags: 0

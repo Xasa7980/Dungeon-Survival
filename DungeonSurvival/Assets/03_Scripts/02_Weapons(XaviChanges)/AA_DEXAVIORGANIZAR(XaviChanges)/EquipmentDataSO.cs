@@ -75,7 +75,10 @@ public class EquipmentDataSO : ScriptableObject
     public EquipmentType equipmentType;
     public EquipmentElement equipmentElement;
     [OnValueChanged("SetEquipmentRankToStats")]public EquipmentRank equipmentRank;
-    [OnValueChanged("SetEquipmentCategoryToStats"), OnValueChanged("SetEquipmentCategoryToVisuals")] public EquipmentCategory equipmentCategory;
+
+    [OnValueChanged("SetEquipmentCategoryToStats"), OnValueChanged("SetEquipmentCategoryToVisuals")] 
+    public EquipmentCategory equipmentCategory => equipmentType >= EquipmentType.Dagger ? EquipmentCategory.Weapon : equipmentType < EquipmentType.Dagger && equipmentType >= EquipmentType.Boots ? 
+        EquipmentCategory.Clothes : EquipmentCategory.Accesory;
 
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")]public WeaponHandler weaponHandlerType = WeaponHandler.Hand_1;
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")]public WeaponRange weaponRange = WeaponRange.Melee;
@@ -86,11 +89,15 @@ public class EquipmentDataSO : ScriptableObject
     [GUIColor(0.3f, 1f, 0.8f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Visual Options")] 
     public EquipmentVisualEffects equipmentVisualEffects;
 
+    [GUIColor(0.3f, 1f, 0.8f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Animation Options")] 
+    public EquipmentAnimations equipmentAnimationClips;
+
     private string EquipmentInformation => equipmentType.ToString();
 
     private void SetEquipmentCategoryToStats() => equipmentStats.equipmentCategory = equipmentCategory;
     private void SetEquipmentRankToStats() => equipmentStats.equipmentRank = equipmentRank;
     private void SetEquipmentCategoryToVisuals ( ) => equipmentVisualEffects.equipmentCategory = equipmentCategory;
+    private void SetEquipmentCategoryToAnimationClips ( ) => equipmentAnimationClips.equipmentCategory = equipmentCategory;
     private void OnValidate ( )
     {
         UpdateSlashColor();
@@ -232,12 +239,12 @@ public class EquipmentDataSO : ScriptableObject
         internal EquipmentRank equipmentRank;
 
         [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public float attackPoints;
-        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public float attackRange;
 
+        public float healthPoints;
+        public float manaPoints;
+        public float defensePoints;
         public float attackSpeed;
         public float elementalPower;
-        public float healthPoints;
-        public float energyPoints;
         public float criticalRate;
         public float criticalDamage;
 
@@ -280,13 +287,29 @@ public class EquipmentDataSO : ScriptableObject
             attackPoints = MathF.Floor(UnityEngine.Random.Range(minimalValue, 100) * valuesMultiplier);
             elementalPower = MathF.Floor(UnityEngine.Random.Range(minimalValue, 100f) * valuesMultiplier);
             healthPoints = MathF.Floor(UnityEngine.Random.Range(minimalValue * 2, 1000f) * valuesMultiplier);
-            energyPoints = MathF.Floor(UnityEngine.Random.Range(minimalValue * 2, 100f) * valuesMultiplier);
+            manaPoints = MathF.Floor(UnityEngine.Random.Range(minimalValue * 2, 100f) * valuesMultiplier);
 
             //Valores estaticos
             attackSpeed = MathF.Floor(UnityEngine.Random.Range(minimalValue * 0.15f, 100f));
             criticalRate = MathF.Floor(UnityEngine.Random.Range(0, 70));
             criticalDamage = MathF.Floor(UnityEngine.Random.Range(minimalValue * 0.25f, 200f));
         }
+    }
+    [System.Serializable]
+    public class EquipmentAnimations
+    {
+        internal EquipmentCategory equipmentCategory;
+
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public AnimationClip[] basicAttackClips;
+
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] chargedAttackClips;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] loadingChargedAttackClips;
+
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] specialAttackClips;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] loadingSpecialAttackClips;
+
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] skillAttackClips;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] loadingSkillAttackClips;
     }
 }
 

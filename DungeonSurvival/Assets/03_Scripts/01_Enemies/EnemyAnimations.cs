@@ -29,9 +29,10 @@ public class EnemyAnimations : MonoBehaviour
     private bool isWalking;
     private bool isRunning;
     private float basicAttackIndex;
+    private float chargedAttackIndex;
+    private float specialAttackIndex;
+    private float skillAttackIndex;
     private Animator animator;
-
-
     private AI_PatrolBehaviour patrolBehaviour;
     private AI_ChasingBehaviour chasingBehaviour;
     private AI_HostileBehaviour hostileBehaviour;

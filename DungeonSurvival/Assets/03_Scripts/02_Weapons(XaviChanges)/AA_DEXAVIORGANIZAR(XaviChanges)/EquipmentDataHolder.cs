@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EquipmentDataHolder : MonoBehaviour
 {
+    public EquipmentElement GetEquipmentElement => equipmentElement;
+ 
     [SerializeField] private EquipmentDataSO equipmentDataSO;
 
     [SerializeField] private EquipmentType equipmentType;
@@ -13,9 +15,9 @@ public class EquipmentDataHolder : MonoBehaviour
     [SerializeField] private EquipmentCategory equipmentCategory;
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] private WeaponHandler weaponHandlerType;
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] private WeaponRange weaponRange;
+
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] public Material slashMaterial;
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] private List<Transform> slashGameObject = new List<Transform>();
-    
     
     private AreaDrawer detectionArea;
     private void Awake ( )
@@ -28,7 +30,6 @@ public class EquipmentDataHolder : MonoBehaviour
         equipmentDataSO.equipmentType = equipmentType;
         equipmentDataSO.equipmentElement = equipmentElement;
         equipmentDataSO.equipmentRank = equipmentRank;
-        equipmentDataSO.equipmentCategory = equipmentCategory;
         equipmentDataSO.weaponHandlerType = weaponHandlerType;
         equipmentDataSO.weaponRange = weaponRange;
         equipmentDataSO.equipmentVisualEffects.slashParticleEffect = slashGameObject;

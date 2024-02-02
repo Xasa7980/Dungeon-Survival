@@ -2,20 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class PlayerAnimationHandler : MonoBehaviour
 {
-    Animator anim;
+    [SerializeField] private AnimationClipContainerSO animationClipContainerSO;
 
-    /// <summary>
-    /// AnimatorOverrideController del Animator Component
-    /// </summary>
-    /// 
-    private void Awake()
+    private Animator animator;
+    private PlayerStats playerStats;
+    private void Awake ( )
     {
-        anim = GetComponent<Animator>();
-        //En vez de usar el Asset del Animator Controller creo una instancia
-        //para preservar la configuracion del Asset
-        anim.runtimeAnimatorController = Instantiate(anim.runtimeAnimatorController);
+        animator = GetComponent<Animator>();
+        playerStats = GetComponent<PlayerStats>();
+        InitializeAnimationsChecker();
     }
+    private void Start ( )
+    {
+    }
+    private void InitializeAnimationsChecker ( )
+    {
+        AnimatorOverrideController animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+
+        animator.runtimeAnimatorController = animatorOverrideController;
+
+        animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ChangeCurrentAnimations(animatorOverrideController, 
+            playerStats.EquipmentDataHolder_RightHand.GetEquipmentDataSO());
+    }
+
 }

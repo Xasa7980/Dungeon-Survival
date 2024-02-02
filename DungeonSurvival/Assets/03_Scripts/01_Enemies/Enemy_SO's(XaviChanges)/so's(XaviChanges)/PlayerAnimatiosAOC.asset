@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073f569f25c154f4d9ef5ac1c2e9dd5f, type: 3}
+  m_Name: PlayerAnimatiosAOC
+  m_EditorClassIdentifier: 
+  getRandomAttackComboAnimation: 0
+  getRandomChargedAttackComboAnimation: 0
+  getRandomSpecialAttackComboAnimation: 0
+  getRandomSkillAttackComboAnimation: 0
+  maxNumberOfBasicAttacks: 4
+  maxNumberOfChargedAttacks: 4
+  maxNumberOfSpecialAttacks: 4
+  maxNumberOfSkillAttacks: 4
+  basicAttackAnimationClips: []
+  chargedAttackAnimationClips: []
+  specialAttackAnimationClips: []
+  skillAttackAnimationClips: []
+  attackBasicClip_01: {fileID: 0}
+  attackBasicClip_02: {fileID: 0}
+  attackBasicClip_03: {fileID: 0}
+  attackBasicClip_04: {fileID: 0}
+  chargedAttackClip_01: {fileID: 0}
+  chargedAttackClip_02: {fileID: 0}
+  chargingAttackClip_01: {fileID: 0}
+  chargingAttackClip_02: {fileID: 0}
+  specialAttackClip_01: {fileID: 0}
+  specialAttackClip_02: {fileID: 0}
+  skillAttackClip_01: {fileID: 0}
+  skillAttackClip_02: {fileID: 0}
+  skillAttackClip_03: {fileID: 0}
+  castingSkillAttackClip_01: {fileID: 0}
+  castingSkillAttackClip_02: {fileID: 0}
+  castingSkillAttackClip_03: {fileID: 0}
+  deathBackwardClip: {fileID: 7400000, guid: 3c99eda5713d0054bacffcdaee0c3bff, type: 2}
+  idleClip: {fileID: 7400000, guid: 5955a77cb4577734b9f51b5ec3e3d105, type: 2}
+  idleCombatClip: {fileID: 7400000, guid: 5e72a9d58d23c084a8d05223d26d42a5, type: 2}
+  runForwardClip: {fileID: 7400000, guid: 391d08f74066fcb4f9eaa2d22536d33e, type: 2}
+  walkForwardClip: {fileID: 7400000, guid: 391d08f74066fcb4f9eaa2d22536d33e, type: 2}

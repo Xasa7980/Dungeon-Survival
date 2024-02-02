@@ -10,14 +10,16 @@ public class SwooshTest : MonoBehaviour
     private MeleeWeaponTrail _trail;
 
     private PlayerAnimations playerAnimations;
-    private Animator _animator;
     private AnimatorStateInfo _animationState;
 
     private bool _isAnimationPlaying = false;
 
+    private void Awake ( )
+    {
+        playerAnimations = GetComponent<PlayerAnimations>();
+    }
     void Start ( )
     {
-        _animator = GetComponent<Animator>();
         if (_trail != null)
         {
             _trail.Emit = false;
@@ -26,9 +28,9 @@ public class SwooshTest : MonoBehaviour
 
     void Update ( )
     {
-        if (_animator != null)
+        if (playerAnimations != null)
         {
-            _animationState = _animator.GetCurrentAnimatorStateInfo(1);//NEED TO DECLARE A STRING WITH THE HOLDER OF THE BASE LAYER
+            _animationState = playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME);//NEED TO DECLARE A STRING WITH THE HOLDER OF THE BASE LAYER
 
             if (_animationState.IsName("AttackBasicTree"))
             {

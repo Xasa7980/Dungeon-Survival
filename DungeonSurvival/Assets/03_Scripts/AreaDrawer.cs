@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AreaDrawer : MonoBehaviour
 {
-    private enum DrawMode
+    public enum DrawMode
     {
         Box,
         Sphere,
@@ -16,14 +16,16 @@ public class AreaDrawer : MonoBehaviour
         ObjectPosition,
         FreePosition
     }
-    [SerializeField] DrawMode drawMode = DrawMode.Box;
+    [SerializeField] DrawMode drawMode => _drawMode;
+    [SerializeField] DrawMode _drawMode = DrawMode.Box;
+
     [SerializeField] ObjectPositionMode objectPositionMode = ObjectPositionMode.ObjectPosition;
 
-    [SerializeField, ShowIf("@drawMode == DrawMode.Box")] Color gizmoBoxColor = Color.green;
-    [SerializeField, ShowIf("@drawMode == DrawMode.Box")] Vector3 _size = Vector3.one;
+    [SerializeField, ShowIf("@_drawMode == DrawMode.Box")] Color gizmoBoxColor = Color.green;
+    [SerializeField, ShowIf("@_drawMode == DrawMode.Box")] Vector3 _size = Vector3.one;
 
-    [SerializeField, ShowIf("@drawMode == DrawMode.Sphere")] Color gizmoSphereColor = Color.red;
-    [SerializeField, ShowIf("@drawMode == DrawMode.Sphere")] float _radius = 1;
+    [SerializeField, ShowIf("@_drawMode == DrawMode.Sphere")] Color gizmoSphereColor = Color.red;
+    [SerializeField, ShowIf("@_drawMode == DrawMode.Sphere")] float _radius = 1;
 
     public float radius => _radius;
     public Vector3 size => _size;

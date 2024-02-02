@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,9 +18,10 @@ public class MonsterStats : MonoBehaviour,IHasProgress
 
 
     [SerializeField] private MonsterDataSO monsterDataSO;
-    [SerializeField] private AI_MainCore aI_MainCore;
 
     private StatsDatabase statsDatabase = new StatsDatabase();
+    private AI_MainCore aI_MainCore;
+    
     #region StatsAtributes
     private int VIT = 1;
     private int INT = 1;
@@ -42,6 +44,16 @@ public class MonsterStats : MonoBehaviour,IHasProgress
     private float criticalRate;
     private float criticalDamage;
     #endregion
+    
+    [SerializeField] private GameObject rightWeaponHandler;
+    [SerializeField] private GameObject leftWeaponHandler;
+    public EquipmentDataHolder equipmentDataHolder_LeftHand;
+    public EquipmentDataHolder equipmentDataHolder_RightHand;
+    public EquipmentDataSO equipmentDataSO_RightHand;
+    public EquipmentDataSO equipmentDataSO_LeftHand;
+    private AreaDrawer leftDetectionArea;
+    private AreaDrawer rightDetectionArea;
+
     private bool Death => healthPoints <= 0? true: false;
 
     private void Awake ( )
@@ -54,31 +66,6 @@ public class MonsterStats : MonoBehaviour,IHasProgress
             healthProgressNormalized = healthPoints / maxHealthPoints,
             manaProgressNormalized = manaPoints / maxManaPoints,
         });
-    }
-    private void Start ( )
-    {
-    }
-    private void Update ( )
-    {
-        if (Death)
-        {
-            aI_MainCore.SetState(State.Death);
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GetDamage(555);
-        }
-    }
-    public void GetDamage ( int dmg )
-    {
-        healthPoints -= dmg;
-        OnChangeProgress();
-        OnGetHurted?.Invoke(this, EventArgs.Empty);
-    }
-    private void TakeDamage ( PlayerStats playerStats )
-    {
-        int damage = CalculateDamage(attackPoints);
-        playerStats.GetDamage(damage);
     }
     private void InitializeStats ( )
     {
@@ -98,10 +85,53 @@ public class MonsterStats : MonoBehaviour,IHasProgress
         attackPoints = statsDatabase.Get_AtkOnBasePower(STR) + (int)monsterDataSO.extraAttackPoints;
         attackSpeed = (int)monsterDataSO.extraAttackSpeed;
 
-        criticalRate = statsDatabase.Get_CritRateOnBaseDexAndAgi(DEX,AGI);
+        criticalRate = statsDatabase.Get_CritRateOnBaseDexAndAgi(DEX, AGI);
         criticalDamage = statsDatabase.Get_CritDmgOnBaseDex(DEX);
 
         defensePoints = statsDatabase.Get_DefenseOnBaseRes(RES) + (int)monsterDataSO.extraDefensePoints;
+    }
+
+    private void Start ( )
+    {
+        WeaponCheck();
+    }
+    private void WeaponCheck ( )
+    {
+        equipmentDataHolder_RightHand = rightWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
+        equipmentDataHolder_LeftHand = leftWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
+
+        equipmentDataSO_RightHand = equipmentDataHolder_RightHand.GetEquipmentDataSO(); //HACER UNO PARA LOS RANGES QUE NO TENDRÁN AREA DRAWER EN EL ARCO SI NO EN LA FLECHA, LA FLECHA CALCULA DISTANCIAS ONTRIGGER ENTTER
+        equipmentDataSO_LeftHand = equipmentDataHolder_LeftHand.GetEquipmentDataSO();
+        rightDetectionArea = equipmentDataHolder_RightHand.GetDetectionArea();
+        leftDetectionArea = equipmentDataHolder_LeftHand.GetDetectionArea();
+    }
+    private void Update ( )
+    {
+        if (Death)
+        {
+            aI_MainCore.SetState(State.Death);
+        }
+    }
+    public void GetDamage ( int damage )
+    {
+        healthPoints -= damage;
+        OnChangeProgress();
+        OnGetHurted?.Invoke(this, EventArgs.Empty);
+    }
+    private DamageType GetDamageType ( EquipmentDataHolder equipmentDataHolder )
+    {
+        if (equipmentDataHolder.GetEquipmentElement == EquipmentElement.None)
+            if (criticalRate < UnityEngine.Random.Range(0, 100))
+            {
+                return DamageType.CriticalDamage;
+            }
+        return DamageType.NormalDamage;
+    }
+    private void TakeDamage ( PlayerStats playerStats, EquipmentDataHolder equipmentDataHolder )
+    {
+        int damage = CalculateDamage(attackPoints);
+        GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder), damage);
+        playerStats.GetDamage(damage);
     }
     private void OnChangeProgress ( )
     {
@@ -111,7 +141,6 @@ public class MonsterStats : MonoBehaviour,IHasProgress
             manaProgressNormalized = manaPoints / maxManaPoints,
         });
     }
-
     //float CalculateNextLevelExpRequired ( ) // Formula para subir de nivel, es equilibrada, cuanto mas nivel seas mas dificil sera pero de una manera equitativa
     //{
     //    return (float)(4 * Mathf.Pow(curLvl, 3) + 0.8 * (Mathf.Pow(curLvl, 2) + 2) * 4);

@@ -19,11 +19,13 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
     public const string RUN_FORWARD = "Run_Forward";
     public const string WALK_FORWARD = "Walk_Forward";
 
-    public void ChangeCurrentAnimations ( AnimatorOverrideController animatorOverrideController )
+    public void ChangeCurrentAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
     {
-        LoadBasicAttackAnimationsOnOverride(animatorOverrideController);
-        LoadChargedAttackAnimationsOnOverride(animatorOverrideController);
-        LoadSkillAttackAnimationsOnOverride(animatorOverrideController);
+        
+        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.basicAttackClips);
+        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.chargedAttackClips);
+        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.specialAttackClips);
+        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.skillAttackClips);
 
         animatorOverrideController[DEATH] = deathBackwardClip;
         animatorOverrideController[IDLE] = idleClip;

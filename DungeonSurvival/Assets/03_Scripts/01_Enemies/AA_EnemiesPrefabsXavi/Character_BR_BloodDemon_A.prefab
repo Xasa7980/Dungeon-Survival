@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 5366698545529483664}
   - component: {fileID: 5366698545529483667}
   - component: {fileID: 5366698545529483666}
+  - component: {fileID: 7675633161092376446}
   m_Layer: 9
   m_Name: Character_BR_BloodDemon_A
   m_TagString: Untagged
@@ -219,6 +220,27 @@ CapsuleCollider:
   m_Height: 3.05955
   m_Direction: 1
   m_Center: {x: 0, y: 1.529775, z: 0}
+--- !u!114 &7675633161092376446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5366698545529483668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f536c188cd59d94abc1d7317555aa94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curLvl: 1
+  playerLvl: 1
+  lvlDif: 0
+  minExpGiven: 4
+  maxExpGiven: 10
+  monsterDataSO: {fileID: 0}
+  aI_MainCore: {fileID: 0}
+  rightWeaponHandler: {fileID: 0}
+  leftWeaponHandler: {fileID: 0}
 --- !u!1001 &5366698545605698821
 PrefabInstance:
   m_ObjectHideFlags: 0

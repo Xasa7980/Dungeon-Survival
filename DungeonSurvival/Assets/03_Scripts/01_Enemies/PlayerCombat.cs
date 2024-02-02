@@ -6,18 +6,13 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    public event EventHandler OnBasicAttack;
+    public event EventHandler OnBasicAttackPerformed;
+    public event EventHandler OnChargedAttackPerformed;
+    public event EventHandler OnSpecialAttackPerformed;
+    public event EventHandler OnSkillAttackPerformed;
 
-    [SerializeField] private GameObject rightWeaponHandler;
-    [SerializeField] private GameObject leftWeaponHandler;
     [SerializeField] private LayerMask detectionMask;
 
-    private EquipmentDataHolder equipmentDataHolder_LeftHand;
-    private EquipmentDataHolder equipmentDataHolder_RightHand;
-    private EquipmentDataSO equipmentDataSO_RightHand;
-    private EquipmentDataSO equipmentDataSO_LeftHand;
-    private AreaDrawer leftDetectionArea;
-    private AreaDrawer rightDetectionArea;
     private PlayerStats playerStats;
     private PlayerAnimations playerAnimations;
     private bool hit;
@@ -28,15 +23,8 @@ public class PlayerCombat : MonoBehaviour
     {
         playerStats = GetComponent<PlayerStats>();
         playerAnimations = GetComponent<PlayerAnimations>();
-
-        equipmentDataHolder_RightHand = rightWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
-        equipmentDataHolder_LeftHand = leftWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
-
-        equipmentDataSO_RightHand = equipmentDataHolder_RightHand.GetEquipmentDataSO(); //HACER UNO PARA LOS RANGES QUE NO TENDRÁN AREA DRAWER EN EL ARCO SI NO EN LA FLECHA, LA FLECHA CALCULA DISTANCIAS ONTRIGGER ENTTER
-        equipmentDataSO_LeftHand = equipmentDataHolder_LeftHand.GetEquipmentDataSO();
-        rightDetectionArea = equipmentDataHolder_RightHand.GetDetectionArea();
-        leftDetectionArea = equipmentDataHolder_LeftHand.GetDetectionArea();
     }
+    
     private void Start ( )
     {
         
@@ -45,23 +33,22 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            OnBasicAttack?.Invoke(this, EventArgs.Empty);
+            OnBasicAttackPerformed?.Invoke(this, EventArgs.Empty);
         }
         WeaponDetectMonsters();
     }
     private void WeaponDetectMonsters ( )
     {
-        
-        Collider[] rightDetection = Physics.OverlapBox(rightDetectionArea.objectPosition, rightDetectionArea.size,
-        rightDetectionArea.rotation, detectionMask);
-        Collider[] leftDetection = Physics.OverlapBox(leftDetectionArea.objectPosition, leftDetectionArea.size,
-        leftDetectionArea.rotation, detectionMask);
+        Collider[] rightDetection = Physics.OverlapBox(playerStats.RightDetectionArea.objectPosition, playerStats.RightDetectionArea.size,
+        playerStats.RightDetectionArea.rotation, detectionMask);
+        Collider[] leftDetection = Physics.OverlapBox(playerStats.LeftDetectionArea.objectPosition, playerStats.LeftDetectionArea.size,
+        playerStats.LeftDetectionArea.rotation, detectionMask);
 
-        if (playerAnimations.GetCurrentAnimationInfo(playerAnimations.ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME).normalizedTime < 1f)
+        if (playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME).normalizedTime < 0.85f)
         {
-            if(!hit)
+            if(rightDetection.Length > 0)
             {
-                if (rightDetection.Length > 0)
+                if (!hit)
                 {
                     foreach (Collider target in rightDetection)
                     {
@@ -69,7 +56,9 @@ public class PlayerCombat : MonoBehaviour
                         {
                             print("rightHitted");
                             timesHit ++;
-                            playerStats.TakeDamage(monsterStats);
+
+                            playerStats.TakeDamage(monsterStats, playerStats.EquipmentDataHolder_RightHand);
+
                             if (timesHit >= totalAttackHits)
                             {
                                 timesHit = 0;
@@ -78,7 +67,10 @@ public class PlayerCombat : MonoBehaviour
                         }
                     }
                 }
-                if (leftDetection.Length > 0)
+            }
+            else if (leftDetection.Length > 0)
+            {
+                if (!hit)
                 {
                     foreach (Collider target in leftDetection)
                     {
@@ -86,7 +78,7 @@ public class PlayerCombat : MonoBehaviour
                         {
                             print("leftHitted");
                             timesHit++;
-                            playerStats.TakeDamage(monsterStats);
+                            playerStats.TakeDamage(monsterStats, playerStats.EquipmentDataHolder_LeftHand);
                             if (timesHit >= totalAttackHits)
                             {
                                 timesHit = 0;
