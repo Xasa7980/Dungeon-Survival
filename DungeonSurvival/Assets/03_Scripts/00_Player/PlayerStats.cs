@@ -45,7 +45,6 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private GameObject rightWeaponHandler;
     [SerializeField] private GameObject leftWeaponHandler;
-
     internal EquipmentDataHolder EquipmentDataHolder_LeftHand => equipmentDataHolder_LeftHand;
     private EquipmentDataHolder equipmentDataHolder_LeftHand;
     private EquipmentDataHolder prev_EquipmentDataHolder_LeftHand;
@@ -100,9 +99,9 @@ public class PlayerStats : MonoBehaviour
 
     private void Start ( )
     {
-        WeaponCheck();
+        InitializeWeaponProperties();
     }
-    private void WeaponCheck ( )
+    private void InitializeWeaponProperties ( )
     {
         equipmentDataHolder_RightHand = rightWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
         equipmentDataHolder_LeftHand = leftWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
@@ -127,6 +126,13 @@ public class PlayerStats : MonoBehaviour
         OnChangeProgress();
         OnGetHurted?.Invoke(this, EventArgs.Empty);
     }
+    public void TakeDamage ( MonsterStats monsterStats, EquipmentDataHolder equipmentDataHolder )
+    {
+        int damage = CalculateDamage(attackPoints);
+
+        GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder),damage);
+        monsterStats.GetDamage(damage);
+    }
     private DamageType GetDamageType ( EquipmentDataHolder equipmentDataHolder )
     {
         if (equipmentDataHolder.GetEquipmentElement == EquipmentElement.None)
@@ -136,15 +142,8 @@ public class PlayerStats : MonoBehaviour
             }
         return DamageType.NormalDamage;
     }
-    public void TakeDamage ( MonsterStats monsterStats, EquipmentDataHolder equipmentDataHolder )
-    {
-        int damage = CalculateDamage(attackPoints);
-
-        GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder),damage);
-        monsterStats.GetDamage(damage);
-    }
     public bool IsDualWeaponWielding => equipmentDataHolder_RightHand != null && equipmentDataHolder_RightHand.GetEquipmentType() != EquipmentType.Shield && 
-        equipmentDataHolder_LeftHand != null && equipmentDataHolder_LeftHand.GetEquipmentType() != EquipmentType.Shield;
+        equipmentDataHolder_LeftHand != null && equipmentDataHolder_LeftHand.GetEquipmentType() >= EquipmentType.Dagger;
     public void EquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {
         prev_EquipmentDataHolder_RightHand = EquipmentDataHolder_RightHand;
@@ -158,6 +157,10 @@ public class PlayerStats : MonoBehaviour
     }
     public void EquipLeftWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {
+        if (equipmentDataHolder_RightHand.Is2HandWeapon)
+        {
+            return;
+        }
         prev_EquipmentDataHolder_LeftHand = equipmentDataHolder_LeftHand;
         equipmentDataHolder_LeftHand = newEquipmentDataHolder;
 
@@ -168,36 +171,49 @@ public class PlayerStats : MonoBehaviour
     }
     private void UpdateEquipmentStats ( EquipmentDataHolder prevEquipment, EquipmentDataHolder newEquipment, ref EquipmentDataHolder currentEquipmentHolder )
     {
-        if (prevEquipment != newEquipment)
+        float multiplier = IsDualWeaponWielding ? 1.3f : 1f;
+        if(newEquipment != null)
         {
-            RemoveStatsPoints(prevEquipment.GetEquipmentDataSO().equipmentStats);
-            AddStatsPoints(newEquipment.GetEquipmentDataSO().equipmentStats);
+            if (prevEquipment != newEquipment)
+            {
+                RemoveStatsPoints(prevEquipment.GetEquipmentDataSO().equipmentStats, multiplier);
+                AddStatsPoints(newEquipment.GetEquipmentDataSO().equipmentStats, multiplier);
+            }
+            currentEquipmentHolder = newEquipment;
         }
-        currentEquipmentHolder = newEquipment;
+        else
+        {
+            Destroy(newEquipment.gameObject);
+            if (prevEquipment != newEquipment)
+            {
+                RemoveStatsPoints(prevEquipment.GetEquipmentDataSO().equipmentStats, multiplier);
+            }
+            currentEquipmentHolder = newEquipment;
+        }
     }
-    private void AddStatsPoints(EquipmentStats equipmentStats )
+    private void AddStatsPoints(EquipmentStats equipmentStats, float multiplier )
     {
-        healthPoints += equipmentStats.healthPoints;
-        manaPoints += equipmentStats.manaPoints;
+        healthPoints += equipmentStats.healthPoints * multiplier;
+        manaPoints += equipmentStats.manaPoints * multiplier;
 
-        attackPoints += equipmentStats.attackPoints;
-        attackSpeed += equipmentStats.attackSpeed;
-        defensePoints += equipmentStats.defensePoints;
+        attackPoints += equipmentStats.attackPoints * multiplier;
+        attackSpeed += equipmentStats.attackSpeed * multiplier;
+        defensePoints += equipmentStats.defensePoints * multiplier;
 
-        criticalRate += equipmentStats.criticalRate;
-        criticalDamage += equipmentStats.criticalDamage;
+        criticalRate += equipmentStats.criticalRate * multiplier;
+        criticalDamage += equipmentStats.criticalDamage * multiplier;
     }
-    private void RemoveStatsPoints(EquipmentStats equipmentStats )
+    private void RemoveStatsPoints(EquipmentStats equipmentStats, float multiplier )
     {
-        healthPoints -= equipmentStats.healthPoints;
-        manaPoints -= equipmentStats.manaPoints;
+        healthPoints -= equipmentStats.healthPoints * multiplier;
+        manaPoints -= equipmentStats.manaPoints * multiplier;
 
-        attackPoints -= equipmentStats.attackPoints;
-        attackSpeed -= equipmentStats.attackSpeed;
-        defensePoints -= equipmentStats.defensePoints;
+        attackPoints -= equipmentStats.attackPoints * multiplier;
+        attackSpeed -= equipmentStats.attackSpeed * multiplier;
+        defensePoints -= equipmentStats.defensePoints * multiplier;
 
-        criticalRate -= equipmentStats.criticalRate;
-        criticalDamage -= equipmentStats.criticalDamage;
+        criticalRate -= equipmentStats.criticalRate * multiplier;
+        criticalDamage -= equipmentStats.criticalDamage * multiplier;
     }
     private void LevelUp ( )
     {

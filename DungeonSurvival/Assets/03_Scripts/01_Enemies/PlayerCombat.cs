@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat : MonoBehaviour, ICombatBehaviour
 {
+    public event EventHandler OnAnimationEventCalls;
+    public event EventHandler OnAnimationEventReleaseEffect;
+
     public event EventHandler OnBasicAttackPerformed;
     public event EventHandler OnChargedAttackPerformed;
     public event EventHandler OnSpecialAttackPerformed;
@@ -15,10 +18,8 @@ public class PlayerCombat : MonoBehaviour
 
     private PlayerStats playerStats;
     private PlayerAnimations playerAnimations;
-    private bool hit;
+    public bool hit;
 
-    private int timesHit;
-    private int totalAttackHits = 1; //Cantidad de veces que la habilidad toca al jugador, ejemplo combo de 2 slashes
     private void Awake ( )
     {
         playerStats = GetComponent<PlayerStats>();
@@ -27,8 +28,23 @@ public class PlayerCombat : MonoBehaviour
     
     private void Start ( )
     {
-        
+        OnAnimationEventCalls += PlayerCombat_OnAnimationEventCalls;
+        OnAnimationEventReleaseEffect += PlayerCombat_OnAnimationEventReleaseEffect;
     }
+    private void PlayerCombat_OnAnimationEventReleaseEffect ( object sender, EventArgs e )
+    {
+        throw new NotImplementedException();
+    }
+
+    private void PlayerCombat_OnAnimationEventCalls ( object sender, EventArgs e )
+    {
+        if(hit)
+        {
+            print("unhitted");
+            hit = false;
+        }
+    }
+
     private void Update ( )
     {
         if (Input.GetMouseButtonDown(0))
@@ -55,15 +71,9 @@ public class PlayerCombat : MonoBehaviour
                         if (target.TryGetComponent<MonsterStats>(out MonsterStats monsterStats))
                         {
                             print("rightHitted");
-                            timesHit ++;
 
                             playerStats.TakeDamage(monsterStats, playerStats.EquipmentDataHolder_RightHand);
-
-                            if (timesHit >= totalAttackHits)
-                            {
-                                timesHit = 0;
-                                hit = true;
-                            }
+                            hit = true;
                         }
                     }
                 }
@@ -77,13 +87,9 @@ public class PlayerCombat : MonoBehaviour
                         if (target.TryGetComponent<MonsterStats>(out MonsterStats monsterStats))
                         {
                             print("leftHitted");
-                            timesHit++;
+
                             playerStats.TakeDamage(monsterStats, playerStats.EquipmentDataHolder_LeftHand);
-                            if (timesHit >= totalAttackHits)
-                            {
-                                timesHit = 0;
-                                hit = true;
-                            }
+                            hit = true;
                         }
                     }
                 }
@@ -91,8 +97,15 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
-            //PLAYER NOT ATTACKED OR ANIMATION ISN'T PERFORMED
             hit = false;
         }
+    }
+    public void OnAnimationEvent_AttackCallback ( )
+    {
+        OnAnimationEventCalls?.Invoke( this,EventArgs.Empty );
+    }
+    public void OnAnimationEvent_AttackEffectCallback ( )
+    {
+        OnAnimationEventReleaseEffect?.Invoke( this,EventArgs.Empty );
     }
 }

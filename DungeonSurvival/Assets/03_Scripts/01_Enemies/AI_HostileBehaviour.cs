@@ -27,7 +27,7 @@ public class AI_HostileBehaviour : MonoBehaviour
         public float progressNormalized;
     }
 
-    [SerializeField] private SpecialAttacksSO specialAttacksSO;
+    [SerializeField] private AttacksDataSO specialAttacksSO;
 
     [SerializeField] private float basicAtkTimerMax;
     [SerializeField] private float chargedAttackTimerMax;
@@ -64,7 +64,7 @@ public class AI_HostileBehaviour : MonoBehaviour
 
         OnEnterCombat?.Invoke(this, EventArgs.Empty);
         chargingReleaseAttack = chargingReleaseAttackMax;
-        skillCastingTimer = specialAttacksSO.castingTimerMax;
+        skillCastingTimer = specialAttacksSO.loadingTimerMax;
     }
     private void OnDisable ( )
     {
@@ -168,7 +168,7 @@ public class AI_HostileBehaviour : MonoBehaviour
                 {
                     specialCastingTimer += Time.deltaTime;
 
-                    if (specialCastingTimer > specialAttacksSO.castingTimerMax) 
+                    if (specialCastingTimer > specialAttacksSO.loadingTimerMax) 
                     {
                         //Release special attack
 
@@ -187,7 +187,7 @@ public class AI_HostileBehaviour : MonoBehaviour
                 if (skillCastingTimer > 0) skillCastingTimer -= Time.deltaTime;
                 OnCastingSkill?.Invoke(this, new OnCastingSkillEventArgs
                 {
-                    progressNormalized = skillCastingTimer / specialAttacksSO.castingTimerMax
+                    progressNormalized = skillCastingTimer / specialAttacksSO.loadingTimerMax
                 });
 
                 if (skillCastingTimer <= 0)
@@ -199,7 +199,7 @@ public class AI_HostileBehaviour : MonoBehaviour
 
                         skillReleaseTime = 0;
                         timerBetweenAttacks = 0;
-                        skillCastingTimer = specialAttacksSO.castingTimerMax;
+                        skillCastingTimer = specialAttacksSO.loadingTimerMax;
                         releasingAttack = false;
 
                         OnSkillAttack?.Invoke(this, EventArgs.Empty);
@@ -245,4 +245,5 @@ public class AI_HostileBehaviour : MonoBehaviour
         // Deberías decidir qué hacer en este caso, por ejemplo, retornar un valor por defecto.
         return -1; // O cualquier valor que indique una condición especial o un error.
         }
-    }
+
+}

@@ -300,16 +300,16 @@ public class EquipmentDataSO : ScriptableObject
     {
         internal EquipmentCategory equipmentCategory;
 
-        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public AnimationClip[] basicAttackClips;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public AttacksDataSO[] basicAttackClips;
 
-        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] chargedAttackClips;
-        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] loadingChargedAttackClips;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public AttacksDataSO[] chargedAttackClips;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public AttacksDataSO[] loadingChargedAttackClips;
 
-        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] specialAttackClips;
-        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] loadingSpecialAttackClips;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public AttacksDataSO[] specialAttackClips;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public AttacksDataSO[] loadingSpecialAttackClips;
 
-        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] skillAttackClips;
-        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public SpecialAttacksSO[] loadingSkillAttackClips;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public AttacksDataSO[] skillAttackClips;
+        [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")] public AttacksDataSO[] loadingSkillAttackClips;
     }
 }
 

@@ -34,4 +34,36 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
         animatorOverrideController[WALK_FORWARD] = walkForwardClip;
 
     }
+    public void DualSwordOverride ( AnimatorOverrideController animatorOverrideController )
+    {
+
+        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackDualSwordWeapon);
+        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, chargedAttackDualSwordWeapon);
+        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackDualSwordWeapon);
+        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, skillAttackDualSwordWeapon);
+    }
+    public void DualDaggerOverride ( AnimatorOverrideController animatorOverrideController )
+    {
+
+        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackDualDaggerWeapon);
+        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, chargedAttackDualDaggerWeapon);
+        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackDualDaggerWeapon);
+        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, skillAttackDualDaggerWeapon);
+    }
+    public void ShieldOverride ( AnimatorOverrideController animatorOverrideController )
+    {
+
+        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackShield);
+        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, chargeAttackShield);
+        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackShield);
+        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, skillAttackShield);
+    }
+    public void NoWeaponOverride ( AnimatorOverrideController animatorOverrideController )
+    {
+
+        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackNoWeapons);
+        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, chargedAttackNoWeapons);
+        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackNoWeapons);
+        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, skillAttackNoWeapons);
+    }
 }

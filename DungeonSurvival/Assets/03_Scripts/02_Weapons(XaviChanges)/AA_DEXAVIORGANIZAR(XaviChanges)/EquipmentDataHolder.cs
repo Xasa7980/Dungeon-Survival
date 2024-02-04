@@ -54,6 +54,7 @@ public class EquipmentDataHolder : MonoBehaviour
     {
         return equipmentDataSO;
     }
+    public bool Is2HandWeapon => weaponHandlerType == WeaponHandler.Hand_2;
     public EquipmentType GetEquipmentType()
     {
         return equipmentDataSO.equipmentType;

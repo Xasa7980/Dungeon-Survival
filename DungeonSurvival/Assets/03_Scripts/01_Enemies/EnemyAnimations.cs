@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAnimations : MonoBehaviour
+public class EnemyAnimations : MonoBehaviour,ICombatBehaviour
 {
     private const string IS_WALKING_BOOL = "IsWalking";
     private const string IS_RUNNING_BOOL = "IsRunning";
@@ -197,5 +197,14 @@ public class EnemyAnimations : MonoBehaviour
         patrolBehaviour = ai_MainCore.GetPatrolBehaviour();
         chasingBehaviour = ai_MainCore.GetChasingBehaviour();
         hostileBehaviour = ai_MainCore.GetHostileBehaviour();
+    }
+
+    public void OnAnimationEvent_AttackCallback ( )
+    {
+        print("a");
+    }
+    public void OnAnimationEvent_AttackEffectCallback ( )
+    {
+        print("b");
     }
 }

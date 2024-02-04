@@ -20,10 +20,22 @@ MonoBehaviour:
   maxNumberOfChargedAttacks: 4
   maxNumberOfSpecialAttacks: 4
   maxNumberOfSkillAttacks: 4
-  basicAttackAnimationClips: []
-  chargedAttackAnimationClips: []
-  specialAttackAnimationClips: []
-  skillAttackAnimationClips: []
+  basicAttackDualSwordWeapon: []
+  chargedAttackDualSwordWeapon: []
+  specialAttackDualSwordWeapon: []
+  skillAttackDualSwordWeapon: []
+  basicAttackDualDaggerWeapon: []
+  chargedAttackDualDaggerWeapon: []
+  specialAttackDualDaggerWeapon: []
+  skillAttackDualDaggerWeapon: []
+  basicAttackNoWeapons: []
+  chargedAttackNoWeapons: []
+  specialAttackNoWeapons: []
+  skillAttackNoWeapons: []
+  basicAttackShield: []
+  chargeAttackShield: []
+  specialAttackShield: []
+  skillAttackShield: []
   attackBasicClip_01: {fileID: 0}
   attackBasicClip_02: {fileID: 0}
   attackBasicClip_03: {fileID: 0}
