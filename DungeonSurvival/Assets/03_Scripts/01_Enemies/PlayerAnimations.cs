@@ -61,13 +61,13 @@ public class PlayerAnimations : MonoBehaviour
     {
         if (animationTriggered)
         {
-            if (GetCurrentAnimationInfo(COMBAT_LAYER, ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME).normalizedTime > 0.85f)
+            if (GetCurrentAnimationInfo(COMBAT_LAYER, ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME).normalizedTime > 0.95f)
             {
                 animator.SetLayerWeight(COMBAT_LAYER, 0f);
 
                 if (animationTriggered)
                 {
-                    attackIndex += 1;
+                    attackIndex ++;
                     animationTriggered = false;
                 }
                 attackCombo_resetTime += Time.deltaTime;
@@ -104,6 +104,10 @@ public class PlayerAnimations : MonoBehaviour
 
         if (currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime < 1f) return true;
         else return false;
+    }
+    public Animator GetAnimator ( )
+    {
+        return animator;
     }
     private void ResetAttackCombo ( )
     {

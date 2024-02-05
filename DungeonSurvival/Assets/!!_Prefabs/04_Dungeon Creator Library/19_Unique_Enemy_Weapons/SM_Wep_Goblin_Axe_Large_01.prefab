@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2385346}
   - component: {fileID: 64940352201742326}
   - component: {fileID: -1484211921701009509}
+  - component: {fileID: 2938949721838497265}
   m_Layer: 0
   m_Name: SM_Wep_Goblin_Axe_Large_01
   m_TagString: Untagged
@@ -115,3 +116,27 @@ MonoBehaviour:
   equipmentType: 5
   equipmentElement: 2
   equipmentRank: 4
+  equipmentCategory: 0
+  weaponHandlerType: 0
+  weaponRange: 0
+  slashMaterial: {fileID: 2100000, guid: f00911ce6e3a60a40a834c3dd81f2b23, type: 2}
+  slashGameObject: []
+--- !u!114 &2938949721838497265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85f64e515b72a34aa5117021604e767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _drawMode: 1
+  objectPositionMode: 1
+  gizmoBoxColor: {r: 0, g: 1, b: 0, a: 1}
+  _size: {x: 1, y: 1, z: 1}
+  gizmoSphereColor: {r: 1, g: 0, b: 0, a: 1}
+  _radius: 0.39
+  freePosition: {x: 0, y: 0, z: 0}

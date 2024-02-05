@@ -2,13 +2,9 @@ using UnityEngine;
 
 public class SwooshTest : MonoBehaviour
 {
-    //Gettear las animaciones del override, y añadir un switch para que hacer una maquina de estados simple para que verifique si es ataque habilidad, carga, etc
-    [SerializeField]
-    private AnimationClip _animation;
-
-    [SerializeField]
-    private MeleeWeaponTrail _trail;
-
+    private MeleeWeaponTrail _trailRight;
+    private MeleeWeaponTrail _trailLeft;
+    private PlayerStats playerStats;
     private PlayerAnimations playerAnimations;
     private AnimatorStateInfo _animationState;
 
@@ -17,13 +13,13 @@ public class SwooshTest : MonoBehaviour
     private void Awake ( )
     {
         playerAnimations = GetComponent<PlayerAnimations>();
+        playerStats = GetComponent<PlayerStats>();
     }
     void Start ( )
     {
-        if (_trail != null)
-        {
-            _trail.Emit = false;
-        }
+        _trailRight = playerStats.EquipmentDataHolder_RightHand.GetWeaponTrail();
+        _trailLeft = playerStats.EquipmentDataHolder_LeftHand.GetWeaponTrail();
+        DeactivateTrail();
     }
 
     void Update ( )
@@ -32,38 +28,50 @@ public class SwooshTest : MonoBehaviour
         {
             _animationState = playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME);//NEED TO DECLARE A STRING WITH THE HOLDER OF THE BASE LAYER
 
-            if (_animationState.IsName("AttackBasicTree"))
+            AnimatorStateInfo[] states = { playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME),
+                 playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_CHARGED_TREE_PERFORMED_NAME),
+                  playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_SPECIAL_TREE_PERFORMED_NAME),
+                   playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_SKILL_TREE_PERFORMED_NAME) };
+
+            foreach (AnimatorStateInfo state in states)
             {
-                if (!_isAnimationPlaying)
+                if (IsStateActive(state))
                 {
-                    _isAnimationPlaying = true;
-                    ActivateTrail();
+                    ActivateTrails();
                 }
-            }
-            else
-            {
-                if (_isAnimationPlaying)
+                else
                 {
-                    _isAnimationPlaying = false;
                     DeactivateTrail();
                 }
             }
         }
     }
 
-    private void ActivateTrail ( )
+    private bool IsStateActive(AnimatorStateInfo state )
     {
-        if (_trail != null)
+        return playerAnimations.GetAnimator().GetCurrentAnimatorStateInfo(playerAnimations.COMBAT_LAYER).fullPathHash == state.fullPathHash;
+    }
+    private void ActivateTrails ( )
+    {
+        if (_trailRight != null)
         {
-            _trail.Emit = true;
+            _trailRight.Emit = true;
+        }
+        if(_trailLeft != null)
+        {
+            _trailLeft.Emit = true;
         }
     }
 
     private void DeactivateTrail ( )
     {
-        if (_trail != null)
+        if (_trailRight != null)
         {
-            _trail.Emit = false;
+            _trailRight.Emit = false;
+        }
+        if(_trailLeft != null)
+        {
+            _trailLeft.Emit = false;
         }
     }
 }

@@ -18,14 +18,17 @@ public class EquipmentDataHolder : MonoBehaviour
 
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] public Material slashMaterial;
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] private List<Transform> slashGameObject = new List<Transform>();
-    
+
+    private MeleeWeaponTrail weaponTrail;
     private AreaDrawer detectionArea;
     private void Awake ( )
     {
+        weaponTrail = GetComponentInChildren<MeleeWeaponTrail>();
         detectionArea = GetComponent<AreaDrawer>();
     }
     private void OnValidate ( )
     {
+        slashGameObject.Clear();
         AddChildrenToList();
         equipmentDataSO.equipmentType = equipmentType;
         equipmentDataSO.equipmentElement = equipmentElement;
@@ -53,6 +56,10 @@ public class EquipmentDataHolder : MonoBehaviour
     public EquipmentDataSO GetEquipmentDataSO ( )
     {
         return equipmentDataSO;
+    }
+    public MeleeWeaponTrail GetWeaponTrail ( )
+    {
+        return weaponTrail;
     }
     public bool Is2HandWeapon => weaponHandlerType == WeaponHandler.Hand_2;
     public EquipmentType GetEquipmentType()

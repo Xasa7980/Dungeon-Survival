@@ -19,20 +19,20 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
     public const string RUN_FORWARD = "Run_Forward";
     public const string WALK_FORWARD = "Walk_Forward";
 
-    public void ChangeCurrentAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
+    public void ChangeCurrentBasicAnimations(AnimatorOverrideController animatorOverrideController )
     {
-        
-        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.basicAttackClips);
-        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.chargedAttackClips);
-        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.specialAttackClips);
-        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.skillAttackClips);
-
         animatorOverrideController[DEATH] = deathBackwardClip;
         animatorOverrideController[IDLE] = idleClip;
         animatorOverrideController[IDLECOMBAT] = idleCombatClip;
         animatorOverrideController[RUN_FORWARD] = runForwardClip;
         animatorOverrideController[WALK_FORWARD] = walkForwardClip;
-
+    }
+    public void ChangeCurretCombatAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
+    {
+        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.basicAttackClips);
+        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.chargedAttackClips);
+        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.specialAttackClips);
+        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.skillAttackClips);
     }
     public void DualSwordOverride ( AnimatorOverrideController animatorOverrideController )
     {

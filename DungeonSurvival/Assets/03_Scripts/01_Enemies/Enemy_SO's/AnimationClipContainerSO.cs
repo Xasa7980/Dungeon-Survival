@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public enum AttackCategory
@@ -14,10 +15,10 @@ public enum AttackCategory
 
 public class AnimationClipContainerSO : ScriptableObject
 {
-    public const string ATTACK_BASIC_1 = "E_Attack_Basic_1";
-    public const string ATTACK_BASIC_2 = "E_Attack_Basic_2";
-    public const string ATTACK_BASIC_3 = "E_Attack_Basic_3";
-    public const string ATTACK_BASIC_4 = "E_Attack_Basic_4";
+    public const string ATTACK_BASIC_1 = "BasicAttack_Default_01";
+    public const string ATTACK_BASIC_2 = "BasicAttack_Default_02";
+    public const string ATTACK_BASIC_3 = "BasicAttack_Default_03";
+    public const string ATTACK_BASIC_4 = "BasicAttack_Default_04";
 
     public const string CHARGED_ATTACK_1 = "ChargedAttack_01";
     public const string CHARGED_ATTACK_2 = "ChargedAttack_02";
@@ -145,93 +146,67 @@ public class AnimationClipContainerSO : ScriptableObject
     {
         return (PlayerAnimationContainerSO)animationClipContainerSO;
     }
-    private int GetAnimationIndexList<T> ( float totalClips,T[] clipsList )
+    private List<int> GetListRandomAnimationIndex<T> ( float totalClips,T[] clipsListLength )
     {
         List<int> selectedIndices = new List<int>();
         while (selectedIndices.Count < totalClips)
         {
-            int index = UnityEngine.Random.Range(0, clipsList.Length);
+            int index = UnityEngine.Random.Range(0, clipsListLength.Length);
             if (!selectedIndices.Contains(index))
             {
                 selectedIndices.Add(index);
-                return index;
             }
         }
-        return 0;
+        return selectedIndices;
+        
     }
     public void LoadBasicAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackBasicAnimationClips )
     {
         string[] attackClipKeys = { ATTACK_BASIC_1, ATTACK_BASIC_2, ATTACK_BASIC_3, ATTACK_BASIC_4 };
         AnimationClip[] attackClips = { attackBasicClip_01, attackBasicClip_02, attackBasicClip_03, attackBasicClip_04 };
 
-        for (int i = 0; i < attackClips.Length; i++)
+        List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfBasicAttacks, attackBasicAnimationClips);
+        for (int i = 0; i < randomIndices.Count && i < attackClipKeys.Length; i++)
         {
-            if(numberOfBasicAttacks > maxNumberOfBasicAttacks)
-            {
-                break;
-            }
-
-            attackClips[i] = getRandomAttackComboAnimation ? attackBasicAnimationClips[GetAnimationIndexList(numberOfBasicAttacks, attackBasicAnimationClips)].release_Attack_Animation_Clip :
-                attackBasicAnimationClips[(int)numberOfBasicAttacks].release_Attack_Animation_Clip;
-            numberOfBasicAttacks++;
+            attackClips[i] = attackBasicAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
+            Debug.Log(attackClips[i]);
             animatorOverrideController[attackClipKeys[i]] = attackClips[i];
         }
     }
     public void LoadChargedAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackChargedAnimationClips )
     {
         string[] animationChargingClipKeys = { CHARGING_ATTACK_1, CHARGING_ATTACK_2 };
-        string[] animationChargedClipKeys = {CHARGED_ATTACK_1, CHARGED_ATTACK_2};
+        string[] animationChargedClipKeys = { CHARGED_ATTACK_1, CHARGED_ATTACK_2 };
 
         AnimationClip[] chargingClips = { chargingAttackClip_01, chargingAttackClip_02 };
         AnimationClip[] chargedClips = { chargedAttackClip_01, chargedAttackClip_02 };
 
-        for (int i = 0; i < chargedClips.Length; i++) //AÑADIR MAS EN CASO DE QUE LOS ENEMIGOS VAYAN A TENER MAS ANIMACIONES SEGUN RANGO
+        List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfChargedAttacks, attackChargedAnimationClips);
+        for (int i = 0; i < randomIndices.Count && i < animationChargedClipKeys.Length; i++)
         {
-            if (numberOfChargedAttacks > maxNumberOfChargedAttacks)
-            {
-                break;
-            }
-
-            chargingClips[i] = getRandomChargedAttackComboAnimation ? attackChargedAnimationClips[GetAnimationIndexList(numberOfChargedAttacks, attackChargedAnimationClips)].loading_Attack_Animation_Clip :
-                attackChargedAnimationClips[(int)numberOfChargedAttacks].loading_Attack_Animation_Clip;
-
-            chargedClips[i] = getRandomChargedAttackComboAnimation ? attackChargedAnimationClips[GetAnimationIndexList(numberOfChargedAttacks, attackChargedAnimationClips)].release_Attack_Animation_Clip :
-                attackChargedAnimationClips[(int)numberOfChargedAttacks].release_Attack_Animation_Clip;
-
-            numberOfChargedAttacks++;
-
+            chargedClips[i] = attackChargedAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
+            chargingClips[i] = attackChargedAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
+            Debug.Log(chargedClips[i]);
             animatorOverrideController[animationChargedClipKeys[i]] = chargedClips[i];
-            animatorOverrideController[animationChargingClipKeys[i]] = chargedClips[i];
         }
     }
-    public void LoadSpecialAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController,  AttacksDataSO[] attackSpecialAnimationClips )
+    public void LoadSpecialAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackSpecialAnimationClips )
     {
         string[] animationSpecialClipKeys = { CASTING_SKILL_ATTACK_1, CASTING_SKILL_ATTACK_2 };
         AnimationClip[] specialClips = { chargedAttackClip_01, chargedAttackClip_02 };
         string[] animationSpecialLoadingClipKeys = { CASTING_SKILL_ATTACK_1, CASTING_SKILL_ATTACK_2 };
         AnimationClip[] specialLoadingClips = { chargedAttackClip_01, chargedAttackClip_02 };
 
-        for (int i = 0; i < specialClips.Length; i++)
+        List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfSpecialAttacks, attackSpecialAnimationClips);
+        for (int i = 0; i < randomIndices.Count && i < attackSpecialAnimationClips.Length; i++)
         {
-            if (numberOfSpecialAttacks > maxNumberOfSpecialAttacks) break;
-
-            if (attackSpecialAnimationClips[i].specialAttackNeedsLoading)
+            specialClips[i] = attackSpecialAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
+            if (attackSpecialAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip != null )
             {
-                specialLoadingClips[i] = getRandomSkillAttackComboAnimation ? attackSpecialAnimationClips[GetAnimationIndexList(numberOfSpecialAttacks, attackSpecialAnimationClips)].loading_Attack_Animation_Clip :
-                attackSpecialAnimationClips[(int)numberOfSpecialAttacks].loading_Attack_Animation_Clip;
-
-                specialClips[i] = getRandomSkillAttackComboAnimation ? attackSpecialAnimationClips[GetAnimationIndexList(numberOfSpecialAttacks, attackSpecialAnimationClips)].release_Attack_Animation_Clip :
-                attackSpecialAnimationClips[(int)numberOfSpecialAttacks].release_Attack_Animation_Clip;
+                specialLoadingClips[i] = attackSpecialAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
             }
-            else
-            {
-                specialClips[i] = getRandomSpecialAttackComboAnimation ? attackSpecialAnimationClips[GetAnimationIndexList(numberOfSpecialAttacks, attackSpecialAnimationClips)].release_Attack_Animation_Clip :
-                    attackSpecialAnimationClips[(int)numberOfSpecialAttacks].release_Attack_Animation_Clip;
-            }
-        
-            numberOfSpecialAttacks++;
-
             animatorOverrideController[animationSpecialClipKeys[i]] = specialClips[i];
+            animatorOverrideController[animationSpecialLoadingClipKeys[i]] = specialLoadingClips[i];
         }
     }
 
@@ -243,20 +218,16 @@ public class AnimationClipContainerSO : ScriptableObject
         AnimationClip[] castingClips = { chargingAttackClip_01, chargingAttackClip_02 };
         AnimationClip[] skillClips = { chargedAttackClip_01, chargedAttackClip_02 };
 
-        for (int i = 0; i < skillClips.Length; i++)
+        List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfSpecialAttacks, attackSkillAnimationClips);
+        for (int i = 0; i < randomIndices.Count && i < attackSkillAnimationClips.Length; i++)
         {
-            if (numberOfSkillAttacks > maxNumberOfSkillAttacks) break;
-
-            castingClips[i] = getRandomSkillAttackComboAnimation ? attackSkillAnimationClips[GetAnimationIndexList(numberOfSkillAttacks, attackSkillAnimationClips)].loading_Attack_Animation_Clip :
-                attackSkillAnimationClips[(int)numberOfSkillAttacks].loading_Attack_Animation_Clip;
-
-            skillClips[i] = getRandomSkillAttackComboAnimation ? attackSkillAnimationClips[GetAnimationIndexList(numberOfSkillAttacks, attackSkillAnimationClips)].release_Attack_Animation_Clip :
-                attackSkillAnimationClips[(int)numberOfSkillAttacks].release_Attack_Animation_Clip;
-
-            numberOfSkillAttacks++;
-
-            animatorOverrideController[animationCastingClipKeys[i]] = castingClips[i];
+            skillClips[i] = attackSkillAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
+            if (attackSkillAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip != null)
+            {
+                castingClips[i] = attackSkillAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
+            }
             animatorOverrideController[animationSkillClipKeys[i]] = skillClips[i];
+            animatorOverrideController[animationCastingClipKeys[i]] = castingClips[i];
         }
     }
     public void LimitMonsterAnimationsByMonsterRank ( MonsterDataSO monsterDataSO )

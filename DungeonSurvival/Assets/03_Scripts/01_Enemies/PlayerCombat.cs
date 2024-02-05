@@ -55,10 +55,18 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
     }
     private void WeaponDetectMonsters ( )
     {
-        Collider[] rightDetection = Physics.OverlapBox(playerStats.RightDetectionArea.objectPosition, playerStats.RightDetectionArea.size,
-        playerStats.RightDetectionArea.rotation, detectionMask);
-        Collider[] leftDetection = Physics.OverlapBox(playerStats.LeftDetectionArea.objectPosition, playerStats.LeftDetectionArea.size,
-        playerStats.LeftDetectionArea.rotation, detectionMask);
+        Collider[] rightDetection = new Collider[0];
+        if(playerStats.RightDetectionArea != null)
+        {
+            Physics.OverlapBox(playerStats.RightDetectionArea.objectPosition, playerStats.RightDetectionArea.size,
+            playerStats.RightDetectionArea.rotation, detectionMask);
+        }
+        Collider[] leftDetection = new Collider[0];
+        if(playerStats.LeftDetectionArea != null)
+        {
+            Physics.OverlapBox(playerStats.LeftDetectionArea.objectPosition, playerStats.LeftDetectionArea.size,
+            playerStats.LeftDetectionArea.rotation, detectionMask);
+        }
 
         if (playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME).normalizedTime < 0.85f)
         {
@@ -74,6 +82,7 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
 
                             playerStats.TakeDamage(monsterStats, playerStats.EquipmentDataHolder_RightHand);
                             hit = true;
+                            break;
                         }
                     }
                 }
@@ -90,6 +99,7 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
 
                             playerStats.TakeDamage(monsterStats, playerStats.EquipmentDataHolder_LeftHand);
                             hit = true;
+                            break;
                         }
                     }
                 }

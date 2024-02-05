@@ -4,26 +4,47 @@ using UnityEngine;
 
 public class PlayerAnimationHandler : MonoBehaviour
 {
+    
     [SerializeField] private AnimationClipContainerSO animationClipContainerSO;
 
     private Animator animator;
     private PlayerStats playerStats;
+    private AnimatorOverrideController animatorOverrideController;
     private void Awake ( )
     {
         animator = GetComponent<Animator>();
         playerStats = GetComponent<PlayerStats>();
-        InitializeAnimationsChecker();
     }
     private void Start ( )
     {
+        GetAnimationsToOverride();
+        playerStats.OnWeaponChanged += PlayerStats_OnWeaponChanged;
+    }
+
+    private void PlayerStats_OnWeaponChanged ( object sender, System.EventArgs e )
+    {
+        ChangeCurrentCombatAnimations(animatorOverrideController);
+    }
+
+    private void Update ( )
+    {
+        
     }
     private bool noWeaponsEquiped => !playerStats.EquipmentDataSO_RightHand ? (!playerStats.EquipmentDataSO_LeftHand ? true : false) : false;
-    private void InitializeAnimationsChecker ( )
+    private void GetAnimationsToOverride ( )
     {
-        AnimatorOverrideController animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
 
         animator.runtimeAnimatorController = animatorOverrideController;
-        if(noWeaponsEquiped )
+
+        animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ChangeCurrentBasicAnimations(animatorOverrideController);
+
+        ChangeCurrentCombatAnimations(animatorOverrideController);
+    }
+
+    private void ChangeCurrentCombatAnimations ( AnimatorOverrideController animatorOverrideController )
+    {
+        if (noWeaponsEquiped)
         {
             animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).NoWeaponOverride(animatorOverrideController);
         }
@@ -46,10 +67,10 @@ public class PlayerAnimationHandler : MonoBehaviour
             }
             else
             {
-                animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ChangeCurrentAnimations(animatorOverrideController,
+                animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ChangeCurretCombatAnimations(animatorOverrideController,
                 playerStats.EquipmentDataHolder_RightHand.GetEquipmentDataSO());
             }
         }
+        Debug.Log(playerStats.EquipmentDataHolder_RightHand + " = " + animationClipContainerSO.attackBasicClip_01);
     }
-
 }

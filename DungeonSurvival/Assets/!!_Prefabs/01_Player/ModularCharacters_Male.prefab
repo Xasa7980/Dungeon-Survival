@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85f64e515b72a34aa5117021604e767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawMode: 0
+  _drawMode: 0
   objectPositionMode: 0
   gizmoBoxColor: {r: 0, g: 1, b: 0, a: 1}
   _size: {x: 0.5, y: 2, z: 1}
@@ -5766,7 +5766,6 @@ GameObject:
   - component: {fileID: 6171076714824322829}
   - component: {fileID: 4245147754982064985}
   - component: {fileID: 6122772404336821252}
-  - component: {fileID: 6122772404336821253}
   - component: {fileID: 6171076714824322830}
   m_Layer: 3
   m_Name: ModularCharacters_Male
@@ -6457,11 +6456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55fcccd3985567f48b355e8e571882cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightWeaponHandler: {fileID: 0}
-  leftWeaponHandler: {fileID: 0}
   detectionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  hit: 0
 --- !u!114 &6122772404336821252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6478,18 +6476,6 @@ MonoBehaviour:
   interactionMask:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &6122772404336821253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9097408344049391604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2cd5b2f41420c94e80bb151421cce56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &6171076714824322830
 CharacterController:
   m_ObjectHideFlags: 0

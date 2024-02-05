@@ -6,6 +6,7 @@ using static EquipmentDataSO;
 
 public class PlayerStats : MonoBehaviour
 {
+    public event EventHandler OnWeaponChanged;
     public event EventHandler OnGetHurted;
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
@@ -190,6 +191,7 @@ public class PlayerStats : MonoBehaviour
             }
             currentEquipmentHolder = newEquipment;
         }
+        OnWeaponChanged?.Invoke(this, EventArgs.Empty);
     }
     private void AddStatsPoints(EquipmentStats equipmentStats, float multiplier )
     {

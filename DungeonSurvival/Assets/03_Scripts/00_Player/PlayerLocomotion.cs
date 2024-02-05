@@ -43,8 +43,10 @@ public class PlayerLocomotion : MonoBehaviour
         }
 
         float speed = direction.sqrMagnitude;
-        anim.SetFloat("Speed", speed, 0.1f, Time.deltaTime * moveSpeed);
+        anim.SetFloat("Speed", speed, 0.1f, Time.deltaTime * moveSpeed); //Personaje se mueve por animacion sin root, bueno para que cuando ataque se haga un override del layer del animator y se pare de caminar
+                                                                         //y no pueda seguir caminando mientras ataca
 
         controller.Move(Vector3.down * characterGravity);
+        //controller.Move(direction * moveSpeed * Time.deltaTime);
     }
 }

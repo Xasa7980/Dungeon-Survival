@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46175650a31d0146af00f2f3fd74f6f, type: 3}
+  m_Name: Axe_Battle_Axe_2Hand
+  m_EditorClassIdentifier: 
+  equipmentName: Battle_Axe
+  description: An uncommon axe wielded by seasoned warriors, carefully forged and
+    balanced for enhanced cutting power and combat efficiency. Its sturdy, solid
+    design makes it a dependable choice for warriors confronting cave dangers.
+  equipmentType: 1
+  equipmentElement: 2
+  equipmentRank: 1
+  weaponHandlerType: 0
+  weaponRange: 0
+  equipmentStats:
+    attackPoints: 23
+    healthPoints: 1156
+    manaPoints: 46
+    defensePoints: 0
+    attackSpeed: 89
+    elementalPower: 106
+    criticalRate: 18
+    criticalDamage: 60
+  equipmentVisualEffects:
+    slashParticleEffect: []
+    equipmentSecondaryParticleEffect: {fileID: 0}
+    emissiveColor: {r: 0, g: 0, b: 0, a: 0}
+    hasSlashEffect: 0
+    hasSecondaryParticleEffect: 0
+    hasDefaultParticleEffects: 0
+    slashMaterials:
+    - {fileID: 2100000, guid: 3297884f181cb2c41940da847c031306, type: 2}
+    - {fileID: 2100000, guid: d167bd781f831aa41ab13961d63f4c6d, type: 2}
+    - {fileID: 2100000, guid: f00911ce6e3a60a40a834c3dd81f2b23, type: 2}
+    - {fileID: 2100000, guid: 6ac0413284f34334081f00536c52ea88, type: 2}
+    - {fileID: 2100000, guid: 5f402d1520e5fa74fa21e08f85b71370, type: 2}
+    - {fileID: 2100000, guid: 733221398693ea142b66f59f80723b06, type: 2}
+    - {fileID: 2100000, guid: ea4367fcd114730488bf7e215965bdb2, type: 2}
+    - {fileID: 2100000, guid: c4af5cbb6397940468eb8318f68b4676, type: 2}
+    weaponSlashMaterial: {fileID: 2100000, guid: f00911ce6e3a60a40a834c3dd81f2b23,
+      type: 2}
+  equipmentAnimationClips:
+    basicAttackClips:
+    - {fileID: 11400000, guid: 3c865977f2f17d8478bd7d3337b84cc1, type: 2}
+    - {fileID: 11400000, guid: 8a32dec3038835443bd77afd8897f1d6, type: 2}
+    - {fileID: 11400000, guid: eb44cd59529b1e04c84eaa66d37cca77, type: 2}
+    - {fileID: 11400000, guid: 458f653555842c04cad6c4cd24eafdc4, type: 2}
+    - {fileID: 11400000, guid: 0a1269b387f5b724bbc68043a67f27d6, type: 2}
+    - {fileID: 11400000, guid: cf987165c707f654dae31a052a35aed0, type: 2}
+    - {fileID: 11400000, guid: a5b2dac7e6a9ab744a48648e28395bd5, type: 2}
+    - {fileID: 11400000, guid: b5eeb2867f6b7564386dc5bf13b4c495, type: 2}
+    - {fileID: 11400000, guid: 05274dce0a3a9ed4cb64f47135771ff7, type: 2}
+    - {fileID: 11400000, guid: 45ccb56701139b744ad85a282cc19bcc, type: 2}
+    - {fileID: 11400000, guid: cdb500112743b3d40a2b77d67ca6565f, type: 2}
+    - {fileID: 11400000, guid: 4de7a710b6cd7b546802587677610d61, type: 2}
+    - {fileID: 11400000, guid: 2cd53dbec8f185145a9d0d87c3c285b1, type: 2}
+    - {fileID: 11400000, guid: 5f147abab6adf2243979dd1d7b598566, type: 2}
+    chargedAttackClips:
+    - {fileID: 11400000, guid: 95a0dbf43ada74048aa07b1986626596, type: 2}
+    loadingChargedAttackClips: []
+    specialAttackClips: []
+    loadingSpecialAttackClips: []
+    skillAttackClips:
+    - {fileID: 11400000, guid: 2c28723814b3bbd4584429aa7832edc1, type: 2}
+    loadingSkillAttackClips: []

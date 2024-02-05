@@ -20,32 +20,56 @@ MonoBehaviour:
   equipmentType: 1
   equipmentElement: 2
   equipmentRank: 4
-  equipmentCategory: 0
+  weaponHandlerType: 0
+  weaponRange: 0
   equipmentStats:
-    attackPoints: 194
-    attackRange: 0
-    attackSpeed: 65
-    elementalPower: 208
-    healthPoints: 1268
-    energyPoints: 287
-    criticalRate: 62
-    criticalDamage: 130
-  equipmentVisuals:
-    equipmentParticleEffects: {fileID: 1840808596326386111, guid: bec9d13c414dc1440b6dbe8d1cd5ab41,
-      type: 3}
-    equipmentSecondaryParticleEffect: {fileID: 8836206791571183091, guid: 904b6d599c671e143807811eca0c9b39,
-      type: 3}
-    colorKey_1: {r: 1.8443027, g: 0.21572624, b: 0, a: 1}
-    colorKey_2: {r: 7.129739, g: 0.35926294, b: 0, a: 1}
+    attackPoints: 203
+    healthPoints: 1614
+    manaPoints: 219
+    defensePoints: 0
+    attackSpeed: 45
+    elementalPower: 180
+    criticalRate: 64
+    criticalDamage: 104
+  equipmentVisualEffects:
+    slashParticleEffect: []
+    equipmentSecondaryParticleEffect: {fileID: 0}
+    emissiveColor: {r: 0, g: 0, b: 0, a: 0}
     hasSlashEffect: 1
-    hasSecondaryParticleEffect: 1
+    hasSecondaryParticleEffect: 0
+    hasDefaultParticleEffects: 0
     slashMaterials:
-    - {fileID: 2100000, guid: 5986593e3c7583a43a77c4ce88bad9bb, type: 2}
-    - {fileID: 2100000, guid: bcc651ca277001445ae5a55641f0aef5, type: 2}
-    - {fileID: 2100000, guid: 4bee4a492cc614f4c8e6b9a20b3b7bf6, type: 2}
-    - {fileID: 2100000, guid: f10cf578735e8e0448945b2891ffd116, type: 2}
-    - {fileID: 2100000, guid: 7b20056bc7e29d4458a669feb4959052, type: 2}
-    - {fileID: 2100000, guid: da86311116c407b4db8dd2ea374eab80, type: 2}
-    - {fileID: 2100000, guid: d4ff6038e606bff45821300fc5464bbb, type: 2}
-    weaponSlashEffectMaterial: {fileID: 2100000, guid: bcc651ca277001445ae5a55641f0aef5,
+    - {fileID: 2100000, guid: 3297884f181cb2c41940da847c031306, type: 2}
+    - {fileID: 2100000, guid: d167bd781f831aa41ab13961d63f4c6d, type: 2}
+    - {fileID: 2100000, guid: f00911ce6e3a60a40a834c3dd81f2b23, type: 2}
+    - {fileID: 2100000, guid: 6ac0413284f34334081f00536c52ea88, type: 2}
+    - {fileID: 2100000, guid: 5f402d1520e5fa74fa21e08f85b71370, type: 2}
+    - {fileID: 2100000, guid: 733221398693ea142b66f59f80723b06, type: 2}
+    - {fileID: 2100000, guid: ea4367fcd114730488bf7e215965bdb2, type: 2}
+    - {fileID: 2100000, guid: c4af5cbb6397940468eb8318f68b4676, type: 2}
+    weaponSlashMaterial: {fileID: 2100000, guid: f00911ce6e3a60a40a834c3dd81f2b23,
       type: 2}
+  equipmentAnimationClips:
+    basicAttackClips:
+    - {fileID: 11400000, guid: 3c865977f2f17d8478bd7d3337b84cc1, type: 2}
+    - {fileID: 11400000, guid: 8a32dec3038835443bd77afd8897f1d6, type: 2}
+    - {fileID: 11400000, guid: eb44cd59529b1e04c84eaa66d37cca77, type: 2}
+    - {fileID: 11400000, guid: 458f653555842c04cad6c4cd24eafdc4, type: 2}
+    - {fileID: 11400000, guid: 0a1269b387f5b724bbc68043a67f27d6, type: 2}
+    - {fileID: 11400000, guid: cf987165c707f654dae31a052a35aed0, type: 2}
+    - {fileID: 11400000, guid: a5b2dac7e6a9ab744a48648e28395bd5, type: 2}
+    - {fileID: 11400000, guid: b5eeb2867f6b7564386dc5bf13b4c495, type: 2}
+    - {fileID: 11400000, guid: 05274dce0a3a9ed4cb64f47135771ff7, type: 2}
+    - {fileID: 11400000, guid: 45ccb56701139b744ad85a282cc19bcc, type: 2}
+    - {fileID: 11400000, guid: cdb500112743b3d40a2b77d67ca6565f, type: 2}
+    - {fileID: 11400000, guid: 4de7a710b6cd7b546802587677610d61, type: 2}
+    - {fileID: 11400000, guid: 2cd53dbec8f185145a9d0d87c3c285b1, type: 2}
+    - {fileID: 11400000, guid: 5f147abab6adf2243979dd1d7b598566, type: 2}
+    chargedAttackClips:
+    - {fileID: 11400000, guid: 95a0dbf43ada74048aa07b1986626596, type: 2}
+    loadingChargedAttackClips: []
+    specialAttackClips: []
+    loadingSpecialAttackClips: []
+    skillAttackClips:
+    - {fileID: 11400000, guid: 2c28723814b3bbd4584429aa7832edc1, type: 2}
+    loadingSkillAttackClips: []

@@ -20,20 +20,20 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
     public const string E_WALK_FORWARD = "E_Walk_Forward";
 
 
-    public void ChangeCurrentAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
+    public void ChangeCurrentBasicAnimations ( AnimatorOverrideController animatorOverrideController )
     {
-        
-        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.basicAttackClips);
-        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.chargedAttackClips);
-        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.specialAttackClips);
-        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.skillAttackClips);
-
         animatorOverrideController[E_DEATHBACK] = eDeathBackClip;
         animatorOverrideController[E_IDLE] = eIdleClip;
         animatorOverrideController[E_IDLECOMBAT] = eIdleCombatClip;
         animatorOverrideController[E_RUN_FORWARD] = eRunForwardClip;
         animatorOverrideController[E_WALK_FORWARD] = eWalkForwardClip;
-
+    }
+    public void ChangeCurretCombatAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
+    {
+        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.basicAttackClips);
+        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.chargedAttackClips);
+        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.specialAttackClips);
+        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.skillAttackClips);
     }
     public void DualSwordOverride ( AnimatorOverrideController animatorOverrideController )
     {
