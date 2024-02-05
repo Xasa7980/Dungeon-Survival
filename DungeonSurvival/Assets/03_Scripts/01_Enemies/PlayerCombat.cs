@@ -56,16 +56,26 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
     private void WeaponDetectMonsters ( )
     {
         Collider[] rightDetection = new Collider[0];
-        if(playerStats.RightDetectionArea != null)
+        if (playerStats.RightDetectionArea != null && playerStats.RightDetectionArea.drawMode == AreaDrawer.DrawMode.Box)
         {
-            Physics.OverlapBox(playerStats.RightDetectionArea.objectPosition, playerStats.RightDetectionArea.size,
-            playerStats.RightDetectionArea.rotation, detectionMask);
+            rightDetection = Physics.OverlapBox(playerStats.RightDetectionArea.objectPosition, playerStats.RightDetectionArea.size,
+                             playerStats.RightDetectionArea.rotation, detectionMask);
+        }
+        else if (playerStats.RightDetectionArea != null && playerStats.RightDetectionArea.drawMode == AreaDrawer.DrawMode.Sphere)
+        {
+            rightDetection = Physics.OverlapSphere(playerStats.RightDetectionArea.objectPosition, playerStats.LeftDetectionArea.radius,
+                             detectionMask);
         }
         Collider[] leftDetection = new Collider[0];
-        if(playerStats.LeftDetectionArea != null)
+        if (playerStats.LeftDetectionArea != null && playerStats.LeftDetectionArea.drawMode == AreaDrawer.DrawMode.Box)
         {
-            Physics.OverlapBox(playerStats.LeftDetectionArea.objectPosition, playerStats.LeftDetectionArea.size,
-            playerStats.LeftDetectionArea.rotation, detectionMask);
+            leftDetection = Physics.OverlapBox(playerStats.LeftDetectionArea.objectPosition, playerStats.LeftDetectionArea.size,
+                           playerStats.LeftDetectionArea.rotation, detectionMask);
+        }
+        else if (playerStats.LeftDetectionArea != null && playerStats.LeftDetectionArea.drawMode == AreaDrawer.DrawMode.Sphere)
+        {
+            leftDetection = Physics.OverlapSphere(playerStats.LeftDetectionArea.objectPosition, playerStats.LeftDetectionArea.radius,
+                             detectionMask);
         }
 
         if (playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME).normalizedTime < 0.85f)

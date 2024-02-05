@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static EquipmentDataSO;
 
 public class MonsterStats : MonoBehaviour,IHasProgress
 {
     public event EventHandler OnGetHurted;
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+
+    public bool IsDualWeaponWielding => equipmentDataHolder_RightHand != null && equipmentDataHolder_RightHand.GetEquipmentType() != EquipmentType.Shield &&
+                equipmentDataHolder_LeftHand != null && equipmentDataHolder_LeftHand.GetEquipmentType() >= EquipmentType.Dagger;
 
     [Header("Battle Experience")]
 
@@ -47,11 +51,20 @@ public class MonsterStats : MonoBehaviour,IHasProgress
     
     [SerializeField] private GameObject rightWeaponHandler;
     [SerializeField] private GameObject leftWeaponHandler;
+
+    internal EquipmentDataHolder EquipmentDataHolder_LeftHand => equipmentDataHolder_LeftHand;
     public EquipmentDataHolder equipmentDataHolder_LeftHand;
+    private EquipmentDataHolder prev_EquipmentDataHolder_LeftHand;
+    internal EquipmentDataHolder EquipmentDataHolder_RightHand => equipmentDataHolder_RightHand;
     public EquipmentDataHolder equipmentDataHolder_RightHand;
+    private EquipmentDataHolder prev_EquipmentDataHolder_RightHand;
+    internal EquipmentDataSO EquipmentDataSO_RightHand => equipmentDataSO_LeftHand;
     public EquipmentDataSO equipmentDataSO_RightHand;
+    internal EquipmentDataSO EquipmentDataSO_LeftHand => equipmentDataSO_LeftHand;
     public EquipmentDataSO equipmentDataSO_LeftHand;
+    internal AreaDrawer LeftDetectionArea => leftDetectionArea;
     private AreaDrawer leftDetectionArea;
+    internal AreaDrawer RightDetectionArea => rightDetectionArea;
     private AreaDrawer rightDetectionArea;
 
     private bool Death => healthPoints <= 0? true: false;
@@ -127,12 +140,84 @@ public class MonsterStats : MonoBehaviour,IHasProgress
             }
         return DamageType.NormalDamage;
     }
-    private void TakeDamage ( PlayerStats playerStats, EquipmentDataHolder equipmentDataHolder )
+    public void TakeDamage ( PlayerStats playerStats, EquipmentDataHolder equipmentDataHolder )
     {
         int damage = CalculateDamage(attackPoints);
         GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder), damage);
         playerStats.GetDamage(damage);
     }
+    public void EquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
+    {
+        prev_EquipmentDataHolder_RightHand = EquipmentDataHolder_RightHand;
+        equipmentDataHolder_RightHand = newEquipmentDataHolder;
+
+        if (equipmentDataHolder_RightHand != prev_EquipmentDataHolder_RightHand)
+        {
+            UpdateEquipmentStats(prev_EquipmentDataHolder_RightHand, equipmentDataHolder_RightHand, ref prev_EquipmentDataHolder_RightHand);
+        }
+        else return;
+    }
+    public void EquipLeftWeapon ( EquipmentDataHolder newEquipmentDataHolder )
+    {
+        if (equipmentDataHolder_RightHand.Is2HandWeapon)
+        {
+            return;
+        }
+        prev_EquipmentDataHolder_LeftHand = equipmentDataHolder_LeftHand;
+        equipmentDataHolder_LeftHand = newEquipmentDataHolder;
+
+        if (equipmentDataHolder_LeftHand != prev_EquipmentDataHolder_RightHand)
+        {
+            UpdateEquipmentStats(prev_EquipmentDataHolder_LeftHand, equipmentDataHolder_LeftHand, ref prev_EquipmentDataHolder_LeftHand);
+        }
+    }
+    private void UpdateEquipmentStats ( EquipmentDataHolder prevEquipment, EquipmentDataHolder newEquipment, ref EquipmentDataHolder currentEquipmentHolder )
+    {
+        float multiplier = IsDualWeaponWielding ? 1.3f : 1f;
+        if (newEquipment != null)
+        {
+            if (prevEquipment != newEquipment)
+            {
+                RemoveStatsPoints(prevEquipment.GetEquipmentDataSO().equipmentStats, multiplier);
+                AddStatsPoints(newEquipment.GetEquipmentDataSO().equipmentStats, multiplier);
+            }
+            currentEquipmentHolder = newEquipment;
+        }
+        else
+        {
+            Destroy(newEquipment.gameObject);
+            if (prevEquipment != newEquipment)
+            {
+                RemoveStatsPoints(prevEquipment.GetEquipmentDataSO().equipmentStats, multiplier);
+            }
+            currentEquipmentHolder = newEquipment;
+        }
+    }
+    private void AddStatsPoints ( EquipmentStats equipmentStats, float multiplier )
+    {
+        healthPoints += equipmentStats.healthPoints * multiplier;
+        manaPoints += equipmentStats.manaPoints * multiplier;
+
+        attackPoints += equipmentStats.attackPoints * multiplier;
+        attackSpeed += equipmentStats.attackSpeed * multiplier;
+        defensePoints += equipmentStats.defensePoints * multiplier;
+
+        criticalRate += equipmentStats.criticalRate * multiplier;
+        criticalDamage += equipmentStats.criticalDamage * multiplier;
+    }
+    private void RemoveStatsPoints ( EquipmentStats equipmentStats, float multiplier )
+    {
+        healthPoints -= equipmentStats.healthPoints * multiplier;
+        manaPoints -= equipmentStats.manaPoints * multiplier;
+
+        attackPoints -= equipmentStats.attackPoints * multiplier;
+        attackSpeed -= equipmentStats.attackSpeed * multiplier;
+        defensePoints -= equipmentStats.defensePoints * multiplier;
+
+        criticalRate -= equipmentStats.criticalRate * multiplier;
+        criticalDamage -= equipmentStats.criticalDamage * multiplier;
+    }
+
     private void OnChangeProgress ( )
     {
         OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs

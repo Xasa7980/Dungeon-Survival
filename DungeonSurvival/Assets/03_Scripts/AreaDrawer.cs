@@ -16,7 +16,7 @@ public class AreaDrawer : MonoBehaviour
         ObjectPosition,
         FreePosition
     }
-    [SerializeField] DrawMode drawMode => _drawMode;
+    public DrawMode drawMode => _drawMode;
     [SerializeField] DrawMode _drawMode = DrawMode.Box;
 
     [SerializeField] ObjectPositionMode objectPositionMode = ObjectPositionMode.ObjectPosition;

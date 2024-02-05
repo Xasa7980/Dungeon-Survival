@@ -6,12 +6,13 @@ public class PlayerAnimations : MonoBehaviour
 {
     [Header("ANIMATOR LAYER")]
     private const int _COMBAT_LAYER = 1;
+    public int COMBAT_LAYER { get { return _COMBAT_LAYER; } }
 
     [Header("ANIMATOR PARAMETERS")]
     private const string ATTACK_BASIC_TRIGGER = "AttackBasic";
     private const string ATTACK_CHARGED_TRIGGER = "AttackCharged";
     private const string ATTACK_SPECIAL_TRIGGER = "AttackSpecial";
-    private const string ATTACK_SKILL_TRIGGER = "AttackBasic";
+    private const string ATTACK_SKILL_TRIGGER = "AttackSkill";
 
     private const string ATTACK_BASIC_INDEX_FLOAT = "AttackIndex";
 
@@ -28,7 +29,6 @@ public class PlayerAnimations : MonoBehaviour
     private const string _ATTACK_SKILL_TREE_NAME = "AttackBasicTree";
     public string ANIMATION_ATTACK_SKILL_TREE_PERFORMED_NAME { get { return _ATTACK_BASIC_TREE_NAME; } }
 
-    public int COMBAT_LAYER { get { return _COMBAT_LAYER; } }
 
     [SerializeField] private float attackCombo_resetTimeMax;
     [SerializeField] private float totalBasicAttackAnimatios = 2;

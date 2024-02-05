@@ -127,5 +127,9 @@ public class AI_MainCore : MonoBehaviour
     {
         return monsterStats;
     }
+    public MonsterAnimations GetMonsterAnimationHandler ( )
+    {
+        return GetComponentInChildren<MonsterAnimations>();
+    }
     #endregion
 }
