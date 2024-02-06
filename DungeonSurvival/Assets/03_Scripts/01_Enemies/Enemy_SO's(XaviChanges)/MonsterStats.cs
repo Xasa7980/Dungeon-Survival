@@ -76,11 +76,6 @@ public class MonsterStats : MonoBehaviour,IHasProgress
         InitializeStats();
         InitializeWeaponValues();
 
-        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
-        {
-            healthProgressNormalized = healthPoints / maxHealthPoints,
-            manaProgressNormalized = manaPoints / maxManaPoints,
-        });
     }
     private void InitializeStats ( )
     {
@@ -95,6 +90,7 @@ public class MonsterStats : MonoBehaviour,IHasProgress
         maxManaPoints = statsDatabase.Get_MpOnBaseInt(INT) + (int)monsterDataSO.extraManaPoints;
 
         healthPoints = maxHealthPoints;
+        print(healthPoints + " / " + maxHealthPoints);
         manaPoints = maxManaPoints;
 
         attackPoints = statsDatabase.Get_AtkOnBasePower(STR) + (int)monsterDataSO.extraAttackPoints;
@@ -108,6 +104,11 @@ public class MonsterStats : MonoBehaviour,IHasProgress
 
     private void Start ( )
     {
+        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+        {
+            healthProgressNormalized = healthPoints / maxHealthPoints,
+            manaProgressNormalized = manaPoints / maxManaPoints,
+        });
     }
     private void InitializeWeaponValues ( )
     {

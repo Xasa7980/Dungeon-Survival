@@ -7,14 +7,12 @@ using UnityEngine.UI;
 public class UI_Progress : MonoBehaviour
 {
     public float smoothness = 1;
-    public GameObject progressGameObject;
-    public FillMethod fillMethod = FillMethod.Filled;
-    [ShowIf("@fillMethod == FillMethod.Slider")] public Image overlayHPBarImage;
-    [ShowIf("@fillMethod == FillMethod.Slider")] public Image overlayMPBarImage;
+    [SerializeField] internal FillMethod fillMethod = FillMethod.Filled;
+
 
     
-    public IHasProgress hasProgress;
-    public enum FillMethod
+    internal IHasProgress hasProgress;
+    internal enum FillMethod
     {
         Filled,
         Slider,
@@ -24,6 +22,10 @@ public class UI_Progress : MonoBehaviour
     public float currentManaPercent;
     public float healthPercent;
     public float manaPercent;
+
+    public GameObject progressGameObject;
+    public Image overlayHPBarImage;
+    public Image overlayMPBarImage;
 
     protected virtual void UpdateUI ( ) //QUITAR BARRA DEL WORLDSPACE
     {

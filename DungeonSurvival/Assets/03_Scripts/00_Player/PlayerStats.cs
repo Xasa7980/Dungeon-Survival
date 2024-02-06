@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EquipmentDataSO;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour, IHasProgress
 {
     public event EventHandler OnWeaponChanged;
     public event EventHandler OnGetHurted;
@@ -130,13 +130,6 @@ public class PlayerStats : MonoBehaviour
         OnChangeProgress();
         OnGetHurted?.Invoke(this, EventArgs.Empty);
     }
-    public void TakeDamage ( MonsterStats monsterStats, EquipmentDataHolder equipmentDataHolder )
-    {
-        int damage = CalculateDamage(attackPoints);
-
-        GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder),damage);
-        monsterStats.GetDamage(damage);
-    }
     private DamageType GetDamageType ( EquipmentDataHolder equipmentDataHolder )
     {
         if (equipmentDataHolder.GetEquipmentElement == EquipmentElement.None)
@@ -145,6 +138,24 @@ public class PlayerStats : MonoBehaviour
                 return DamageType.CriticalDamage;
             }
         return DamageType.NormalDamage;
+    }
+    public void TakeDamage ( MonsterStats monsterStats, EquipmentDataHolder equipmentDataHolder )
+    {
+        int damage = CalculateDamage(attackPoints);
+
+        GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder),damage);
+        monsterStats.GetDamage(damage);
+    }
+    private int CalculateDamage ( float damage )
+    {
+        /* Esta opccion es como ataque + (( ataque^2) / 10) / (defensePoints + defensePoints), lo cual el daño realizado nunca sera menor al ataque por muy alta que sea la defensa
+         * Hay otra que seria calcular primero : ataque + ((ataque ^2) / 10) y luego dividir este resultado por : / (defensa * 0.25f) un cuarto de la defensa
+         * pudiendo darle aun mas aleatoriedad haciendo en la defensa en el multiplicador "0.25f" un Random.Range para determinar el valor multiplicador */
+
+        return UnityEngine.Random.Range(
+                Mathf.RoundToInt(damage + (Mathf.Pow(damage, 2f)) / 10) / ((int)defensePoints + (int)defensePoints),
+                Mathf.RoundToInt(damage + (Mathf.Pow(damage, 2.3f)) / 10) / ((int)defensePoints + (int)defensePoints)
+            );
     }
     public void OnEquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {
@@ -218,7 +229,7 @@ public class PlayerStats : MonoBehaviour
         criticalRate -= equipmentStats.criticalRate * multiplier;
         criticalDamage -= equipmentStats.criticalDamage * multiplier;
     }
-    private void LevelUp ( )
+    private void LevelUp ( ) /* It needs to be implemented */
     {
         if(currentExperience >= maxExperience)
         {
@@ -234,17 +245,6 @@ public class PlayerStats : MonoBehaviour
     }
 
     //formula para calcular daño en base defensa, formula equilibrada
-    private int CalculateDamage ( float damage )
-    {
-        /* Esta opccion es como ataque + (( ataque^2) / 10) / (defensePoints + defensePoints), lo cual el daño realizado nunca sera menor al ataque por muy alta que sea la defensa
-         * Hay otra que seria calcular primero : ataque + ((ataque ^2) / 10) y luego dividir este resultado por : / (defensa * 0.25f) un cuarto de la defensa
-         * pudiendo darle aun mas aleatoriedad haciendo en la defensa en el multiplicador "0.25f" un Random.Range para determinar el valor multiplicador */
-
-        return UnityEngine.Random.Range(
-                Mathf.RoundToInt(damage + (Mathf.Pow(damage, 2f)) / 10) / ((int)defensePoints + (int)defensePoints),
-                Mathf.RoundToInt(damage + (Mathf.Pow(damage, 2.3f)) / 10) / ((int)defensePoints + (int)defensePoints)
-            );
-    }
     private void OnChangeProgress ( )
     {
         OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs

@@ -26,12 +26,12 @@ public class SwooshTest : MonoBehaviour
     {
         if (playerAnimations != null)
         {
-            _animationState = playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME);//NEED TO DECLARE A STRING WITH THE HOLDER OF THE BASE LAYER
+            _animationState = playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME);//NEED TO DECLARE A STRING WITH THE HOLDER OF THE BASE LAYER
 
-            AnimatorStateInfo[] states = { playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME),
-                 playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_CHARGED_TREE_PERFORMED_NAME),
-                  playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_SPECIAL_TREE_PERFORMED_NAME),
-                   playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_SKILL_TREE_PERFORMED_NAME) };
+            AnimatorStateInfo[] states = { playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME),
+                 playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME),
+                  playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_STATE_SPECIAL_ATTACK_TREE_PERFORMED_NAME),
+                   playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_STATE_SKILL_ATTACK_TREE_PERFORMED_NAME) };
 
             foreach (AnimatorStateInfo state in states)
             {

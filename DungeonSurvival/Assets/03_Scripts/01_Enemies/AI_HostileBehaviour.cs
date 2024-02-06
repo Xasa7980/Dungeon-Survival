@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
 
 public class AI_HostileBehaviour : MonoBehaviour
 {
@@ -132,6 +130,7 @@ public class AI_HostileBehaviour : MonoBehaviour
 
                 if (skillAttacks.Length == 0)
                 {
+                    DetermineAttackType();
                     return;
                 }
                 index = UnityEngine.Random.Range( 0, chargedAttacks.Length);
@@ -141,6 +140,7 @@ public class AI_HostileBehaviour : MonoBehaviour
 
                 if (skillAttacks.Length == 0)
                 {
+                    DetermineAttackType();
                     return;
                 }
                 index = UnityEngine.Random.Range( 0, specialAttacks.Length);
@@ -150,6 +150,7 @@ public class AI_HostileBehaviour : MonoBehaviour
 
                 if(skillAttacks.Length == 0)
                 {
+                    DetermineAttackType();
                     return;
                 }
                 index = UnityEngine.Random.Range( 0, skillAttacks.Length);

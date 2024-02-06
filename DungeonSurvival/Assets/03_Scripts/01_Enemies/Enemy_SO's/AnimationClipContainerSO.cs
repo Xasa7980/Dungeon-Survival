@@ -62,25 +62,25 @@ public class AnimationClipContainerSO : ScriptableObject
     [ShowIf("@attackCategory == AttackCategory.special")] public float maxNumberOfSpecialAttacks = 4;
     [ShowIf("@attackCategory == AttackCategory.skill")] public float maxNumberOfSkillAttacks = 4;
 
-    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("DualSword_Animation_List")] public AttacksDataSO[] basicAttackDualSwordWeapon;
-    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("DualSword_Animation_List")] public AttacksDataSO[] chargedAttackDualSwordWeapon;
-    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("DualSword_Animation_List")] public AttacksDataSO[] specialAttackDualSwordWeapon;
-    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("DualSword_Animation_List")] public AttacksDataSO[] skillAttackDualSwordWeapon;
+    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] basicAttackDualSwordWeapon;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] chargedAttackDualSwordWeapon;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] specialAttackDualSwordWeapon;
+    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] skillAttackDualSwordWeapon;
 
-    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("DualDagger_Animation_List")] public AttacksDataSO[] basicAttackDualDaggerWeapon;
-    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("DualDagger_Animation_List")] public AttacksDataSO[] chargedAttackDualDaggerWeapon;
-    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("DualDagger_Animation_List")] public AttacksDataSO[] specialAttackDualDaggerWeapon;
-    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("DualDagger_Animation_List")] public AttacksDataSO[] skillAttackDualDaggerWeapon;
+    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] basicAttackDualDaggerWeapon;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] chargedAttackDualDaggerWeapon;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] specialAttackDualDaggerWeapon;
+    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] skillAttackDualDaggerWeapon;
 
-    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("NoWeapons_Animation_List")] public AttacksDataSO[] basicAttackNoWeapons;
-    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("NoWeapons_Animation_List")] public AttacksDataSO[] chargedAttackNoWeapons;
-    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("NoWeapons_Animation_List")] public AttacksDataSO[] specialAttackNoWeapons;
-    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("NoWeapons_Animation_List")] public AttacksDataSO[] skillAttackNoWeapons;
+    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] basicAttackNoWeapons;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] chargedAttackNoWeapons;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] specialAttackNoWeapons;
+    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] skillAttackNoWeapons;
 
-    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("DualWithShield_Animation_List")] public AttacksDataSO[] basicAttackShield;
-    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("DualWithShield_Animation_List")] public AttacksDataSO[] chargeAttackShield;
-    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("DualWithShield_Animation_List")] public AttacksDataSO[] specialAttackShield;
-    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("DualWithShield_Animation_List")] public AttacksDataSO[] skillAttackShield;
+    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] basicAttackShield;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] chargeAttackShield;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] specialAttackShield;
+    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("ExtraAnimationsSetUp")] public AttacksDataSO[] skillAttackShield;
 
 
 

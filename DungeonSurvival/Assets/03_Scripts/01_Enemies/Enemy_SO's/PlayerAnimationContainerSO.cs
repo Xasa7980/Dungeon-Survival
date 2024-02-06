@@ -14,7 +14,7 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
     public const string IDLE_ANIMATION = "Idle_Animation";
     public const string IDLECOMBAT_ANIMATION = "IdleCombat_Animation";
 
-    [InfoBox("Becareful with those, they can't be rooted, the players moves with animation movement", InfoMessageType.Warning)]
+    [InfoBox("Becareful with these, animations can't be rooted, the player moves with animation movement", InfoMessageType.Warning)]
     public AnimationClip runForwardAnimationClip;
     public AnimationClip walkForwardAnimationClip;
     public const string RUN_FORWARD_ANIMATION = "Run_Forward_Animation";
@@ -27,11 +27,12 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
     public void ChangeCurrentBasicAnimations(AnimatorOverrideController animatorOverrideController )
     {
         SettingMaxAnimationsInList();
-        animatorOverrideController[DEATH_ANIMATION] = deathAnimationClip;
-        animatorOverrideController[IDLE_ANIMATION] = idleAnimationClip;
-        animatorOverrideController[IDLECOMBAT_ANIMATION] = idleCombatAnimationClip;
-        animatorOverrideController[RUN_FORWARD_ANIMATION] = runForwardAnimationClip;
-        animatorOverrideController[WALK_FORWARD_ANIMATION] = walkForwardAnimationClip;
+        if (deathAnimationClip != null) animatorOverrideController[DEATH_ANIMATION] = deathAnimationClip;
+        if (idleAnimationClip != null) animatorOverrideController[IDLE_ANIMATION] = idleAnimationClip;
+        if (idleCombatAnimationClip != null) animatorOverrideController[IDLECOMBAT_ANIMATION] = idleCombatAnimationClip;
+
+        if(runForwardAnimationClip != null) animatorOverrideController[RUN_FORWARD_ANIMATION] = runForwardAnimationClip;
+        if (walkForwardAnimationClip != null) animatorOverrideController[WALK_FORWARD_ANIMATION] = walkForwardAnimationClip;
     }
     public void ChangeCurretCombatAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
     {

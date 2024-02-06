@@ -16,10 +16,10 @@ public class MonsterProgress_UI : UI_Progress
     private void Awake ( )
     {
         hasProgress = progressGameObject.GetComponent<IHasProgress>();
-        hasProgress.OnProgressChanged += EnemyUI_OnProgressChanged;
+        hasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
 
     }
-    private void EnemyUI_OnProgressChanged ( object sender, IHasProgress.OnProgressChangedEventArgs e )
+    private void HasProgress_OnProgressChanged ( object sender, IHasProgress.OnProgressChangedEventArgs e )
     {
         healthPercent = e.healthProgressNormalized;
         manaPercent = e.manaProgressNormalized;

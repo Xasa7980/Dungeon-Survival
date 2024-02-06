@@ -9,32 +9,50 @@ public class PlayerAnimations : MonoBehaviour
     public int COMBAT_LAYER { get { return _COMBAT_LAYER; } }
 
     [Header("ANIMATOR PARAMETERS")]
-    private const string ATTACK_BASIC_TRIGGER = "AttackBasic";
-    private const string ATTACK_CHARGED_TRIGGER = "AttackCharged";
-    private const string ATTACK_SPECIAL_TRIGGER = "AttackSpecial";
-    private const string ATTACK_SKILL_TRIGGER = "AttackSkill";
+    private const string ATTACK_BASIC_TRIGGER = "BasicAttack";
+    private const string ATTACK_CHARGED_TRIGGER = "ChargedAttack";
+    private const string ATTACK_SPECIAL_TRIGGER = "SpecialAttack";
+    private const string ATTACK_SKILL_TRIGGER = "SkillAttack";
 
-    private const string ATTACK_BASIC_INDEX_FLOAT = "AttackIndex";
+    private const string BASIC_ATTACK_INDEX_FLOAT = "BasicAttackIndex";
+    private const string CHARGED_ATTACK_INDEX_FLOAT = "ChargedAttackIndex";
+    private const string SPECIAL_ATTACK_INDEX_FLOAT = "SpecialAttackIndex";
+    private const string SKILL_ATTACK_INDEX_FLOAT = "SkillAttackIndex";
 
-    [Header ("ANIMATOR STATE NAME")]
-    private const string _ATTACK_BASIC_TREE_NAME = "AttackBasicTree";
-    public string ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME { get { return _ATTACK_BASIC_TREE_NAME; } }
+    #region ANIMATOR STATE NAMES
+    public string ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME { get { return BASIC_ATTACK_TREE_NAME; } }
+    private const string BASIC_ATTACK_TREE_NAME = "BasicAttack_Tree";
 
-    private const string _ATTACK_CHARGED_TREE_NAME = "AttackBasicTree";
-    public string ANIMATION_ATTACK_CHARGED_TREE_PERFORMED_NAME { get { return _ATTACK_BASIC_TREE_NAME; } }
+    public string ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME { get { return CHARGED_ATTACK_TREE_NAME; } }
+    private const string CHARGED_ATTACK_TREE_NAME = "ChargedAttack_Tree";
 
-    private const string _ATTACK_SPECIAL_TREE_NAME = "AttackBasicTree";
-    public string ANIMATION_ATTACK_SPECIAL_TREE_PERFORMED_NAME { get { return _ATTACK_BASIC_TREE_NAME; } }
+    public string ANIMATION_STATE_SPECIAL_ATTACK_TREE_PERFORMED_NAME { get { return SPECIAL_ATTACK_TREE_NAME; } }
+    private const string SPECIAL_ATTACK_TREE_NAME = "SpecialAttack_Tree";
 
-    private const string _ATTACK_SKILL_TREE_NAME = "AttackBasicTree";
-    public string ANIMATION_ATTACK_SKILL_TREE_PERFORMED_NAME { get { return _ATTACK_BASIC_TREE_NAME; } }
+    public string ANIMATION_STATE_SKILL_ATTACK_TREE_PERFORMED_NAME { get { return SKILL_ATTACK_TREE_NAME; } }
+    private const string SKILL_ATTACK_TREE_NAME = "SkillAttack_Tree ";
 
+
+    public string ANIMATION_STATE_LOADING_CHARGED_ATTACK_TREE_PERFORMED_NAME { get { return LOADING_CHARGED_ATTACK_TREE_NAME; } }
+    private const string LOADING_CHARGED_ATTACK_TREE_NAME = "LoadingChargedAttack_Tree";
+
+    public string ANIMATION_STATE_LOADING_SPECIAL_ATTACK_TREE_PERFORMED_NAME { get { return LOADING_SPECIAL_ATTACK_TREE_NAME; } }
+    private const string LOADING_SPECIAL_ATTACK_TREE_NAME = "LoadingSpecialAttack_Tree";
+
+    public string ANIMATION_STATE_LOADING_SKILL_ATTACK_TREE_PERFORMED_NAME { get { return LOADING_SKILL_ATTACK_TREE_NAME; } }
+    private const string LOADING_SKILL_ATTACK_TREE_NAME = "LoadingSkillAttack_Tree  ";
+    #endregion
 
     [SerializeField] private float attackCombo_resetTimeMax;
     [SerializeField] private float totalBasicAttackAnimatios = 2;
 
     private float attackCombo_resetTime;
-    private int attackIndex;
+
+    private int basicAttackIndex;
+    private int chargedAttackIndex;
+    private int specialAttackIndex;
+    private int skillAttackIndex;
+
     private Animator animator;
     private PlayerCombat playerCombat;
     private bool animationTriggered;
@@ -61,13 +79,13 @@ public class PlayerAnimations : MonoBehaviour
     {
         if (animationTriggered)
         {
-            if (GetCurrentAnimationInfo(COMBAT_LAYER, ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME).normalizedTime > 0.95f)
+            if (GetCurrentAnimationInfo(COMBAT_LAYER, ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME).normalizedTime > 0.95f)
             {
                 animator.SetLayerWeight(COMBAT_LAYER, 0f);
 
                 if (animationTriggered)
                 {
-                    attackIndex ++;
+                    basicAttackIndex ++;
                     animationTriggered = false;
                 }
                 attackCombo_resetTime += Time.deltaTime;
@@ -75,7 +93,7 @@ public class PlayerAnimations : MonoBehaviour
                 {
                     ResetAttackCombo();
                 }
-                else if(attackIndex > totalBasicAttackAnimatios)
+                else if(basicAttackIndex > totalBasicAttackAnimatios)
                 {
                     ResetAttackCombo();
                 }
@@ -111,7 +129,7 @@ public class PlayerAnimations : MonoBehaviour
     }
     private void ResetAttackCombo ( )
     {
-        attackIndex = 0;
+        basicAttackIndex = 0;
         attackCombo_resetTime = 0;
         animationTriggered = false;
         animator.SetLayerWeight(COMBAT_LAYER, 0f);
@@ -121,7 +139,7 @@ public class PlayerAnimations : MonoBehaviour
         if (!animationTriggered)
         {
             animator.SetTrigger(ATTACK_BASIC_TRIGGER);
-            animator.SetFloat(ATTACK_BASIC_INDEX_FLOAT, attackIndex);
+            animator.SetFloat(BASIC_ATTACK_INDEX_FLOAT, basicAttackIndex);
             attackCombo_resetTime = 0;
             animationTriggered = true;
         }
@@ -133,7 +151,7 @@ public class PlayerAnimations : MonoBehaviour
         if (!animationTriggered)
         {
             animator.SetTrigger(ATTACK_CHARGED_TRIGGER);
-            animator.SetFloat(ATTACK_BASIC_INDEX_FLOAT, attackIndex);
+            animator.SetFloat(CHARGED_ATTACK_INDEX_FLOAT, basicAttackIndex);
             attackCombo_resetTime = 0;
             animationTriggered = true;
         }
@@ -145,7 +163,7 @@ public class PlayerAnimations : MonoBehaviour
         if (!animationTriggered)
         {
             animator.SetTrigger(ATTACK_SPECIAL_TRIGGER);
-            animator.SetFloat(ATTACK_BASIC_INDEX_FLOAT, attackIndex);
+            animator.SetFloat(BASIC_ATTACK_INDEX_FLOAT, basicAttackIndex);
             attackCombo_resetTime = 0;
             animationTriggered = true;
         }
@@ -157,7 +175,7 @@ public class PlayerAnimations : MonoBehaviour
         if (!animationTriggered)
         {
             animator.SetTrigger(ATTACK_SKILL_TRIGGER);
-            animator.SetFloat(ATTACK_BASIC_INDEX_FLOAT, attackIndex);
+            animator.SetFloat(BASIC_ATTACK_INDEX_FLOAT, basicAttackIndex);
             attackCombo_resetTime = 0;
             animationTriggered = true;
         }

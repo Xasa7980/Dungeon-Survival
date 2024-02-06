@@ -18,7 +18,7 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
 
     private PlayerStats playerStats;
     private PlayerAnimations playerAnimations;
-    public bool hit;
+    private bool hit = true;
 
     private void Awake ( )
     {
@@ -78,7 +78,7 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
                              detectionMask);
         }
 
-        if (playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME).normalizedTime < 0.85f)
+        if (playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME).normalizedTime < 0.85f)
         {
             if(rightDetection.Length > 0)
             {
