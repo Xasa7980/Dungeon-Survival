@@ -13,29 +13,33 @@ public class EnemyAnimationHandler : MonoBehaviour
     private void Awake ( )
     {
         animator = GetComponent<Animator>();
-        monsterStats = GetComponent<MonsterStats>();
+        monsterStats = GetComponentInParent<MonsterStats>();
+
+        animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        animator.runtimeAnimatorController = animatorOverrideController;
     }
     private void Start ( )
     {
         GetAnimationsToOverride();
+        monsterStats.OnWeaponChanged += MonsterStats_OnWeaponChanged;
     }
+
+    private void MonsterStats_OnWeaponChanged ( object sender, System.EventArgs e )
+    {
+        ChangeCurrentCombatAnimations(animatorOverrideController);
+    }
+
     private bool noWeaponsEquiped => monsterStats.EquipmentDataSO_RightHand == null ? true : false;
     private void GetAnimationsToOverride ( )
     {
-        animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
-
-        animator.runtimeAnimatorController = animatorOverrideController;
-
-        animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ChangeCurrentBasicAnimations(animatorOverrideController);
-
-        ChangeCurrentCombatAnimations(animatorOverrideController);
+        animationClipContainerSO.GetEnemyAnimationClipContainer(animationClipContainerSO).ChangeCurrentBasicAnimations(animatorOverrideController);
     }
 
     private void ChangeCurrentCombatAnimations ( AnimatorOverrideController animatorOverrideController )
     {
         if (noWeaponsEquiped)
         {
-            animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).NoWeaponOverride(animatorOverrideController);
+            animationClipContainerSO.GetEnemyAnimationClipContainer(animationClipContainerSO).NoWeaponOverride(animatorOverrideController);
         }
         else
         {
@@ -43,20 +47,20 @@ public class EnemyAnimationHandler : MonoBehaviour
             {
                 if (monsterStats.EquipmentDataHolder_RightHand.GetEquipmentType() == EquipmentType.Sword)
                 {
-                    animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).DualSwordOverride(animatorOverrideController);
+                    animationClipContainerSO.GetEnemyAnimationClipContainer(animationClipContainerSO).DualSwordOverride(animatorOverrideController);
                 }
                 else if (monsterStats.EquipmentDataHolder_RightHand.GetEquipmentType() == EquipmentType.Dagger)
                 {
-                    animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).DualDaggerOverride(animatorOverrideController);
+                    animationClipContainerSO.GetEnemyAnimationClipContainer(animationClipContainerSO).DualDaggerOverride(animatorOverrideController);
                 }
                 else if (monsterStats.EquipmentDataHolder_LeftHand.GetEquipmentType() == EquipmentType.Shield)
                 {
-                    animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ShieldOverride(animatorOverrideController);
+                    animationClipContainerSO.GetEnemyAnimationClipContainer(animationClipContainerSO).ShieldOverride(animatorOverrideController);
                 }
             }
             else
             {
-                animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ChangeCurretCombatAnimations(animatorOverrideController,
+                animationClipContainerSO.GetEnemyAnimationClipContainer(animationClipContainerSO).ChangeCurretCombatAnimations(animatorOverrideController,
                 monsterStats.EquipmentDataHolder_RightHand.GetEquipmentDataSO());
             }
         }

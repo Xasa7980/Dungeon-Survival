@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771f9fce1904b1f47ba2c58516330a92, type: 3}
+  m_Name: enemyAOC
+  m_EditorClassIdentifier: 
+  getRandomAttackComboAnimation: 0
+  getRandomChargedAttackComboAnimation: 0
+  getRandomSpecialAttackComboAnimation: 0
+  getRandomSkillAttackComboAnimation: 0
+  maxNumberOfBasicAttacks: 4
+  maxNumberOfChargedAttacks: 4
+  maxNumberOfSpecialAttacks: 4
+  maxNumberOfSkillAttacks: 4
+  basicAttackDualSwordWeapon: []
+  chargedAttackDualSwordWeapon: []
+  specialAttackDualSwordWeapon: []
+  skillAttackDualSwordWeapon: []
+  basicAttackDualDaggerWeapon: []
+  chargedAttackDualDaggerWeapon: []
+  specialAttackDualDaggerWeapon: []
+  skillAttackDualDaggerWeapon: []
+  basicAttackNoWeapons: []
+  chargedAttackNoWeapons: []
+  specialAttackNoWeapons: []
+  skillAttackNoWeapons: []
+  basicAttackShield: []
+  chargeAttackShield: []
+  specialAttackShield: []
+  skillAttackShield: []
+  attackBasicClip_01: {fileID: 0}
+  attackBasicClip_02: {fileID: 0}
+  attackBasicClip_03: {fileID: 0}
+  attackBasicClip_04: {fileID: 0}
+  chargedAttackClip_01: {fileID: 0}
+  chargedAttackClip_02: {fileID: 0}
+  chargedAttackClip_03: {fileID: 0}
+  chargedAttackClip_04: {fileID: 0}
+  loadingChargingAttackClip_01: {fileID: 0}
+  loadingChargingAttackClip_02: {fileID: 0}
+  loadingChargingAttackClip_03: {fileID: 0}
+  loadingChargingAttackClip_04: {fileID: 0}
+  specialAttackClip_01: {fileID: 0}
+  specialAttackClip_02: {fileID: 0}
+  specialAttackClip_03: {fileID: 0}
+  specialAttackClip_04: {fileID: 0}
+  loadingSpecialAttackClip_01: {fileID: 0}
+  loadingSpecialAttackClip_02: {fileID: 0}
+  loadingSpecialAttackClip_03: {fileID: 0}
+  loadingSpecialAttackClip_04: {fileID: 0}
+  skillAttackClip_01: {fileID: 0}
+  skillAttackClip_02: {fileID: 0}
+  skillAttackClip_03: {fileID: 0}
+  skillAttackClip_04: {fileID: 0}
+  loadingSkillAttackClip_01: {fileID: 0}
+  loadingSkillAttackClip_02: {fileID: 0}
+  loadingSkillAttackClip_03: {fileID: 0}
+  loadingSkillAttackClip_04: {fileID: 0}
+  monsterDataSO: {fileID: 0}
+  deathAnimationClip: {fileID: 0}
+  idleAnimationClip: {fileID: 0}
+  idleCombatAnimationClip: {fileID: 0}
+  runForwardAnimationClip: {fileID: 0}
+  walkForwardAnimationClip: {fileID: 0}

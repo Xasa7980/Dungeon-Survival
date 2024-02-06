@@ -7,7 +7,9 @@ using static UnityEditor.Progress;
 [CreateAssetMenu(fileName = "NewEquipmentLibrary", menuName = "Dungeon Survival/Equipment/Library")]
 public class EquipmentLibrarySO : ScriptableObject
 {
+#pragma warning disable IDE0052 // Quitar miembros privados no leídos
     private EquipmentType equipmentType;
+#pragma warning restore IDE0052 // Quitar miembros privados no leídos
 
     [SerializeField, ShowIf("@equipmentType == EquipmentType.Axe")] List<EquipmentPart> axe = new List<EquipmentPart>();
     [SerializeField, ShowIf("@equipmentType == EquipmentType.Bow")] List<EquipmentPart> bow = new List<EquipmentPart>();

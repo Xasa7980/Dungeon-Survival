@@ -132,7 +132,6 @@ public class AI_HostileBehaviour : MonoBehaviour
 
                 if (skillAttacks.Length == 0)
                 {
-                    DetermineAttackType();
                     return;
                 }
                 index = UnityEngine.Random.Range( 0, chargedAttacks.Length);
@@ -142,7 +141,6 @@ public class AI_HostileBehaviour : MonoBehaviour
 
                 if (skillAttacks.Length == 0)
                 {
-                    DetermineAttackType();
                     return;
                 }
                 index = UnityEngine.Random.Range( 0, specialAttacks.Length);
@@ -152,7 +150,6 @@ public class AI_HostileBehaviour : MonoBehaviour
 
                 if(skillAttacks.Length == 0)
                 {
-                    DetermineAttackType();
                     return;
                 }
                 index = UnityEngine.Random.Range( 0, skillAttacks.Length);

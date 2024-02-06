@@ -38143,31 +38143,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 997998974}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1001383665 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8086128405066560671, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
-    type: 3}
-  m_PrefabInstance: {fileID: 5182210333929262798}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1001383671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1001383665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e85f64e515b72a34aa5117021604e767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _drawMode: 1
-  objectPositionMode: 1
-  gizmoBoxColor: {r: 0, g: 1, b: 0, a: 1}
-  _size: {x: 1, y: 1, z: 1}
-  gizmoSphereColor: {r: 1, g: 0, b: 0, a: 0.49019608}
-  _radius: 0.33
-  freePosition: {x: 0, y: 0.73, z: 0}
 --- !u!1001 &1004787283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51575,9 +51550,9 @@ MonoBehaviour:
   prefabPool: {fileID: 245604440750398229, guid: 4d8d6525f7d7e2643a3e5aeee83109d3,
     type: 3}
   poolSize: 10
---- !u!1 &1372354086 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6315516389290307549, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+--- !u!4 &1372354087 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9097632711025811324, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
     type: 3}
   m_PrefabInstance: {fileID: 5182210333929262798}
   m_PrefabAsset: {fileID: 0}
@@ -85811,9 +85786,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2055755470}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2056935392 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5999314311035160626, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+--- !u!4 &2056935393 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6297509504721710580, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
     type: 3}
   m_PrefabInstance: {fileID: 5182210333929262798}
   m_PrefabAsset: {fileID: 0}
@@ -92043,18 +92018,18 @@ PrefabInstance:
         type: 3}
       propertyPath: animationClipContainerSO
       value: 
-      objectReference: {fileID: 11400000, guid: ceebfc5c2cd575644ac6974348f7195e,
+      objectReference: {fileID: 11400000, guid: 4798eb78ca000c0449027df84482de19,
         type: 2}
     - target: {fileID: 5182210334302575489, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
         type: 3}
       propertyPath: leftWeaponHandler
       value: 
-      objectReference: {fileID: 2056935392}
+      objectReference: {fileID: 2056935393}
     - target: {fileID: 5182210334302575489, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
         type: 3}
       propertyPath: rightWeaponHandler
       value: 
-      objectReference: {fileID: 1372354086}
+      objectReference: {fileID: 1372354087}
     - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
         type: 3}
       propertyPath: detectionMask.m_Bits
@@ -92174,6 +92149,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516095130863810895, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: _radius
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516095130863810895, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: freePosition.y
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516095130863810895, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: gizmoSphereColor.a
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859484194067626727, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: _radius
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859484194067626727, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: freePosition.y
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859484194067626727, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: gizmoSphereColor.a
+      value: 0.5254902
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff3f6dd45532e5b4b8b85c5fb3066933, type: 3}

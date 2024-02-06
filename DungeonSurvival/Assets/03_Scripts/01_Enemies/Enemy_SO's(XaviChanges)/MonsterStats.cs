@@ -8,6 +8,7 @@ using static EquipmentDataSO;
 
 public class MonsterStats : MonoBehaviour,IHasProgress
 {
+    public event EventHandler OnWeaponChanged;
     public event EventHandler OnGetHurted;
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
@@ -49,8 +50,8 @@ public class MonsterStats : MonoBehaviour,IHasProgress
     private float criticalDamage;
     #endregion
     
-    [SerializeField] private GameObject rightWeaponHandler;
-    [SerializeField] private GameObject leftWeaponHandler;
+    [SerializeField] private Transform rightWeaponHandler;
+    [SerializeField] private Transform leftWeaponHandler;
 
     internal EquipmentDataHolder EquipmentDataHolder_LeftHand => equipmentDataHolder_LeftHand;
     public EquipmentDataHolder equipmentDataHolder_LeftHand;
@@ -73,6 +74,7 @@ public class MonsterStats : MonoBehaviour,IHasProgress
     {
         aI_MainCore = GetComponent<AI_MainCore>();
         InitializeStats();
+        InitializeWeaponValues();
 
         OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
         {
@@ -106,17 +108,33 @@ public class MonsterStats : MonoBehaviour,IHasProgress
 
     private void Start ( )
     {
-        WeaponCheck();
     }
-    private void WeaponCheck ( )
+    private void InitializeWeaponValues ( )
     {
-        equipmentDataHolder_RightHand = rightWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
-        equipmentDataHolder_LeftHand = leftWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
+        if (leftWeaponHandler == null)
+        {
+            Debug.LogError("leftWeaponHandler no ha sido asignado en MonsterStats.");
+            return;
+        }
+        if (rightWeaponHandler == null)
+        {
+            Debug.LogError("rightWeaponHandler no ha sido asignado en MonsterStats.");
+            return;
+        }
 
-        equipmentDataSO_RightHand = equipmentDataHolder_RightHand.GetEquipmentDataSO(); //HACER UNO PARA LOS RANGES QUE NO TENDRÁN AREA DRAWER EN EL ARCO SI NO EN LA FLECHA, LA FLECHA CALCULA DISTANCIAS ONTRIGGER ENTTER
-        equipmentDataSO_LeftHand = equipmentDataHolder_LeftHand.GetEquipmentDataSO();
-        rightDetectionArea = equipmentDataHolder_RightHand.GetDetectionArea();
-        leftDetectionArea = equipmentDataHolder_LeftHand.GetDetectionArea();
+        equipmentDataHolder_RightHand = rightWeaponHandler.GetChild(0).GetComponent<EquipmentDataHolder>();
+        equipmentDataHolder_LeftHand = leftWeaponHandler.GetChild(0).GetComponent<EquipmentDataHolder>();
+
+        if(equipmentDataHolder_RightHand != null)
+        {
+            equipmentDataSO_RightHand = equipmentDataHolder_RightHand.GetEquipmentDataSO(); //HACER UNO PARA LOS RANGES QUE NO TENDRÁN AREA DRAWER EN EL ARCO SI NO EN LA FLECHA, LA FLECHA CALCULA DISTANCIAS ONTRIGGER ENTTER
+            rightDetectionArea = equipmentDataHolder_RightHand.GetDetectionArea();
+        }
+        if (equipmentDataHolder_LeftHand != null)
+        {
+            equipmentDataSO_LeftHand = equipmentDataHolder_LeftHand.GetEquipmentDataSO();
+            leftDetectionArea = equipmentDataHolder_LeftHand.GetDetectionArea();
+        }
     }
     private void Update ( )
     {
@@ -146,7 +164,7 @@ public class MonsterStats : MonoBehaviour,IHasProgress
         GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder), damage);
         playerStats.GetDamage(damage);
     }
-    public void EquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
+    public void OnEquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {
         prev_EquipmentDataHolder_RightHand = EquipmentDataHolder_RightHand;
         equipmentDataHolder_RightHand = newEquipmentDataHolder;
@@ -157,7 +175,7 @@ public class MonsterStats : MonoBehaviour,IHasProgress
         }
         else return;
     }
-    public void EquipLeftWeapon ( EquipmentDataHolder newEquipmentDataHolder )
+    public void OnEquipLeftWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {
         if (equipmentDataHolder_RightHand.Is2HandWeapon)
         {
@@ -192,6 +210,7 @@ public class MonsterStats : MonoBehaviour,IHasProgress
             }
             currentEquipmentHolder = newEquipment;
         }
+        OnWeaponChanged?.Invoke(this, EventArgs.Empty);
     }
     private void AddStatsPoints ( EquipmentStats equipmentStats, float multiplier )
     {

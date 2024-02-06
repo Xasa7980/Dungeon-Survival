@@ -10,6 +10,9 @@ public class PlayerStats : MonoBehaviour
     public event EventHandler OnGetHurted;
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
+    public bool IsDualWeaponWielding => equipmentDataHolder_RightHand != null && equipmentDataHolder_RightHand.GetEquipmentType() != EquipmentType.Shield &&
+    equipmentDataHolder_LeftHand != null && equipmentDataHolder_LeftHand.GetEquipmentType() >= EquipmentType.Dagger;
+
 
     [SerializeField] private PlayerDataSO playerDataSO;
 
@@ -143,9 +146,7 @@ public class PlayerStats : MonoBehaviour
             }
         return DamageType.NormalDamage;
     }
-    public bool IsDualWeaponWielding => equipmentDataHolder_RightHand != null && equipmentDataHolder_RightHand.GetEquipmentType() != EquipmentType.Shield && 
-        equipmentDataHolder_LeftHand != null && equipmentDataHolder_LeftHand.GetEquipmentType() >= EquipmentType.Dagger;
-    public void EquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
+    public void OnEquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {
         prev_EquipmentDataHolder_RightHand = EquipmentDataHolder_RightHand;
         equipmentDataHolder_RightHand = newEquipmentDataHolder;
@@ -156,7 +157,7 @@ public class PlayerStats : MonoBehaviour
         }
         else return;
     }
-    public void EquipLeftWeapon ( EquipmentDataHolder newEquipmentDataHolder )
+    public void OnEquipLeftWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {
         if (equipmentDataHolder_RightHand.Is2HandWeapon)
         {

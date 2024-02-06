@@ -56,7 +56,7 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
     private bool loadingSkillAttack;
     private void Awake ( )
     {
-        //ai_MainCore = GetComponentInParent<AI_MainCore>();
+        ai_MainCore = GetComponentInParent<AI_MainCore>();
         animator = GetComponent<Animator>();
         SetBehaviours();
     }

@@ -14,6 +14,10 @@ public class PlayerAnimationHandler : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         playerStats = GetComponent<PlayerStats>();
+
+        animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        animator.runtimeAnimatorController = animatorOverrideController;
+
     }
     private void Start ( )
     {
@@ -25,21 +29,11 @@ public class PlayerAnimationHandler : MonoBehaviour
     {
         ChangeCurrentCombatAnimations(animatorOverrideController);
     }
-
-    private void Update ( )
-    {
-        
-    }
     private bool noWeaponsEquiped => !playerStats.EquipmentDataSO_RightHand ? (!playerStats.EquipmentDataSO_LeftHand ? true : false) : false;
     private void GetAnimationsToOverride ( )
     {
-        animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
-
-        animator.runtimeAnimatorController = animatorOverrideController;
 
         animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ChangeCurrentBasicAnimations(animatorOverrideController);
-
-        ChangeCurrentCombatAnimations(animatorOverrideController);
     }
 
     private void ChangeCurrentCombatAnimations ( AnimatorOverrideController animatorOverrideController )
