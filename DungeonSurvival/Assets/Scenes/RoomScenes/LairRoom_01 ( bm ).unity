@@ -606,21 +606,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &8497320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,21 +1150,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &19497422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2685,21 +2691,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &53460341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3194,21 +3203,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &59925976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3478,21 +3490,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &61819381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4521,21 +4536,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &96981709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5026,21 +5044,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &115647988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6212,21 +6233,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &145733083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6916,21 +6940,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &168015354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7561,21 +7588,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &176711631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10203,21 +10233,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &255078635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11408,21 +11441,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &282554649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12481,21 +12517,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &318527829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12698,21 +12737,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &318680734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16715,21 +16757,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &441607896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16932,21 +16977,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &443216027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18287,21 +18335,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &470626179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19254,21 +19305,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &499718349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19874,21 +19928,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &527847728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22835,21 +22892,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &605591738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23052,21 +23112,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &605956802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25572,21 +25635,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &684016070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28388,21 +28454,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &751713660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28791,21 +28860,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &758039646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30565,21 +30637,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &793278959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31508,21 +31583,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &826017782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33635,21 +33713,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &880997430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37327,21 +37408,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &988724919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37544,21 +37628,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &990490162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41674,21 +41761,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1106884203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43350,21 +43440,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1143906213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43647,21 +43740,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1145584959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44540,21 +44636,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1166021913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45582,21 +45681,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1197666537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47794,21 +47896,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1258294065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48338,21 +48443,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1278749677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49612,21 +49720,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1317792109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56168,21 +56279,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1461820712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58754,21 +58868,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1505923834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59502,21 +59619,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1514188353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59719,21 +59839,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1514926890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60535,21 +60658,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1529845246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60975,21 +61101,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1535701197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61845,21 +61974,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1556160207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63405,21 +63537,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1582820054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65396,21 +65531,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1622581176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66813,21 +66951,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1660084962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67110,21 +67251,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1662708870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67985,21 +68129,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1670543546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69449,21 +69596,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1693312453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70281,21 +70431,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1709625957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72419,21 +72572,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1759095160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73224,21 +73380,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1772108340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73871,21 +74030,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1788510983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75604,21 +75766,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1825254286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80428,21 +80593,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1896751301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83178,21 +83346,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &1987933448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84043,21 +84214,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &2024745281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85177,21 +85351,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &2047587446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88038,21 +88215,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &2129728140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88255,21 +88435,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   attackRates:
   - 99
   - 30
   - 13
   - 12
-  attackState: 1
 --- !u!114 &2131818716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91850,6 +92033,12 @@ PrefabInstance:
       propertyPath: progressGameObject
       value: 
       objectReference: {fileID: 1301967799}
+    - target: {fileID: 1787379285989705557, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 4d6960cb9d3665e4d9e2c23e9e2d8269,
+        type: 2}
     - target: {fileID: 2609970680222791004, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
         type: 3}
       propertyPath: animationClipContainerSO
@@ -91866,6 +92055,36 @@ PrefabInstance:
       propertyPath: rightWeaponHandler
       value: 
       objectReference: {fileID: 1372354086}
+    - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: detectionMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: timerMaxBetweenAttack
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: attackRates.Array.data[0]
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: attackRates.Array.data[1]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: attackRates.Array.data[2]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: attackRates.Array.data[3]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5182210334302575496, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
         type: 3}
       propertyPath: m_Height

@@ -32,15 +32,15 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
 
     private AI_MainCore ai_MainCore;
     private MonsterStats monsterStats;
-    private EquipmentDataSO equipmentDataSO => monsterStats.equipmentDataHolder_RightHand.GetEquipmentDataSO();
+    private EnemyAnimationHandler enemyAnimationHandler => GetComponent<EnemyAnimationHandler>();
     
     private bool isWalking;
     private bool isRunning;
 
-    private int numberOfBasicAttacks => monsterStats ? equipmentDataSO.equipmentAnimationClips.basicAttackClips.Length : -1;
-    private int numberOfChargedAttacks => monsterStats ? equipmentDataSO.equipmentAnimationClips.chargedAttackClips.Length : -1;
-    private int numberOfSpecialAttacks => monsterStats ? equipmentDataSO.equipmentAnimationClips.specialAttackClips.Length : -1;
-    private int numberOfSkillAttacks => monsterStats ? equipmentDataSO.equipmentAnimationClips.skillAttackClips.Length : -1;
+    private int numberOfBasicAttacks => (int)enemyAnimationHandler.AnimationClipContainerSO.maxNumberOfBasicAttacks;
+    private int numberOfChargedAttacks => (int)enemyAnimationHandler.AnimationClipContainerSO.maxNumberOfChargedAttacks;
+    private int numberOfSpecialAttacks => (int)enemyAnimationHandler.AnimationClipContainerSO.maxNumberOfSpecialAttacks;
+    private int numberOfSkillAttacks => (int)enemyAnimationHandler.AnimationClipContainerSO.maxNumberOfSkillAttacks;
 
     private float basicAttackIndex;
     private float chargedAttackIndex;

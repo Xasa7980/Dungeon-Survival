@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAnimationHandler : MonoBehaviour
 {
+    public AnimationClipContainerSO AnimationClipContainerSO => animationClipContainerSO;
     [SerializeField] private AnimationClipContainerSO animationClipContainerSO;
 
     private Animator animator;

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,27 +6,32 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewAnimationsContainer", menuName = "Dungeon Survival/Animations/PlayerAnimations")]
 public class PlayerAnimationContainerSO : AnimationClipContainerSO
 {
-    public AnimationClip deathBackwardClip;
-    public AnimationClip idleClip;
-    public AnimationClip idleCombatClip;
+    public AnimationClip deathAnimationClip;
+    public AnimationClip idleAnimationClip;
+    public AnimationClip idleCombatAnimationClip;
 
-    public const string DEATH = "DeathBack";
-    public const string IDLE = "Idle";
-    public const string IDLECOMBAT = "IdleCombat";
+    public const string DEATH_ANIMATION = "Death_Animation";
+    public const string IDLE_ANIMATION = "Idle_Animation";
+    public const string IDLECOMBAT_ANIMATION = "IdleCombat_Animation";
 
-    //MIRAR SI ALFINAL ESTAS CAMBIARAN O NO
-    public AnimationClip runForwardClip;
-    public AnimationClip walkForwardClip;
-    public const string RUN_FORWARD = "Run_Forward";
-    public const string WALK_FORWARD = "Walk_Forward";
+    [InfoBox("Becareful with those, they can't be rooted, the players moves with animation movement", InfoMessageType.Warning)]
+    public AnimationClip runForwardAnimationClip;
+    public AnimationClip walkForwardAnimationClip;
+    public const string RUN_FORWARD_ANIMATION = "Run_Forward_Animation";
+    public const string WALK_FORWARD_ANIMATION = "Walk_Forward_Animation";
 
+    private void OnValidate ( )
+    {
+        SettingMaxAnimationsInList();
+    }
     public void ChangeCurrentBasicAnimations(AnimatorOverrideController animatorOverrideController )
     {
-        animatorOverrideController[DEATH] = deathBackwardClip;
-        animatorOverrideController[IDLE] = idleClip;
-        animatorOverrideController[IDLECOMBAT] = idleCombatClip;
-        animatorOverrideController[RUN_FORWARD] = runForwardClip;
-        animatorOverrideController[WALK_FORWARD] = walkForwardClip;
+        SettingMaxAnimationsInList();
+        animatorOverrideController[DEATH_ANIMATION] = deathAnimationClip;
+        animatorOverrideController[IDLE_ANIMATION] = idleAnimationClip;
+        animatorOverrideController[IDLECOMBAT_ANIMATION] = idleCombatAnimationClip;
+        animatorOverrideController[RUN_FORWARD_ANIMATION] = runForwardAnimationClip;
+        animatorOverrideController[WALK_FORWARD_ANIMATION] = walkForwardAnimationClip;
     }
     public void ChangeCurretCombatAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
     {
@@ -65,5 +71,13 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
         LoadChargedAttackAnimationsOnOverride(animatorOverrideController, chargedAttackNoWeapons);
         LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackNoWeapons);
         LoadSkillAttackAnimationsOnOverride(animatorOverrideController, skillAttackNoWeapons);
+    }
+    [OnValueChanged("SettingMaxAnimationsInList")]
+    private void SettingMaxAnimationsInList ( )
+    {
+        maxNumberOfBasicAttacks = 4;
+        maxNumberOfChargedAttacks = 4;
+        maxNumberOfSpecialAttacks = 4;
+        maxNumberOfSkillAttacks = 4;
     }
 }

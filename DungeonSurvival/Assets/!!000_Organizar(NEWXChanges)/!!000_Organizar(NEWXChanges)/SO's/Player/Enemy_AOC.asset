@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771f9fce1904b1f47ba2c58516330a92, type: 3}
+  m_Name: Enemy_AOC
+  m_EditorClassIdentifier: 
+  getRandomAttackComboAnimation: 1
+  getRandomChargedAttackComboAnimation: 1
+  getRandomSpecialAttackComboAnimation: 1
+  getRandomSkillAttackComboAnimation: 1
+  maxNumberOfBasicAttacks: 4
+  maxNumberOfChargedAttacks: 4
+  maxNumberOfSpecialAttacks: 4
+  maxNumberOfSkillAttacks: 4
+  basicAttackDualSwordWeapon: []
+  chargedAttackDualSwordWeapon: []
+  specialAttackDualSwordWeapon: []
+  skillAttackDualSwordWeapon: []
+  basicAttackDualDaggerWeapon: []
+  chargedAttackDualDaggerWeapon: []
+  specialAttackDualDaggerWeapon: []
+  skillAttackDualDaggerWeapon: []
+  basicAttackNoWeapons: []
+  chargedAttackNoWeapons: []
+  specialAttackNoWeapons: []
+  skillAttackNoWeapons: []
+  basicAttackShield: []
+  chargeAttackShield: []
+  specialAttackShield: []
+  skillAttackShield: []
+  attackBasicClip_01: {fileID: 7400000, guid: 768ce6d2fca75a949811acaa5d9a6ba9, type: 2}
+  attackBasicClip_02: {fileID: 7400000, guid: 43f58fed942316c49ae89c66e296fb2a, type: 2}
+  attackBasicClip_03: {fileID: 7400000, guid: a24beb962d820d849ae21cc48d554fce, type: 2}
+  attackBasicClip_04: {fileID: 7400000, guid: c4080a4fd7c471b47a017cca8c02df02, type: 2}
+  chargedAttackClip_01: {fileID: 7400000, guid: 15d9e3d4e01c95444910e7dd9976a104,
+    type: 2}
+  chargedAttackClip_02: {fileID: 7400000, guid: 2edccbdb6605389409c4e3e27f9e854b,
+    type: 2}
+  chargedAttackClip_03: {fileID: 7400000, guid: dd3805df1e4957241a051f207bfa4eca,
+    type: 2}
+  chargedAttackClip_04: {fileID: 7400000, guid: 21165cbe2f0839c4cbd792b3413e0fd2,
+    type: 2}
+  loadingChargingAttackClip_01: {fileID: 7400000, guid: 4574283035029a44689ac2d428a5732f,
+    type: 2}
+  loadingChargingAttackClip_02: {fileID: 7400000, guid: 3d4c992088cba7545bb959b464a5c2ee,
+    type: 2}
+  loadingChargingAttackClip_03: {fileID: 7400000, guid: 2d5d0d5b87a76844099d387183f118f6,
+    type: 2}
+  loadingChargingAttackClip_04: {fileID: 7400000, guid: e0319caae41168d418e44aa515a93faa,
+    type: 2}
+  specialAttackClip_01: {fileID: 7400000, guid: 7b246bf6907bffd4e890f9408acb46f7,
+    type: 2}
+  specialAttackClip_02: {fileID: 7400000, guid: 6254804fe37b82e4397bf793b0045c4b,
+    type: 2}
+  specialAttackClip_03: {fileID: 7400000, guid: bbbc1a3c740db1e4f86360acc010e924,
+    type: 2}
+  specialAttackClip_04: {fileID: 7400000, guid: 2410bf28387811a41992e93ad0a676a1,
+    type: 2}
+  loadingSpecialAttackClip_01: {fileID: 7400000, guid: a024de235701c254aa7bcbae28d18520,
+    type: 2}
+  loadingSpecialAttackClip_02: {fileID: 7400000, guid: ff356b854b62da041b65d9b931e71933,
+    type: 2}
+  loadingSpecialAttackClip_03: {fileID: 7400000, guid: 5d86fd6dcbc70cf44adb88c33c9305eb,
+    type: 2}
+  loadingSpecialAttackClip_04: {fileID: 7400000, guid: 2bd3d5eb1fae7aa40bfdc0394153c392,
+    type: 2}
+  skillAttackClip_01: {fileID: 7400000, guid: f2032643d9f71724eba04b2c3ef02f5c, type: 2}
+  skillAttackClip_02: {fileID: 7400000, guid: 691ea2f62de7827469eb185201096038, type: 2}
+  skillAttackClip_03: {fileID: 7400000, guid: 8f02402bf972d474cb3160e158406ca2, type: 2}
+  skillAttackClip_04: {fileID: 7400000, guid: da8e255ed753903468ffa7c37883a42d, type: 2}
+  loadingSkillAttackClip_01: {fileID: 7400000, guid: 2ed1d0a05deadf143869d6c189933aa9,
+    type: 2}
+  loadingSkillAttackClip_02: {fileID: 7400000, guid: b0339c564dcd7d7439de833a09d6d3bc,
+    type: 2}
+  loadingSkillAttackClip_03: {fileID: 7400000, guid: 9fa3513ca784eb64e82680f782690d89,
+    type: 2}
+  loadingSkillAttackClip_04: {fileID: 7400000, guid: e7e27b42d6a6fba42b608f95b347e0f9,
+    type: 2}
+  monsterDataSO: {fileID: 0}
+  deathAnimationClip: {fileID: 7400000, guid: 7c8ba04fccec7054285bc83c99916778, type: 2}
+  idleAnimationClip: {fileID: 7400000, guid: c014a77fc0f66164e9912064949521d9, type: 2}
+  idleCombatAnimationClip: {fileID: 7400000, guid: 12c89681f1b936b4e84324e5311b4bb1,
+    type: 2}
+  runForwardAnimationClip: {fileID: 7400000, guid: ea2173d1cc9f9f842a4432385492607b,
+    type: 2}
+  walkForwardAnimationClip: {fileID: 7400000, guid: 32df2ef05a8f6ae40812c95cbe4edad5,
+    type: 2}

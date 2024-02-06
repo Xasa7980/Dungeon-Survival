@@ -63,7 +63,6 @@ MonoBehaviour:
   nearDieBehaviour: {fileID: 7529029528057753565}
   deathBehaviour: {fileID: 7529029528057753564}
   actualBehaviour: {fileID: 0}
-  monsterStats: {fileID: 0}
 --- !u!114 &7529029528057753561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,21 +116,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720bc2a89f83fa44aff7aa7793fd504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttacksSO: {fileID: 0}
-  basicAtkTimerMax: 1
-  chargedAttackTimerMax: 2
-  chargingReleaseAttackMax: 0
-  specialAtkTimerMax: 4
-  skillReleaseTimeMax: 0
-  skillCastingTimerMax: 0
+  attackCategory: 0
+  chargedAttacks: []
+  specialAttacks: []
+  skillAttacks: []
+  basicAttackReleaseTimerMax: 1
+  chargedAttackReleaseTimerMax: 2
+  specialAttackReleaseTimerMax: 2
+  skillAttackReleaseTimerMax: 3
   attackSpeed: 2
-  timerMaxBetweenAttacks: 3
+  timerBetweenAttackMax: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 8
   attackRates:
-  - 99
+  - 60
   - 30
-  - 13
-  - 12
-  attackState: 1
+  - 6
+  - 4
 --- !u!114 &7529029528057753565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,9 +240,12 @@ MonoBehaviour:
   minExpGiven: 4
   maxExpGiven: 10
   monsterDataSO: {fileID: 0}
-  aI_MainCore: {fileID: 0}
   rightWeaponHandler: {fileID: 0}
   leftWeaponHandler: {fileID: 0}
+  equipmentDataHolder_LeftHand: {fileID: 0}
+  equipmentDataHolder_RightHand: {fileID: 0}
+  equipmentDataSO_RightHand: {fileID: 0}
+  equipmentDataSO_LeftHand: {fileID: 0}
 --- !u!1001 &3375961860520040730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -478,8 +483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216bba6893f5ad4699dc7b08346dc6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfAttacks: 4
-  ai_MainCore: {fileID: 0}
 --- !u!114 &5715016890753774521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,4 +497,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationClipContainerSO: {fileID: 11400000, guid: 67362877a8ec9da4d832b0da6959f4f8,
     type: 2}
-  characterCategory: 1

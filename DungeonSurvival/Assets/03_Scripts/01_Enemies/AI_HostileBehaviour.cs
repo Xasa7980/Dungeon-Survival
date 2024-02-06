@@ -45,7 +45,7 @@ public class AI_HostileBehaviour : MonoBehaviour
     [SerializeField] private float specialAttackReleaseTimerMax = 2;
     [SerializeField] private float skillAttackReleaseTimerMax = 3;
     [SerializeField] private float attackSpeed;
-    [SerializeField] private float timerMaxBetweenAttack;
+    [SerializeField] private float timerBetweenAttackMax = 3;
 
     [SerializeField] private LayerMask detectionMask;
     [SerializeField] private List<float> attackRates = new List<float>();
@@ -103,7 +103,7 @@ public class AI_HostileBehaviour : MonoBehaviour
         if (!releasingAttack)
         {
             timerBetweenAttack += Time.deltaTime * attackSpeed;
-            if (timerBetweenAttack > timerMaxBetweenAttack && !releasingAttack)
+            if (timerBetweenAttack > timerBetweenAttackMax && !releasingAttack)
             {
                 DetermineAttackType();
             }

@@ -15,25 +15,40 @@ public enum AttackCategory
 
 public class AnimationClipContainerSO : ScriptableObject
 {
-    public const string ATTACK_BASIC_1 = "BasicAttack_Default_01";
-    public const string ATTACK_BASIC_2 = "BasicAttack_Default_02";
-    public const string ATTACK_BASIC_3 = "BasicAttack_Default_03";
-    public const string ATTACK_BASIC_4 = "BasicAttack_Default_04";
+    public const string ATTACK_BASIC_1 = "BasicAttack_Animation_01";
+    public const string ATTACK_BASIC_2 = "BasicAttack_Animation_02";
+    public const string ATTACK_BASIC_3 = "BasicAttack_Animation_03";
+    public const string ATTACK_BASIC_4 = "BasicAttack_Animation_04";
 
-    public const string CHARGED_ATTACK_1 = "ChargedAttack_01";
-    public const string CHARGED_ATTACK_2 = "ChargedAttack_02";
+    public const string CHARGED_ATTACK_1 = "ChargedAttack_Animation_01";
+    public const string CHARGED_ATTACK_2 = "ChargedAttack_Animation_02";
+    public const string CHARGED_ATTACK_3 = "ChargedAttack_Animation_03";
+    public const string CHARGED_ATTACK_4 = "ChargedAttack_Animation_04";
 
-    public const string CHARGING_ATTACK_1 = "ChargingAttack_01";
-    public const string CHARGING_ATTACK_2 = "ChargingAttack_02";
+    public const string LOADING_CHARGING_ATTACK_1 = "LoadingChargedAttack_Animation_01";
+    public const string LOADING_CHARGING_ATTACK_2 = "LoadingChargedAttack_Animation_02";
+    public const string LOADING_CHARGING_ATTACK_3 = "LoadingChargedAttack_Animation_03";
+    public const string LOADING_CHARGING_ATTACK_4 = "LoadingChargedAttack_Animation_04";
 
-    public const string SPECIAL_ATTACK_BASIC_1 = "SpecialAttack_01";
-    public const string SPECIAL_ATTACK_BASIC_2 = "SpecialAttack_02";
+    public const string SPECIAL_ATTACK_BASIC_1 = "SpecialAttack_Animation_01";
+    public const string SPECIAL_ATTACK_BASIC_2 = "SpecialAttack_Animation_02";
+    public const string SPECIAL_ATTACK_BASIC_3 = "SpecialAttack_Animation_03";
+    public const string SPECIAL_ATTACK_BASIC_4 = "SpecialAttack_Animation_04";
 
-    public const string SKILL_ATTACK_1 = "SpecialAttack_01";
-    public const string SKILL_ATTACK_2 = "SpecialAttack_02";
+    public const string LOADING_SPECIAL_ATTACK_BASIC_1 = "LoadingSpecialAttack_Animation_01";
+    public const string LOADING_SPECIAL_ATTACK_BASIC_2 = "LoadingSpecialAttack_Animation_02";
+    public const string LOADING_SPECIAL_ATTACK_BASIC_3 = "LoadingSpecialAttack_Animation_03";
+    public const string LOADING_SPECIAL_ATTACK_BASIC_4 = "LoadingSpecialAttack_Animation_04";
 
-    public const string CASTING_SKILL_ATTACK_1 = "SpecialAttack_01";
-    public const string CASTING_SKILL_ATTACK_2 = "SpecialAttack_02";
+    public const string SKILL_ATTACK_1 = "SkillAttack_Animation_01";
+    public const string SKILL_ATTACK_2 = "SkillAttack_Animation_02";
+    public const string SKILL_ATTACK_3 = "SkillAttack_Animation_03";
+    public const string SKILL_ATTACK_4 = "SkillAttack_Animation_04";
+
+    public const string LOADING_SKILL_ATTACK_1 = "LoadingSkillAttack_Animation_01";
+    public const string LOADING_SKILL_ATTACK_2 = "LoadingSkillAttack_Animation_02";
+    public const string LOADING_SKILL_ATTACK_3 = "LoadingSkillAttack_Animation_03";
+    public const string LOADING_SKILL_ATTACK_4 = "LoadingSkillAttack_Animation_04";
 
     public bool getRandomAttackComboAnimation;
     public bool getRandomChargedAttackComboAnimation;
@@ -46,30 +61,26 @@ public class AnimationClipContainerSO : ScriptableObject
     [ShowIf("@attackCategory == AttackCategory.charged")] public float maxNumberOfChargedAttacks = 4;
     [ShowIf("@attackCategory == AttackCategory.special")] public float maxNumberOfSpecialAttacks = 4;
     [ShowIf("@attackCategory == AttackCategory.skill")] public float maxNumberOfSkillAttacks = 4;
-    private float numberOfBasicAttacks = 0;
-    private float numberOfChargedAttacks = 0;
-    private float numberOfSpecialAttacks = 0;
-    private float numberOfSkillAttacks = 0;
 
-    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("Basic Attacks")] public AttacksDataSO[] basicAttackDualSwordWeapon;
-    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")] public AttacksDataSO[] chargedAttackDualSwordWeapon;
-    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")] public AttacksDataSO[] specialAttackDualSwordWeapon;
-    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")] public AttacksDataSO[] skillAttackDualSwordWeapon;
+    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("DualSword_Animation_List")] public AttacksDataSO[] basicAttackDualSwordWeapon;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("DualSword_Animation_List")] public AttacksDataSO[] chargedAttackDualSwordWeapon;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("DualSword_Animation_List")] public AttacksDataSO[] specialAttackDualSwordWeapon;
+    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("DualSword_Animation_List")] public AttacksDataSO[] skillAttackDualSwordWeapon;
 
-    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("Basic Attacks")] public AttacksDataSO[] basicAttackDualDaggerWeapon;
-    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")] public AttacksDataSO[] chargedAttackDualDaggerWeapon;
-    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")] public AttacksDataSO[] specialAttackDualDaggerWeapon;
-    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")] public AttacksDataSO[] skillAttackDualDaggerWeapon;
+    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("DualDagger_Animation_List")] public AttacksDataSO[] basicAttackDualDaggerWeapon;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("DualDagger_Animation_List")] public AttacksDataSO[] chargedAttackDualDaggerWeapon;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("DualDagger_Animation_List")] public AttacksDataSO[] specialAttackDualDaggerWeapon;
+    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("DualDagger_Animation_List")] public AttacksDataSO[] skillAttackDualDaggerWeapon;
 
-    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("Basic Attacks")] public AttacksDataSO[] basicAttackNoWeapons;
-    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")] public AttacksDataSO[] chargedAttackNoWeapons;
-    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")] public AttacksDataSO[] specialAttackNoWeapons;
-    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")] public AttacksDataSO[] skillAttackNoWeapons;
+    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("NoWeapons_Animation_List")] public AttacksDataSO[] basicAttackNoWeapons;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("NoWeapons_Animation_List")] public AttacksDataSO[] chargedAttackNoWeapons;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("NoWeapons_Animation_List")] public AttacksDataSO[] specialAttackNoWeapons;
+    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("NoWeapons_Animation_List")] public AttacksDataSO[] skillAttackNoWeapons;
 
-    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("Basic Attacks")] public AttacksDataSO[] basicAttackShield;
-    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")] public AttacksDataSO[] chargeAttackShield;
-    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")] public AttacksDataSO[] specialAttackShield;
-    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")] public AttacksDataSO[] skillAttackShield;
+    [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("DualWithShield_Animation_List")] public AttacksDataSO[] basicAttackShield;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("DualWithShield_Animation_List")] public AttacksDataSO[] chargeAttackShield;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("DualWithShield_Animation_List")] public AttacksDataSO[] specialAttackShield;
+    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("DualWithShield_Animation_List")] public AttacksDataSO[] skillAttackShield;
 
 
 
@@ -86,18 +97,41 @@ public class AnimationClipContainerSO : ScriptableObject
     public AnimationClip chargedAttackClip_01;
     [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")]
     public AnimationClip chargedAttackClip_02;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")]
+    public AnimationClip chargedAttackClip_03;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")]
+    public AnimationClip chargedAttackClip_04;
 
     [PropertySpace(SpaceBefore = 10)]
 
     [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")]
-    public AnimationClip chargingAttackClip_01;
+    public AnimationClip loadingChargingAttackClip_01;
     [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")]
-    public AnimationClip chargingAttackClip_02;
+    public AnimationClip loadingChargingAttackClip_02;    
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")]
+    public AnimationClip loadingChargingAttackClip_03;
+    [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")]
+    public AnimationClip loadingChargingAttackClip_04;
 
     [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")]
     public AnimationClip specialAttackClip_01;
     [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")]
     public AnimationClip specialAttackClip_02;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")]
+    public AnimationClip specialAttackClip_03;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")]
+    public AnimationClip specialAttackClip_04;
+
+    [PropertySpace(SpaceBefore = 10)]
+    
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")]
+    public AnimationClip loadingSpecialAttackClip_01;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")]
+    public AnimationClip loadingSpecialAttackClip_02;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")]
+    public AnimationClip loadingSpecialAttackClip_03;
+    [ShowIf("@attackCategory == AttackCategory.special"), FoldoutGroup("Special Attacks")]
+    public AnimationClip loadingSpecialAttackClip_04;
 
     [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")]
     public AnimationClip skillAttackClip_01;
@@ -105,15 +139,19 @@ public class AnimationClipContainerSO : ScriptableObject
     public AnimationClip skillAttackClip_02;
     [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")]
     public AnimationClip skillAttackClip_03;
+    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")]
+    public AnimationClip skillAttackClip_04;
 
     [PropertySpace(SpaceBefore = 10)]
 
     [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")]
-    public AnimationClip castingSkillAttackClip_01;
+    public AnimationClip loadingSkillAttackClip_01;
     [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")]
-    public AnimationClip castingSkillAttackClip_02;
+    public AnimationClip loadingSkillAttackClip_02;
     [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")]
-    public AnimationClip castingSkillAttackClip_03;
+    public AnimationClip loadingSkillAttackClip_03;
+    [ShowIf("@attackCategory == AttackCategory.skill"), FoldoutGroup("Skill Attacks")]
+    public AnimationClip loadingSkillAttackClip_04;
 
     private AttackCategory attackCategory;
     #region EditorButtons
@@ -129,12 +167,12 @@ public class AnimationClipContainerSO : ScriptableObject
 
     [PropertyOrder(3)]
     [HorizontalGroup("Toolbar_01")]
-    [Button("Basic Attack")]
+    [Button("Special Attack")]
     private void SetSpecialAttack ( ) => attackCategory = AttackCategory.special;
 
     [PropertyOrder(3)]
     [HorizontalGroup("Toolbar_01")]
-    [Button("Charged Attack")]
+    [Button("Skill Attack")]
     private void SetSkillAttack ( ) => attackCategory = AttackCategory.skill;
     #endregion
 
@@ -166,7 +204,7 @@ public class AnimationClipContainerSO : ScriptableObject
         AnimationClip[] attackClips = { attackBasicClip_01, attackBasicClip_02, attackBasicClip_03, attackBasicClip_04 };
 
         List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfBasicAttacks, attackBasicAnimationClips);
-        for (int i = 0; i < randomIndices.Count && i < attackClipKeys.Length; i++)
+        for (int i = 0; i < randomIndices.Count && i < maxNumberOfBasicAttacks && i < attackClipKeys.Length; i++)
         {
             attackClips[i] = attackBasicAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
             Debug.Log(attackClips[i]);
@@ -175,30 +213,33 @@ public class AnimationClipContainerSO : ScriptableObject
     }
     public void LoadChargedAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackChargedAnimationClips )
     {
-        string[] animationChargingClipKeys = { CHARGING_ATTACK_1, CHARGING_ATTACK_2 };
-        string[] animationChargedClipKeys = { CHARGED_ATTACK_1, CHARGED_ATTACK_2 };
+        string[] animationChargingClipKeys = { LOADING_CHARGING_ATTACK_1, LOADING_CHARGING_ATTACK_2, LOADING_CHARGING_ATTACK_3, LOADING_CHARGING_ATTACK_4 };
+        string[] animationChargedClipKeys = { CHARGED_ATTACK_1, CHARGED_ATTACK_2, LOADING_CHARGING_ATTACK_3, LOADING_CHARGING_ATTACK_4 };
 
-        AnimationClip[] chargingClips = { chargingAttackClip_01, chargingAttackClip_02 };
-        AnimationClip[] chargedClips = { chargedAttackClip_01, chargedAttackClip_02 };
+        AnimationClip[] loadingClips = { loadingChargingAttackClip_01, loadingChargingAttackClip_02, loadingChargingAttackClip_03, loadingChargingAttackClip_04 };
+        AnimationClip[] chargedClips = { chargedAttackClip_01, chargedAttackClip_02, chargedAttackClip_03, chargedAttackClip_04 };
 
         List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfChargedAttacks, attackChargedAnimationClips);
-        for (int i = 0; i < randomIndices.Count && i < animationChargedClipKeys.Length; i++)
+
+        for (int i = 0; i < randomIndices.Count && i < maxNumberOfChargedAttacks && i < animationChargedClipKeys.Length; i++)
         {
             chargedClips[i] = attackChargedAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
-            chargingClips[i] = attackChargedAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
+            loadingClips[i] = attackChargedAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
             Debug.Log(chargedClips[i]);
             animatorOverrideController[animationChargedClipKeys[i]] = chargedClips[i];
         }
     }
     public void LoadSpecialAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackSpecialAnimationClips )
     {
-        string[] animationSpecialClipKeys = { CASTING_SKILL_ATTACK_1, CASTING_SKILL_ATTACK_2 };
-        AnimationClip[] specialClips = { chargedAttackClip_01, chargedAttackClip_02 };
-        string[] animationSpecialLoadingClipKeys = { CASTING_SKILL_ATTACK_1, CASTING_SKILL_ATTACK_2 };
-        AnimationClip[] specialLoadingClips = { chargedAttackClip_01, chargedAttackClip_02 };
+        string[] animationSpecialClipKeys = { SPECIAL_ATTACK_BASIC_1, SPECIAL_ATTACK_BASIC_2, SPECIAL_ATTACK_BASIC_3, SPECIAL_ATTACK_BASIC_4 };
+        AnimationClip[] specialClips = { specialAttackClip_01, specialAttackClip_02, specialAttackClip_03, specialAttackClip_04 };
+
+        string[] animationSpecialLoadingClipKeys = { LOADING_SPECIAL_ATTACK_BASIC_1, LOADING_SPECIAL_ATTACK_BASIC_2, LOADING_SPECIAL_ATTACK_BASIC_3, LOADING_SPECIAL_ATTACK_BASIC_4 };
+        AnimationClip[] specialLoadingClips = { loadingSpecialAttackClip_01, loadingSpecialAttackClip_02, loadingSpecialAttackClip_03, loadingSpecialAttackClip_04 };
 
         List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfSpecialAttacks, attackSpecialAnimationClips);
-        for (int i = 0; i < randomIndices.Count && i < attackSpecialAnimationClips.Length; i++)
+
+        for (int i = 0; i < randomIndices.Count && i < maxNumberOfSpecialAttacks && i < attackSpecialAnimationClips.Length; i++)
         {
             specialClips[i] = attackSpecialAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
             if (attackSpecialAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip != null )
@@ -212,82 +253,22 @@ public class AnimationClipContainerSO : ScriptableObject
 
     public void LoadSkillAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackSkillAnimationClips )
     {
-        string[] animationCastingClipKeys = { CASTING_SKILL_ATTACK_1, CASTING_SKILL_ATTACK_2 };
-        string[] animationSkillClipKeys = { SKILL_ATTACK_1, SKILL_ATTACK_2 };
+        string[] animationCastingClipKeys = { LOADING_SKILL_ATTACK_1, LOADING_SKILL_ATTACK_2, LOADING_SKILL_ATTACK_3, LOADING_SKILL_ATTACK_4 };
+        string[] animationSkillClipKeys = { SKILL_ATTACK_1, SKILL_ATTACK_2, SKILL_ATTACK_3, SKILL_ATTACK_4 };
 
-        AnimationClip[] castingClips = { chargingAttackClip_01, chargingAttackClip_02 };
-        AnimationClip[] skillClips = { chargedAttackClip_01, chargedAttackClip_02 };
+        AnimationClip[] loadingClips = { loadingSkillAttackClip_01, loadingSkillAttackClip_02, loadingSkillAttackClip_03, loadingSkillAttackClip_04 };
+        AnimationClip[] skillClips = { skillAttackClip_01, skillAttackClip_02, skillAttackClip_03, skillAttackClip_04 };
 
         List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfSpecialAttacks, attackSkillAnimationClips);
-        for (int i = 0; i < randomIndices.Count && i < attackSkillAnimationClips.Length; i++)
+        for (int i = 0; i < randomIndices.Count && i < maxNumberOfSkillAttacks && i < attackSkillAnimationClips.Length; i++)
         {
             skillClips[i] = attackSkillAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
             if (attackSkillAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip != null)
             {
-                castingClips[i] = attackSkillAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
+                loadingClips[i] = attackSkillAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
             }
             animatorOverrideController[animationSkillClipKeys[i]] = skillClips[i];
-            animatorOverrideController[animationCastingClipKeys[i]] = castingClips[i];
-        }
-    }
-    public void LimitMonsterAnimationsByMonsterRank ( MonsterDataSO monsterDataSO )
-    {
-        if(monsterDataSO != null)
-        {
-
-            switch (monsterDataSO.monsterRank)
-            {
-                case MonsterRank.Minion:
-
-                    maxNumberOfBasicAttacks = 2;
-                    maxNumberOfChargedAttacks = 1;
-                    maxNumberOfSpecialAttacks = 1;
-                    maxNumberOfSkillAttacks = 0;
-                    break;
-
-                case MonsterRank.Soldier:
-
-                    maxNumberOfBasicAttacks = 3;
-                    maxNumberOfChargedAttacks = 1;
-                    maxNumberOfSpecialAttacks = 1;
-                    maxNumberOfSkillAttacks = 0;
-                    break;
-
-                case MonsterRank.Guardian:
-
-                    maxNumberOfBasicAttacks = 4;
-                    maxNumberOfChargedAttacks = 1;
-                    maxNumberOfSpecialAttacks = 1;
-                    maxNumberOfSkillAttacks = 0;
-                    break;
-
-                case MonsterRank.General:
-
-                    maxNumberOfBasicAttacks = 3;
-                    maxNumberOfChargedAttacks = 2;
-                    maxNumberOfSpecialAttacks = 1;
-                    maxNumberOfSkillAttacks = 1;
-                    break;
-
-                case MonsterRank.Boss:
-
-                    maxNumberOfBasicAttacks = 3;
-                    maxNumberOfChargedAttacks = 2;
-                    maxNumberOfSpecialAttacks = 2;
-                    maxNumberOfSkillAttacks = 2;
-                    break;
-
-                case MonsterRank.EliteBoss:
-
-                    maxNumberOfBasicAttacks = 3;
-                    maxNumberOfChargedAttacks = 2;
-                    maxNumberOfSpecialAttacks = 3;
-                    maxNumberOfSkillAttacks = 2;
-                    break;
-
-                default:
-                    break;
-            }
+            animatorOverrideController[animationCastingClipKeys[i]] = loadingClips[i];
         }
     }
 }

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,26 +8,30 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
 {
     public MonsterDataSO monsterDataSO;
 
-    public AnimationClip eDeathBackClip;
-    public AnimationClip eIdleClip;
-    public AnimationClip eIdleCombatClip;
-    public AnimationClip eRunForwardClip;
-    public AnimationClip eWalkForwardClip;
+    public AnimationClip deathAnimationClip;
+    public AnimationClip idleAnimationClip;
+    public AnimationClip idleCombatAnimationClip;
+    public AnimationClip runForwardAnimationClip;
+    public AnimationClip walkForwardAnimationClip;
 
-    public const string E_DEATHBACK = "E_DeathBack";
-    public const string E_IDLE = "E_Idle";
-    public const string E_IDLECOMBAT = "E_IdleCombat";
-    public const string E_RUN_FORWARD = "E_Run_Forward";
-    public const string E_WALK_FORWARD = "E_Walk_Forward";
+    public const string DEATH_ANIMATION = "Death_Animation";
+    public const string IDLE_ANIMATION = "Idle_Animation";
+    public const string IDLECOMBAT_ANIMATION = "IdleCombat_Animation";
+    public const string RUN_FORWARD_ANIMATION = "Run_Forward_Animation";
+    public const string WALK_FORWARD_ANIMATION = "Walk_Forward_Animation";
 
-
+    private void OnValidate ( )
+    {
+        LimitMonsterAnimationsByMonsterRank(monsterDataSO);
+    }
     public void ChangeCurrentBasicAnimations ( AnimatorOverrideController animatorOverrideController )
     {
-        animatorOverrideController[E_DEATHBACK] = eDeathBackClip;
-        animatorOverrideController[E_IDLE] = eIdleClip;
-        animatorOverrideController[E_IDLECOMBAT] = eIdleCombatClip;
-        animatorOverrideController[E_RUN_FORWARD] = eRunForwardClip;
-        animatorOverrideController[E_WALK_FORWARD] = eWalkForwardClip;
+        LimitMonsterAnimationsByMonsterRank(monsterDataSO);
+        animatorOverrideController[DEATH_ANIMATION] = deathAnimationClip;
+        animatorOverrideController[IDLE_ANIMATION] = idleAnimationClip;
+        animatorOverrideController[IDLECOMBAT_ANIMATION] = idleCombatAnimationClip;
+        animatorOverrideController[RUN_FORWARD_ANIMATION] = runForwardAnimationClip;
+        animatorOverrideController[WALK_FORWARD_ANIMATION] = walkForwardAnimationClip;
     }
     public void ChangeCurretCombatAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
     {
@@ -67,4 +72,66 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
         LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackNoWeapons);
         LoadSkillAttackAnimationsOnOverride(animatorOverrideController, skillAttackNoWeapons);
     }
+
+    [OnValueChanged("LimitMonsterAnimationsByMonsterRank")]
+    public void LimitMonsterAnimationsByMonsterRank ( MonsterDataSO monsterDataSO )
+    {
+        if (monsterDataSO != null)
+        {
+            switch (monsterDataSO.monsterRank)
+            {
+                case MonsterRank.Minion:
+
+                    maxNumberOfBasicAttacks = 2;
+                    maxNumberOfChargedAttacks = 1;
+                    maxNumberOfSpecialAttacks = 1;
+                    maxNumberOfSkillAttacks = 0;
+                    break;
+
+                case MonsterRank.Soldier:
+
+                    maxNumberOfBasicAttacks = 3;
+                    maxNumberOfChargedAttacks = 1;
+                    maxNumberOfSpecialAttacks = 1;
+                    maxNumberOfSkillAttacks = 0;
+                    break;
+
+                case MonsterRank.Guardian:
+
+                    maxNumberOfBasicAttacks = 4;
+                    maxNumberOfChargedAttacks = 1;
+                    maxNumberOfSpecialAttacks = 1;
+                    maxNumberOfSkillAttacks = 0;
+                    break;
+
+                case MonsterRank.General:
+
+                    maxNumberOfBasicAttacks = 3;
+                    maxNumberOfChargedAttacks = 2;
+                    maxNumberOfSpecialAttacks = 1;
+                    maxNumberOfSkillAttacks = 1;
+                    break;
+
+                case MonsterRank.Boss:
+
+                    maxNumberOfBasicAttacks = 3;
+                    maxNumberOfChargedAttacks = 2;
+                    maxNumberOfSpecialAttacks = 2;
+                    maxNumberOfSkillAttacks = 2;
+                    break;
+
+                case MonsterRank.EliteBoss:
+
+                    maxNumberOfBasicAttacks = 3;
+                    maxNumberOfChargedAttacks = 2;
+                    maxNumberOfSpecialAttacks = 3;
+                    maxNumberOfSkillAttacks = 2;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
 }
