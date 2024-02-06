@@ -78,7 +78,9 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
                              detectionMask);
         }
 
-        if (playerAnimations.GetCurrentAnimationInfo(playerAnimations.COMBAT_LAYER, playerAnimations.ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME).normalizedTime < 0.85f)
+        AnimatorStateInfo currentAnimationState = playerAnimations.SelectCurrentAnimatorState(playerAnimations.COMBAT_LAYER);
+
+        if (currentAnimationState.normalizedTime < 0.85f)
         {
             if(rightDetection.Length > 0)
             {

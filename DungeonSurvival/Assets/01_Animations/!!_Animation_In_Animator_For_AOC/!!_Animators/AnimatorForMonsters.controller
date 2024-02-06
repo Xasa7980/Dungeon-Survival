@@ -671,13 +671,13 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Attack
+  - m_Name: BasicAttack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: AttackIndex
+  - m_Name: BasicAttackIndex
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
@@ -1083,7 +1083,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Attack
+    m_ConditionEvent: BasicAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6204939258778274720}
@@ -1344,7 +1344,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: AttackIndex
     m_Mirror: 0
-  m_BlendParameter: AttackIndex
+  m_BlendParameter: BasicAttackIndex
   m_BlendParameterY: Blend
   m_MinThreshold: 0
   m_MaxThreshold: 3
