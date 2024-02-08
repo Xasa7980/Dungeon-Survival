@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -158,6 +159,11 @@ public class AI_HostileBehaviour : MonoBehaviour
     private void DetermineAttackType ( )
     {
         int randomIndex = GetRandomAttack();
+
+        if (randomIndex >= 0) 
+        {
+            attackCategory = (AttackCategory)randomIndex;
+        }
         attackCategory = (AttackCategory)randomIndex;
         releasingAttack = true;
         timerBetweenAttack = 0;
@@ -292,7 +298,7 @@ public class AI_HostileBehaviour : MonoBehaviour
             {
                 if (specialAttackLoadingTimer < specialAttacksInstances[index].attackData.loadingTimerMax)
                 {
-                    skillAttackLoadingTimer += Time.deltaTime;
+                    specialAttackLoadingTimer += Time.deltaTime;
                     OnLoadingSpecialAttack?.Invoke(this, new OnLoadingSpecialEventArgs
                     {
                         progressNormalized = specialAttackLoadingTimer / specialAttacksInstances[index].attackData.loadingTimerMax,
@@ -302,11 +308,11 @@ public class AI_HostileBehaviour : MonoBehaviour
                 }
                 else if (specialAttackReleaseTimer > specialAttackReleaseTimerMax)
                 {
+                    OnSpecialAttack?.Invoke(this, EventArgs.Empty);
+
                     ResetAttackTimers();
                     specialAttackLoadingTimer = 0;
                     specialAttacksInstances[index].cooldownTimer = 0;
-
-                    OnSpecialAttack?.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
@@ -407,7 +413,7 @@ public class AI_HostileBehaviour : MonoBehaviour
     private int GetRandomAttack ( )
     {
         float randNum = UnityEngine.Random.value;
-        float total = randNum * 100;
+        float total = randNum * (attackRates.Count > 0 ? attackRates.Sum() : 1);
         float cumulativeRate = 0;
 
         for (int i = 0; i < attackRates.Count; i++)
@@ -421,7 +427,7 @@ public class AI_HostileBehaviour : MonoBehaviour
 
         // Si llega aquí, significa que total no era menor que ninguna de las tasas acumuladas
         // Deberías decidir qué hacer en este caso, por ejemplo, retornar un valor por defecto.
-        return -1; // O cualquier valor que indique una condición especial o un error.
+        return 0; // O cualquier valor que indique una condición especial o un error.
     }
     private void CheckForEnemies ( )
     {

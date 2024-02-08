@@ -97,8 +97,11 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
         hostileBehaviour.OnExitCombat += HostileBehaviour_OnExitCombat;
         hostileBehaviour.OnBasicAttack += AI_HostileBehaviour_OnBasicAttack;
         hostileBehaviour.OnChargingAttack += AI_HostileBehaviour_OnLoadingChargedAttack;
+        hostileBehaviour.OnChargedAttack += AI_HostileBehaviour_OnChargedAttack;
+        hostileBehaviour.OnLoadingSpecialAttack += AI_HostileBehaviour_OnLoadingSpecialAttack;
         hostileBehaviour.OnSpecialAttack += AI_HostileBehaviour_OnSpecialAttack;
         hostileBehaviour.OnCastingSkill += AI_HostileBehaviour_OnLoadingSkillAttack;
+        hostileBehaviour.OnSkillAttack += AI_HostileBehaviour_OnSkillAttack;
     }
 
 
@@ -121,58 +124,41 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
     }
     private void AI_HostileBehaviour_OnChargedAttack ( object sender, System.EventArgs e )
     {
-        animator.SetBool(CHARGED_ATTACK_BOOL, true);
+        animator.SetTrigger(LOADING_CHARGED_ATTACK_TRIGGER);
+
         print("chargedattacked");
     }
     private void AI_HostileBehaviour_OnLoadingChargedAttack ( object sender, AI_HostileBehaviour.OnLoadingAttackEventArgs e )
     {
         chargedAttackIndex = e.attackIndex;
-        animator.SetBool(CHARGED_ATTACK_BOOL, false);
+        animator.SetBool(CHARGED_ATTACK_BOOL, true);
         animator.SetFloat(CHARGED_ATTACK_INDEX_FLOAT, chargedAttackIndex);
-        animator.SetTrigger(LOADING_CHARGED_ATTACK_TRIGGER);
-
-        if (e.progressNormalized <= 0 || e.progressNormalized > 0.95f)
-        {
-            hostileBehaviour.OnChargedAttack += AI_HostileBehaviour_OnChargedAttack;
-        }
+        
         print("Loading" + e.progressNormalized + e.attacksDataSO);
     }
     private void AI_HostileBehaviour_OnSpecialAttack ( object sender, System.EventArgs e )
     {
-        animator.SetBool(SPECIAL_ATTACK_BOOL,true);
+        animator.SetTrigger(LOADING_SPECIAL_ATTACK_TRIGGER);
         print("special_attacked");
 
     }
     private void AI_HostileBehaviour_OnLoadingSpecialAttack ( object sender, AI_HostileBehaviour.OnLoadingSpecialEventArgs e )
     {
         specialAttackIndex = e.attackIndex;
-        animator.SetBool(SPECIAL_ATTACK_BOOL, false);
+        animator.SetBool(SPECIAL_ATTACK_BOOL, true);
         animator.SetFloat(SPECIAL_ATTACK_INDEX_FLOAT, specialAttackIndex);
-        animator.SetTrigger(LOADING_SPECIAL_ATTACK_TRIGGER);
-
-        if (e.progressNormalized <= 0 || e.progressNormalized > 0.95f)
-        {
-            hostileBehaviour.OnSpecialAttack += AI_HostileBehaviour_OnSpecialAttack;
-        }
-        print("Loading" + e.progressNormalized + e.attacksDataSO);
     }
     private void AI_HostileBehaviour_OnSkillAttack ( object sender, System.EventArgs e )
     {
-        animator.SetBool(SKILL_ATTACK_BOOL, true);
+        animator.SetTrigger(LOADING_SKILL_ATTACK_TRIGGER);
         print("skill_attacked");
     }
     private void AI_HostileBehaviour_OnLoadingSkillAttack ( object sender, AI_HostileBehaviour.OnLoadingSkillEventArgs e )
     {
+
         skillAttackIndex = e.attackIndex;
         animator.SetFloat(SKILL_ATTACK_INDEX_FLOAT, skillAttackIndex);
-        animator.SetBool(SKILL_ATTACK_BOOL, false);
-        animator.SetTrigger(LOADING_SKILL_ATTACK_TRIGGER);
-
-        if (e.progressNormalized <= 0 ||e.progressNormalized > 0.95f)
-        {
-            hostileBehaviour.OnSkillAttack += AI_HostileBehaviour_OnSkillAttack;
-        }
-        print("Loading" + e.progressNormalized + e.attacksDataSO);
+        animator.SetBool(SKILL_ATTACK_BOOL, true);
     }
     #endregion
 
@@ -193,11 +179,6 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
         animator.SetBool(IS_RUNNING_BOOL, isRunning);
         animator.SetBool(IS_WALKING_BOOL, isWalking);
 
-        if(GetCurrentAnimationInfo(COMBAT_LAYER,ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME).normalizedTime > 1f)
-        {
-            Debug.Log("animacion cargada terminada");
-            animator.SetBool(CHARGED_ATTACK_BOOL, false);
-        }
         //animator.SetBool(CHARGED_ATTACK_BOOL, !isAnimationEnded(currentAnimatorStateInfo,COMBAT_LAYER, ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME));
         //animator.SetBool(SPECIAL_ATTACK_BOOL, !isAnimationEnded(currentAnimatorStateInfo,COMBAT_LAYER, ANIMATION_STATE_LOADING_SPECIAL_ATTACK_TREE_PERFORMED_NAME));
         //animator.SetBool(SKILL_ATTACK_BOOL, !isAnimationEnded(currentAnimatorStateInfo,COMBAT_LAYER,ANIMATION_STATE_SKILL_ATTACK_TREE_PERFORMED_NAME));

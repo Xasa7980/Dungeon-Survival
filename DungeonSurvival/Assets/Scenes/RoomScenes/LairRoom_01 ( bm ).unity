@@ -91405,22 +91405,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
         type: 3}
-      propertyPath: attackRates.Array.data[0]
-      value: 1
+      propertyPath: timerBetweenAttackMax
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
         type: 3}
-      propertyPath: attackRates.Array.data[1]
+      propertyPath: attackRates.Array.data[0]
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
         type: 3}
+      propertyPath: attackRates.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
       propertyPath: attackRates.Array.data[2]
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
         type: 3}
       propertyPath: attackRates.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182210334302575492, guid: ff3f6dd45532e5b4b8b85c5fb3066933,
+        type: 3}
+      propertyPath: basicAttackReleaseTimerMax
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5182210334302575498, guid: ff3f6dd45532e5b4b8b85c5fb3066933,

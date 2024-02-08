@@ -244,10 +244,10 @@ public class AnimationClipContainerSO : ScriptableObject
                 chargedClips[i] = attackChargedAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
                 chargedAttacksSO_List.Add(attackChargedAnimationClips[randomIndices[i]]);
                 
-                if (attackChargedAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip != null)
+                if (attackChargedAnimationClips[randomIndices[i]].specialAttackNeedsLoading)
                 {
                     loadingClips[i] = attackChargedAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
-                    animatorOverrideController[animationLoadingChargedClipKeys[i]] = chargedClips[i];
+                    animatorOverrideController[animationLoadingChargedClipKeys[i]] = loadingClips[i];
                 }
                 animatorOverrideController[animationChargedClipKeys[i]] = chargedClips[i];
                 Debug.Log(chargedClips[i]);
