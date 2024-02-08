@@ -96,7 +96,7 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
         hostileBehaviour.OnEnterCombat += HostileBehaviour_OnEnterCombat;
         hostileBehaviour.OnExitCombat += HostileBehaviour_OnExitCombat;
         hostileBehaviour.OnBasicAttack += AI_HostileBehaviour_OnBasicAttack;
-        hostileBehaviour.OnChargingAttack += AI_HostileBehaviour_OnLoadingChargedAttack;
+        hostileBehaviour.OnLoadingAttack += AI_HostileBehaviour_OnLoadingChargedAttack;
         hostileBehaviour.OnChargedAttack += AI_HostileBehaviour_OnChargedAttack;
         hostileBehaviour.OnLoadingSpecialAttack += AI_HostileBehaviour_OnLoadingSpecialAttack;
         hostileBehaviour.OnSpecialAttack += AI_HostileBehaviour_OnSpecialAttack;

@@ -12,7 +12,7 @@ public class AI_HostileBehaviour : MonoBehaviour
     public event EventHandler OnBasicAttack;
 
     public event EventHandler OnChargedAttack;
-    public event EventHandler<OnLoadingAttackEventArgs> OnChargingAttack;
+    public event EventHandler<OnLoadingAttackEventArgs> OnLoadingAttack;
     public class OnLoadingAttackEventArgs : EventArgs
     {
         public float progressNormalized;
@@ -242,7 +242,7 @@ public class AI_HostileBehaviour : MonoBehaviour
                 if (chargedAttackLoadingTimer < chargedAttacksInstances[index].attackData.loadingTimerMax)
                 {
                     chargedAttackLoadingTimer += Time.deltaTime;
-                    OnChargingAttack?.Invoke(this, new OnLoadingAttackEventArgs
+                    OnLoadingAttack?.Invoke(this, new OnLoadingAttackEventArgs
                     {
                         progressNormalized = chargedAttackLoadingTimer / chargedAttacksInstances[index].attackData.loadingTimerMax,
                         attackIndex = index,
@@ -263,7 +263,7 @@ public class AI_HostileBehaviour : MonoBehaviour
             }
             else
             {
-                OnChargingAttack?.Invoke(this, new OnLoadingAttackEventArgs
+                OnLoadingAttack?.Invoke(this, new OnLoadingAttackEventArgs
                 {
                     progressNormalized = chargedAttackLoadingTimer / chargedAttacksInstances[index].attackData.loadingTimerMax,
                     attackIndex = index,

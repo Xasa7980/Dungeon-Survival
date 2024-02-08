@@ -74,7 +74,7 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
             {
                 case MonsterRank.Minion:
 
-                    maxNumberOfBasicAttacks = 2;
+                    maxNumberOfBasicAttacks = 3;
                     maxNumberOfChargedAttacks = 1;
                     maxNumberOfSpecialAttacks = 1;
                     maxNumberOfSkillAttacks = 0;
@@ -83,7 +83,7 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
                 case MonsterRank.Soldier:
 
                     maxNumberOfBasicAttacks = 3;
-                    maxNumberOfChargedAttacks = 1;
+                    maxNumberOfChargedAttacks = 2;
                     maxNumberOfSpecialAttacks = 1;
                     maxNumberOfSkillAttacks = 0;
                     break;
@@ -91,33 +91,33 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
                 case MonsterRank.Guardian:
 
                     maxNumberOfBasicAttacks = 4;
-                    maxNumberOfChargedAttacks = 1;
-                    maxNumberOfSpecialAttacks = 1;
-                    maxNumberOfSkillAttacks = 0;
+                    maxNumberOfChargedAttacks = 2;
+                    maxNumberOfSpecialAttacks = 2;
+                    maxNumberOfSkillAttacks = 1;
                     break;
 
                 case MonsterRank.General:
 
-                    maxNumberOfBasicAttacks = 3;
+                    maxNumberOfBasicAttacks = 4;
                     maxNumberOfChargedAttacks = 2;
                     maxNumberOfSpecialAttacks = 1;
-                    maxNumberOfSkillAttacks = 1;
+                    maxNumberOfSkillAttacks = 2;
                     break;
 
                 case MonsterRank.Boss:
 
-                    maxNumberOfBasicAttacks = 3;
-                    maxNumberOfChargedAttacks = 2;
+                    maxNumberOfBasicAttacks = 4;
+                    maxNumberOfChargedAttacks = 3;
                     maxNumberOfSpecialAttacks = 2;
-                    maxNumberOfSkillAttacks = 2;
+                    maxNumberOfSkillAttacks = 3;
                     break;
 
                 case MonsterRank.EliteBoss:
 
-                    maxNumberOfBasicAttacks = 3;
-                    maxNumberOfChargedAttacks = 2;
+                    maxNumberOfBasicAttacks =  4;
+                    maxNumberOfChargedAttacks = 3;
                     maxNumberOfSpecialAttacks = 3;
-                    maxNumberOfSkillAttacks = 2;
+                    maxNumberOfSkillAttacks = 4;
                     break;
 
                 default:
