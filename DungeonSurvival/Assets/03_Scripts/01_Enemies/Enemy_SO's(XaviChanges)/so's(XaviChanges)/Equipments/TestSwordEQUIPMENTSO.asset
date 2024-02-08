@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f46175650a31d0146af00f2f3fd74f6f, type: 3}
-  m_Name: Sword_Goblin_Cleaver_1Hand
+  m_Name: TestSwordEQUIPMENTSO
   m_EditorClassIdentifier: 
   equipmentName: Goblin Cleaver
   description: A hefty, crude sword wielded by goblins for plunder and battle. Made
@@ -63,13 +63,14 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f9d179f7f364c4c43b3887adfe01cb55, type: 2}
     - {fileID: 11400000, guid: b6df55902204e2247b6f4bdfa417a34b, type: 2}
     chargedAttackClips:
-    - {fileID: 11400000, guid: 8238d2baa97ce5d49b0c5b476248e2e7, type: 2}
-    - {fileID: 11400000, guid: eb17d4b0cadae7048b3f9204f442e53f, type: 2}
-    loadingChargedAttackClips: []
+    - {fileID: 11400000, guid: 3cac4cd395e8b6c4c80018633c79fb23, type: 2}
+    loadingChargedAttackClips:
+    - {fileID: 11400000, guid: 3cac4cd395e8b6c4c80018633c79fb23, type: 2}
     specialAttackClips:
-    - {fileID: 11400000, guid: ee9d682e70d8ce84099baaae2808d009, type: 2}
-    - {fileID: 11400000, guid: c46e57c8dffb9c34bb476b8b6d9170c3, type: 2}
-    loadingSpecialAttackClips: []
+    - {fileID: 11400000, guid: 3160cd46bbed3274badb56fe13fb5304, type: 2}
+    loadingSpecialAttackClips:
+    - {fileID: 11400000, guid: 3160cd46bbed3274badb56fe13fb5304, type: 2}
     skillAttackClips:
     - {fileID: 11400000, guid: 92e25e9d072c45b4a9fc99bef7a73105, type: 2}
-    loadingSkillAttackClips: []
+    loadingSkillAttackClips:
+    - {fileID: 11400000, guid: 92e25e9d072c45b4a9fc99bef7a73105, type: 2}

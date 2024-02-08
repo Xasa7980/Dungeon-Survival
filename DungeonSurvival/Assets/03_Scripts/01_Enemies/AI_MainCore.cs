@@ -28,7 +28,6 @@ public class AI_MainCore : MonoBehaviour
 
     private void Awake ( )
     {
-        state = State.Idle;
         monsterStats = GetComponent<MonsterStats>();
     }
     private void Start ( )

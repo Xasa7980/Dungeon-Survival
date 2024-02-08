@@ -184,7 +184,7 @@ public class AnimationClipContainerSO : ScriptableObject
     {
         return (PlayerAnimationContainerSO)animationClipContainerSO;
     }
-    private List<int> GetListRandomAnimationIndex<T> ( float totalClips,T[] clipsListLength )
+    private List<int> GetListRandomAnimationIndex ( float totalClips, AttacksDataSO[] clipsListLength )
     {
         List<int> selectedIndices = new List<int>();
         while (selectedIndices.Count < totalClips)
@@ -198,77 +198,130 @@ public class AnimationClipContainerSO : ScriptableObject
         return selectedIndices;
         
     }
+    public List<AttacksDataSO> basicAttacksSO_List = new List<AttacksDataSO>();
     public void LoadBasicAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackBasicAnimationClips )
     {
-        string[] attackClipKeys = { ATTACK_BASIC_1, ATTACK_BASIC_2, ATTACK_BASIC_3, ATTACK_BASIC_4 };
-        AnimationClip[] attackClips = { attackBasicClip_01, attackBasicClip_02, attackBasicClip_03, attackBasicClip_04 };
-
-        List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfBasicAttacks, attackBasicAnimationClips);
-        for (int i = 0; i < randomIndices.Count && i < maxNumberOfBasicAttacks && i < attackClipKeys.Length; i++)
+        if(attackBasicAnimationClips.Length > 0)
         {
-            attackClips[i] = attackBasicAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
-            Debug.Log(attackClips[i]);
-            animatorOverrideController[attackClipKeys[i]] = attackClips[i];
+            basicAttacksSO_List.Clear();
+
+            string[] attackClipKeys = { ATTACK_BASIC_1, ATTACK_BASIC_2, ATTACK_BASIC_3, ATTACK_BASIC_4 };
+            AnimationClip[] attackClips = { attackBasicClip_01, attackBasicClip_02, attackBasicClip_03, attackBasicClip_04 };
+
+            List<int> randomIndices = GetListRandomAnimationIndex(maxNumberOfBasicAttacks, attackBasicAnimationClips);
+            for (int i = 0; i < maxNumberOfBasicAttacks; i++)
+            {
+                attackClips[i] = attackBasicAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
+                basicAttacksSO_List.Add(attackBasicAnimationClips[randomIndices[i]]);
+                animatorOverrideController[attackClipKeys[i]] = attackClips[i];
+            }
+        }
+        else
+        {
+            Debug.Log("No basic attack clips available to assign.");
+            return;
         }
     }
+    public List<AttacksDataSO> chargedAttacksSO_List = new List<AttacksDataSO>();
     public void LoadChargedAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackChargedAnimationClips )
     {
-        string[] animationChargingClipKeys = { LOADING_CHARGING_ATTACK_1, LOADING_CHARGING_ATTACK_2, LOADING_CHARGING_ATTACK_3, LOADING_CHARGING_ATTACK_4 };
-        string[] animationChargedClipKeys = { CHARGED_ATTACK_1, CHARGED_ATTACK_2, LOADING_CHARGING_ATTACK_3, LOADING_CHARGING_ATTACK_4 };
-
-        AnimationClip[] loadingClips = { loadingChargingAttackClip_01, loadingChargingAttackClip_02, loadingChargingAttackClip_03, loadingChargingAttackClip_04 };
-        AnimationClip[] chargedClips = { chargedAttackClip_01, chargedAttackClip_02, chargedAttackClip_03, chargedAttackClip_04 };
-
-        List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfChargedAttacks, attackChargedAnimationClips);
-
-        for (int i = 0; i < randomIndices.Count && i < maxNumberOfChargedAttacks && i < animationChargedClipKeys.Length; i++)
+        if (attackChargedAnimationClips.Length > 0)
         {
-            chargedClips[i] = attackChargedAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
-            loadingClips[i] = attackChargedAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
-            Debug.Log(chargedClips[i]);
-            animatorOverrideController[animationChargedClipKeys[i]] = chargedClips[i];
+            chargedAttacksSO_List.Clear();
+
+            string[] animationLoadingChargedClipKeys = { LOADING_CHARGING_ATTACK_1, LOADING_CHARGING_ATTACK_2, LOADING_CHARGING_ATTACK_3, LOADING_CHARGING_ATTACK_4 };
+            string[] animationChargedClipKeys = { CHARGED_ATTACK_1, CHARGED_ATTACK_2, LOADING_CHARGING_ATTACK_3, LOADING_CHARGING_ATTACK_4 };
+
+            AnimationClip[] loadingClips = { loadingChargingAttackClip_01, loadingChargingAttackClip_02, loadingChargingAttackClip_03, loadingChargingAttackClip_04 };
+            AnimationClip[] chargedClips = { chargedAttackClip_01, chargedAttackClip_02, chargedAttackClip_03, chargedAttackClip_04 };
+
+            int availableClips = attackChargedAnimationClips.Length;
+
+            List<int> randomIndices = GetListRandomAnimationIndex(Math.Min(maxNumberOfChargedAttacks, availableClips), attackChargedAnimationClips);
+
+            for (int i = 0; i < randomIndices.Count && i < availableClips; i++)
+            {
+                chargedClips[i] = attackChargedAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
+                chargedAttacksSO_List.Add(attackChargedAnimationClips[randomIndices[i]]);
+                
+                if (attackChargedAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip != null)
+                {
+                    loadingClips[i] = attackChargedAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
+                    animatorOverrideController[animationLoadingChargedClipKeys[i]] = chargedClips[i];
+                }
+                animatorOverrideController[animationChargedClipKeys[i]] = chargedClips[i];
+                Debug.Log(chargedClips[i]);
+            }
+        }
+
+        else
+        {
+            Debug.Log("No charged attack clips available to assign.");
+            return;
         }
     }
+    public List<AttacksDataSO> specialAttacksSO_List = new List<AttacksDataSO>();
     public void LoadSpecialAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackSpecialAnimationClips )
     {
-        string[] animationSpecialClipKeys = { SPECIAL_ATTACK_BASIC_1, SPECIAL_ATTACK_BASIC_2, SPECIAL_ATTACK_BASIC_3, SPECIAL_ATTACK_BASIC_4 };
-        AnimationClip[] specialClips = { specialAttackClip_01, specialAttackClip_02, specialAttackClip_03, specialAttackClip_04 };
-
-        string[] animationSpecialLoadingClipKeys = { LOADING_SPECIAL_ATTACK_BASIC_1, LOADING_SPECIAL_ATTACK_BASIC_2, LOADING_SPECIAL_ATTACK_BASIC_3, LOADING_SPECIAL_ATTACK_BASIC_4 };
-        AnimationClip[] specialLoadingClips = { loadingSpecialAttackClip_01, loadingSpecialAttackClip_02, loadingSpecialAttackClip_03, loadingSpecialAttackClip_04 };
-
-        List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfSpecialAttacks, attackSpecialAnimationClips);
-
-        for (int i = 0; i < randomIndices.Count && i < maxNumberOfSpecialAttacks && i < attackSpecialAnimationClips.Length; i++)
+        if (attackSpecialAnimationClips.Length > 0)
         {
-            specialClips[i] = attackSpecialAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
-            if (attackSpecialAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip != null )
+            specialAttacksSO_List.Clear();
+
+            string[] animationSpecialClipKeys = { SPECIAL_ATTACK_BASIC_1, SPECIAL_ATTACK_BASIC_2, SPECIAL_ATTACK_BASIC_3, SPECIAL_ATTACK_BASIC_4 };
+            string[] animationSpecialLoadingClipKeys = { LOADING_SPECIAL_ATTACK_BASIC_1, LOADING_SPECIAL_ATTACK_BASIC_2, LOADING_SPECIAL_ATTACK_BASIC_3, LOADING_SPECIAL_ATTACK_BASIC_4 };
+
+            AnimationClip[] specialLoadingClips = { loadingSpecialAttackClip_01, loadingSpecialAttackClip_02, loadingSpecialAttackClip_03, loadingSpecialAttackClip_04 };
+            AnimationClip[] specialClips = { specialAttackClip_01, specialAttackClip_02, specialAttackClip_03, specialAttackClip_04 };
+
+            List<int> randomIndices = GetListRandomAnimationIndex(Math.Min(maxNumberOfSpecialAttacks, attackSpecialAnimationClips.Length), attackSpecialAnimationClips);
+
+            for (int i = 0; i < randomIndices.Count; i++)
             {
-                specialLoadingClips[i] = attackSpecialAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
+                specialClips[i] = attackSpecialAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
+                if (attackSpecialAnimationClips[randomIndices[i]].specialAttackNeedsLoading)
+                {
+                    specialLoadingClips[i] = attackSpecialAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
+                    animatorOverrideController[animationSpecialLoadingClipKeys[i]] = specialLoadingClips[i];
+                }
+                specialAttacksSO_List.Add(attackSpecialAnimationClips[randomIndices[i]]);
+                animatorOverrideController[animationSpecialClipKeys[i]] = specialClips[i];
             }
-            animatorOverrideController[animationSpecialClipKeys[i]] = specialClips[i];
-            animatorOverrideController[animationSpecialLoadingClipKeys[i]] = specialLoadingClips[i];
+        }
+        else
+        {
+            Debug.Log("No special attack clips available to assign.");
         }
     }
 
+    public List<AttacksDataSO> skillAttacksSO_List = new List<AttacksDataSO>();
     public void LoadSkillAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackSkillAnimationClips )
     {
-        string[] animationCastingClipKeys = { LOADING_SKILL_ATTACK_1, LOADING_SKILL_ATTACK_2, LOADING_SKILL_ATTACK_3, LOADING_SKILL_ATTACK_4 };
-        string[] animationSkillClipKeys = { SKILL_ATTACK_1, SKILL_ATTACK_2, SKILL_ATTACK_3, SKILL_ATTACK_4 };
-
-        AnimationClip[] loadingClips = { loadingSkillAttackClip_01, loadingSkillAttackClip_02, loadingSkillAttackClip_03, loadingSkillAttackClip_04 };
-        AnimationClip[] skillClips = { skillAttackClip_01, skillAttackClip_02, skillAttackClip_03, skillAttackClip_04 };
-
-        List<int> randomIndices = GetListRandomAnimationIndex<AttacksDataSO>(maxNumberOfSpecialAttacks, attackSkillAnimationClips);
-        for (int i = 0; i < randomIndices.Count && i < maxNumberOfSkillAttacks && i < attackSkillAnimationClips.Length; i++)
+        if (attackSkillAnimationClips.Length > 0)
         {
-            skillClips[i] = attackSkillAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
-            if (attackSkillAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip != null)
+            skillAttacksSO_List.Clear();
+            string[] animationCastingClipKeys = { LOADING_SKILL_ATTACK_1, LOADING_SKILL_ATTACK_2, LOADING_SKILL_ATTACK_3, LOADING_SKILL_ATTACK_4 };
+            string[] animationSkillClipKeys = { SKILL_ATTACK_1, SKILL_ATTACK_2, SKILL_ATTACK_3, SKILL_ATTACK_4 };
+
+            AnimationClip[] loadingClips = { loadingSkillAttackClip_01, loadingSkillAttackClip_02, loadingSkillAttackClip_03, loadingSkillAttackClip_04 };
+            AnimationClip[] skillClips = { skillAttackClip_01, skillAttackClip_02, skillAttackClip_03, skillAttackClip_04 };
+
+            List<int> randomIndices = GetListRandomAnimationIndex(Math.Min(maxNumberOfSkillAttacks, attackSkillAnimationClips.Length), attackSkillAnimationClips);
+
+            for (int i = 0; i < randomIndices.Count; i++)
             {
-                loadingClips[i] = attackSkillAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
+                skillClips[i] = attackSkillAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
+                if (attackSkillAnimationClips[randomIndices[i]].specialAttackNeedsLoading)
+                {
+                    loadingClips[i] = attackSkillAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
+                    animatorOverrideController[animationCastingClipKeys[i]] = loadingClips[i];
+                }
+                skillAttacksSO_List.Add(attackSkillAnimationClips[randomIndices[i]]);
+                animatorOverrideController[animationSkillClipKeys[i]] = skillClips[i];
             }
-            animatorOverrideController[animationSkillClipKeys[i]] = skillClips[i];
-            animatorOverrideController[animationCastingClipKeys[i]] = loadingClips[i];
+        }
+        else
+        {
+            Debug.Log("No skill attack clips available to assign.");
         }
     }
 }

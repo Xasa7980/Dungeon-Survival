@@ -64,9 +64,16 @@ MonoBehaviour:
   loadingSkillAttackClip_02: {fileID: 0}
   loadingSkillAttackClip_03: {fileID: 0}
   loadingSkillAttackClip_04: {fileID: 0}
+  basicAttacksSO_List: []
+  chargedAttacksSO_List: []
+  specialAttacksSO_List: []
+  skillAttacksSO_List: []
   monsterDataSO: {fileID: 0}
-  deathAnimationClip: {fileID: 0}
-  idleAnimationClip: {fileID: 0}
-  idleCombatAnimationClip: {fileID: 0}
-  runForwardAnimationClip: {fileID: 0}
-  walkForwardAnimationClip: {fileID: 0}
+  deathAnimationClip: {fileID: 7400000, guid: a6172e49ac28e93478724e4b98f1f0f0, type: 2}
+  idleAnimationClip: {fileID: 7400000, guid: 9bacf0928ea200a459dd1a5faa36dad4, type: 2}
+  idleCombatAnimationClip: {fileID: 7400000, guid: 6286b35fd91558c4d8b709b23d7d6db7,
+    type: 2}
+  runForwardAnimationClip: {fileID: 7400000, guid: 7b073386d7006094fa8c676023958a4a,
+    type: 2}
+  walkForwardAnimationClip: {fileID: 7400000, guid: e659df40853ae784e8df1cc12dbb74f3,
+    type: 2}

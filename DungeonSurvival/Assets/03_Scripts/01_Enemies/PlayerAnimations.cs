@@ -52,7 +52,7 @@ public class PlayerAnimations : MonoBehaviour
     private int chargedAttackIndex;
     private int specialAttackIndex;
     private int skillAttackIndex;
-
+    private AnimatorStateInfo currentCombatAnimatorState => SelectCurrentAnimatorState(COMBAT_LAYER);
     private Animator animator;
     private PlayerCombat playerCombat;
     private bool attackAnimationTriggered;
@@ -79,9 +79,9 @@ public class PlayerAnimations : MonoBehaviour
     {
         if (attackAnimationTriggered)
         {
-            AnimatorStateInfo currentState = SelectCurrentAnimatorState(COMBAT_LAYER);
+            
 
-            if (currentState.normalizedTime > 0.95f)
+            if (currentCombatAnimatorState.normalizedTime > 0.95f)
             {
                 animator.SetLayerWeight(COMBAT_LAYER, 0f);
 

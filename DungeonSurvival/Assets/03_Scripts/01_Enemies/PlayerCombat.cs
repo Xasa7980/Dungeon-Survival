@@ -51,75 +51,58 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
         {
             OnBasicAttackPerformed?.Invoke(this, EventArgs.Empty);
         }
-        WeaponDetectMonsters();
+        CheckForEnemies();
     }
-    private void WeaponDetectMonsters ( )
+    private void CheckForEnemies ( )
     {
-        Collider[] rightDetection = new Collider[0];
-        if (playerStats.RightDetectionArea != null && playerStats.RightDetectionArea.drawMode == AreaDrawer.DrawMode.Box)
-        {
-            rightDetection = Physics.OverlapBox(playerStats.RightDetectionArea.objectPosition, playerStats.RightDetectionArea.size,
-                             playerStats.RightDetectionArea.rotation, detectionMask);
-        }
-        else if (playerStats.RightDetectionArea != null && playerStats.RightDetectionArea.drawMode == AreaDrawer.DrawMode.Sphere)
-        {
-            rightDetection = Physics.OverlapSphere(playerStats.RightDetectionArea.objectPosition, playerStats.LeftDetectionArea.radius,
-                             detectionMask);
-        }
-        Collider[] leftDetection = new Collider[0];
-        if (playerStats.LeftDetectionArea != null && playerStats.LeftDetectionArea.drawMode == AreaDrawer.DrawMode.Box)
-        {
-            leftDetection = Physics.OverlapBox(playerStats.LeftDetectionArea.objectPosition, playerStats.LeftDetectionArea.size,
-                           playerStats.LeftDetectionArea.rotation, detectionMask);
-        }
-        else if (playerStats.LeftDetectionArea != null && playerStats.LeftDetectionArea.drawMode == AreaDrawer.DrawMode.Sphere)
-        {
-            leftDetection = Physics.OverlapSphere(playerStats.LeftDetectionArea.objectPosition, playerStats.LeftDetectionArea.radius,
-                             detectionMask);
-        }
+        Collider[] rightDetection = GetDetectionColliders(playerStats.RightDetectionArea);
+        Collider[] leftDetection = GetDetectionColliders(playerStats.LeftDetectionArea);
 
-        AnimatorStateInfo currentAnimationState = playerAnimations.SelectCurrentAnimatorState(playerAnimations.COMBAT_LAYER);
-
-        if (currentAnimationState.normalizedTime < 0.85f)
+        if (playerAnimations.SelectCurrentAnimatorState(playerAnimations.COMBAT_LAYER).normalizedTime < 0.95f)
         {
-            if(rightDetection.Length > 0)
+            if (rightDetection.Length > 0)
             {
-                if (!hit)
-                {
-                    foreach (Collider target in rightDetection)
-                    {
-                        if (target.TryGetComponent<MonsterStats>(out MonsterStats monsterStats))
-                        {
-                            print("rightHitted");
-
-                            playerStats.TakeDamage(monsterStats, playerStats.EquipmentDataHolder_RightHand);
-                            hit = true;
-                            break;
-                        }
-                    }
-                }
+                CheckAndDamageEnemies(rightDetection, playerStats.EquipmentDataHolder_RightHand);
             }
             else if (leftDetection.Length > 0)
             {
-                if (!hit)
-                {
-                    foreach (Collider target in leftDetection)
-                    {
-                        if (target.TryGetComponent<MonsterStats>(out MonsterStats monsterStats))
-                        {
-                            print("leftHitted");
-
-                            playerStats.TakeDamage(monsterStats, playerStats.EquipmentDataHolder_LeftHand);
-                            hit = true;
-                            break;
-                        }
-                    }
-                }
+                CheckAndDamageEnemies(leftDetection, playerStats.EquipmentDataHolder_LeftHand);
             }
         }
         else
         {
             hit = false;
+        }
+    }
+    private Collider[] GetDetectionColliders ( AreaDrawer detectionArea )
+    {
+        Collider[] detectionColliders = new Collider[0];
+        if (detectionArea != null)
+        {
+            if (detectionArea.drawMode == AreaDrawer.DrawMode.Box)
+            {
+                detectionColliders = Physics.OverlapBox(detectionArea.objectPosition, detectionArea.size, detectionArea.rotation, detectionMask);
+            }
+            else if (detectionArea.drawMode == AreaDrawer.DrawMode.Sphere)
+            {
+                detectionColliders = Physics.OverlapSphere(detectionArea.objectPosition, detectionArea.radius, detectionMask);
+            }
+        }
+        return detectionColliders;
+    }
+    private void CheckAndDamageEnemies ( Collider[] detectionColliders, EquipmentDataHolder equipmentDataHolder )
+    {
+        if (!hit)
+        {
+            foreach (Collider target in detectionColliders)
+            {
+                if (target.TryGetComponent<MonsterStats>(out MonsterStats monsterStats))
+                {
+                    playerStats.TakeDamage(monsterStats, equipmentDataHolder);
+                    hit = true;
+                    break;
+                }
+            }
         }
     }
     public void OnAnimationEvent_AttackCallback ( )

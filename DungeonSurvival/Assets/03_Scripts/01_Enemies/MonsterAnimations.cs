@@ -1,38 +1,60 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
 {
-    private const int BASE_LAYER_INDEX = 0;
-    public int COMBAT_LAYER { get { return _COMBAT_LAYER; } }
+    [Header("ANIMATOR LAYER")]
     private const int _COMBAT_LAYER = 1;
+    public int COMBAT_LAYER { get { return _COMBAT_LAYER; } }
 
-    //private const int ADDITIVE_EFFECTS_LAYER_INDEX = 2;
-    public string ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME { get { return _ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME; } }
-    private const string _ANIMATION_ATTACK_BASIC_TREE_PERFORMED_NAME = "AttackCombo";
-    public string ANIMATION_ATTACK_CHARGED_TREE_PERFORMED_NAME { get { return _ATTACK_CHARGED_TREE_NAME; } }
-    private const string _ATTACK_CHARGED_TREE_NAME = "ChargedAttack";
-    public string ANIMATION_ATTACK_SPECIAL_TREE_PERFORMED_NAME { get { return _ATTACK_SPECIAL_TREE_NAME; } }
-    private const string _ATTACK_SPECIAL_TREE_NAME = "SkillAttack";
-    public string ANIMATION_ATTACK_SKILL_TREE_PERFORMED_NAME { get { return _ATTACK_SKILL_TREE_NAME; } }
-    private const string _ATTACK_SKILL_TREE_NAME = "SkillAttack";
-
+    [Header("ANIMATOR PARAMETERS")]
     private const string IS_WALKING_BOOL = "IsWalking";
     private const string IS_RUNNING_BOOL = "IsRunning";
-    private const string ATTACK_TRIGGER_FLOAT = "Attack";
-    private const string ATTACK_INDEX_FLOAT = "AttackIndex";
-    private const string CHARGED_ATTACK_BOOL = "ChargedAttack";
-    private const string RECHARGING_TRIGGER = "ChargingAttack";
-    private const string SPECIAL_ATTACK_TRIGGER = "SpecialAttack";
-    private const string SKILL_ATTACK_BOOL = "SkillAttack";
-    private const string CASTING_SKILL_TRIGGER = "SkillCastingAttack";
     private const string DEATH_TRIGGER = "Death";
 
+    private const string BASIC_ATTACK_TRIGGER = "BasicAttack";
+    private const string CHARGED_ATTACK_BOOL = "ChargedAttack";
+    private const string SPECIAL_ATTACK_BOOL = "SpecialAttack";
+    private const string SKILL_ATTACK_BOOL = "SkillAttack";
+
+    private const string BASIC_ATTACK_INDEX_FLOAT = "BasicAttackIndex";
+    private const string CHARGED_ATTACK_INDEX_FLOAT = "ChargedAttackIndex";
+    private const string SPECIAL_ATTACK_INDEX_FLOAT = "SpecialAttackIndex";
+    private const string SKILL_ATTACK_INDEX_FLOAT = "SkillAttackIndex";
+
+    private const string LOADING_CHARGED_ATTACK_TRIGGER = "LoadingChargedAttack";
+    private const string LOADING_SPECIAL_ATTACK_TRIGGER = "LoadingSpecialAttack";
+    private const string LOADING_SKILL_ATTACK_TRIGGER = "LoadingSkillAttack";
+
+    #region ANIMATOR STATE NAMES
+    public string ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME { get { return BASIC_ATTACK_TREE_NAME; } }
+    private const string BASIC_ATTACK_TREE_NAME = "BasicAttack_Tree";
+
+    public string ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME { get { return CHARGED_ATTACK_TREE_NAME; } }
+    private const string CHARGED_ATTACK_TREE_NAME = "ChargedAttack_Tree";
+
+    public string ANIMATION_STATE_SPECIAL_ATTACK_TREE_PERFORMED_NAME { get { return SPECIAL_ATTACK_TREE_NAME; } }
+    private const string SPECIAL_ATTACK_TREE_NAME = "SpecialAttack_Tree";
+
+    public string ANIMATION_STATE_SKILL_ATTACK_TREE_PERFORMED_NAME { get { return SKILL_ATTACK_TREE_NAME; } }
+    private const string SKILL_ATTACK_TREE_NAME = "SkillAttack_Tree ";
+
+
+    public string ANIMATION_STATE_LOADING_CHARGED_ATTACK_TREE_PERFORMED_NAME { get { return LOADING_CHARGED_ATTACK_TREE_NAME; } }
+    private const string LOADING_CHARGED_ATTACK_TREE_NAME = "LoadingChargedAttack_Tree";
+
+    public string ANIMATION_STATE_LOADING_SPECIAL_ATTACK_TREE_PERFORMED_NAME { get { return LOADING_SPECIAL_ATTACK_TREE_NAME; } }
+    private const string LOADING_SPECIAL_ATTACK_TREE_NAME = "LoadingSpecialAttack_Tree";
+
+    public string ANIMATION_STATE_LOADING_SKILL_ATTACK_TREE_PERFORMED_NAME { get { return LOADING_SKILL_ATTACK_TREE_NAME; } }
+    private const string LOADING_SKILL_ATTACK_TREE_NAME = "LoadingSkillAttack_Tree  ";
+    #endregion
 
     private AI_MainCore ai_MainCore;
     private MonsterStats monsterStats;
-    private EnemyAnimationHandler enemyAnimationHandler => GetComponent<EnemyAnimationHandler>();
+    public EnemyAnimationHandler enemyAnimationHandler => GetComponent<EnemyAnimationHandler>();
     
     private bool isWalking;
     private bool isRunning;
@@ -51,6 +73,7 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
     private AI_PatrolBehaviour patrolBehaviour;
     private AI_ChasingBehaviour chasingBehaviour;
     private AI_HostileBehaviour hostileBehaviour;
+    private AnimatorStateInfo currentAnimatorStateInfo => SelectCurrentAnimatorState(COMBAT_LAYER);
     private bool loadingSpecialAttack;
     private bool loadingChargedAttack;
     private bool loadingSkillAttack;
@@ -85,98 +108,71 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
     }
     private void HostileBehaviour_OnExitCombat ( object sender, System.EventArgs e )
     {
+        print("salida de animaciones");
         animator.SetLayerWeight(COMBAT_LAYER, 0);
     }
     #region HostileBehaviour
     private void AI_HostileBehaviour_OnBasicAttack ( object sender, System.EventArgs e )
     {
         basicAttackIndex = (int)UnityEngine.Random.Range(0, numberOfBasicAttacks);
+        animator.SetFloat(BASIC_ATTACK_INDEX_FLOAT, basicAttackIndex);
 
-        if (basicAttackIndex > numberOfBasicAttacks)
-        {
-            basicAttackIndex = 0;
-        }
-
-        animator.SetTrigger(ATTACK_TRIGGER_FLOAT);
-        animator.SetFloat(ATTACK_INDEX_FLOAT, basicAttackIndex);
-
-        basicAttackIndex += 1;
+        animator.SetTrigger(BASIC_ATTACK_TRIGGER);
     }
     private void AI_HostileBehaviour_OnChargedAttack ( object sender, System.EventArgs e )
     {
         animator.SetBool(CHARGED_ATTACK_BOOL, true);
+        print("chargedattacked");
     }
     private void AI_HostileBehaviour_OnLoadingChargedAttack ( object sender, AI_HostileBehaviour.OnLoadingAttackEventArgs e )
     {
-        chargedAttackIndex = (int)UnityEngine.Random.Range(0, numberOfChargedAttacks);
+        chargedAttackIndex = e.attackIndex;
+        animator.SetBool(CHARGED_ATTACK_BOOL, false);
+        animator.SetFloat(CHARGED_ATTACK_INDEX_FLOAT, chargedAttackIndex);
+        animator.SetTrigger(LOADING_CHARGED_ATTACK_TRIGGER);
 
-        if (chargedAttackIndex > numberOfChargedAttacks)
-        {
-            chargedAttackIndex = 0;
-        }
-
-        if (!loadingChargedAttack)
-        {
-            animator.SetTrigger(RECHARGING_TRIGGER);
-            loadingChargedAttack = true;
-        }
-        if (e.progressNormalized <= 0)
+        if (e.progressNormalized <= 0 || e.progressNormalized > 0.95f)
         {
             hostileBehaviour.OnChargedAttack += AI_HostileBehaviour_OnChargedAttack;
         }
-        animator.SetFloat(ATTACK_INDEX_FLOAT, chargedAttackIndex);
-        chargedAttackIndex += 1;
+        print("Loading" + e.progressNormalized + e.attacksDataSO);
     }
     private void AI_HostileBehaviour_OnSpecialAttack ( object sender, System.EventArgs e )
     {
-        animator.SetTrigger(SPECIAL_ATTACK_TRIGGER);
+        animator.SetBool(SPECIAL_ATTACK_BOOL,true);
+        print("special_attacked");
+
     }
     private void AI_HostileBehaviour_OnLoadingSpecialAttack ( object sender, AI_HostileBehaviour.OnLoadingSpecialEventArgs e )
     {
-        specialAttackIndex = (int)UnityEngine.Random.Range(0, numberOfSpecialAttacks);
+        specialAttackIndex = e.attackIndex;
+        animator.SetBool(SPECIAL_ATTACK_BOOL, false);
+        animator.SetFloat(SPECIAL_ATTACK_INDEX_FLOAT, specialAttackIndex);
+        animator.SetTrigger(LOADING_SPECIAL_ATTACK_TRIGGER);
 
-        if (specialAttackIndex > numberOfSpecialAttacks)
-        {
-            specialAttackIndex = 0;
-        }
-
-        if (!loadingSkillAttack)
-        {
-            animator.SetTrigger(CASTING_SKILL_TRIGGER);
-            loadingSkillAttack = true;
-        }
-        if (e.progressNormalized <= 0)
+        if (e.progressNormalized <= 0 || e.progressNormalized > 0.95f)
         {
             hostileBehaviour.OnSpecialAttack += AI_HostileBehaviour_OnSpecialAttack;
         }
-        animator.SetFloat(ATTACK_INDEX_FLOAT, specialAttackIndex);
-        specialAttackIndex += 1;
+        print("Loading" + e.progressNormalized + e.attacksDataSO);
     }
     private void AI_HostileBehaviour_OnSkillAttack ( object sender, System.EventArgs e )
     {
         animator.SetBool(SKILL_ATTACK_BOOL, true);
-        
+        print("skill_attacked");
     }
     private void AI_HostileBehaviour_OnLoadingSkillAttack ( object sender, AI_HostileBehaviour.OnLoadingSkillEventArgs e )
     {
-        skillAttackIndex = (int)UnityEngine.Random.Range(0, numberOfSkillAttacks);
+        skillAttackIndex = e.attackIndex;
+        animator.SetFloat(SKILL_ATTACK_INDEX_FLOAT, skillAttackIndex);
+        animator.SetBool(SKILL_ATTACK_BOOL, false);
+        animator.SetTrigger(LOADING_SKILL_ATTACK_TRIGGER);
 
-        if (skillAttackIndex > numberOfSkillAttacks)
-        {
-            skillAttackIndex = 0;
-        }
-
-        if (!loadingSkillAttack)
-        {
-            animator.SetTrigger(CASTING_SKILL_TRIGGER);
-            loadingSkillAttack = true;
-        }
-        if (e.progressNormalized <= 0)
+        if (e.progressNormalized <= 0 ||e.progressNormalized > 0.95f)
         {
             hostileBehaviour.OnSkillAttack += AI_HostileBehaviour_OnSkillAttack;
         }
-        animator.SetFloat(ATTACK_INDEX_FLOAT, skillAttackIndex);
-        skillAttackIndex += 1;
+        print("Loading" + e.progressNormalized + e.attacksDataSO);
     }
     #endregion
 
@@ -194,35 +190,50 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
 
     private void Update ( )
     {
-        if (DetectAnimationEnding(COMBAT_LAYER, ANIMATION_ATTACK_SKILL_TREE_PERFORMED_NAME))
-        {
-            loadingSkillAttack = false;
-
-            animator.SetBool(SKILL_ATTACK_BOOL, false);
-        }
-        else if (DetectAnimationEnding(COMBAT_LAYER, ANIMATION_ATTACK_CHARGED_TREE_PERFORMED_NAME))
-        {
-            loadingChargedAttack = false;
-
-            animator.SetBool(CHARGED_ATTACK_BOOL, false);
-        }
         animator.SetBool(IS_RUNNING_BOOL, isRunning);
         animator.SetBool(IS_WALKING_BOOL, isWalking);
 
-    }
-    private bool DetectAnimationEnding( int layerIndex, string animationName)
-    {
-        if (animator.GetCurrentAnimatorStateInfo(COMBAT_LAYER).IsName(animationName))
+        if(GetCurrentAnimationInfo(COMBAT_LAYER,ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME).normalizedTime > 1f)
         {
-            if (animator.GetCurrentAnimatorStateInfo(COMBAT_LAYER).normalizedTime >= 0.95f) /* el valor varia segun la duracion de transicion, en este caso la salida sera en el segundo 0.95 y tardara  
-                                                                                                   * 0,05 en hacer la transicion a otro estado */
+            Debug.Log("animacion cargada terminada");
+            animator.SetBool(CHARGED_ATTACK_BOOL, false);
+        }
+        //animator.SetBool(CHARGED_ATTACK_BOOL, !isAnimationEnded(currentAnimatorStateInfo,COMBAT_LAYER, ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME));
+        //animator.SetBool(SPECIAL_ATTACK_BOOL, !isAnimationEnded(currentAnimatorStateInfo,COMBAT_LAYER, ANIMATION_STATE_LOADING_SPECIAL_ATTACK_TREE_PERFORMED_NAME));
+        //animator.SetBool(SKILL_ATTACK_BOOL, !isAnimationEnded(currentAnimatorStateInfo,COMBAT_LAYER,ANIMATION_STATE_SKILL_ATTACK_TREE_PERFORMED_NAME));
+    }
+    private bool isAnimationEnded (AnimatorStateInfo currentAnimatorState,int layer, string animationStateName )
+    {
+        AnimatorStateInfo animatorStateInfo = GetCurrentAnimationInfo(layer, animationStateName);
+        if(currentAnimatorState.fullPathHash == animatorStateInfo.fullPathHash)
+        {
+            if (animatorStateInfo.normalizedTime > 1)
             {
                 return true;
             }
-            print(animationName + " animation has been released;");
         }
         return false;
     }
+    public bool IsStateActive ( AnimatorStateInfo state )
+    {
+        return animator.GetCurrentAnimatorStateInfo(COMBAT_LAYER).fullPathHash == state.fullPathHash;
+    }
+    public AnimatorStateInfo SelectCurrentAnimatorState ( int layer )
+    {
+        AnimatorStateInfo[] states = { GetCurrentAnimationInfo(layer, ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME),
+                                       GetCurrentAnimationInfo(layer, ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME),
+                                       GetCurrentAnimationInfo(layer, ANIMATION_STATE_SPECIAL_ATTACK_TREE_PERFORMED_NAME),
+                                       GetCurrentAnimationInfo(layer, ANIMATION_STATE_SKILL_ATTACK_TREE_PERFORMED_NAME) };
+        foreach (AnimatorStateInfo state in states)
+        {
+            if (state.fullPathHash == animator.GetCurrentAnimatorStateInfo(COMBAT_LAYER).fullPathHash)
+            {
+                return state;
+            }
+        }
+        return states[0];
+    }
+
     public AnimatorStateInfo GetCurrentAnimationInfo ( int layer, string animationName )
     {
         AnimatorStateInfo currentStateInfo = animator.GetCurrentAnimatorStateInfo(layer);
@@ -232,7 +243,7 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
     }
     public void OnAnimationEvent_AttackCallback ( )
     {
-        ai_MainCore.GetHostileBehaviour().SetHit(true);
+        //ai_MainCore.GetHostileBehaviour().SetHit(true);
     }
     public void OnAnimationEvent_AttackEffectCallback ( )
     {

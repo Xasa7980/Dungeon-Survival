@@ -12,6 +12,7 @@ public class MonsterStats : MonoBehaviour,IHasProgress
     public event EventHandler OnGetHurted;
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
+    public MonsterRank monsterRank => monsterDataSO.monsterRank;
     public bool IsDualWeaponWielding => equipmentDataHolder_RightHand != null && equipmentDataHolder_RightHand.GetEquipmentType() != EquipmentType.Shield &&
                 equipmentDataHolder_LeftHand != null && equipmentDataHolder_LeftHand.GetEquipmentType() >= EquipmentType.Dagger;
 
@@ -54,15 +55,15 @@ public class MonsterStats : MonoBehaviour,IHasProgress
     [SerializeField] private Transform leftWeaponHandler;
 
     internal EquipmentDataHolder EquipmentDataHolder_LeftHand => equipmentDataHolder_LeftHand;
-    public EquipmentDataHolder equipmentDataHolder_LeftHand;
+    private EquipmentDataHolder equipmentDataHolder_LeftHand;
     private EquipmentDataHolder prev_EquipmentDataHolder_LeftHand;
     internal EquipmentDataHolder EquipmentDataHolder_RightHand => equipmentDataHolder_RightHand;
-    public EquipmentDataHolder equipmentDataHolder_RightHand;
+    private EquipmentDataHolder equipmentDataHolder_RightHand;
     private EquipmentDataHolder prev_EquipmentDataHolder_RightHand;
     internal EquipmentDataSO EquipmentDataSO_RightHand => equipmentDataSO_LeftHand;
-    public EquipmentDataSO equipmentDataSO_RightHand;
+    private EquipmentDataSO equipmentDataSO_RightHand;
     internal EquipmentDataSO EquipmentDataSO_LeftHand => equipmentDataSO_LeftHand;
-    public EquipmentDataSO equipmentDataSO_LeftHand;
+    private EquipmentDataSO equipmentDataSO_LeftHand;
     internal AreaDrawer LeftDetectionArea => leftDetectionArea;
     private AreaDrawer leftDetectionArea;
     internal AreaDrawer RightDetectionArea => rightDetectionArea;
@@ -70,6 +71,11 @@ public class MonsterStats : MonoBehaviour,IHasProgress
 
     private bool Death => healthPoints <= 0? true: false;
 
+    public List<AttacksDataSO> AttacksDataSOs => attacksDataSOs;
+    [SerializeField] private List<AttacksDataSO> attacksDataSOs = new List<AttacksDataSO>();
+    public Dictionary<AttacksDataSO, float> AttackTimers => attackTimers;
+    private Dictionary<AttacksDataSO, float> attackTimers = new Dictionary<AttacksDataSO, float>();
+    
     private void Awake ( )
     {
         aI_MainCore = GetComponent<AI_MainCore>();
@@ -90,7 +96,6 @@ public class MonsterStats : MonoBehaviour,IHasProgress
         maxManaPoints = statsDatabase.Get_MpOnBaseInt(INT) + (int)monsterDataSO.extraManaPoints;
 
         healthPoints = maxHealthPoints;
-        print(healthPoints + " / " + maxHealthPoints);
         manaPoints = maxManaPoints;
 
         attackPoints = statsDatabase.Get_AtkOnBasePower(STR) + (int)monsterDataSO.extraAttackPoints;
@@ -104,6 +109,10 @@ public class MonsterStats : MonoBehaviour,IHasProgress
 
     private void Start ( )
     {
+        foreach (var attackDataSO in attacksDataSOs)
+        {
+            attackTimers[attackDataSO] = 0;
+        }
         OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
         {
             healthProgressNormalized = healthPoints / maxHealthPoints,
@@ -192,7 +201,10 @@ public class MonsterStats : MonoBehaviour,IHasProgress
     }
     private void UpdateEquipmentStats ( EquipmentDataHolder prevEquipment, EquipmentDataHolder newEquipment, ref EquipmentDataHolder currentEquipmentHolder )
     {
+
         float multiplier = IsDualWeaponWielding ? 1.3f : 1f;
+        OnWeaponChanged?.Invoke(this, EventArgs.Empty);
+
         if (newEquipment != null)
         {
             if (prevEquipment != newEquipment)
@@ -204,14 +216,11 @@ public class MonsterStats : MonoBehaviour,IHasProgress
         }
         else
         {
-            Destroy(newEquipment.gameObject);
-            if (prevEquipment != newEquipment)
-            {
-                RemoveStatsPoints(prevEquipment.GetEquipmentDataSO().equipmentStats, multiplier);
-            }
+            Destroy(equipmentDataHolder_RightHand.gameObject);
+            if (equipmentDataHolder_LeftHand != null) Destroy(equipmentDataHolder_LeftHand.gameObject);
+            RemoveStatsPoints(equipmentDataHolder_RightHand.GetEquipmentDataSO().equipmentStats, multiplier);
             currentEquipmentHolder = newEquipment;
         }
-        OnWeaponChanged?.Invoke(this, EventArgs.Empty);
     }
     private void AddStatsPoints ( EquipmentStats equipmentStats, float multiplier )
     {

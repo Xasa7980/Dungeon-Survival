@@ -21,9 +21,10 @@ public class EnemyAnimationHandler : MonoBehaviour
     private void Start ( )
     {
         GetAnimationsToOverride();
+        ChangeCurrentCombatAnimations(animatorOverrideController);
         monsterStats.OnWeaponChanged += MonsterStats_OnWeaponChanged;
-    }
 
+    }
     private void MonsterStats_OnWeaponChanged ( object sender, System.EventArgs e )
     {
         ChangeCurrentCombatAnimations(animatorOverrideController);
@@ -32,7 +33,8 @@ public class EnemyAnimationHandler : MonoBehaviour
     private bool noWeaponsEquiped => monsterStats.EquipmentDataSO_RightHand == null ? true : false;
     private void GetAnimationsToOverride ( )
     {
-        animationClipContainerSO.GetEnemyAnimationClipContainer(animationClipContainerSO).ChangeCurrentBasicAnimations(animatorOverrideController);
+        animationClipContainerSO.GetEnemyAnimationClipContainer(animationClipContainerSO).ChangeCurrentBasicAnimations(animatorOverrideController, monsterStats);
+
     }
 
     private void ChangeCurrentCombatAnimations ( AnimatorOverrideController animatorOverrideController )
@@ -64,6 +66,6 @@ public class EnemyAnimationHandler : MonoBehaviour
                 monsterStats.EquipmentDataHolder_RightHand.GetEquipmentDataSO());
             }
         }
-        Debug.Log(monsterStats.EquipmentDataHolder_RightHand + " = " + animationClipContainerSO.attackBasicClip_01);
+        Debug.Log(monsterStats.EquipmentDataHolder_RightHand.name);
     }
 }

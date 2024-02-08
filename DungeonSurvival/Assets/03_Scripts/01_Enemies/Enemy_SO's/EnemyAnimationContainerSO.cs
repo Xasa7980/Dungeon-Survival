@@ -1,13 +1,12 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewAnimationsContainer", menuName = "Dungeon Survival/Animations/EnemyAnimations")]
 public class EnemyAnimationContainerSO : AnimationClipContainerSO
 {
-    public MonsterDataSO monsterDataSO;
-
     public AnimationClip deathAnimationClip;
     public AnimationClip idleAnimationClip;
     public AnimationClip idleCombatAnimationClip;
@@ -20,13 +19,10 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
     public const string RUN_FORWARD_ANIMATION = "Run_Forward_Animation";
     public const string WALK_FORWARD_ANIMATION = "Walk_Forward_Animation";
 
-    private void OnValidate ( )
+    public void ChangeCurrentBasicAnimations ( AnimatorOverrideController animatorOverrideController, MonsterStats monsterStats )
     {
-        LimitMonsterAnimationsByMonsterRank(monsterDataSO);
-    }
-    public void ChangeCurrentBasicAnimations ( AnimatorOverrideController animatorOverrideController )
-    {
-        LimitMonsterAnimationsByMonsterRank(monsterDataSO);
+        LimitMonsterAnimationsByMonsterRank(monsterStats);
+
         animatorOverrideController[DEATH_ANIMATION] = deathAnimationClip;
         animatorOverrideController[IDLE_ANIMATION] = idleAnimationClip;
         animatorOverrideController[IDLECOMBAT_ANIMATION] = idleCombatAnimationClip;
@@ -42,7 +38,6 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
     }
     public void DualSwordOverride ( AnimatorOverrideController animatorOverrideController )
     {
-
         LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackDualSwordWeapon);
         LoadChargedAttackAnimationsOnOverride(animatorOverrideController, chargedAttackDualSwordWeapon);
         LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackDualSwordWeapon);
@@ -50,7 +45,6 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
     }
     public void DualDaggerOverride ( AnimatorOverrideController animatorOverrideController )
     {
-
         LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackDualDaggerWeapon);
         LoadChargedAttackAnimationsOnOverride(animatorOverrideController, chargedAttackDualDaggerWeapon);
         LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackDualDaggerWeapon);
@@ -58,7 +52,6 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
     }
     public void ShieldOverride ( AnimatorOverrideController animatorOverrideController )
     {
-
         LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackShield);
         LoadChargedAttackAnimationsOnOverride(animatorOverrideController, chargeAttackShield);
         LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackShield);
@@ -66,19 +59,18 @@ public class EnemyAnimationContainerSO : AnimationClipContainerSO
     }
     public void NoWeaponOverride ( AnimatorOverrideController animatorOverrideController )
     {
-
         LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackNoWeapons);
         LoadChargedAttackAnimationsOnOverride(animatorOverrideController, chargedAttackNoWeapons);
-        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackNoWeapons);
+        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, skillAttackNoWeapons);
         LoadSkillAttackAnimationsOnOverride(animatorOverrideController, skillAttackNoWeapons);
     }
 
     [OnValueChanged("LimitMonsterAnimationsByMonsterRank")]
-    public void LimitMonsterAnimationsByMonsterRank ( MonsterDataSO monsterDataSO )
+    public void LimitMonsterAnimationsByMonsterRank ( MonsterStats monsterStats )
     {
-        if (monsterDataSO != null)
+        if (monsterStats != null)
         {
-            switch (monsterDataSO.monsterRank)
+            switch (monsterStats.monsterRank)
             {
                 case MonsterRank.Minion:
 

@@ -17,7 +17,8 @@ public class MonsterProgress_UI : UI_Progress
     {
         hasProgress = progressGameObject.GetComponent<IHasProgress>();
         hasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
-
+        currentHealthPercent = 1;
+        currentManaPercent = 1;
     }
     private void HasProgress_OnProgressChanged ( object sender, IHasProgress.OnProgressChangedEventArgs e )
     {
