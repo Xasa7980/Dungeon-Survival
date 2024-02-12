@@ -27,12 +27,12 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
     public void ChangeCurrentBasicAnimations(AnimatorOverrideController animatorOverrideController )
     {
         SettingMaxAnimationsInList();
-        if (deathAnimationClip != null) animatorOverrideController[DEATH_ANIMATION] = deathAnimationClip;
-        if (idleAnimationClip != null) animatorOverrideController[IDLE_ANIMATION] = idleAnimationClip;
-        if (idleCombatAnimationClip != null) animatorOverrideController[IDLECOMBAT_ANIMATION] = idleCombatAnimationClip;
+        animatorOverrideController[DEATH_ANIMATION] = deathAnimationClip;
+        animatorOverrideController[IDLE_ANIMATION] = idleAnimationClip;
+        animatorOverrideController[IDLECOMBAT_ANIMATION] = idleCombatAnimationClip;
 
-        if(runForwardAnimationClip != null) animatorOverrideController[RUN_FORWARD_ANIMATION] = runForwardAnimationClip;
-        if (walkForwardAnimationClip != null) animatorOverrideController[WALK_FORWARD_ANIMATION] = walkForwardAnimationClip;
+        animatorOverrideController[RUN_FORWARD_ANIMATION] = runForwardAnimationClip;
+        animatorOverrideController[WALK_FORWARD_ANIMATION] = walkForwardAnimationClip;
     }
     public void ChangeCurretCombatAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
     {

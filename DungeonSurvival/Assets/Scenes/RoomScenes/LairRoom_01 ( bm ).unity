@@ -69239,7 +69239,7 @@ PrefabInstance:
         type: 3}
       propertyPath: slashMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 3297884f181cb2c41940da847c031306, type: 2}
+      objectReference: {fileID: 2100000, guid: f00911ce6e3a60a40a834c3dd81f2b23, type: 2}
     - target: {fileID: 5110829791759827709, guid: 14565c7c141bbba498505d7b3ef17d72,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -69554,6 +69554,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116367464565003070, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: loadingSkillAttackTimes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116367464565003070, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: loadingChargedAttackTimes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116367464565003070, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: loadingSkillAttackTimes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116367464565003070, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: loadingSkillAttackTimes.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116367464565003070, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: loadingSkillAttackTimes.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116367464565003070, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: loadingSkillAttackTimes.Array.data[3]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116367464565003070, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: loadingChargedAttackTimes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116367464565003070, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: loadingChargedAttackTimes.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116367464565003070, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: loadingChargedAttackTimes.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116367464565003070, guid: 14565c7c141bbba498505d7b3ef17d72,
+        type: 3}
+      propertyPath: loadingChargedAttackTimes.Array.data[3]
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14565c7c141bbba498505d7b3ef17d72, type: 3}

@@ -10,13 +10,21 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
     public event EventHandler OnAnimationEventReleaseEffect;
 
     public event EventHandler OnBasicAttackPerformed;
-    public event EventHandler OnChargedAttackPerformed;
+    public event EventHandler<OnAttackIndexEventArgs> OnChargedAttackPerformed;
     public event EventHandler OnSpecialAttackPerformed;
-    public event EventHandler OnSkillAttackPerformed;
+    public event EventHandler<OnAttackIndexEventArgs> OnSkillAttackPerformed;
+    public class OnAttackIndexEventArgs : EventArgs
+    {
+        public float index;
+    }
 
     [SerializeField] private LayerMask detectionMask;
+    [SerializeField] private float[] loadingChargedAttackTimes;
+    [SerializeField] private float[] loadingSkillAttackTimes;
+    private float maxChargeTime;
 
     private PlayerStats playerStats;
+    public PlayerStats GetPlayerStats => playerStats;
     private PlayerAnimations playerAnimations;
     private bool hit = true;
 
@@ -47,11 +55,74 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
 
     private void Update ( )
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            OnBasicAttackPerformed?.Invoke(this, EventArgs.Empty);
-        }
         CheckForEnemies();
+
+        DoAttack();
+    }
+    private void DoAttack ( )
+    {
+        float selectedTime = -1;
+
+        if (Input.GetMouseButton(0))
+        {
+            for (int i = 0; i < loadingChargedAttackTimes.Length; i++)
+            {
+                if (maxChargeTime > loadingChargedAttackTimes[i])
+                {
+                    selectedTime = i;
+                }
+                else
+                {
+                    maxChargeTime += Time.deltaTime;
+                }
+            }
+        }
+        else if (Input.GetMouseButton(1))
+        {
+            for (int i = 0; i < loadingSkillAttackTimes.Length; i++)
+            {
+                if (maxChargeTime > loadingSkillAttackTimes[i])
+                {
+                    selectedTime = i;
+                }
+                else
+                {
+                    maxChargeTime += Time.deltaTime;
+                }
+            }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if (selectedTime >= loadingChargedAttackTimes[0]) /* DO CHARGED ATTACK */
+            {
+                OnChargedAttackPerformed?.Invoke(this, new OnAttackIndexEventArgs
+                {
+                    index = selectedTime
+                });
+                maxChargeTime = 0;
+            }
+            else /* DO BASIC ATTACK */
+            {
+                OnBasicAttackPerformed?.Invoke(this, EventArgs.Empty);
+                maxChargeTime = 0;
+            }
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            if (selectedTime >= loadingSkillAttackTimes[0])
+            {
+                OnSkillAttackPerformed?.Invoke(this, new OnAttackIndexEventArgs
+                {
+                    index = selectedTime
+                });
+                maxChargeTime = 0;
+            }
+            else
+            {
+                OnSpecialAttackPerformed?.Invoke(this, EventArgs.Empty);
+                maxChargeTime = 0;
+            }
+        }
     }
     private void CheckForEnemies ( )
     {

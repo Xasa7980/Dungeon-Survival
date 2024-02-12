@@ -65,10 +65,11 @@ public class PlayerStats : MonoBehaviour, IHasProgress
     private AreaDrawer rightDetectionArea;
     #endregion
     private bool death => healthPoints <= 0 ? true : false;
-
+    public bool noWeaponsEquiped => EquipmentDataSO_RightHand == null && equipmentDataHolder_LeftHand == null;
     private void Awake ( )
     {
         InitializeStats();
+        InitializeWeaponProperties();
 
         OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
         {
@@ -103,10 +104,10 @@ public class PlayerStats : MonoBehaviour, IHasProgress
 
     private void Start ( )
     {
-        InitializeWeaponProperties();
     }
     private void InitializeWeaponProperties ( )
     {
+        print("STarts");
         equipmentDataHolder_RightHand = rightWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
         equipmentDataHolder_LeftHand = leftWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
 
@@ -114,9 +115,13 @@ public class PlayerStats : MonoBehaviour, IHasProgress
         equipmentDataSO_LeftHand = equipmentDataHolder_LeftHand.GetEquipmentDataSO();
         rightDetectionArea = equipmentDataHolder_RightHand.GetDetectionArea();
         leftDetectionArea = equipmentDataHolder_LeftHand.GetDetectionArea();
+        print("End");
     }
     private void Update ( )
     {
+        Debug.Log(noWeaponsEquiped);
+        Debug.Log(IsDualWeaponWielding);
+        Debug.Log(equipmentDataHolder_RightHand);
         if (Input.GetKeyDown(KeyCode.K))
         {
             //GetDamage(5);

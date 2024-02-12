@@ -44,24 +44,30 @@ public class PlayerAnimations : MonoBehaviour
     #endregion
 
     [SerializeField] private float attackCombo_resetTimeMax;
-    [SerializeField] private float totalBasicAttackAnimatios = 2;
-
+    
     private float attackCombo_resetTime;
 
     private int basicAttackIndex;
     private int chargedAttackIndex;
     private int specialAttackIndex;
     private int skillAttackIndex;
+    private float maxNumberOfBasicAttacks => playerAnimationHandler.GetAnimationClipContainerSO.maxNumberOfBasicAttacks - 1;
+    private float maxNumberOfChargedAttacks => playerAnimationHandler.GetAnimationClipContainerSO.maxNumberOfChargedAttacks - 1;
+    private float maxNumberOfSpecialAttacks => playerAnimationHandler.GetAnimationClipContainerSO.maxNumberOfSpecialAttacks - 1;
+    private float maxNumberOfSkillAttacks => playerAnimationHandler.GetAnimationClipContainerSO.maxNumberOfSkillAttacks - 1;
+
+    private bool attackAnimationTriggered;
     private AnimatorStateInfo currentCombatAnimatorState => SelectCurrentAnimatorState(COMBAT_LAYER);
+    private AttackCategory attackCategory = AttackCategory.basic;
     private Animator animator;
     private PlayerCombat playerCombat;
-    private bool attackAnimationTriggered;
+    private PlayerAnimationHandler playerAnimationHandler;
 
-    private AttackCategory attackCategory = AttackCategory.basic;
     private void Awake ( )
     {
         playerCombat = GetComponent<PlayerCombat>();
         animator = GetComponent<Animator>();
+        playerAnimationHandler = GetComponent<PlayerAnimationHandler>();
     }
 
     private void Start ( )
@@ -79,8 +85,6 @@ public class PlayerAnimations : MonoBehaviour
     {
         if (attackAnimationTriggered)
         {
-            
-
             if (currentCombatAnimatorState.normalizedTime > 0.95f)
             {
                 animator.SetLayerWeight(COMBAT_LAYER, 0f);
@@ -95,7 +99,7 @@ public class PlayerAnimations : MonoBehaviour
                 {
                     ResetAttackCombo();
                 }
-                else if(basicAttackIndex > totalBasicAttackAnimatios)
+                else if(basicAttackIndex > maxNumberOfBasicAttacks)
                 {
                     ResetAttackCombo();
                 }

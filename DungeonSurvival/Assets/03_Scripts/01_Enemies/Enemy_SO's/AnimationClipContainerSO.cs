@@ -250,7 +250,6 @@ public class AnimationClipContainerSO : ScriptableObject
                     animatorOverrideController[animationLoadingChargedClipKeys[i]] = loadingClips[i];
                 }
                 animatorOverrideController[animationChargedClipKeys[i]] = chargedClips[i];
-                Debug.Log(chargedClips[i]);
             }
         }
 

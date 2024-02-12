@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimationHandler : MonoBehaviour
 {
     
+    public AnimationClipContainerSO GetAnimationClipContainerSO => animationClipContainerSO;
     [SerializeField] private AnimationClipContainerSO animationClipContainerSO;
 
     private Animator animator;
@@ -22,6 +23,7 @@ public class PlayerAnimationHandler : MonoBehaviour
     private void Start ( )
     {
         GetAnimationsToOverride();
+        ChangeCurrentCombatAnimations(animatorOverrideController);
         playerStats.OnWeaponChanged += PlayerStats_OnWeaponChanged;
     }
 
@@ -29,7 +31,6 @@ public class PlayerAnimationHandler : MonoBehaviour
     {
         ChangeCurrentCombatAnimations(animatorOverrideController);
     }
-    private bool noWeaponsEquiped => !playerStats.EquipmentDataSO_RightHand ? (!playerStats.EquipmentDataSO_LeftHand ? true : false) : false;
     private void GetAnimationsToOverride ( )
     {
 
@@ -38,7 +39,7 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     private void ChangeCurrentCombatAnimations ( AnimatorOverrideController animatorOverrideController )
     {
-        if (noWeaponsEquiped)
+        if (playerStats.noWeaponsEquiped)
         {
             animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).NoWeaponOverride(animatorOverrideController);
         }
@@ -65,6 +66,5 @@ public class PlayerAnimationHandler : MonoBehaviour
                 playerStats.EquipmentDataHolder_RightHand.GetEquipmentDataSO());
             }
         }
-        Debug.Log(playerStats.EquipmentDataHolder_RightHand + " = " + animationClipContainerSO.attackBasicClip_01);
     }
 }
