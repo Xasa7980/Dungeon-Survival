@@ -25,6 +25,11 @@ public class PlayerAnimationHandler : MonoBehaviour
         GetAnimationsToOverride();
         ChangeCurrentCombatAnimations(animatorOverrideController);
         playerStats.OnWeaponChanged += PlayerStats_OnWeaponChanged;
+        Debug.Log(animatorOverrideController["LoadingChargedAttack_Animation_01"]);
+        Debug.Log(animatorOverrideController["LoadingChargedAttack_Animation_02"]);
+        Debug.Log(animatorOverrideController["ChargedAttack_Animation_01"]);
+        Debug.Log(animatorOverrideController["ChargedAttack_Animation_02"]);
+
     }
 
     private void PlayerStats_OnWeaponChanged ( object sender, System.EventArgs e )

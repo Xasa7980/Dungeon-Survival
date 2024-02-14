@@ -13,7 +13,6 @@ public class PlayerStats : MonoBehaviour, IHasProgress
     public bool IsDualWeaponWielding => equipmentDataHolder_RightHand != null && equipmentDataHolder_RightHand.GetEquipmentType() != EquipmentType.Shield &&
     equipmentDataHolder_LeftHand != null && equipmentDataHolder_LeftHand.GetEquipmentType() >= EquipmentType.Dagger;
 
-
     [SerializeField] private PlayerDataSO playerDataSO;
 
     [Header("Battle Experience")]
@@ -46,6 +45,8 @@ public class PlayerStats : MonoBehaviour, IHasProgress
     private float criticalRate;
 
     private float criticalDamage;
+
+    public Camera uiCamera;
 
     [SerializeField] private GameObject rightWeaponHandler;
     [SerializeField] private GameObject leftWeaponHandler;
@@ -107,7 +108,6 @@ public class PlayerStats : MonoBehaviour, IHasProgress
     }
     private void InitializeWeaponProperties ( )
     {
-        print("STarts");
         equipmentDataHolder_RightHand = rightWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
         equipmentDataHolder_LeftHand = leftWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
 
@@ -115,7 +115,6 @@ public class PlayerStats : MonoBehaviour, IHasProgress
         equipmentDataSO_LeftHand = equipmentDataHolder_LeftHand.GetEquipmentDataSO();
         rightDetectionArea = equipmentDataHolder_RightHand.GetDetectionArea();
         leftDetectionArea = equipmentDataHolder_LeftHand.GetDetectionArea();
-        print("End");
     }
     private void Update ( )
     {
@@ -148,7 +147,10 @@ public class PlayerStats : MonoBehaviour, IHasProgress
     {
         int damage = CalculateDamage(attackPoints);
 
-        GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder),damage);
+        Vector3 textPosition = monsterStats.transform.position + UnityEngine.Random.onUnitSphere * 0.15f;
+        textPosition.y = 2; // Mantén la altura del jugador si solo te interesa el plano XZ.
+
+        GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder),damage, textPosition);
         monsterStats.GetDamage(damage);
     }
     private int CalculateDamage ( float damage )

@@ -249,6 +249,7 @@ public class AnimationClipContainerSO : ScriptableObject
                     loadingClips[i] = attackChargedAnimationClips[randomIndices[i]].loading_Attack_Animation_Clip;
                     animatorOverrideController[animationLoadingChargedClipKeys[i]] = loadingClips[i];
                 }
+
                 animatorOverrideController[animationChargedClipKeys[i]] = chargedClips[i];
             }
         }

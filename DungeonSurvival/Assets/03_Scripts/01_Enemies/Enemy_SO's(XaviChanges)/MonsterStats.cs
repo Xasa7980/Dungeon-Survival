@@ -22,7 +22,6 @@ public class MonsterStats : MonoBehaviour,IHasProgress
     public int minExpGiven = 4, maxExpGiven = 10;
     public int ExpGiven => UnityEngine.Random.Range(minExpGiven, maxExpGiven);
 
-
     [SerializeField] private MonsterDataSO monsterDataSO;
 
     private StatsDatabase statsDatabase = new StatsDatabase();
@@ -171,7 +170,12 @@ public class MonsterStats : MonoBehaviour,IHasProgress
     public void TakeDamage ( PlayerStats playerStats, EquipmentDataHolder equipmentDataHolder )
     {
         int damage = CalculateDamage(attackPoints);
-        GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder), damage);
+
+        Vector3 textPosition = playerStats.transform.position + UnityEngine.Random.onUnitSphere * 0.15f;
+        textPosition.y = 2; // Mantén la altura del monstruo si solo te interesa el plano XZ.
+
+        GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder), damage, textPosition);
+
         playerStats.GetDamage(damage);
     }
     public void OnEquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )

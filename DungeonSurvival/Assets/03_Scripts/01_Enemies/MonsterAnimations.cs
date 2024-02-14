@@ -15,18 +15,19 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
     private const string DEATH_TRIGGER = "Death";
 
     private const string BASIC_ATTACK_TRIGGER = "BasicAttack";
-    private const string CHARGED_ATTACK_BOOL = "ChargedAttack";
-    private const string SPECIAL_ATTACK_BOOL = "SpecialAttack";
-    private const string SKILL_ATTACK_BOOL = "SkillAttack";
+    private const string CHARGED_ATTACK_TRIGGER = "ChargedAttack";
+    private const string SPECIAL_ATTACK_TRIGGER = "SpecialAttack";
+    private const string SKILL_ATTACK_TRIGGER = "SkillAttack";
+
+    private const string LOADING_CHARGED_ATTACK_BOOL = "LoadingChargedAttack";
+    private const string LOADING_SPECIAL_ATTACK_BOOL = "LoadingSpecialAttack";
+    private const string LOADING_SKILL_ATTACK_BOOL = "LoadingSkillAttack";
 
     private const string BASIC_ATTACK_INDEX_FLOAT = "BasicAttackIndex";
     private const string CHARGED_ATTACK_INDEX_FLOAT = "ChargedAttackIndex";
     private const string SPECIAL_ATTACK_INDEX_FLOAT = "SpecialAttackIndex";
     private const string SKILL_ATTACK_INDEX_FLOAT = "SkillAttackIndex";
 
-    private const string LOADING_CHARGED_ATTACK_TRIGGER = "LoadingChargedAttack";
-    private const string LOADING_SPECIAL_ATTACK_TRIGGER = "LoadingSpecialAttack";
-    private const string LOADING_SKILL_ATTACK_TRIGGER = "LoadingSkillAttack";
 
     #region ANIMATOR STATE NAMES
     public string ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME { get { return BASIC_ATTACK_TREE_NAME; } }
@@ -124,33 +125,33 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
     }
     private void AI_HostileBehaviour_OnChargedAttack ( object sender, System.EventArgs e )
     {
-        animator.SetTrigger(LOADING_CHARGED_ATTACK_TRIGGER);
+        animator.SetTrigger(CHARGED_ATTACK_TRIGGER);
 
         print("chargedattacked");
     }
     private void AI_HostileBehaviour_OnLoadingChargedAttack ( object sender, AI_HostileBehaviour.OnLoadingAttackEventArgs e )
     {
         chargedAttackIndex = e.attackIndex;
-        animator.SetBool(CHARGED_ATTACK_BOOL, true);
+        animator.SetBool(LOADING_CHARGED_ATTACK_BOOL, true);
         animator.SetFloat(CHARGED_ATTACK_INDEX_FLOAT, chargedAttackIndex);
         
         print("Loading" + e.progressNormalized + e.attacksDataSO);
     }
     private void AI_HostileBehaviour_OnSpecialAttack ( object sender, System.EventArgs e )
     {
-        animator.SetTrigger(LOADING_SPECIAL_ATTACK_TRIGGER);
+        animator.SetTrigger(SPECIAL_ATTACK_TRIGGER);
         print("special_attacked");
 
     }
     private void AI_HostileBehaviour_OnLoadingSpecialAttack ( object sender, AI_HostileBehaviour.OnLoadingSpecialEventArgs e )
     {
         specialAttackIndex = e.attackIndex;
-        animator.SetBool(SPECIAL_ATTACK_BOOL, true);
+        animator.SetBool(LOADING_SPECIAL_ATTACK_BOOL, true);
         animator.SetFloat(SPECIAL_ATTACK_INDEX_FLOAT, specialAttackIndex);
     }
     private void AI_HostileBehaviour_OnSkillAttack ( object sender, System.EventArgs e )
     {
-        animator.SetTrigger(LOADING_SKILL_ATTACK_TRIGGER);
+        animator.SetTrigger(SKILL_ATTACK_TRIGGER);
         print("skill_attacked");
     }
     private void AI_HostileBehaviour_OnLoadingSkillAttack ( object sender, AI_HostileBehaviour.OnLoadingSkillEventArgs e )
@@ -158,7 +159,7 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
 
         skillAttackIndex = e.attackIndex;
         animator.SetFloat(SKILL_ATTACK_INDEX_FLOAT, skillAttackIndex);
-        animator.SetBool(SKILL_ATTACK_BOOL, true);
+        animator.SetBool(LOADING_SKILL_ATTACK_BOOL, true);
     }
     #endregion
 
@@ -178,10 +179,6 @@ public class MonsterAnimations : MonoBehaviour,ICombatBehaviour
     {
         animator.SetBool(IS_RUNNING_BOOL, isRunning);
         animator.SetBool(IS_WALKING_BOOL, isWalking);
-
-        //animator.SetBool(CHARGED_ATTACK_BOOL, !isAnimationEnded(currentAnimatorStateInfo,COMBAT_LAYER, ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME));
-        //animator.SetBool(SPECIAL_ATTACK_BOOL, !isAnimationEnded(currentAnimatorStateInfo,COMBAT_LAYER, ANIMATION_STATE_LOADING_SPECIAL_ATTACK_TREE_PERFORMED_NAME));
-        //animator.SetBool(SKILL_ATTACK_BOOL, !isAnimationEnded(currentAnimatorStateInfo,COMBAT_LAYER,ANIMATION_STATE_SKILL_ATTACK_TREE_PERFORMED_NAME));
     }
     private bool isAnimationEnded (AnimatorStateInfo currentAnimatorState,int layer, string animationStateName )
     {

@@ -27,7 +27,11 @@ public class MeleeWeaponTrail : MonoBehaviour
 	float _emitTime = 0.0f;
 
 	[SerializeField] EquipmentDataHolder _equipmentDataHolder;
-	private Material _material => _equipmentDataHolder.slashMaterial;
+
+	[SerializeField]
+	private Material _material;
+
+    private Material material => _equipmentDataHolder.slashMaterial;
 
 	[SerializeField]
 	float _lifeTime = 1.0f;

@@ -9,10 +9,15 @@ public class PlayerAnimations : MonoBehaviour
     public int COMBAT_LAYER { get { return _COMBAT_LAYER; } }
 
     [Header("ANIMATOR PARAMETERS")]
-    private const string ATTACK_BASIC_TRIGGER = "BasicAttack";
-    private const string ATTACK_CHARGED_TRIGGER = "ChargedAttack";
-    private const string ATTACK_SPECIAL_TRIGGER = "SpecialAttack";
-    private const string ATTACK_SKILL_TRIGGER = "SkillAttack";
+    private const string START_LOADING_TRIGGER = "StartLoading";
+    private const string BASIC_ATTACK_TRIGGER = "BasicAttack";
+    private const string CHARGED_ATTACK_TRIGGER = "ChargedAttack";
+    private const string SPECIAL_ATTACK_TRIGGER = "SpecialAttack";
+    private const string SKILL_ATTACK_TRIGGER = "SkillAttack";
+
+    private const string LOADING_CHARGED_ATTACK_BOOL = "LoadingChargedAttack";
+    private const string LOADING_SPECIAL_ATTACK_BOOL = "LoadingSpecialAttack";
+    private const string LOADING_SKILL_ATTACK_BOOL = "LoadingSkillAttack";
 
     private const string BASIC_ATTACK_INDEX_FLOAT = "BasicAttackIndex";
     private const string CHARGED_ATTACK_INDEX_FLOAT = "ChargedAttackIndex";
@@ -52,7 +57,7 @@ public class PlayerAnimations : MonoBehaviour
     private int specialAttackIndex;
     private int skillAttackIndex;
     private float maxNumberOfBasicAttacks => playerAnimationHandler.GetAnimationClipContainerSO.maxNumberOfBasicAttacks - 1;
-    private float maxNumberOfChargedAttacks => playerAnimationHandler.GetAnimationClipContainerSO.maxNumberOfChargedAttacks - 1;
+    private float maxNumberOfChachargedAttackIndexrgedAttacks => playerAnimationHandler.GetAnimationClipContainerSO.maxNumberOfChargedAttacks - 1;
     private float maxNumberOfSpecialAttacks => playerAnimationHandler.GetAnimationClipContainerSO.maxNumberOfSpecialAttacks - 1;
     private float maxNumberOfSkillAttacks => playerAnimationHandler.GetAnimationClipContainerSO.maxNumberOfSkillAttacks - 1;
 
@@ -73,12 +78,49 @@ public class PlayerAnimations : MonoBehaviour
     private void Start ( )
     {
         playerCombat.OnBasicAttackPerformed += PlayerCombat_OnBasicAttackPerformed;
+        playerCombat.OnLoadingChargedAttackPerformed += PlayerCombat_OnLoadingChargedAttackPerformed;
+        playerCombat.OnChargedAttackPerformed += PlayerCombat_OnChargedAttackPerformed;
+        //playerCombat.OnSpecialAttackPerformed += 
+        playerCombat.OnLoadingSkillAttackPerformed += PlayerCombat_OnLoadingSkillAttackPerformed;
+        playerCombat.OnSkillAttackPerformed += PlayerCombat_OnSkillAttackPerformed;
+        playerCombat.OnLoadCancelled += PlayerCombat_OnLoadCancelled;
+    }
+
+    private void PlayerCombat_OnLoadCancelled ( object sender, System.EventArgs e )
+    {
+        animator.SetBool(LOADING_CHARGED_ATTACK_BOOL, false);
+        animator.SetBool(LOADING_SPECIAL_ATTACK_BOOL, false);
+        animator.SetBool(LOADING_SKILL_ATTACK_BOOL, false);
     }
 
     private void PlayerCombat_OnBasicAttackPerformed ( object sender, System.EventArgs e )
     {
         attackCategory = AttackCategory.basic;
         OnBasicAttack();
+    }
+    private void PlayerCombat_OnLoadingChargedAttackPerformed ( object sender, PlayerCombat.OnAttackIndexEventArgs e )
+    {
+        if(playerCombat.IsLoadingAttack())
+        {
+            animator.SetLayerWeight(COMBAT_LAYER, 1f);
+            chargedAttackIndex = (int)e.index;
+            animator.SetFloat(CHARGED_ATTACK_INDEX_FLOAT, chargedAttackIndex + 1);
+            animator.SetBool(LOADING_CHARGED_ATTACK_BOOL, true);
+            animator.SetTrigger(START_LOADING_TRIGGER);
+        }
+    }
+
+    private void PlayerCombat_OnChargedAttackPerformed ( object sender, System.EventArgs e )
+    {
+        OnChargedAttackPerformed();
+    }
+    private void PlayerCombat_OnLoadingSkillAttackPerformed ( object sender, PlayerCombat.OnAttackIndexEventArgs e )
+    {
+        throw new System.NotImplementedException();
+    }
+    private void PlayerCombat_OnSkillAttackPerformed ( object sender, System.EventArgs e )
+    {
+        throw new System.NotImplementedException();
     }
 
     private void Update ( )
@@ -87,8 +129,6 @@ public class PlayerAnimations : MonoBehaviour
         {
             if (currentCombatAnimatorState.normalizedTime > 0.95f)
             {
-                animator.SetLayerWeight(COMBAT_LAYER, 0f);
-
                 if (attackAnimationTriggered)
                 {
                     basicAttackIndex ++;
@@ -153,50 +193,49 @@ public class PlayerAnimations : MonoBehaviour
     }
     private void OnBasicAttack ( )
     {
+        animator.SetLayerWeight(COMBAT_LAYER, 1f);
+
         if (!attackAnimationTriggered)
         {
-            animator.SetTrigger(ATTACK_BASIC_TRIGGER);
+            animator.SetTrigger(BASIC_ATTACK_TRIGGER);
             animator.SetFloat(BASIC_ATTACK_INDEX_FLOAT, basicAttackIndex);
             attackCombo_resetTime = 0;
             attackAnimationTriggered = true;
         }
-
-        animator.SetLayerWeight(COMBAT_LAYER, 1f);
     }
     private void OnChargedAttackPerformed ( )
     {
+        animator.SetLayerWeight(COMBAT_LAYER, 1f);
+        
         if (!attackAnimationTriggered)
         {
-            animator.SetTrigger(ATTACK_CHARGED_TRIGGER);
-            animator.SetFloat(CHARGED_ATTACK_INDEX_FLOAT, basicAttackIndex);
+            animator.SetTrigger(CHARGED_ATTACK_TRIGGER);
             attackCombo_resetTime = 0;
             attackAnimationTriggered = true;
         }
-
-        animator.SetLayerWeight(COMBAT_LAYER, 1f);
     }
     private void OnSpecialAttackPerformed ( )
     {
+        animator.SetLayerWeight(COMBAT_LAYER, 1f);
+
         if (!attackAnimationTriggered)
         {
-            animator.SetTrigger(ATTACK_SPECIAL_TRIGGER);
+            animator.SetTrigger(SPECIAL_ATTACK_TRIGGER);
             animator.SetFloat(BASIC_ATTACK_INDEX_FLOAT, basicAttackIndex);
             attackCombo_resetTime = 0;
             attackAnimationTriggered = true;
         }
-
-        animator.SetLayerWeight(COMBAT_LAYER, 1f);
     }
     private void OnSkillAttackPerformed ( )
     {
+        animator.SetLayerWeight(COMBAT_LAYER, 1f);
+
         if (!attackAnimationTriggered)
         {
-            animator.SetTrigger(ATTACK_SKILL_TRIGGER);
+            animator.SetTrigger(SKILL_ATTACK_TRIGGER);
             animator.SetFloat(BASIC_ATTACK_INDEX_FLOAT, basicAttackIndex);
             attackCombo_resetTime = 0;
             attackAnimationTriggered = true;
         }
-
-        animator.SetLayerWeight(COMBAT_LAYER, 1f);
     }
 }

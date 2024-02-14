@@ -1,4 +1,5 @@
 using DamageNumbersPro;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,7 +20,6 @@ public enum DamageType
 public class GUI_Pool_Manager : MonoBehaviour
 {
     public static GUI_Pool_Manager Instance { get; private set; }
-    DamageNumber DA;
     public ObjectPool NormalDamagePool => normalDamagePool;
     [SerializeField] private ObjectPool normalDamagePool;
 
@@ -50,6 +50,10 @@ public class GUI_Pool_Manager : MonoBehaviour
     [SerializeField] private DamageNumber normalPool;
     [SerializeField] private DamageNumber critPool;
 
+    [SerializeField] private Camera uiCamera;
+    [PropertyOrder(0)]
+    [Button("SetCameraToCanvas")]
+    public void SetCameraToCanvas ( ) { GetComponent<Canvas>().worldCamera = uiCamera; }
     private string suffixText;
     private string prefixText;
     private void Awake ( )
@@ -61,7 +65,8 @@ public class GUI_Pool_Manager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Recapacitar de si voy a tener mas escenas o diferentes
+        //DontDestroyOnLoad(gameObject); // Recapacitar de si voy a tener mas escenas o diferentes
+        SetCameraToCanvas();
     }
     public ObjectPool GetPoolBasedOnDamageType ( DamageType poolType )
     {
@@ -108,7 +113,7 @@ public class GUI_Pool_Manager : MonoBehaviour
                 return normalDamagePool;
         }
     }
-    public void CreateNumberTexts ( DamageType poolType, int value )
+    public void CreateNumberTexts ( DamageType poolType, int value, Vector3 position )
     {
         switch (poolType)
         {
@@ -183,10 +188,14 @@ public class GUI_Pool_Manager : MonoBehaviour
         }
 
         GameObject gO_Requested = GetPoolBasedOnDamageType(poolType).RequestGameObject();
-        if (gO_Requested.TryGetComponent<DamageNumberGUI>(out DamageNumberGUI damageNumber))
+        
+        if (gO_Requested.TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI damageIndicator))
         {
-            TMP_Text[] text = damageNumber.GetTextMeshs();
-            text[1].text = prefixText + value.ToString() + suffixText;
+            UI_Animations uI_Animations = gO_Requested.GetComponent<UI_Animations>();
+            uI_Animations.originalPosition = position; 
+            uI_Animations.SetTargetValue(position);
+            damageIndicator.text = prefixText + value.ToString() + suffixText;
+            damageIndicator.transform.position = position;
         }
     }
 }
