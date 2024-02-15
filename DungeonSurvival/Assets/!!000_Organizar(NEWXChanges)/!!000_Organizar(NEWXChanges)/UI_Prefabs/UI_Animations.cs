@@ -9,28 +9,30 @@ using UnityEngine.UIElements;
 
 public class UI_Animations : MonoBehaviour
 {
-    public bool enableAnimation = true;
-    public float animationSpeed = 1f;
-    public float startTime;
-    public Vector3 originalPosition;
-    [SerializeField] private Transform uiTarget;
-    public Vector3 targetPosition;
-    public float fadeDuration = 1f; // Duración del efecto fade in y fade out
-    public AnimationCurve scaleCurve;
-    public AnimationCurve alphaCurve;
-    public float lifeTime = 5f; // Tiempo total de vida del objeto
+    [SerializeField] private bool enableAnimation = true;
+    [SerializeField] private float animationSpeed = 1f;
+    [SerializeField] private float startTime;
 
-    public bool enableLateralJump = false; // Controla si el salto incluirá un movimiento lateral
-    public bool enableSpiralMovement = false; // Controla si el objeto realizará un movimiento en espiral
-    public float lateralJumpIntensity = 2f; // Intensidad del salto lateral
-    public float jumpHeight = 2f; // Altura máxima del salto
-    public float spiralIntensity = 5f; // Intensidad del movimiento espiral
-    public AnimationCurve shrinkCurve; // Curva para el efecto de encogimiento
+    public Vector3 originalPosition;
+
+    [SerializeField] private AnimationCurve scaleCurve;
+    [SerializeField] private AnimationCurve alphaCurve;
+    [SerializeField] private AnimationCurve shrinkCurve; // Curva para el efecto de encogimiento
+    [SerializeField] private float fadeDuration = 1f; // Duración del efecto fade in y fade out
+    [SerializeField] private float jumpHeight = 2f; // Altura máxima del salto
+    [SerializeField] private float lifeTime = 5f; // Tiempo total de vida del objeto
+
+    [SerializeField] private bool enableLateralJump = false; // Controla si el salto incluirá un movimiento lateral
+    [SerializeField] private float lateralJumpIntensity = 2f; // Intensidad del salto lateral
+    [SerializeField] private bool enableSpiralMovement = false; // Controla si el objeto realizará un movimiento en espiral
+    [SerializeField] private float spiralIntensity = 5f; // Intensidad del movimiento espiral
 
     [SerializeField] private TextMeshProUGUI textMesh;
-    private float currentLifeTime = 0f; // Contador de tiempo de vida actual
 
-    public Vector2 freeMovement = new(0,0);
+    public void SetTargetValue ( Vector3 target ) => targetPosition = target;
+    private Vector3 targetPosition;
+
+    private float currentLifeTime = 0f; // Contador de tiempo de vida actual
     private void OnEnable ( )
     {
         ResetValues();
@@ -60,10 +62,6 @@ public class UI_Animations : MonoBehaviour
         }
     }
 
-    public void SetTargetValue ( Vector3 target )
-    {
-        targetPosition = target;
-    }
     void ResetValues ( )
     {
         startTime = Time.time;
@@ -75,8 +73,6 @@ public class UI_Animations : MonoBehaviour
 
     void AnimatePosition ( float time )
     {
-        Vector3 finalTarget = uiTarget != null ? uiTarget.position : targetPosition; // Determine el objetivo final
-
         float normalizedTime = time / lifeTime;
         float verticalMovement = jumpHeight * Mathf.Sin(Mathf.PI * normalizedTime);
 
@@ -98,7 +94,7 @@ public class UI_Animations : MonoBehaviour
             spiralMovementY = Mathf.Cos(spiralProgress) * spiralIntensity * (normalizedTime <= 0.5f ? 1 : -1);
         }
 
-        Vector3 newPosition = originalPosition + new Vector3(horizontalMovement + spiralMovementX + freeMovement.x, freeMovement.y + verticalMovement + spiralMovementY, 0);
+        Vector3 newPosition = originalPosition + new Vector3(horizontalMovement + spiralMovementX, verticalMovement + spiralMovementY, 0);
         transform.position = newPosition;
         if (normalizedTime >= 1f)
         {
