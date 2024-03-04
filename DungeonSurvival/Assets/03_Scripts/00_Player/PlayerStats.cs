@@ -118,9 +118,9 @@ public class PlayerStats : MonoBehaviour, IHasProgress
     }
     private void Update ( )
     {
-        Debug.Log(noWeaponsEquiped);
-        Debug.Log(IsDualWeaponWielding);
-        Debug.Log(equipmentDataHolder_RightHand);
+        //Debug.Log(noWeaponsEquiped);
+        //Debug.Log(IsDualWeaponWielding);
+        //Debug.Log(equipmentDataHolder_RightHand);
         if (Input.GetKeyDown(KeyCode.K))
         {
             //GetDamage(5);
@@ -163,6 +163,17 @@ public class PlayerStats : MonoBehaviour, IHasProgress
                 Mathf.RoundToInt(damage + (Mathf.Pow(damage, 2f)) / 10) / ((int)defensePoints + (int)defensePoints),
                 Mathf.RoundToInt(damage + (Mathf.Pow(damage, 2.3f)) / 10) / ((int)defensePoints + (int)defensePoints)
             );
+    }
+    public void Healing ( ItemAction.FunctionType functionType, float healingAmount )
+    {
+        if(functionType == ItemAction.FunctionType.Healing_HP)
+        {
+            healthPoints = Mathf.Clamp(healthPoints, healthPoints + healingAmount, maxHealthPoints);
+        }
+        else if(functionType == ItemAction.FunctionType.Healing_MP)
+        {
+            manaPoints = Mathf.Clamp(manaPoints, manaPoints + healingAmount, maxManaPoints);
+        }
     }
     public void OnEquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {

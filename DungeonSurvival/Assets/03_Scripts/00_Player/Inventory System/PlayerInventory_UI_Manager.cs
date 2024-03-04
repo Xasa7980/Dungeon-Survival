@@ -7,6 +7,8 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
 {
     public static PlayerInventory_UI_Manager current { get; private set; }
 
+    public KeyCode itemUseKey = KeyCode.Return;
+
     [SerializeField] GameObject inventoryBar;
 
     InventoryItem_UI_Layout[] slots;
@@ -58,14 +60,19 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
                 currentSelectedIndex = slots.Length - 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(itemUseKey))
         {
             if (!slots[currentSelectedIndex].empty)
             {
                 switch (slots[currentSelectedIndex].item)
                 {
-                    case Item_Backpack backpack:
+                    case Item_Backpack backpack: /* Si el item es de tipo Item_Backpack procede */
+                        
                         PlayerInventory.current.EquipBackpack(backpack);
+                        break;
+                    case Item usableItem when usableItem.itemAction.itemFunction.itemTag == "Key" :
+
+                        PlayerInventory.current.UseItem(usableItem); 
                         break;
                 }
             }

@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 public class PlayerInteraction : MonoBehaviour
 {
     public static PlayerInteraction current { get; private set; }
+
+    public event EventHandler<OnInteractAnyObjectEventArgs> OnInteractAnyObject;
+    public class OnInteractAnyObjectEventArgs : EventArgs
+    {
+        public GameObject objectInteracted;
+    }
 
     Interactable _possibleInteraction;
     public Interactable possibleInteraction
@@ -44,6 +51,10 @@ public class PlayerInteraction : MonoBehaviour
 
         if(possibleInteraction != null)
         {
+            OnInteractAnyObject?.Invoke(this, new OnInteractAnyObjectEventArgs()
+            {
+                objectInteracted = possibleInteraction.gameObject
+            });
             if (Input.GetButtonDown("Interact"))
             {
                 possibleInteraction.Prepare(this);

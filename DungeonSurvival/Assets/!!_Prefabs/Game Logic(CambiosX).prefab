@@ -1574,6 +1574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ac6435a9fb0dc429d5851e090c2613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemUse: 13
   inventoryBar: {fileID: 7987567954424176684}
   primaryWeapon: {fileID: 2503552039087206594}
   secundaryWeapon: {fileID: 8053757378920870857}
@@ -4473,7 +4474,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCombo_resetTimeMax: 3
-  totalBasicAttackAnimatios: 2
 --- !u!114 &6957219622236435353
 MonoBehaviour:
   m_ObjectHideFlags: 0

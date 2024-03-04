@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-
-
+using Unity.VisualScripting;
+using System;
 
 [CreateAssetMenu(menuName = "Dungeon Survival/Inventory/Item")]
 public class Item : ItemBase
@@ -36,12 +36,12 @@ public class Item : ItemBase
 
     public WorldItem InstantiateInWorld(Vector3 position)
     {
-        return Instantiate(interactableModel, position, Quaternion.Euler(Vector3.up * Random.Range(0, 360)));
+        return Instantiate(interactableModel, position, Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0, 360)));
     }
 
     public WorldItem InstantiateInWorld(Vector3 position, Item item)
     {
-        WorldItem instance = Instantiate(interactableModel, position, Quaternion.Euler(Vector3.up * Random.Range(0, 360)));
+        WorldItem instance = Instantiate(interactableModel, position, Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0, 360)));
         instance.ChangeItemReference(item);
         return instance;
     }
@@ -59,8 +59,23 @@ public class Item : ItemBase
         }
     }
 
-    public virtual void Use()
+    public virtual void UseItem()
     {
         //do something
+    }
+
+    public ItemAction itemAction;
+}
+public class ActionResult<T>
+{
+    public bool Success { get; set; }
+    public T Value { get; set; }
+    public string Message { get; set; } // opcional
+
+    public ActionResult ( bool success, T value, string message = "" )
+    {
+        Success = success;
+        Value = value;
+        Message = message;
     }
 }
