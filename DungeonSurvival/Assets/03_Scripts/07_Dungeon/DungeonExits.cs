@@ -11,6 +11,8 @@ public enum ExitType
 public class DungeonExits : MonoBehaviour
 {
     [SerializeField] private Vector3 position;
+    [SerializeField] private Vector3 parentRotation;
+
     [SerializeField] private float radius;
 
     [SerializeField] private ExitType exitType;
@@ -19,29 +21,6 @@ public class DungeonExits : MonoBehaviour
 
     public Vector3 actualPos;
     public Vector3 parentActualPos;
-    private void OnValidate ( )
-    {
-        actualPos = transform.localPosition;
-        parentActualPos = transform.parent.parent.position;
-        Debug.Log(transform.parent.parent.name);
-    }
-    private void OnDrawGizmos ( )
-    {
-        if(!IsEntrance() && !IsExit())
-        {
-            Gizmos.color = Color.red;
-        }
-        else if(IsEntrance() && !IsExit())
-        {
-            Gizmos.color = Color.green;
-        }
-        else
-        {
-            Gizmos.color = Color.blue;
-        }
-
-        Gizmos.DrawSphere ( transform.position + position, radius );
-    }
     public void SetExitType(ExitType _exitType )
     {
         exitType = _exitType;
@@ -54,12 +33,22 @@ public class DungeonExits : MonoBehaviour
     {
         return exitType == ExitType.Exit;
     }
-    private void UpdateExitStatus()
+    private void OnDrawGizmos ( )
     {
-        isOpen = (exitType == ExitType.Entrance);
-    }
-    private void StorePosition ( )
-    {
-        LoadSceneManager.instance.sceneHierarchyPosition = transform.position;
+        if (!IsEntrance() && !IsExit())
+        {
+            Gizmos.color = Color.red;
+        }
+        else if (IsEntrance() && !IsExit())
+        {
+            Gizmos.color = Color.green;
+        }
+        else
+        {
+            Gizmos.color = Color.blue;
+        }
+
+        Gizmos.DrawRay(transform.position, -transform.forward * 7.5f);
+        Gizmos.DrawSphere(transform.position + position, radius);
     }
 }

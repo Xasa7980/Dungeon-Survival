@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using ListExtension;
 public class LoadSceneManager : MonoBehaviour
 {
     public static LoadSceneManager instance;
@@ -40,6 +40,7 @@ public class LoadSceneManager : MonoBehaviour
     public SceneData[] sceneDataArray;
 
     private string environmentRule;
+    private List<SceneData> loadedSceneDatas = new List<SceneData>();
 
     private SceneRoomTags roomTags => new SceneRoomTags();
     private void Awake ( )
@@ -57,21 +58,38 @@ public class LoadSceneManager : MonoBehaviour
         InitializeSceneData();
     }
 
+    private void CheckForEnabledScenesRooms ( )
+    {
+        foreach (SceneData sceneData in loadedSceneDatas)
+        {
+            if(sceneData.sceneEnabled)
+            {
+                sceneData.sceneRoom = sceneData.scene.GetRootGameObjects().Where(s => s.GetComponent<DungeonManager>()).FirstOrDefault();
+            }
+        }
+    }
     private void InitializeSceneData ( )
     {
         currentSceneData = sceneDataArray.FirstOrDefault(s => s.sceneTag == "StartRoom");
-        nextSceneData = GetNewSceneData();
+
+        if (currentSceneData != null)
+        {
+            currentSceneData.sceneEnabled = true;
+            currentSceneData.InitializeSceneRoom();
+            loadedSceneDatas.Add(currentSceneData);
+
+            nextSceneData = GetNewSceneData();
+        }
     }
     public void LoadSceneAsync ( ) //LOAD SCENE FUNCTION
     {
-        if (nextSceneData == null)
+        if (String.IsNullOrEmpty(nextSceneData.sceneName))
         {
             Debug.LogError("Next scene is empty.");
             nextSceneData = GetNewSceneData();
         }
 
         StartCoroutine(LoadSceneAdditiveAsync(nextSceneData));
-        currentSceneIndex ++;
     }
     private IEnumerator LoadSceneAdditiveAsync ( SceneData sceneData ) //LOAD SCENE LOGIC
     {
@@ -82,59 +100,39 @@ public class LoadSceneManager : MonoBehaviour
 
         if (loadedScene.IsValid())
         {
-            GameObject sceneRoomObject = loadedScene.GetRootGameObjects().FirstOrDefault(obj => obj.GetComponent<DungeonManager>() != null);
-            sceneData.sceneRoom = sceneRoomObject;
+            print("loadedScene");
+            sceneData.InitializeSceneRoom();
+            UpdateSceneDataReferences(sceneData);
+            loadedSceneDatas.Add(sceneData);
 
-            if (sceneRoomObject != null)
-            {
-                UpdateSceneData(sceneData,sceneRoomObject);
+            OnSceneLoaded?.Invoke(this, EventArgs.Empty);
 
-                currentSceneData.exit = SelectCurrentExit();
-                nextSceneData.entrance = SelectNextEntrance();
+            currentSceneIndex++;
 
-                CalculateRoomTransform();
-
-                OnSceneLoaded?.Invoke(this, EventArgs.Empty);
-            }
-        }
-        else
-        {
-            Debug.LogError("No se encontró un GameObject con DungeonManager en la escena cargada.");
+            ReInitializeSceneDataValues();
         }
     }
+    private void UpdateSceneDataReferences (SceneData sceneData ) // Update SceneData references
 
-    public DungeonExits SelectCurrentExit ( ) // SELECT AN EXIT
     {
-        if (currentSceneData == null)
-        {
-            Debug.Log("Not found any currentSceneData.exit");
-            return null;
-        }
-
-        GameObject currentDungeonMainObject = currentSceneData.scene.GetRootGameObjects().Where(sD => sD.GetComponent<DungeonManager>()).First();
-
-        currentSceneData.sceneRoomManager = currentDungeonMainObject.GetComponent<DungeonManager>();
-        if (currentSceneData.sceneRoomManager.HasEntrance()) return null;
-
-        DungeonExits exit = currentDungeonMainObject.GetComponent<DungeonManager>().SetExit();
-
-        return exit;
+        prevSceneData = currentSceneData;
+        currentSceneData = sceneData;
+        nextSceneData = GetNewSceneData();
     }
-    public DungeonExits SelectNextEntrance ( ) //SELECT AN ENTRANCE
+    private void ReInitializeSceneDataValues ( )
     {
-        if (nextSceneData == null)
+        if(prevSceneData != null)
         {
-            Debug.Log("Not found any nextSceneData.entrance");
-            return null;
+            prevSceneData.InitializeSceneRoom();
         }
-        GameObject nextDungeonMainObject = nextSceneData.scene.GetRootGameObjects().Where(sD => sD.GetComponent<DungeonManager>().gameObject).First();
-
-        nextSceneData.sceneRoomManager = nextDungeonMainObject.GetComponent<DungeonManager>();
-        if (nextSceneData.sceneRoomManager.HasEntrance()) return null;
-
-        DungeonExits entrance = nextDungeonMainObject.GetComponent<DungeonManager>().SetEntrance();
-
-        return entrance;
+        if(currentSceneData != null)
+        {
+            currentSceneData.InitializeSceneRoom();
+        }
+        if(nextSceneData != null)
+        {
+            nextSceneData.InitializeSceneRoom();
+        }
     }
     public SceneData GetSceneDataByName(string sceneName ) //GET SCENEDATA BY NAME
     {
@@ -152,39 +150,31 @@ public class LoadSceneManager : MonoBehaviour
     private SceneData GetNewSceneData ( ) //GET A SCENE DATA AVAILABLE TO SPAWN WITH FILTERING
     {
         //string _environmentRule = TryGetSceneRules();
-
         float randNum = UnityEngine.Random.Range(0, 100);
         //Filtro las escenas aptas para la colocación
-        List<SceneData> initialFilter = sceneDataArray.Where(sD => randNum < sD.spawnRate && 
+        List<SceneData> initialFilter = sceneDataArray.Where(sD => randNum > sD.spawnRate && 
                                         currentSceneIndex > sD.spawnIndex && sD.sceneTag != roomTags.startRoom_Tag).ToList();
-        foreach (SceneData sceneData in initialFilter)
-        {
-            Debug.Log(sceneData.sceneTag);
-        }
+
         // Agregamos los que tengan diferente sceneTag que currentSceneData o el anterior y que no sea el tag "startRoom"
         List<SceneData> validSceneDatas = initialFilter
-            .Where(sD => sD.sceneTag != currentSceneData.sceneTag/* && sD.sceneTag != prevSceneData.sceneTag*/).ToList(); 
+            .Where(sD => sD.sceneTag != roomTags.startRoom_Tag && sD.sceneTag != currentSceneData.sceneTag).ToList();
+
+        
         if (validSceneDatas.Count > 0)
         {
-            Debug.Log(validSceneDatas.Count);
-
+            Debug.Log("eaea");
             //Coloco una al azar
             int randomIndex = UnityEngine.Random.Range(0, validSceneDatas.Count);
             SceneData selectedScene = validSceneDatas[randomIndex];
 
             return selectedScene;
         }
-        SceneData selectedDefault = sceneDataArray.Where(sD => sD.sceneTag != roomTags.startRoom_Tag && sD.sceneTag != currentSceneData.sceneTag).FirstOrDefault();
-        return selectedDefault;
+        Debug.Log("eaea3");
+        List<SceneData> validSceneDatasDefault = sceneDataArray.Where(sD => sD.sceneTag != roomTags.startRoom_Tag && currentSceneIndex + 3 >= sD.spawnIndex ).ToList();
+        Debug.Log(validSceneDatasDefault.Count);
+
+        return validSceneDatasDefault[UnityEngine.Random.Range(0, validSceneDatasDefault.Count)];
     }
-    private void UpdateSceneData ( SceneData sceneData, GameObject sceneRoomObject )
-    {
-        prevSceneData = currentSceneData;
-        currentSceneData = sceneData;
-        currentSceneData.sceneRoom = sceneRoomObject;
-        nextSceneData = GetNewSceneData(); // Implement this method based on your logic
-    }    
-    private List<SceneData> loadedSceneDatas = new List<SceneData>();
     private string TryGetSceneRules ( SceneData sceneData ) //SET RULES FOR SCENES
     {
         if(currentSceneData.IsUnityNull() || nextSceneData.IsUnityNull())
@@ -210,127 +200,81 @@ public class LoadSceneManager : MonoBehaviour
                 return "normal";
         }
     }
-    public void UpdatePrevSceneRoom( GameObject sceneRoomObject )//UPDATE THE GAMEOBJECT OF THE ROOM FROM A PREV SCENE DATA
+    public void CalculateRoomTransform ( DungeonExits entrance, GameObject sceneRoom)
     {
-        if (prevSceneData != null)
+        if (currentSceneData.exit == null || entrance == null)
         {
-            prevSceneData.sceneRoom = sceneRoomObject;
+            return;
         }
-        else
+        Transform exitParent = currentSceneData.exit.transform.parent;
+        Transform entranceParent = entrance.transform.parent;
+        if (exitParent == null || entranceParent == null)
         {
-            Debug.LogError("currentSceneData es null. No se puede actualizar sceneRoom.");
+            Debug.LogError("Exit or Entrance does not have a parent object.");
+            return;
         }
-    }
-    public void UpdateCurrentSceneRoom (GameObject sceneRoomObject ) //UPDATE THE GAMEOBJECT OF THE ROOM FROM A CURRENT SCENE DATA
-    {
-        if (currentSceneData != null)
-        {
-            currentSceneData.sceneRoom = sceneRoomObject;
-        }
-        else
-        {
-            Debug.LogError("currentSceneData es null. No se puede actualizar sceneRoom.");
-        }
-    }
-    public void UpdateNextSceneRoom( GameObject sceneRoomObject )//UPDATE THE GAMEOBJECT OF THE ROOM FROM A NEXT SCENE DATA
-    {
-        if (nextSceneData != null)
-        {
-            nextSceneData.sceneRoom = sceneRoomObject;
-        }
-        else
-        {
-            Debug.LogError("currentSceneData es null. No se puede actualizar sceneRoom.");
-        }
-    }
-    private void CalculateRoomTransform ( )
-    {
-        Debug.Log(currentSceneData.exit);
-        Debug.Log(nextSceneData.entrance);
+        Vector3 exitOrientation = exitParent.forward * 7.5f; // O el vector que apunta hacia la salida
+        Vector3 entranceOrientation = entranceParent.forward * 7.5f; // O el vector que apunta hacia la entrada
+                                                                     // Calcula la dirección deseada para la entrada en relación a la salida.
+                                                                     // Esto es inverso porque queremos que la entrada de la nueva habitación mire hacia la salida.
+        Vector3 desiredForward = -exitOrientation;
 
-        if (currentSceneData.exit == null)
-        {
-            currentSceneData.exit = SelectCurrentExit();
-        }
-        if(nextSceneData.entrance == null)
-        {
-            currentSceneData.entrance = SelectNextEntrance();
-        }
-        Debug.Log(currentSceneData.exit);
-        Debug.Log(nextSceneData.entrance);
+        // Calcula la rotación necesaria desde la orientación actual de la entrada hacia la dirección deseada.
 
-        Vector3 exitOrientation = currentSceneData.exit.transform.forward; // O el vector que apunta hacia la salida
-        Debug.DrawLine(currentSceneData.exit.transform.forward, currentSceneData.exit.transform.forward * 5, Color.red, 10);
-        Vector3 entranceOrientation = nextSceneData.entrance.transform.forward; // O el vector que apunta hacia la entrada
-        Debug.DrawLine(nextSceneData.exit.transform.forward, nextSceneData.exit.transform.forward * 5,Color.red,10);
+        Quaternion currentRotation = Quaternion.LookRotation(entranceOrientation);
+        Quaternion desiredRotation = Quaternion.LookRotation(desiredForward);
+        Quaternion rotationDifference = desiredRotation * Quaternion.Inverse(currentRotation);
 
-        Vector3 crossProduct = Vector3.Cross(exitOrientation, entranceOrientation);
-        float angle = Vector3.Angle(exitOrientation,entranceOrientation);
-        if (crossProduct.y < 0) angle = -angle; //Determinamos la orientacion a la que rotamos
+        // Aplica la rotación calculada al objeto sceneRoom en el espacio global.
+        sceneRoom.transform.rotation = rotationDifference;
 
-        nextSceneData.sceneRoom.transform.Rotate(Vector3.up, angle);
-        
-        Vector3 entranceOffset = nextSceneData.entrance.transform.localPosition;
-        Quaternion rotation = Quaternion.Euler(0,angle,0);
-        entranceOffset = rotation * entranceOffset;
-
-        nextSceneData.sceneRoomManager.SetPosition(currentSceneData.exit.transform.position - entranceOffset);
-        //nextSceneData.sceneRoom.transform.position = exit.transform.position - entranceOffset;
-    }
-    public SceneData GetPrevSceneData ( )
-    {
-        SceneData _prevSceneData;
-        _prevSceneData = prevSceneData.sceneName != "" ? nextSceneData : null;
-        return _prevSceneData;
-    }
-    public SceneData GetCurrentSceneData ( )
-    {
-        SceneData _currentSceneData;
-        _currentSceneData = currentSceneData.sceneName != "" ? nextSceneData : null;
-
-        return _currentSceneData;
-    }
-    public SceneData GetNextSceneData ( )
-    {
-        SceneData _nextSceneData;
-        _nextSceneData = nextSceneData.sceneName != "" ? nextSceneData : null;
-
-        return _nextSceneData;
+        // Ajusta la posición teniendo en cuenta el nuevo punto de orientación
+        // Suponiendo que quieres mover sceneRoom para que su entrada quede justo en la posición de la salida
+        // Este paso puede necesitar ajustes según la ubicación exacta de los puntos de entrada/salida y su relación espacial
+        Vector3 entrancePosition = entrance.transform.position;
+        Vector3 exitPosition = currentSceneData.exit.transform.position;
+        Vector3 positionOffset = exitPosition - entrancePosition;
+        sceneRoom.transform.position += positionOffset;
     }
     public int GetCurrentSceneIndex ( )
     {
         return currentSceneIndex;
     }
-    public void SetCurrentSceneIndex ( int i )
-    {
-        currentSceneIndex += i;
-    }
 }
 [System.Serializable]
 public class SceneData
 {
-    internal Scene scene => SceneManager.GetSceneByName(sceneName);
-    internal GameObject sceneRoom;
-    internal DungeonManager sceneRoomManager;
-    internal DungeonExits exit;
-    internal DungeonExits entrance;
-
     public string sceneName;
     public string sceneTag;
-
     public string environmentRule;
+    public bool sceneEnabled;
+    public GameObject sceneRoom;
+    public DungeonManager sceneRoomManager;
+    public DungeonExits exit { get { return sceneRoomManager?.currentExit; } private set { exit = value; } }
+    public DungeonExits entrance { get { return sceneRoomManager?.currentEntrance; } private set { exit = value; } }
 
     public float spawnRate;
     public int spawnIndex;
 
-    public SceneData ( GameObject _sceneRoom, string _environmentRule )
+    public Scene scene => SceneManager.GetSceneByName(sceneName);
+
+    public void InitializeSceneRoom ( )
     {
-        sceneRoom = _sceneRoom;
-        environmentRule = _environmentRule;
+        GameObject[] rootObjects = scene.GetRootGameObjects();
+        sceneRoom = rootObjects.FirstOrDefault(obj => obj.GetComponent<DungeonManager>() != null);
+        if (sceneRoom != null)
+        {
+            sceneEnabled = true;
+            sceneRoomManager = sceneRoom.GetComponent<DungeonManager>();
+        }
     }
-    public SceneData ( GameObject _sceneRoom )
+    public void SetNewExit(DungeonExits newExit )
     {
-        sceneRoom = _sceneRoom;
+        exit = newExit;
+    }
+    public void SetNewEntrance(DungeonExits newEntrance)
+    {
+        entrance = newEntrance;
     }
 }
 public class SceneRoomTags

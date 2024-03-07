@@ -12,28 +12,41 @@ public class ActivableAltar : MonoBehaviour
     //Activa Efectos
     //Camera Shake
     public event EventHandler OnPlaceKey;
-    private bool altarIsEnabled;
 
-    public void SetAltarState(bool _altarIsEnabled )
+    [SerializeField] private DungeonExits exit;
+    
+    [SerializeField] private GameObject altar;
+    
+    private bool altarIsEnabled;
+    public DungeonExits TurnExitOn ( )
     {
-        altarIsEnabled = _altarIsEnabled;
-    }
-    public bool AltarIsEnabled( )
-    {
-        return altarIsEnabled;
-    }
-    public void TurnExitOn ( DungeonExits exit)
-    {
-        if (altarIsEnabled) return;
         exit.SetExitType(ExitType.Exit);
         OnPlaceKey?.Invoke(this,EventArgs.Empty);
+        return exit;
     }
     public void TurnEntranceOn(DungeonManager dungeonManager)
     {
-        if (dungeonManager.HasEntrance()) return;
-        if(altarIsEnabled) return;
-
         DungeonExits[] dungeonExits = dungeonManager.exits;
         dungeonExits[UnityEngine.Random.Range(0, dungeonExits.Length)].SetExitType(ExitType.Entrance);
+    }
+    public DungeonExits GetEnabledAltarExit ( )
+    {
+        return exit;
+    }
+    public void SetAltarState ( bool _altarIsEnabled )
+    {
+        altarIsEnabled = _altarIsEnabled;
+    }
+    public bool AltarIsEnabled ( )
+    {
+        return altarIsEnabled;
+    }
+    private void Show ( )
+    {
+        altar.SetActive( true );
+    }
+    private void Hide ( )
+    {
+        altar.SetActive ( false );
     }
 }

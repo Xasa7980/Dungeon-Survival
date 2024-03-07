@@ -8,11 +8,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     public static PlayerInteraction current { get; private set; }
 
-    public event EventHandler<OnInteractAnyObjectEventArgs> OnInteractAnyObject;
-    public class OnInteractAnyObjectEventArgs : EventArgs
-    {
-        public GameObject objectInteracted;
-    }
+    public event EventHandler OnInteractAnyObject;
 
     Interactable _possibleInteraction;
     public Interactable possibleInteraction
@@ -51,10 +47,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if(possibleInteraction != null)
         {
-            OnInteractAnyObject?.Invoke(this, new OnInteractAnyObjectEventArgs()
-            {
-                objectInteracted = possibleInteraction.gameObject
-            });
+            OnInteractAnyObject?.Invoke(this, EventArgs.Empty);
             if (Input.GetButtonDown("Interact"))
             {
                 possibleInteraction.Prepare(this);

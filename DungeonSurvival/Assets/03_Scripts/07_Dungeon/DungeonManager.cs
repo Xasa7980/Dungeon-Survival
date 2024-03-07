@@ -10,24 +10,44 @@ public class DungeonManager : MonoBehaviour
     public DungeonExits currentExit;
     public DungeonExits currentEntrance;
 
-    private ActivableAltar activableAltar;
-
     private bool hasEntrance;
+    private bool hasExit;
+
     private void Start ( )
     {
-        activableAltar = PlayerInventory.current.activableAltar;
-        activableAltar.OnPlaceKey += ActivableAltar_OnPlaceKey;
+        currentEntrance = SetEntrance();
         LoadSceneManager.instance.OnSceneLoaded += LoadSceneManager_OnSceneLoaded;
+        LoadSceneManager.instance.CalculateRoomTransform(currentEntrance,gameObject);
     }
-
+    private void Update ( )
+    {
+        if(exits.Any(sD => sD.IsExit()))
+        {
+            currentExit = exits.First(sD => sD.IsExit());
+        }
+    }
     private void LoadSceneManager_OnSceneLoaded ( object sender, System.EventArgs e )
     {
         throw new System.NotImplementedException();
     }
 
+    public DungeonExits SetEntrance ( ) // Next room entrance
+    {
+        if (currentEntrance != null)
+        {
+            hasEntrance = true;
+            return currentEntrance;
+        }
+        currentEntrance = exits[UnityEngine.Random.Range(0, exits.Length)];
+
+        currentEntrance.GetComponentInParent<ActivableAltar>().TurnEntranceOn(this);
+        hasEntrance = true;
+
+        return currentEntrance;
+    }
     public DungeonExits GetActivedExit ( )
     {
-        foreach ( DungeonExits ex in exits)
+        foreach (DungeonExits ex in exits)
         {
             if (ex.IsExit())
             {
@@ -51,26 +71,13 @@ public class DungeonManager : MonoBehaviour
         Debug.LogError("NotFound entrance");
         return null;
     }
-    private void ActivableAltar_OnPlaceKey ( object sender, System.EventArgs e )
-    {
-        activableAltar.TurnEntranceOn(this);
-    }
-
-    public DungeonExits SetEntrance ( )
-    {
-        activableAltar.TurnEntranceOn(this);
-        return exits.Where(x => x.IsEntrance()).FirstOrDefault();
-    }
-    public DungeonExits SetExit ( )
-    {
-        DungeonExits exit = exits.Where(ex => ex.transform.GetComponentInChildren<DungeonExits>()).First();
-        activableAltar.TurnExitOn(exit);
-
-        return exits.Where(x => x.IsEntrance()).FirstOrDefault();
-    }
     public bool HasEntrance ( )
     {
         return hasEntrance;
+    }
+    public bool HasExit ( )
+    {
+        return hasExit;
     }
     public void SetPosition ( Vector3 position )
     {

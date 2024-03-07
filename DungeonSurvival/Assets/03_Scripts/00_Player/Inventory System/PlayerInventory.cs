@@ -16,6 +16,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
     public int keys { get; private set; }
 
     [SerializeField] private PlayerInteraction playerInteraction;
+    public event EventHandler OnPlaceKey;
     private void Awake()
     {
         current = this;
@@ -27,7 +28,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
         playerInteraction.OnInteractAnyObject += PlayerInteraction_OnInteractAnyObject;
     }
     public ActivableAltar activableAltar;
-    private void PlayerInteraction_OnInteractAnyObject ( object sender, PlayerInteraction.OnInteractAnyObjectEventArgs e )
+    private void PlayerInteraction_OnInteractAnyObject ( object sender, System.EventArgs e )
     {
         //if(e.objectInteracted.TryGetComponent<ActivableAltar>(out ActivableAltar activableAltar))
         PlayerInteraction playerInteraction = sender as PlayerInteraction;
@@ -182,9 +183,10 @@ public class PlayerInventory : MonoBehaviour, iInventory
         }
         if (activableAltar.AltarIsEnabled()) return;
 
-        activableAltar.TurnExitOn(activableAltar.GetComponentsInChildren<DungeonExits>().FirstOrDefault());
+        OnPlaceKey?.Invoke(this, EventArgs.Empty);
         LoadSceneManager.instance.LoadSceneAsync();
         activableAltar.SetAltarState(true);
+        activableAltar.TurnExitOn();
     }
     public bool TryAddItem(Item item) //Por usar
     {
