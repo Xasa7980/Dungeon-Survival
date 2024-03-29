@@ -17,7 +17,7 @@ public static class iInventoryExtensions
     /// <returns>Falso si el inventario esta lleno</returns>
     public static bool TryAddItem(this iInventory inventory, Item item, out int index, bool backpack = false)
     {
-        if (item.stackable)
+        if (item.isStackable)
         {
             InventoryItem[] stacks = inventory.allItems.Where(i => i != null && i.item == item).ToArray();
             InventoryItem stack = stacks.FirstOrDefault(i => !i.isFull);
@@ -114,5 +114,17 @@ public static class iInventoryExtensions
 
         index = -1;
         return false;
+    }
+}
+public static class iItemDataExtensions
+{
+    public static bool IsTypeOf ( this iItemData item, System.Type type )
+    {
+        return item.GetType() == type;
+    }
+
+    public static bool IsType ( this iItemData item, ItemTag type )
+    {
+        return item.itemTag == type;
     }
 }

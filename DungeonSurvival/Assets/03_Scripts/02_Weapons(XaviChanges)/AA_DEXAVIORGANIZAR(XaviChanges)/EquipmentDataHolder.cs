@@ -14,7 +14,7 @@ public class EquipmentDataHolder : MonoBehaviour
     [SerializeField] private EquipmentRank equipmentRank;
     [SerializeField] private EquipmentCategory equipmentCategory;
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] private WeaponHandler weaponHandlerType;
-    [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] private WeaponRange weaponRange;
+    [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] private WeaponType weaponRange;
 
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] public Material slashMaterial;
     [ShowIf("@equipmentCategory == EquipmentCategory.Weapon"), SerializeField] private List<Transform> slashGameObject = new List<Transform>();
@@ -34,7 +34,7 @@ public class EquipmentDataHolder : MonoBehaviour
         equipmentDataSO.equipmentElement = equipmentElement;
         equipmentDataSO.equipmentRank = equipmentRank;
         equipmentDataSO.weaponHandlerType = weaponHandlerType;
-        equipmentDataSO.weaponRange = weaponRange;
+        equipmentDataSO.weaponType = weaponRange;
         equipmentDataSO.equipmentVisualEffects.slashParticleEffect = slashGameObject;
         slashMaterial = equipmentDataSO.equipmentVisualEffects.weaponSlashMaterial;
     }

@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 2897180301575624228}
   - component: {fileID: 3939443072599816726}
   - component: {fileID: 3838283611125641121}
+  - component: {fileID: 8579981615645464447}
   m_Layer: 5
   m_Name: Item_UI Slot
   m_TagString: Untagged
@@ -450,9 +451,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _toggle: {fileID: 3939443072599816726}
-  _icon: {fileID: 5398686318950812989}
+  icon: {fileID: 0}
   amountCounter: {fileID: 5850423237562582868}
   _key: 49
+  tempImageSize: {x: 100, y: 100}
+--- !u!114 &8579981615645464447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247644588165137290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 5
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventID: 13
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventID: 14
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventID: 12
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &6163597283440299694
 GameObject:
   m_ObjectHideFlags: 0

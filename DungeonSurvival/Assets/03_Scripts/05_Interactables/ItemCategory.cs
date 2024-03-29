@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Dungeon Survival/Inventory/Category")]
+public enum EquipmentCategory
+{
+    Weapon,
+    Armor,
+    Accesory
+}
+[CreateAssetMenu(menuName = "Dungeon Survival/Inventory/Item Category")]
 public class ItemCategory : ItemBase
 {
-
+    public EquipmentCategory equipmentCategory;
 }

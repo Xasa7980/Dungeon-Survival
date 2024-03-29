@@ -30,7 +30,6 @@ public class ItemAction : ScriptableObject
     public struct ItemFunctions
     {
         public FunctionType functionType;
-        public string itemTag;
     }
 
 }

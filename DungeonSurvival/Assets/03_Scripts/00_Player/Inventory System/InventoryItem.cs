@@ -6,25 +6,32 @@ public class InventoryItem
 {
     public Item item { get; private set; }
 
-    public bool stackable => item.stackable;
-    int maxStack => item.maxStack;
+    public bool stackable => item.isStackable;
+    int maxStack => item.stackAmount;
     public int currentStack = 0;
 
-    InventoryItem_UI_Layout slot;
+    InventoryItem_UI slot;
 
     public bool isFull => !(currentStack < maxStack);
 
-    public InventoryItem(Item item, InventoryItem_UI_Layout slot)
+    public InventoryItem(Item item, InventoryItem_UI slot)
     {
         this.item = item;
         this.slot = slot;
         currentStack = 1;
     }
 
-    public void UpdateSlot(InventoryItem_UI_Layout slot)
+    public void UpdateInventorySlot( InventoryItem_UI _slot )
     {
-        this.slot = slot;
-        slot.SetItem(this);
+        InventoryItem_UI_Layout tempSlot = _slot as InventoryItem_UI_Layout;
+        this.slot = tempSlot;
+        tempSlot.SetItemToInventory(this);
+    }
+    public void UpdateEquipmentSlot( InventoryItem_UI _slot )
+    {
+        EquipedItem_UI_Layout tempSlot = _slot as EquipedItem_UI_Layout;
+        this.slot = tempSlot;
+        tempSlot.SetItemToEquipmentWindow(this);
     }
 
     /// <summary>
@@ -35,8 +42,9 @@ public class InventoryItem
     {
         if (currentStack < maxStack)
         {
+            InventoryItem_UI_Layout tempSlot = slot as InventoryItem_UI_Layout;
             currentStack++;
-            slot.UpdateStack(this);
+            tempSlot.UpdateStack(this);
             return true;
         }
 
@@ -49,9 +57,36 @@ public class InventoryItem
     /// <returns>False si el stack esta vacio</returns>
     public bool TryRemove()
     {
+        InventoryItem_UI_Layout tempSlot = slot as InventoryItem_UI_Layout;
         currentStack--;
-        slot.UpdateStack(this);
+        tempSlot.UpdateStack(this);
 
         return currentStack > 0;
     }
+    //public void TrySwapEquipment ( InventoryItem_UI _slot )
+    //{
+    //    InventoryItem_UI_Layout tempInventorySlot;
+    //    EquipedItem_UI_Layout tempEquipmentInventorySlot;
+
+    //    if(_slot as InventoryItem_UI_Layout != null)
+    //    {
+    //        tempInventorySlot = _slot as InventoryItem_UI_Layout;
+    //        if (!tempInventorySlot.empty)
+    //        {
+    //            Item tempItem = tempInventorySlot.item;
+    //            tempInventorySlot.SetItem(item);
+    //            item = tempItem;
+    //            tempInventorySlot.UpdateStack(this);
+    //            return;
+    //        }
+    //        item = tempInventorySlot.item;
+    //        tempInventorySlot.UpdateStack(this);
+    //    }
+    //    if (_slot as EquipedItem_UI_Layout != null)
+    //    {
+    //        tempEquipmentInventorySlot = _slot as EquipedItem_UI_Layout;
+    //    }
+
+    //    return;
+    //}
 }

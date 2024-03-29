@@ -35,13 +35,6 @@ public enum EquipmentType
     Necklace,
     Ring
 }
-public enum EquipmentCategory
-{
-    Weapon,
-    Clothes,
-    Accesory
-}
-
 public enum EquipmentRank
 {
     Normal,
@@ -55,12 +48,15 @@ public enum WeaponHandler
     Hand_1,
     Hand_2
 }
-public enum WeaponRange
+public enum WeaponType
 {
     Melee,
-    Ranged
+    Range,
+    Shield,
+    Armor
 }
-[CreateAssetMenu(fileName = "NewEquipmentData", menuName = "Dungeon Survival/Equipment/Data")]
+[CreateAssetMenu(fileName = "NewEquipmentData", menuName = "Dungeon Survival/Inventory/EquipmentData")]
+
 public class EquipmentDataSO : ScriptableObject
 {
     [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
@@ -74,28 +70,28 @@ public class EquipmentDataSO : ScriptableObject
 
     public EquipmentType equipmentType;
     public EquipmentElement equipmentElement;
-    [OnValueChanged("SetEquipmentRankToStats")]public EquipmentRank equipmentRank;
+    public EquipmentRank equipmentRank;
 
-    [OnValueChanged("SetEquipmentCategoryToStats"), OnValueChanged("SetEquipmentCategoryToVisuals")] 
-    public EquipmentCategory equipmentCategory => equipmentType >= EquipmentType.Dagger ? EquipmentCategory.Weapon : equipmentType < EquipmentType.Dagger && equipmentType >= EquipmentType.Boots ? 
-        EquipmentCategory.Clothes : EquipmentCategory.Accesory;
+    [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")]
+    public WeaponHandler weaponHandlerType = WeaponHandler.Hand_1;
 
-    [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")]public WeaponHandler weaponHandlerType = WeaponHandler.Hand_1;
-    [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")]public WeaponRange weaponRange = WeaponRange.Melee;
+    [ShowIf("@equipmentCategory == EquipmentCategory.Weapon")]
+    public WeaponType weaponType = WeaponType.Melee;
 
-    [GUIColor(0.3f, 1f, 0.5f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Main Stats")] 
+    [GUIColor(0.3f, 1f, 0.5f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Main Stats")]
     public EquipmentStats equipmentStats;
 
-    [GUIColor(0.3f, 1f, 0.8f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Visual Options")] 
+    [GUIColor(0.3f, 1f, 0.8f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Visual Options")]
     public EquipmentVisualEffects equipmentVisualEffects;
 
-    [GUIColor(0.3f, 1f, 0.8f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Animation Options")] 
+    [GUIColor(0.3f, 1f, 0.8f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Animation Options")]
     public EquipmentAnimations equipmentAnimationClips;
 
-    private string EquipmentInformation => equipmentType.ToString();
-
-    private void SetEquipmentCategoryToStats() => equipmentStats.equipmentCategory = equipmentCategory;
-    private void SetEquipmentRankToStats() => equipmentStats.equipmentRank = equipmentRank;
+    [OnValueChanged("SetEquipmentCategoryToStats"), OnValueChanged("SetEquipmentCategoryToVisuals")]
+    private EquipmentCategory equipmentCategory => equipmentType >= EquipmentType.Dagger ? EquipmentCategory.Weapon : equipmentType < EquipmentType.Dagger && equipmentType >= EquipmentType.Boots ?
+    EquipmentCategory.Armor : EquipmentCategory.Accesory;
+    private void SetEquipmentCategoryToStats ( ) => equipmentStats.equipmentCategory = equipmentCategory;
+    private void SetEquipmentRankToStats ( ) => equipmentStats.equipmentRank = equipmentRank;
     private void SetEquipmentCategoryToVisuals ( ) => equipmentVisualEffects.equipmentCategory = equipmentCategory;
     private void SetEquipmentCategoryToAnimationClips ( ) => equipmentAnimationClips.equipmentCategory = equipmentCategory;
     private void OnValidate ( )
@@ -103,7 +99,6 @@ public class EquipmentDataSO : ScriptableObject
         UpdateSlashColor();
         UpdateEquipmentRank();
     }
-
     [OnValueChanged("UpdateSlashColor")]
     private void UpdateSlashColor ( )
     {

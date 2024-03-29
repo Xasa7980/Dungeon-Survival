@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour, iInventory
@@ -12,7 +13,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
     public InventoryItem[] allItems { get; private set; }
 
     Item_Backpack backpack;
-    Item item;
+    public Item item;
     public int keys { get; private set; }
 
     [SerializeField] private PlayerInteraction playerInteraction;
@@ -100,7 +101,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
         {
             if (itemAction != null)
             {
-                if (_item.itemAction.itemFunction.itemTag == tag)
+                if(_item.itemTag.tag == tag)
                 {
                     ActionResult<Action> actionResult = itemAction.ExecuteAction(( ) => UseKey(_item));
                 }
@@ -258,9 +259,28 @@ public class PlayerInventory : MonoBehaviour, iInventory
 }
 public class ItemTagLibrary
 {
+    public string itemTag;
     public string[] foodTags = new string[] { "Meat", "Wheat", "Rice" };
     public string[] healHPTags = new string[] { "Meat", "Wheat", "Rice" };
     public string[] healMPTags = new string[] { "Meat", "Wheat", "Rice" };
     public string[] repairTags = new string[] { "Meat", "Wheat", "Rice" };
     public string[] specialTags = new string[] { "Key", "Wheat", "Rice" };
+    public string[] equipmentTags = new string[] { "Key", "Wheat", "Rice" };
+    public string[] othersTags = new string[] { "Key", "Wheat", "Rice" };
+}
+public static class ItemTagLibraryExtensions
+{
+    public static string SetTag ( this ItemTagLibrary itemTagLibrary, string itemTag )
+    {
+        return itemTagLibrary.itemTag = itemTag;
+    }
+    public static string GetTag ( this ItemTagLibrary itemTagLibrary )
+    {
+        if( string.IsNullOrWhiteSpace(itemTagLibrary.itemTag) )
+        {
+            Debug.LogError("There is not tag in this itemTagLibrary");
+            return null;
+        }
+        return itemTagLibrary.itemTag;
+    }
 }

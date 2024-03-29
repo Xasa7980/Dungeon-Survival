@@ -17,7 +17,7 @@ public class WorldItem : Interactable
     {
         base.FinishInteraction();
 
-        if (_item.canBeEquiped && _item.autoEquip)
+        if (_item.equipable && _item.autoEquip)
         {
             switch (_item)
             {

@@ -175,6 +175,14 @@ public class PlayerStats : MonoBehaviour, IHasProgress
             manaPoints = Mathf.Clamp(manaPoints, manaPoints + healingAmount, maxManaPoints);
         }
     }
+    //public void Equip ( Item item, EquipmentDataHolder newEquipmentDataHolder )
+    //{
+    //    if (PlayerInventory.current.item.equipable)
+    //    {
+    //        PlayerInventory.current.TryRemoveItem(item);
+    //        PlayerInventory_UI_Manager.current.
+    //    }
+    //}
     public void OnEquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {
         prev_EquipmentDataHolder_RightHand = EquipmentDataHolder_RightHand;
