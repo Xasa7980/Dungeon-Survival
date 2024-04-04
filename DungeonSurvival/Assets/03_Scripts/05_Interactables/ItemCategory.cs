@@ -8,7 +8,7 @@ public enum EquipmentCategory
     Armor,
     Accesory
 }
-[CreateAssetMenu(menuName = "Dungeon Survival/Inventory/Item Category")]
+[CreateAssetMenu(menuName = "Dungeon Survival/Inventory/item Category")]
 public class ItemCategory : ItemBase
 {
     public EquipmentCategory equipmentCategory;

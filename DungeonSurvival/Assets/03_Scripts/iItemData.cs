@@ -21,7 +21,7 @@ public interface iItemData
     bool equipable { get; }
     bool canBeInHotbar { get; }
     bool isStackable { get; }
-    int stackAmount { get; }
+    int currentStack { get; }
     int currentAmount { get; set; }
     bool lookAtCursor { get; }
     float lookSpeed { get; }

@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using System;
 using System.Linq;
 
-[CreateAssetMenu(menuName = "Dungeon Survival/Inventory/Item")]
+[CreateAssetMenu(menuName = "Dungeon Survival/Inventory/item")]
 public class Item : ScriptableObject, iItemData
 {
     #region PrivateParams
@@ -35,19 +35,19 @@ public class Item : ScriptableObject, iItemData
     [Header("Equiping")]
     [SerializeField] bool _equipable;
 
-    [FoldoutGroup("Equip"), SerializeField,ShowIf("equipable")] EquipmentDataSO _equipmentDataSO;
-    [FoldoutGroup("Equip"), SerializeField, ShowIf("showIfIsShield")] float _protectionAngle;
-    [FoldoutGroup("Equip"), SerializeField, ShowIf("showIfNotArmor")] bool _lookAtCursor;
-    [FoldoutGroup("Equip"), SerializeField, ShowIf("showLookSpeedField")] float _lookSpeed = 3;
-    [FoldoutGroup("Equip"), SerializeField, ShowIf("showIfNotArmor")] bool _canMove = true;
-    [FoldoutGroup("Equip"), SerializeField, ShowIf("showIfNotArmor")] protected AnimationClip _useAnimation;
-    [FoldoutGroup("Equip"), SerializeField, ShowIf("showIfNotArmor")] protected AnimationClip _useContinuousAnimation;
-    [FoldoutGroup("Equip"), SerializeField, ShowIf("showIfNotArmor")] protected AnimationClip _useEndAnimation;
+    [FoldoutGroup("EquipUI"), SerializeField,ShowIf("equipable")] EquipmentDataSO _equipmentDataSO;
+    [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showIfIsShield")] float _protectionAngle;
+    [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showIfNotArmor")] bool _lookAtCursor;
+    [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showLookSpeedField")] float _lookSpeed = 3;
+    [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showIfNotArmor")] bool _canMove = true;
+    [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showIfNotArmor")] protected AnimationClip _useAnimation;
+    [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showIfNotArmor")] protected AnimationClip _useContinuousAnimation;
+    [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showIfNotArmor")] protected AnimationClip _useEndAnimation;
     //[SerializeField, ShowIf("isRangeWeapon")] Proyectile _proyectile;
-    [FoldoutGroup("Equip"), SerializeField, ShowIf("isRangeWeapon")] bool hasRealoadAnimation;
-    [FoldoutGroup("Equip"), SerializeField, ShowIf("showReloadField")] AnimationClip _reloadAnimation;
+    [FoldoutGroup("EquipUI"), SerializeField, ShowIf("isRangeWeapon")] bool hasRealoadAnimation;
+    [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showReloadField")] AnimationClip _reloadAnimation;
 
-    [FoldoutGroup("Equip"), SerializeField] bool _autoEquip;
+    [FoldoutGroup("EquipUI"), SerializeField] bool _autoEquip;
 
     [Header("Dismantle")]
     
@@ -59,7 +59,7 @@ public class Item : ScriptableObject, iItemData
     [FoldoutGroup("WorldOptions"),SerializeField] WorldItem _interactableModel;
     [FoldoutGroup("WorldOptions"), SerializeField] GameObject _visualizationModel;
     
-    [Header("Item Use Properties")]
+    [Header("item Use Properties")]
 
     [SerializeField] bool _instantUse = false;
     [SerializeField] ItemAction[] _itemFunction;
@@ -76,7 +76,7 @@ public class Item : ScriptableObject, iItemData
     public bool equipable => _equipable;
     public bool canBeInHotbar => _canBeInHotbar;
     public bool isStackable => _isStackable;
-    public int stackAmount => _stackAmount;
+    public int currentStack => _stackAmount;
     public int currentAmount { get; set; }
     public bool lookAtCursor => _lookAtCursor;
     public float lookSpeed => _lookSpeed;
@@ -158,6 +158,7 @@ public class Item : ScriptableObject, iItemData
 
     public void Equip ( /*PlayerStats player, EquipmentDataSO equipmentDataSO*/)
     {
+        Debug.LogError("Misses to implement this function");
         //player.OnEquipRightWeapon
     }
 

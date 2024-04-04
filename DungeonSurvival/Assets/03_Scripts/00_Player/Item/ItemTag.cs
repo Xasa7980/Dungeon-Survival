@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item Tag", menuName = "Dungeon Survival/Inventory/ItemTag")]
+[CreateAssetMenu(fileName = "New item Tag", menuName = "Dungeon Survival/Inventory/ItemTag")]
 public class ItemTag : ScriptableObject
 {
     [SerializeField] string _itemTag;

@@ -13,12 +13,29 @@ MonoBehaviour:
   m_Name: Key_NonStackable
   m_EditorClassIdentifier: 
   _displayName: 
+  _description: 
+  _canBeInHotbar: 0
+  _isStackable: 0
   _icon: {fileID: 21300000, guid: c4fb9ad601fca72499f96095a828034c, type: 3}
-  _category: {fileID: 0}
-  _stackable: 0
-  _maxStack: 3
-  interactableModel: {fileID: 0}
-  visualizationModel: {fileID: 0}
-  _canBeEquiped: 0
+  _stackAmount: 3
+  _itemTag: {fileID: 0}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 0}
+  _protectionAngle: 0
+  _lookAtCursor: 0
+  _lookSpeed: 3
+  _canMove: 1
+  _useAnimation: {fileID: 0}
+  _useContinuousAnimation: {fileID: 0}
+  _useEndAnimation: {fileID: 0}
+  hasRealoadAnimation: 0
+  _reloadAnimation: {fileID: 0}
   _autoEquip: 0
+  _canBeDismantled: 0
+  _resultingPieces: []
+  _interactableModel: {fileID: 0}
+  _visualizationModel: {fileID: 0}
+  _instantUse: 0
+  _itemFunction: []
+  _useAnimations: []
   itemAction: {fileID: 11400000, guid: 5204b8551629ad846a62f658ad98dcb5, type: 2}

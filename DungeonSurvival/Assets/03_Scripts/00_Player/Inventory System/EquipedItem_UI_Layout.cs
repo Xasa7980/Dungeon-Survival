@@ -6,38 +6,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 
-public class InventoryItem_UI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerEnterHandler
-{
-    public virtual void OnBeginDrag ( PointerEventData eventData )
-    {
-    }
-    public virtual void OnDrag ( PointerEventData eventData )
-    {
-    }
-
-    public virtual void OnEndDrag ( PointerEventData eventData )
-    {
-    }
-    public virtual void OnPointerClick ( PointerEventData eventData )
-    {
-    }
-
-    public virtual void OnPointerEnter ( PointerEventData eventData )
-    {
-    }
-}
 public class EquipedItem_UI_Layout : InventoryItem_UI
 {
     [SerializeField] Image icon;
 
-    [SerializeField] ItemCategory _itemCategory;
     [SerializeField] Vector2 tempImageSize = new Vector2(100,100);
-    public ItemCategory itemCategory => _itemCategory;
 
-    Item _item;
-    public Item item => _item;
-    public void SetItem(Item item ) {  _item = item; }
-    public bool empty => _item == null;
+    public bool empty => item == null;
 
     private GameObject tempItemRepresentation;
     private InventoryItem_UI _tempTargetContainer;
@@ -60,19 +35,19 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
             icon.sprite = item.item.icon;
         }
 
-        _item = item == null ? null : item.item;
+        this.item = item == null ? null : item.item;
     }
 
-    public void Equip ( Item item )
+    public void EquipUI ( Item item )
     {
-        this._item = item;
-        icon.sprite = this._item.icon;
+        this.item = item;
+        icon.sprite = this.item.icon;
         UpdateIconAlpha(1);
     }
 
-    public void Unequip ( )
+    public void UnequipUI ( )
     {
-        _item = null;
+        item = null;
         icon.sprite = itemCategory.icon;
         UpdateIconAlpha(0.5f);
     }
@@ -84,16 +59,16 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
     }
     public override void OnBeginDrag ( PointerEventData eventData )
     {
-        if (_item != null)
+        if (item != null)
         {
             tempItemRepresentation = new GameObject("TempItem");
             tempItemRepresentation.transform.SetParent(transform.parent.parent.parent, false);
             tempItemRepresentation.transform.SetAsLastSibling(); // Para visualizarlo por encima de otros UIs
             Image tempImage = tempItemRepresentation.AddComponent<Image>();
-            tempImage.sprite = _item.icon;
+            tempImage.sprite = item.icon;
             tempImage.rectTransform.sizeDelta = new Vector2(tempImageSize.x, tempImageSize.y); // Le damos un tamaño a la imagen con el icono temporal
             tempImage.color = icon.color;
-            tempItem = _item;
+            tempItem = item;
         }
     }
 
@@ -126,7 +101,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
                     {
                         // Aquí implementas la lógica para transferir el item al contenedor objetivo.
                         // Esto podría incluir llamar a `Unequip` en este contenedor y `Equip` en el contenedor destino.
-                        targetContainer.Equip(tempItem);
+                        targetContainer.EquipUI(tempItem);
                     }
                 }
                 else if (dropTarget.GetComponentInParent<InventoryItem_UI>() as InventoryItem_UI_Layout != null)
@@ -135,7 +110,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
 
                     if (targetContainer.empty)
                     {
-                        // Aquí implementas la lógica para transferir el item al contenedor objetivo.
+                        // lógica para transferir el item al contenedor objetivo.
                         // Esto podría incluir llamar a `Unequip` en este contenedor y `Equip` en el contenedor destino.
                         targetContainer.SetItem(item);
                     }
@@ -143,7 +118,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
                     {
                         Item _targetItem = targetContainer.item;
                         targetContainer.SetItem(tempItem);
-                        _item = _targetItem;
+                        item = _targetItem;
                     }
                 }
 
@@ -151,9 +126,16 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
         }
         tempItem = null;
     }
-
+    public void SetItem ( Item _item )
+    {
+        item = _item;
+    }
     public override void OnPointerClick ( PointerEventData eventData )
     {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            itemInformationWindow_UI.transform.position = (eventData.position);
+        }
     }
     public override void OnPointerEnter ( PointerEventData eventData )
     {

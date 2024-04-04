@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.8666667, g: 0.6039216, b: 0.47058824, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -332,10 +332,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba209ff7a679144bbce0d43b0ed4361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryType: 1
+  itemInformationWindow_UI: {fileID: 0}
+  _itemCategory: {fileID: 0}
+  playerInventory: {fileID: 0}
+  backpackInventory: {fileID: 0}
   _toggle: {fileID: 7737585627772039183}
   icon: {fileID: 1666656367164344100}
   amountCounter: {fileID: 935125054083140941}
-  _key: 49
+  _key: 0
   tempImageSize: {x: 100, y: 100}
 --- !u!114 &3504024025049584702
 MonoBehaviour:

@@ -67,7 +67,6 @@ public static class iInventoryExtensions
         index = -1;
         return false;
     }
-
     /// <summary>
     /// Intentar remover un item espeifico del inventario
     /// </summary>

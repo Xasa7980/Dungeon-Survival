@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Dungeon Survival/Inventory/Backpack")]
 public class Item_Backpack : Item, iInventory
 {
-    [SerializeField] int _maxItems = 4;
+    [SerializeField] int _maxItems = 28;
     public int maxItems => _maxItems;
 
     public InventoryItem[] allItems { get; private set; }

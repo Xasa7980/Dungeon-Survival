@@ -13,14 +13,32 @@ MonoBehaviour:
   m_Name: Item_Equipable_Backpack
   m_EditorClassIdentifier: 
   _displayName: Normal backpack
+  _description: 
+  _canBeInHotbar: 0
+  _isStackable: 0
   _icon: {fileID: 21300000, guid: fe5bcbfdcfb0dda45910b0fbd8ca8b9f, type: 3}
-  _canBeEquiped: 1
+  _stackAmount: 3
+  _itemTag: {fileID: 0}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 0}
+  _protectionAngle: 0
+  _lookAtCursor: 0
+  _lookSpeed: 3
+  _canMove: 1
+  _useAnimation: {fileID: 0}
+  _useContinuousAnimation: {fileID: 0}
+  _useEndAnimation: {fileID: 0}
+  hasRealoadAnimation: 0
+  _reloadAnimation: {fileID: 0}
   _autoEquip: 1
-  _category: {fileID: 11400000, guid: b89d358207aded044862732ec1a0fea0, type: 2}
-  _stackable: 0
-  _maxStack: 3
-  interactableModel: {fileID: 8795290171477455467, guid: c2b4cd27e3cbb034ea9e9a7381bf247f,
+  _canBeDismantled: 0
+  _resultingPieces: []
+  _interactableModel: {fileID: 8795290171477455467, guid: c2b4cd27e3cbb034ea9e9a7381bf247f,
     type: 3}
-  visualizationModel: {fileID: 1056416218193148, guid: 001c79d88f696944684a91cd13c6a1a3,
+  _visualizationModel: {fileID: 1056416218193148, guid: 001c79d88f696944684a91cd13c6a1a3,
     type: 3}
-  _maxItems: 6
+  _instantUse: 0
+  _itemFunction: []
+  _useAnimations: []
+  itemAction: {fileID: 0}
+  _maxItems: 28

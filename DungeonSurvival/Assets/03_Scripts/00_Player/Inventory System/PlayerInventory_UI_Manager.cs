@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Linq;
+using System;
 
 public class PlayerInventory_UI_Manager : MonoBehaviour
 {
     public static PlayerInventory_UI_Manager current { get; private set; }
+    public event EventHandler<SlotChecker> OnAnySlotChanged;
 
     public KeyCode itemUseKey = KeyCode.Return;
 
@@ -26,29 +29,40 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
     }
     [FoldoutGroup("Equipment Windows"), SerializeField] GameObject equipmentWindowsInventory;
 
-    [FoldoutGroup("Quick Equip Slots"), SerializeField] EquipedItem_UI_Layout primaryWeapon;
-    [FoldoutGroup("Quick Equip Slots"), SerializeField] EquipedItem_UI_Layout secundaryWeapon;
-    [FoldoutGroup("Quick Equip Slots"), SerializeField] EquipedItem_UI_Layout backpack;
+    [FoldoutGroup("Quick EquipUI Slots"), SerializeField] EquipedItem_UI_Layout primaryWeapon;
+    [FoldoutGroup("Quick EquipUI Slots"), SerializeField] EquipedItem_UI_Layout secundaryWeapon;
+    [FoldoutGroup("Quick EquipUI Slots"), SerializeField] EquipedItem_UI_Layout backpack;
 
     [FoldoutGroup("Backpack"), SerializeField] InventoryItem_UI_Layout slotPrefab;
     [FoldoutGroup("Backpack"), SerializeField] Transform backpackContainer;
     InventoryItem_UI_Layout[] backpackSlots;
 
-    private void Awake()
+    private void Awake ( )
     {
         current = this;
     }
 
-    private void Start()
+    private void Start ( )
     {
         quickAccessSlots = inventoryQuickAccessBar.GetComponentsInChildren<InventoryItem_UI_Layout>();
         backpackSlots = backpackContainer.GetComponentsInChildren<InventoryItem_UI_Layout>();
         equipmentItem_UI_Slots = equipmentWindowsInventory.GetComponentsInChildren<EquipedItem_UI_Layout>();
+        OnAnySlotChanged += PlayerInventory_UI_Manager_OnAnySlotChanged;
     }
 
-    private void Update()
+    private void PlayerInventory_UI_Manager_OnAnySlotChanged ( object sender, SlotChecker e )
     {
-        if(Input.GetAxisRaw("Mouse ScrollWheel") > 0)
+        InventoryItem inventoryItem = sender as InventoryItem;
+
+        if (inventoryItem.currentStack <= 0)
+        {
+            PlayerInventory.current.TryRemoveItem(e.inventoryItem.item);
+        }
+    }
+
+    private void Update ( )
+    {
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
         {
             if (currentSelectedIndex < quickAccessSlots.Length - 1)
                 currentSelectedIndex++;
@@ -71,37 +85,51 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
                 switch (quickAccessSlots[currentSelectedIndex].item)
                 {
                     case Item_Backpack backpack: /* Si el item es de tipo Item_Backpack procede */
-                        
+
                         PlayerInventory.current.EquipBackpack(backpack);
                         break;
-                    case Item usableItem when usableItem.itemTag.tag == "Key" :
+                    case Item usableItem when usableItem.itemTag.tag == "Key":
 
-                        PlayerInventory.current.UseItem(usableItem); 
+                        PlayerInventory.current.UseItem(usableItem);
                         break;
                 }
             }
         }
     }
 
-    public void SelectItem(int index) => currentSelectedIndex = index;
+    public void SelectItem ( int index ) => currentSelectedIndex = index;
 
-    public void AddItem(int index, InventoryItem item)
+    public void AddItemToQuickAccess ( int index, InventoryItem item )
     {
         quickAccessSlots[index].SetItemToInventory(item);
     }
+    public void AddItemToBackpack ( int index, InventoryItem item )
+    {
+        backpackSlots[index].SetItemToInventory(item);
+    }
+    public void EquipItemToEquipmentWindows ( Item item )
+    {
+        for (int i = 0; i < equipmentItem_UI_Slots.Length; i++)
+        {
+            if (equipmentItem_UI_Slots[i].itemCategory.equipmentCategory == item.equipmentDataSO.equipmentStats.equipmentCategory)
+            {
+                equipmentItem_UI_Slots[i].EquipUI(item);
+            }
+        }
+    }
 
-    public void EquipBackpack(Item_Backpack backpack)
+    public void EquipBackpack ( Item_Backpack backpack )
     {
         if (backpackSlots != null)
         {
-            foreach(InventoryItem_UI_Layout s in backpackSlots)
+            foreach (InventoryItem_UI_Layout s in backpackSlots)
             {
                 if (s != null)
                     Destroy(s.gameObject);
             }
         }
 
-        this.backpack.Equip(backpack);
+        this.backpack.EquipUI(backpack);
         backpackSlots = new InventoryItem_UI_Layout[backpack.maxItems];
 
         for (int i = 0; i < backpackSlots.Length; i++)
@@ -109,29 +137,24 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
             InventoryItem iItem = backpack.allItems[i];
 
             InventoryItem_UI_Layout slot = Instantiate(slotPrefab, backpackContainer);
-            slot.transform.Find("Key").gameObject.SetActive(false);
+            //slot.transform.Find("Key").gameObject.SetActive(false);
             backpackSlots[i] = slot;
 
             if (iItem != null)
-                iItem.UpdateInventorySlot(slot);
+                iItem.UpdateInventorySlot(slot, OnAnySlotChanged);
         }
     }
 
-    public void AddItemToBackpack(int index, InventoryItem item)
+    public InventoryItem_UI_Layout GetSlot ( int index ) => quickAccessSlots[index];
+    public InventoryItem_UI_Layout GetBackpackSlot ( int index ) => backpackSlots[index];
+    public InventoryItem_UI_Layout GetFirstBackpackEmptySlot ( InventoryItem_UI inventoryItem_UI )
     {
-        backpackSlots[index].SetItemToInventory(item);
+        return backpackSlots.First(i => i.empty);
     }
+    public int GetFirstBackpackEmptySlotIndex ( InventoryItem_UI inventoryItem_UI )
+    {
+        int index = Array.FindIndex(backpackSlots, i => i.empty);
 
-    public void EquipItemToEquipmentWindows ( Item item )
-    {
-        for (int i = 0; i < equipmentItem_UI_Slots.Length; i++)
-        {
-            if (equipmentItem_UI_Slots[i].itemCategory.equipmentCategory == item.equipmentDataSO.equipmentStats.equipmentCategory)
-            {
-                equipmentItem_UI_Slots[i].Equip(item);
-            }
-        }
+        return index;
     }
-    public InventoryItem_UI_Layout GetSlot(int index) => quickAccessSlots[index];
-    public InventoryItem_UI_Layout GetBackpackSlot(int index) => backpackSlots[index];
 }

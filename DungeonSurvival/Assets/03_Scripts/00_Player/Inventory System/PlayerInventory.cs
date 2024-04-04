@@ -8,12 +8,16 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour, iInventory
 {
     public static PlayerInventory current { get; private set; }
+    public event EventHandler OnEquipBackpack;
+    public event EventHandler OnUnequipBackpack;
 
     [SerializeField] int maxItems = 9;
+    [SerializeField] int maxEquipableItems = 9;
     public InventoryItem[] allItems { get; private set; }
+    public InventoryItem[] allEquipableItems { get; private set; }
 
     Item_Backpack backpack;
-    public Item item;
+    public Item_Backpack GetEquipedBackpack => backpack;
     public int keys { get; private set; }
 
     [SerializeField] private PlayerInteraction playerInteraction;
@@ -26,6 +30,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
     private void Start()
     {
         allItems = new InventoryItem[maxItems];
+        allEquipableItems = new InventoryItem[maxEquipableItems];
         playerInteraction.OnInteractAnyObject += PlayerInteraction_OnInteractAnyObject;
     }
     public ActivableAltar activableAltar;
@@ -58,8 +63,9 @@ public class PlayerInventory : MonoBehaviour, iInventory
 
         //this.TryRemoveItem(backpack);
         Item_Backpack backpackInstance = backpack.CreateInstance() as Item_Backpack;
-        this.backpack = backpackInstance;
         backpackInstance.Init();
+        this.backpack = backpackInstance;
+        OnEquipBackpack?.Invoke(this, EventArgs.Empty);
         PlayerInventory_UI_Manager.current.EquipBackpack(backpackInstance);
         backpackInstance.EquipOnPlayer(PlayerHolsterHandler.current.backpack);
     }
@@ -84,6 +90,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
         Destroy(PlayerHolsterHandler.current.backpack.GetChild(0).gameObject);
 
         backpack = null;
+        OnUnequipBackpack?.Invoke(this, EventArgs.Empty);
     }
 
     void DropItem(Item item)
@@ -177,7 +184,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
     private void UseKey(Item _item )
     {
         Item itemToUse = _item.CreateInstance() as Item;
-        item = itemToUse;
+
         if (activableAltar == null)
         {
             return;
@@ -195,18 +202,51 @@ public class PlayerInventory : MonoBehaviour, iInventory
         {
             if (backpack != null)
             {
+                Debug.Log("added to backpack");
                 return TryAddItemToBackPack(item);
             }
-            else
-                return false;
+
+            Debug.Log("added to quickAcces");
+            return false;
         }
 
         if (index >= 0)
-            PlayerInventory_UI_Manager.current.AddItem(index, allItems[index]);
+        {
+            Debug.Log("added to quickAcces by default");
+            PlayerInventory_UI_Manager.current.AddItemToQuickAccess(index, allItems[index]);
+        }
 
         return true;
     }
+    public bool TryAddItemTo(InventoryItem_UI inputSlot, InventoryItem_UI targetSlot,Item item) //Por usar
+    {
+        if (inputSlot == targetSlot) return false;
 
+
+        if (!((iInventory)this).TryAddItem(item, out int index))
+        {
+            if (backpack != null)
+            {
+                Debug.Log("added to backpack");
+                return TryAddItemToBackPack(item);
+            }
+
+            Debug.Log("added to quickAcces");
+            return false;
+        }
+
+        if (index >= 0)
+        {
+            Debug.Log("added to quickAcces by default");
+            if(targetSlot.inventoryType != InventoryType.B)
+            {
+                PlayerInventory_UI_Manager.current.AddItemToQuickAccess(index, allItems[index]);
+            }
+            PlayerInventory_UI_Manager.current.AddItemToBackpack(index, allItems[index]);
+        }
+
+        return true;
+    }
     public bool TryRemoveItem(Item item) // Por usar
     {
         if (!((iInventory)this).TryRemoveItem(item, out int index))
@@ -220,7 +260,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
         }
 
         if (index >= 0)
-            PlayerInventory_UI_Manager.current.AddItem(index, null);
+            PlayerInventory_UI_Manager.current.AddItemToQuickAccess(index, null);
 
         return true;
     }
