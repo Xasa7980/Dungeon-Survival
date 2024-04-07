@@ -7,6 +7,7 @@ using System;
 
 public class PlayerInventory_UI_Manager : MonoBehaviour
 {
+    [PropertyOrder(5)]public ItemTagLibrary itemTagLibrary;
     public static PlayerInventory_UI_Manager current { get; private set; }
     public event EventHandler<SlotChecker> OnAnySlotChanged;
 
@@ -88,7 +89,7 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
 
                         PlayerInventory.current.EquipBackpack(backpack);
                         break;
-                    case Item usableItem when usableItem.itemTag.tag == "Key":
+                    case Item usableItem when usableItem.itemTag.GetTag == "Key":
 
                         PlayerInventory.current.UseItem(usableItem);
                         break;
@@ -156,5 +157,40 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
         int index = Array.FindIndex(backpackSlots, i => i.empty);
 
         return index;
+    }
+}
+[System.Serializable]
+public class ItemTagLibrary
+{
+    public string itemTagString;
+    public ItemTag itemTag;
+
+    public string[] foodTags = new string[] { "Meat", "Wheat", "Rice" };
+    public string[] healHPTags = new string[] { "Meat", "Wheat", "Rice" };
+    public string[] healMPTags = new string[] { "Meat", "Wheat", "Rice" };
+    public string[] repairTags = new string[] { "Meat", "Wheat", "Rice" };
+    public string[] specialTags = new string[] { "Key", "Wheat", "Rice" };
+    public string[] equipmentTags = new string[] { "Key", "Wheat", "Rice" };
+
+    public ItemTagLibrary(string _itemTagString, ItemTag _itemTag )
+    {
+        itemTagString = _itemTagString;
+        itemTag = _itemTag;
+    }
+}
+public static class ItemTagLibraryExtensions
+{
+    public static string SetTag ( this ItemTagLibrary itemTagLibrary, string itemTag )
+    {
+        return itemTagLibrary.itemTagString = itemTag;
+    }
+    public static string GetTag ( this ItemTagLibrary itemTagLibrary )
+    {
+        if( string.IsNullOrWhiteSpace(itemTagLibrary.itemTagString) )
+        {
+            Debug.LogError("There is not SetTag in this itemTagLibrary");
+            return null;
+        }
+        return itemTagLibrary.itemTagString;
     }
 }

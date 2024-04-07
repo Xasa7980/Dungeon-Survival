@@ -38,11 +38,11 @@ public class FoodItemAction : ItemAction
     {
         if (typeof(T) == typeof(float))
         {
-            if (itemFunction.functionType == FunctionType.Healing_HP)
+            if (itemFunction.functionType == FunctionType.Food)
             {
                 return new ActionResult<T>(true, (T)(object)hungerPoints);
             }
-            else if (itemFunction.functionType == FunctionType.Healing_MP)
+            else
             {
                 return new ActionResult<T>(true, (T)(object)hungerPoints);
             }
@@ -55,15 +55,16 @@ public class FoodItemAction : ItemAction
 public class BoostItemAction : ItemAction
 {
     public float statPoints;
+    public ItemTag tag;
     public override ActionResult<T> ExecuteFunction<T> ( Item item )
     {
         if (typeof(T) == typeof(float))
         {
-            if (itemFunction.functionType == FunctionType.Healing_HP)
+            if (itemFunction.functionType == FunctionType.Boosting_Stats)
             {
                 return new ActionResult<T>(true, (T)(object)statPoints);
             }
-            else if (itemFunction.functionType == FunctionType.Healing_MP)
+            else
             {
                 return new ActionResult<T>(true, (T)(object)statPoints);
             }
@@ -81,11 +82,11 @@ public class RepairItemAction : ItemAction
     {
         if (typeof(T) == typeof(float))
         {
-            if (itemFunction.functionType == FunctionType.Healing_HP)
+            if (itemFunction.functionType == FunctionType.Repairing)
             {
                 return new ActionResult<T>(true, (T)(object)repairingPoints);
             }
-            else if (itemFunction.functionType == FunctionType.Healing_MP)
+            else
             {
                 return new ActionResult<T>(true, (T)(object)repairingPoints);
             }
@@ -122,3 +123,16 @@ public class RepairItemAction : ItemAction
 //        return new ActionResult<T>(false, default(T), "No realizada la funcion");
 //    }
 //}
+public class ActionResult<T>
+{
+    public bool Success { get; set; }
+    public T Value { get; set; }
+    public string Message { get; set; } // opcional
+
+    public ActionResult ( bool success, T value, string message = "" )
+    {
+        Success = success;
+        Value = value;
+        Message = message;
+    }
+}

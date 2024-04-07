@@ -24,6 +24,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: b7839dad95683814aa64166edc107ae2, type: 3}
   m_ValidKeywords:
   - _EMISSION
+  - _NORMALMAP
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _ALPHABLEND_ON
@@ -42,11 +43,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 8127d72dd65a1454082d10767b2fcad4, type: 3}
+        m_Texture: {fileID: 2800000, guid: a60586f7a1d621a46b56e7326fc9f381, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 8af32bd080d13b44d8045a88019902ed, type: 3}
+        m_Texture: {fileID: 2800000, guid: 81c4ba162e7b8894bb8d49ca8eaaf9c6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -62,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 77c621fe6d401b943993b4d3131e17a1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7c1e1c0193570304e801e44671ea8fba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:

@@ -9,6 +9,13 @@ using System.Linq;
 [CreateAssetMenu(menuName = "Dungeon Survival/Inventory/item")]
 public class Item : ScriptableObject, iItemData
 {
+    public enum IconType
+    {
+        Normal,
+        NormalInverted,
+        Diagonal,
+        DiagonalInverted
+    }
     #region PrivateParams
 
     [Header("Main Options")]
@@ -19,8 +26,17 @@ public class Item : ScriptableObject, iItemData
     [SerializeField] bool _isStackable;
 
     [SerializeField] Sprite _icon;
+    [SerializeField] IconType _iconType;
+    public float _iconRotationZ => _iconType == IconType.Normal ? 0 : 
+        _iconType == IconType.NormalInverted ? 0 :
+        _iconType == IconType.Diagonal ? 135.2f : -135.2f; //Primero se hace en editor para saber que valor poner despues de ":"
+    public float _iconScale => _iconType == IconType.Normal ? 1 : 
+        _iconType == IconType.NormalInverted ? -1 :
+        _iconType == IconType.Diagonal ? 1.5f : -1.5f; //Primero se hace en editor para saber que valor poner despues de ":"
+
     [ShowIf("_isStackable"), SerializeField] int _stackAmount = 3;
     [SerializeField, DisableIf("isNotBase")] ItemTag _itemTag;
+    private ItemAction itemAction;
 
     #region Verificables
     bool isRangeWeapon { get => equipable && weaponType == WeaponType.Range; }
@@ -36,6 +52,7 @@ public class Item : ScriptableObject, iItemData
     [SerializeField] bool _equipable;
 
     [FoldoutGroup("EquipUI"), SerializeField,ShowIf("equipable")] EquipmentDataSO _equipmentDataSO;
+    [FoldoutGroup("EquipUI"), SerializeField,ShowIf("equipable")] ItemCategory itemCategory;
     [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showIfIsShield")] float _protectionAngle;
     [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showIfNotArmor")] bool _lookAtCursor;
     [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showLookSpeedField")] float _lookSpeed = 3;
@@ -118,12 +135,12 @@ public class Item : ScriptableObject, iItemData
         return instance;
     }
 
-    public virtual void EquipOnPlayer(Transform holster)
+    public virtual void EquipVisuals(Transform holster)
     {
         Instantiate(visualizationModel, holster);
     }
 
-    public virtual void UnequipOnPlayer(iInventory inventory)
+    public virtual void UnequipVisuals(iInventory inventory)
     {
         if (inventory.TryAddItem(this, out int index))
         {
@@ -136,49 +153,38 @@ public class Item : ScriptableObject, iItemData
         //do something
     }
 
-    public void Use ( PlayerInventory character )
+    public void Use ( Transform character )
     {
-        throw new NotImplementedException();
+        //if (!instantUse)
+        //{
+        //    ((AnimatorOverrideController)character.anim.runtimeAnimatorController)["Use_Item"] = useAnimations[Random.Range(0, useAnimations.Length)];
+        //    character.GetComponent<PlayerCombat>.SetTrigger("UseItem");
+        //} En caso de haber una animacion para usar items (todavia no)
     }
-
-    iItemData iItemData.CreateInstance ( )
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Reconfigure ( NewItemData data )
-    {
-        throw new NotImplementedException();
-    }
-
-    public GameObject CreateVisualizationObject ( )
-    {
-        throw new NotImplementedException();
-    }
-
     public void Equip ( /*PlayerStats player, EquipmentDataSO equipmentDataSO*/)
     {
         Debug.LogError("Misses to implement this function");
+        equiped = true;
         //player.OnEquipRightWeapon
     }
 
     public void Unequip ( )
     {
+        equiped = false;
         throw new NotImplementedException();
     }
 
-    public ItemAction itemAction;
-}
-public class ActionResult<T>
-{
-    public bool Success { get; set; }
-    public T Value { get; set; }
-    public string Message { get; set; } // opcional
-
-    public ActionResult ( bool success, T value, string message = "" )
+    public bool TryGetAction ( out ItemAction itemAction )
     {
-        Success = success;
-        Value = value;
-        Message = message;
+        if (this.itemAction != null)
+        {
+            itemAction = this.itemAction;
+            return true;
+        }
+        else
+        {
+            itemAction = null;
+            return false;
+        }
     }
 }

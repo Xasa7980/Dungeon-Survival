@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EquipmentDataSO;
 
-public class PlayerStats : MonoBehaviour, IHasProgress
+public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
 {
     public event EventHandler OnWeaponChanged;
     public event EventHandler OnGetHurted;
@@ -126,9 +126,9 @@ public class PlayerStats : MonoBehaviour, IHasProgress
             //GetDamage(5);
         }
     }
-    public void GetDamage ( int dmg )
+    public void ApplyDamage ( int dmg, bool arrowHit )
     {
-        int damage = CalculateDamage(dmg);
+        int damage = arrowHit ? CalculateDamage(Mathf.Pow(attackPoints,0.3f) * dmg) : CalculateDamage(dmg);
         healthPoints -= dmg;
 
         OnChangeProgress();
@@ -151,7 +151,7 @@ public class PlayerStats : MonoBehaviour, IHasProgress
         textPosition.y = 2; // Mantén la altura del jugador si solo te interesa el plano XZ.
 
         GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder),damage, textPosition);
-        monsterStats.GetDamage(damage);
+        monsterStats.ApplyDamage(damage, false);
     }
     private int CalculateDamage ( float damage )
     {

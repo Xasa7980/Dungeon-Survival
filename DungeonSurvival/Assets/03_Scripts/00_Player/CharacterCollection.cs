@@ -22,17 +22,17 @@ public class CharacterCollection : MonoBehaviour
 
     [SerializeField, HideInInspector] Category category = Category.Head;
 
-    [SerializeField, ShowIf("@equipmentCategory == Category.Head && onBody")] CharacterPart[] head;
-    [SerializeField, ShowIf("@equipmentCategory == Category.Torso && onBody")] CharacterPart[] torso;
-    [SerializeField, ShowIf("@equipmentCategory == Category.Hips && onBody")] CharacterPart[] hips;
-    [SerializeField, ShowIf("@equipmentCategory == Category.Legs && onBody")] CharacterPart[] legs;
+    [SerializeField, ShowIf("@category == Category.Head && onBody")] CharacterPart[] head;
+    [SerializeField, ShowIf("@category == Category.Torso && onBody")] CharacterPart[] torso;
+    [SerializeField, ShowIf("@category == Category.Hips && onBody")] CharacterPart[] hips;
+    [SerializeField, ShowIf("@category == Category.Legs && onBody")] CharacterPart[] legs;
 
     [SerializeField, HideInInspector] bool onBody = true;
 
-    [SerializeField, ShowIf("@equipmentCategory == Category.Head && !onBody")] CharacterPart[] headElements;
-    [SerializeField, ShowIf("@equipmentCategory == Category.Torso && !onBody")] CharacterPart[] torsoElements;
-    [SerializeField, ShowIf("@equipmentCategory == Category.Hips && !onBody")] CharacterPart[] hipsElements;
-    [SerializeField, ShowIf("@equipmentCategory == Category.Legs && !onBody")] CharacterPart[] legsElements;
+    [SerializeField, ShowIf("@category == Category.Head && !onBody")] CharacterPart[] headElements;
+    [SerializeField, ShowIf("@category == Category.Torso && !onBody")] CharacterPart[] torsoElements;
+    [SerializeField, ShowIf("@category == Category.Hips && !onBody")] CharacterPart[] hipsElements;
+    [SerializeField, ShowIf("@category == Category.Legs && !onBody")] CharacterPart[] legsElements;
 
     [PropertyOrder(-2)]
     [HorizontalGroup("Toolbar")]

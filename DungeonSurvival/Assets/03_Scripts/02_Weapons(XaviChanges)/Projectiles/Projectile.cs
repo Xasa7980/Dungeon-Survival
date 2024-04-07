@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] LayerMask impactMask;
     [SerializeField] float lifeTime = 10;
 
-    bool update = false;
+    bool rechargedArrow = false;
 
     private void Start()
     {
@@ -20,14 +20,14 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        if (!update) return;
+        if (!rechargedArrow) return;
 
         Ray ray = new Ray(checkPoint.position, checkPoint.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, speed * Time.deltaTime + checkTreshold, impactMask))
         {
             if (hit.collider.TryGetComponent(out iDamageable damageable))
             {
-                damageable.ApplyDamage(damage);                
+                damageable.ApplyDamage(damage, true);                
             }
 
             transform.position = hit.point - transform.forward * checkPoint.localPosition.z;
@@ -46,14 +46,14 @@ public class Projectile : MonoBehaviour
         Projectile projectile = Instantiate(this, shootPoint.position, shootPoint.rotation);
 
         projectile.damage += additionalDamage;
-        projectile.update = false;
+        projectile.rechargedArrow = false;
 
         return projectile;
     }
 
     public void Release()
     {
-        update = true;
+        rechargedArrow = true;
     }
 
     IEnumerator DelayDestroy()

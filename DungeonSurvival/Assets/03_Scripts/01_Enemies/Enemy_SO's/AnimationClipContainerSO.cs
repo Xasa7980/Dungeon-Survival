@@ -218,7 +218,7 @@ public class AnimationClipContainerSO : ScriptableObject
         }
         else
         {
-            Debug.Log("No basic attack clips available to assign.");
+            Debug.Log("No basic attackValue clips available to assign.");
             return;
         }
     }
@@ -256,7 +256,7 @@ public class AnimationClipContainerSO : ScriptableObject
 
         else
         {
-            Debug.Log("No charged attack clips available to assign.");
+            Debug.Log("No charged attackValue clips available to assign.");
             return;
         }
     }
@@ -289,7 +289,7 @@ public class AnimationClipContainerSO : ScriptableObject
         }
         else
         {
-            Debug.Log("No special attack clips available to assign.");
+            Debug.Log("No special attackValue clips available to assign.");
         }
     }
 
@@ -321,7 +321,7 @@ public class AnimationClipContainerSO : ScriptableObject
         }
         else
         {
-            Debug.Log("No skill attack clips available to assign.");
+            Debug.Log("No skill attackValue clips available to assign.");
         }
     }
 }

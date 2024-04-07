@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static EquipmentDataSO;
 
-public class MonsterStats : MonoBehaviour,IHasProgress
+public class MonsterStats : MonoBehaviour,IHasProgress, iDamageable
 {
     public event EventHandler OnWeaponChanged;
     public event EventHandler OnGetHurted;
@@ -152,8 +152,10 @@ public class MonsterStats : MonoBehaviour,IHasProgress
             aI_MainCore.SetState(State.Death);
         }
     }
-    public void GetDamage ( int damage )
+    public void ApplyDamage ( int dmg, bool arrowHit )
     {
+        int damage = arrowHit ? CalculateDamage(Mathf.Pow(attackPoints, 0.3f) * dmg) : CalculateDamage(dmg);
+
         healthPoints -= damage;
         OnChangeProgress();
         OnGetHurted?.Invoke(this, EventArgs.Empty);
@@ -176,7 +178,7 @@ public class MonsterStats : MonoBehaviour,IHasProgress
 
         GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder), damage, textPosition);
 
-        playerStats.GetDamage(damage);
+        playerStats.ApplyDamage(damage, false);
     }
     public void OnEquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {

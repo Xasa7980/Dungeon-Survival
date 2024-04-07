@@ -67,7 +67,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
         this.backpack = backpackInstance;
         OnEquipBackpack?.Invoke(this, EventArgs.Empty);
         PlayerInventory_UI_Manager.current.EquipBackpack(backpackInstance);
-        backpackInstance.EquipOnPlayer(PlayerHolsterHandler.current.backpack);
+        backpackInstance.EquipVisuals(PlayerHolsterHandler.current.backpack);
     }
 
     public void UnequipBackpack()
@@ -102,20 +102,22 @@ public class PlayerInventory : MonoBehaviour, iInventory
     }
     public void UseItem(Item _item )
     {
-        ItemAction itemAction = _item.itemAction;
-        ItemTagLibrary itemTagLibrary = new();
-        foreach (string tag in itemTagLibrary.specialTags)
+        if(_item.TryGetAction(out ItemAction itemAction))
         {
-            if (itemAction != null)
+            ItemTagLibrary itemTagLibrary = PlayerInventory_UI_Manager.current.itemTagLibrary;
+            foreach (string tag in itemTagLibrary.specialTags)
             {
-                if(_item.itemTag.tag == tag)
+                if (itemAction != null)
                 {
-                    ActionResult<Action> actionResult = itemAction.ExecuteAction(( ) => UseKey(_item));
+                    if (_item.itemTag.GetTag == tag)
+                    {
+                        ActionResult<Action> actionResult = itemAction.ExecuteAction(( ) => UseKey(_item));
+                    }
                 }
-            }
-            else
-            {
-                Debug.LogError("itemAction es null.");
+                else
+                {
+                    Debug.LogError("itemAction es null.");
+                }
             }
         }
 
@@ -238,7 +240,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
         if (index >= 0)
         {
             Debug.Log("added to quickAcces by default");
-            if(targetSlot.inventoryType != InventoryType.B)
+            if(targetSlot.inventoryType != InventoryType.BackpackInventory)
             {
                 PlayerInventory_UI_Manager.current.AddItemToQuickAccess(index, allItems[index]);
             }
@@ -295,32 +297,5 @@ public class PlayerInventory : MonoBehaviour, iInventory
         }
         else
             return false;
-    }
-}
-public class ItemTagLibrary
-{
-    public string itemTag;
-    public string[] foodTags = new string[] { "Meat", "Wheat", "Rice" };
-    public string[] healHPTags = new string[] { "Meat", "Wheat", "Rice" };
-    public string[] healMPTags = new string[] { "Meat", "Wheat", "Rice" };
-    public string[] repairTags = new string[] { "Meat", "Wheat", "Rice" };
-    public string[] specialTags = new string[] { "Key", "Wheat", "Rice" };
-    public string[] equipmentTags = new string[] { "Key", "Wheat", "Rice" };
-    public string[] othersTags = new string[] { "Key", "Wheat", "Rice" };
-}
-public static class ItemTagLibraryExtensions
-{
-    public static string SetTag ( this ItemTagLibrary itemTagLibrary, string itemTag )
-    {
-        return itemTagLibrary.itemTag = itemTag;
-    }
-    public static string GetTag ( this ItemTagLibrary itemTagLibrary )
-    {
-        if( string.IsNullOrWhiteSpace(itemTagLibrary.itemTag) )
-        {
-            Debug.LogError("There is not tag in this itemTagLibrary");
-            return null;
-        }
-        return itemTagLibrary.itemTag;
     }
 }

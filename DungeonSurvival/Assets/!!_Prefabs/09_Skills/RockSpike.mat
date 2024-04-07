@@ -25,6 +25,7 @@ Material:
   m_ValidKeywords:
   - _ALPHATEST_ON
   - _EMISSION
+  - _METALLICSPECGLOSSMAP
   - _SPECGLOSSMAP
   m_InvalidKeywords:
   - _FLIPBOOKBLENDING_OFF
@@ -41,7 +42,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 99f701799de29b144b56bd497c187078, type: 3}
+        m_Texture: {fileID: 2800000, guid: baa3e6bf1edd0eb4886280905ca46da4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -61,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 5ecc6bda157267e498a3ff1d4fff6af8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 26cc59029b860d5469eb2a9a2628e299, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -69,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 02deeccf62fee5e4e9a92d72eb2fd421, type: 3}
+        m_Texture: {fileID: 2800000, guid: de905570ebb011b499d2db96e0fc16ee, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:

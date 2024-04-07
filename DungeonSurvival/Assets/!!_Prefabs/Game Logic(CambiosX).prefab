@@ -2967,6 +2967,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ac6435a9fb0dc429d5851e090c2613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemTagLibrary:
+    itemTagString: 
+    itemTag: {fileID: 0}
+    foodTags: []
+    healHPTags: []
+    healMPTags: []
+    repairTags: []
+    specialTags: []
+    equipmentTags: []
   itemUseKey: 13
   inventoryQuickAccessBar: {fileID: 1519961065597099442}
   equipmentWindowsInventory: {fileID: 749665578}
@@ -2989,6 +2998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxItems: 9
+  maxEquipableItems: 9
   playerInteraction: {fileID: 1194132864256185443}
   activableAltar: {fileID: 0}
 --- !u!1 &7987567955256152616
@@ -17139,6 +17149,11 @@ PrefabInstance:
       propertyPath: icon
       value: 
       objectReference: {fileID: 4326143367979116518}
+    - target: {fileID: 3838283611125641121, guid: 91420b816c7679f42a97d92e49931dbe,
+        type: 3}
+      propertyPath: _keyIcon
+      value: 
+      objectReference: {fileID: 6820352337368077439}
     - target: {fileID: 3939443072599816726, guid: 91420b816c7679f42a97d92e49931dbe,
         type: 3}
       propertyPath: m_IsOn
@@ -17212,6 +17227,12 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6820352337368077439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2901640540842491556, guid: 91420b816c7679f42a97d92e49931dbe,
+    type: 3}
+  m_PrefabInstance: {fileID: 8566533558806358747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6833837226270473471 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2897180301575624228, guid: 91420b816c7679f42a97d92e49931dbe,

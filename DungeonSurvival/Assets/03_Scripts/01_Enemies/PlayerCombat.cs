@@ -26,9 +26,12 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
     [SerializeField] private float[] loadingSkillAttackTimes;
     private float maxChargeTime;
 
-    private PlayerStats playerStats;
     public PlayerStats GetPlayerStats => playerStats;
+    private PlayerStats playerStats;
+
+    public PlayerAnimations GetPlayerAnimations => playerAnimations;
     private PlayerAnimations playerAnimations;
+    
     private bool hit = true;
 
     private void Awake ( )

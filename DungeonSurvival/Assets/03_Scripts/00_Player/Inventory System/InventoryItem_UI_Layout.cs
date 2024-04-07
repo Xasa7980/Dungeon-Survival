@@ -31,6 +31,10 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
         icon.gameObject.SetActive(false);
         amountCounter.transform.parent.gameObject.SetActive(false);
         inventoryType = transform.parent.GetComponent<InventoryItem_UI>().inventoryType;
+        itemInformationWindow_UI = transform.parent.GetComponent<InventoryItem_UI>().itemInformationWindow_UI;
+        equipmentItemInformationWindow_UI = transform.parent.GetComponent<InventoryItem_UI>().equipmentItemInformationWindow_UI;
+
+        keyIcon.SetActive(hasKeyIcon);
     }
 
     private void Update()
@@ -154,29 +158,38 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
         else if (inventoryItem_UI is EquipedItem_UI_Layout)
         {
             EquipedItem_UI_Layout equipmentSlot = inventoryItem_UI as EquipedItem_UI_Layout;
-            if (equipmentSlot.empty)
+            bool equipable = item.equipable? true : false;
+            if(equipable)
             {
-                equipmentSlot.SetItem(this.item);
-                this.RemoveItem_UI(null);
-            }
-            else
-            {
-                Item tempItem = this.item;
-                this.SetItem(equipmentSlot.item);
-                equipmentSlot.SetItem(tempItem);
-            }
-            if(equipmentSlot.item != null)
-            {
-                bool canEquip = equipmentSlot.item.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.equipmentCategory;
-                if(canEquip)
+                if (equipmentSlot.empty)
                 {
-                    equipmentSlot.item.Equip();
-                    equipmentSlot.EquipUI(equipmentSlot.item);
+                    equipmentSlot.SetItem(this.item);
+                    this.RemoveItem_UI(null);
                 }
                 else
                 {
-                    return;
+                    Item tempItem = this.item;
+                    this.SetItem(equipmentSlot.item);
+                    equipmentSlot.SetItem(tempItem);
                 }
+                if (equipmentSlot.item != null)
+                {
+                    bool canEquip = equipmentSlot.item.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.equipmentCategory;
+                    if (canEquip)
+                    {
+                        equipmentSlot.item.Equip();
+                        equipmentSlot.EquipUI(equipmentSlot.item);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Not EquipableItem");
+                return;
             }
         }
 
@@ -210,9 +223,41 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
     }
     public override void OnPointerClick ( PointerEventData eventData )
     {
-        // Implementar la lógica para la informacion del item.
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            //Abrir ventana de usos para item
+            if (item.equipable)
+            {
+                //Usos para Equipamiento (Equipar, desequipar, destruir, tirar al suelo)
+            }
+            else
+            {
+                //Usos para item (Uso,destruir,tirar al suelo)
+            }
+        }
+        else if(eventData.button == PointerEventData.InputButton.Left)
+        {
+            if(item.equipable)
+            {
+                equipmentItemInformationWindow_UI.gameObject.SetActive(true);
+                equipmentItemInformationWindow_UI.SetItemInformation(item);
+            }
+            else
+            {
+                itemInformationWindow_UI.gameObject.SetActive(false);
+                itemInformationWindow_UI.SetItemInformation(item);
+            }
+        }
     }
     public override void OnPointerEnter ( PointerEventData eventData )
     {
+    }
+    private void Show ( GameObject gO)
+    {
+        gO.SetActive(true);
+    }
+    private void Hide ( GameObject gO )
+    {
+        gO.SetActive(false);
     }
 }

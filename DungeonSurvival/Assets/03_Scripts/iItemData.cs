@@ -34,13 +34,7 @@ public interface iItemData
 
     bool instantUse { get; }
     AnimationClip[] useAnimations { get; }
-    void Use ( PlayerInventory character );
-
-    iItemData CreateInstance ( );
-
-    void Reconfigure ( NewItemData data );
-
-    GameObject CreateVisualizationObject ( );
+    void Use ( Transform character );
 
     void Equip ( );
 
