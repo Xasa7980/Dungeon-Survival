@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &139086
+--- !u!1 &190890
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 448048}
-  - component: {fileID: 3316716}
-  - component: {fileID: 2370496}
-  - component: {fileID: -8964259787291975894}
-  - component: {fileID: 64117120027482174}
+  - component: {fileID: 446128}
+  - component: {fileID: 3388554}
+  - component: {fileID: 2383984}
+  - component: {fileID: -6544621921111090833}
+  - component: {fileID: 64393088753849168}
   m_Layer: 0
-  m_Name: SM_Staff_Ornate_Spikes_01
+  m_Name: Hammer_Artisan_Hammer_2Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &448048
+--- !u!4 &446128
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139086}
+  m_GameObject: {fileID: 190890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.25, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3316716
+--- !u!33 &3388554
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139086}
-  m_Mesh: {fileID: 4300000, guid: 8d9e6fedf8f681f42a215ef1f7005565, type: 3}
---- !u!23 &2370496
+  m_GameObject: {fileID: 190890}
+  m_Mesh: {fileID: 4300000, guid: 2a4ef89610b72a94eb50eecaf3e4eebf, type: 3}
+--- !u!23 &2383984
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139086}
+  m_GameObject: {fileID: 190890}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,38 +85,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8964259787291975894
+--- !u!114 &-6544621921111090833
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139086}
+  m_GameObject: {fileID: 190890}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8dcbb948e9ad87b4b9d8a654dddc5972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentDataSO: {fileID: 11400000, guid: 22f24b3c1db725346914b7084b0fa5b4, type: 2}
-  equipmentType: 6
+  equipmentDataSO: {fileID: 11400000, guid: ed70940bf51714b49894cdac2c678b44, type: 2}
+  equipmentType: 0
   equipmentElement: 2
   equipmentRank: 4
-  equipmentCategory: 0
-  weaponHandlerType: 0
-  weaponRange: 0
-  slashMaterial: {fileID: 2100000, guid: f00911ce6e3a60a40a834c3dd81f2b23, type: 2}
-  slashGameObject: []
---- !u!64 &64117120027482174
+--- !u!64 &64393088753849168
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139086}
+  m_GameObject: {fileID: 190890}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 43203586099624828, guid: ecde33fb0b40d5746952ab834af37bae, type: 2}
+  m_Mesh: {fileID: 43399417854568468, guid: 09a17485c6c3b8045ab757b786e654ae, type: 2}

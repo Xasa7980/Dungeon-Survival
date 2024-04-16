@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46175650a31d0146af00f2f3fd74f6f, type: 3}
+  m_Name: Bat_Mole_Shocker_Bat_1Hand
+  m_EditorClassIdentifier: 
+  equipmentName: Mole_Shocker
+  description: A sturden bone, that never breaks, it is perfect to break some heads.
+  equipmentType: 0
+  equipmentElement: 0
+  equipmentRank: 0
+  weaponHandlerType: 0
+  weaponType: 0
+  equipmentStats:
+    attackPoints: 0
+    healthPoints: 0
+    manaPoints: 0
+    defensePoints: 0
+    attackSpeed: 0
+    elementalPower: 0
+    criticalRate: 0
+    criticalDamage: 0
+  equipmentVisualEffects:
+    slashParticleEffect: []
+    equipmentSecondaryParticleEffect: {fileID: 0}
+    emissiveColor: {r: 0, g: 0, b: 0, a: 0}
+    hasSlashEffect: 0
+    hasSecondaryParticleEffect: 0
+    hasDefaultParticleEffects: 0
+    slashMaterials: []
+    weaponSlashMaterial: {fileID: 0}
+  equipmentAnimationClips:
+    basicAttackClips: []
+    chargedAttackClips: []
+    loadingChargedAttackClips: []
+    specialAttackClips: []
+    loadingSpecialAttackClips: []
+    skillAttackClips: []
+    loadingSkillAttackClips: []
