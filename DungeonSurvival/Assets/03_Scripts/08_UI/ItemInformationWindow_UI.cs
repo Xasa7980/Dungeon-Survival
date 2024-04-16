@@ -35,9 +35,9 @@ public class ItemInformationWindow_UI : MonoBehaviour
                 hungerRecoveringValue.textValue.text = foodItemAction.hungerPoints.ToString();
                 feedSpeedValue.textValue.text = foodItemAction.eatFillTime.ToString();
             }
-            else if (action is BoostItemAction)
+            else if (action is StatBoostItemAction)
             {
-                BoostItemAction boostItemAction = (BoostItemAction)action;
+                StatBoostItemAction boostItemAction = (StatBoostItemAction)action;
 
                 ItemInformationTextContainer statPoints = Instantiate(textContainer, prefabParent.transform);
 
@@ -67,16 +67,17 @@ public class ItemInformationWindow_UI : MonoBehaviour
     {
         itemNameText.text = itemDescription;
     }
-    private void SetItemIcon ( Sprite _itemIcon, Item item )
+    private void SetItemIcon ( Item item )
     {
         itemIcon.transform.rotation = Quaternion.Euler(0, 0, item._iconRotationZ);
         itemIcon.transform.localScale = new Vector3(item._iconScale, item._iconScale, item._iconScale);
-        itemIcon.sprite = _itemIcon;
+        itemIcon.sprite = item.icon;
     }
     public void SetItemInformation ( Item item )
     {
         SetItemName(item.name);
         SetItemDescription(item.description);
+        SetItemIcon(item);
         CheckItemInformation(item);
     }
 }

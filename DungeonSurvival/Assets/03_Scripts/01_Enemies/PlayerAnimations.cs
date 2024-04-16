@@ -64,8 +64,9 @@ public class PlayerAnimations : MonoBehaviour
     private bool attackAnimationTriggered;
     private AnimatorStateInfo currentCombatAnimatorState => SelectCurrentAnimatorState(COMBAT_LAYER);
     private AttackCategory attackCategory = AttackCategory.basic;
-    private Animator _animator;
     public Animator animator => _animator;
+    private Animator _animator;
+
     private PlayerCombat playerCombat;
     private PlayerAnimationHandler playerAnimationHandler;
 

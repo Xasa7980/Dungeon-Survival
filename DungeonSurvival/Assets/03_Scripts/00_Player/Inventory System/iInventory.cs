@@ -72,15 +72,16 @@ public static class iInventoryExtensions
     /// </summary>
     /// <param name="item">Item a remover</param>
     /// <returns>Falso si el item no existe en el inventario</returns>
-    public static bool TryRemoveItem(this iInventory inventory, Item item, out int index)
+    public static bool TryRemoveItem(this iInventory inventory, Item item, out int index, int quatityItemsToBeRemoved)
     {
-        InventoryItem instance = inventory.allItems.FirstOrDefault(i => i.item == item); // Guardo el item que sea igual al item que pasaremos como parametro 
+        InventoryItem instance = inventory.allItems.FirstOrDefault(i => i.item != null &&
+                                                                        object.ReferenceEquals(i.item, item)); // Guardo el item que sea igual al item que pasaremos como parametro 
 
         if (instance != null) // Si ese item es diferente a nulo
         {
             if (instance.stackable) // Si ese item es stackable
             {
-                if (!instance.TryRemove()) // Si le quitamos uno y se queda con 1 o 0
+                if (!instance.TryRemove(quatityItemsToBeRemoved)) // Si le quitamos uno y se queda con 1 o 0
                 {
                     for (int i = 0; i < inventory.allItems.Length; i++)
                     {

@@ -7,8 +7,9 @@ public class PlayerLocomotion : MonoBehaviour
 {
     public static PlayerLocomotion current { get; private set; }
 
-    [SerializeField] float turnSpeed = 5;
+    [SerializeField] float SetSpeedSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
     [SerializeField] float moveSpeed = 3;
+    [SerializeField] float turnSpeed = 5;
 
     CharacterController controller;
     Animator anim;
@@ -30,6 +31,8 @@ public class PlayerLocomotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerComponents.instance.lockedAll) return;
+
         Vector3 frontDir = CameraController.current.transform.forward * Input.GetAxis("Vertical");
         Vector3 sideDir = CameraController.current.transform.right * Input.GetAxis("Horizontal");
         Vector3 direction = (frontDir + sideDir).normalized;

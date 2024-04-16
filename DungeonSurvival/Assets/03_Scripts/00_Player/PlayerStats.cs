@@ -33,9 +33,11 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
 
     private float maxHealthPoints;
     private float maxManaPoints;
+    private float maxHungerPoints;
 
     private float healthPoints;
     private float manaPoints;
+    private float hungerPoints;
 
     private float attackPoints;
     private float attackSpeed;
@@ -113,6 +115,11 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
 
         equipmentDataSO_RightHand = equipmentDataHolder_RightHand.GetEquipmentDataSO(); //HACER UNO PARA LOS RANGES QUE NO TENDRÁN AREA DRAWER EN EL ARCO SI NO EN LA FLECHA, LA FLECHA CALCULA DISTANCIAS ONTRIGGER ENTTER
         equipmentDataSO_LeftHand = equipmentDataHolder_LeftHand.GetEquipmentDataSO();
+
+        if(equipmentDataHolder_RightHand.GetDetectionArea() == null)
+        {
+
+        }
         rightDetectionArea = equipmentDataHolder_RightHand.GetDetectionArea();
         leftDetectionArea = equipmentDataHolder_LeftHand.GetDetectionArea();
     }
@@ -174,6 +181,66 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
         {
             manaPoints = Mathf.Clamp(manaPoints, manaPoints + healingAmount, maxManaPoints);
         }
+    }
+    public void BoostMaxHealth ( float boostingAmount, int itemQualityLevel )
+    {
+        BoostStat(ref maxHealthPoints, ref healthPoints, boostingAmount, itemQualityLevel);
+    }
+
+    public void BoostMaxMana ( float boostingAmount, int itemQualityLevel )
+    {
+        BoostStat(ref maxManaPoints, ref manaPoints, boostingAmount, itemQualityLevel);
+    }
+
+    public void BoostAttack ( float boostingAmount, int itemQualityLevel )
+    {
+        BoostSimpleStat(ref attackPoints, boostingAmount, itemQualityLevel);
+    }
+
+    public void BoostAttackSpeed ( float boostingAmount, int itemQualityLevel )
+    {
+        BoostSimpleStat(ref attackSpeed, boostingAmount, itemQualityLevel);
+    }
+
+    public void BoostDefense ( float boostingAmount, int itemQualityLevel )
+    {
+        BoostSimpleStat(ref defensePoints, boostingAmount, itemQualityLevel);
+    }
+
+    public void BoostCriticalRate ( float boostingAmount, int itemQualityLevel )
+    {
+        BoostSimpleStat(ref criticalRate, boostingAmount, itemQualityLevel);
+    }
+
+    public void BoostCriticalDamage ( float boostingAmount, int itemQualityLevel )
+    {
+        BoostSimpleStat(ref criticalDamage, boostingAmount, itemQualityLevel);
+    }
+
+    private void BoostStat ( ref float statToBoost, ref float currentStat, float boostingAmount, int itemQualityLevel )
+    {
+        float boostingMultiplier = GetBoostingMultiplier(itemQualityLevel);
+        float quantityBoosted = statToBoost + (boostingAmount * boostingMultiplier);
+        float delta = quantityBoosted - statToBoost;
+        currentStat += delta;
+        statToBoost = quantityBoosted;
+    }
+
+    private void BoostSimpleStat ( ref float stat, float boostingAmount, int itemQualityLevel )
+    {
+        stat += boostingAmount * GetBoostingMultiplier(itemQualityLevel);
+    }
+
+    private float GetBoostingMultiplier ( int itemQualityLevel )
+    {
+        return itemQualityLevel switch
+        {
+            0 => 1.1f,
+            1 => 1.25f,
+            2 => 1.4f,
+            3 => 1.7f,
+            _ => 1f,
+        };
     }
     //public void Equip ( Item item, EquipmentDataHolder newEquipmentDataHolder )
     //{
@@ -262,15 +329,14 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
             curLvl = nextLevel;
             nextLevel++;
             currentExperience = 0;
-            //maxExperience = CalculateNextLevelExpRequired();
+            maxExperience = (int)CalculateNextLevelExpRequired();
         }
     }
     private float CalculateNextLevelExpRequired ( ) // Formula para subir de nivel, es equilibrada, cuanto mas nivel seas mas dificil sera pero de una manera equitativa
     {
-        return (float)(4 * Mathf.Pow(curLvl, 3) + 0.8 * (Mathf.Pow(curLvl, 2) + 2) * 4);
+        return (float)(4 * Mathf.Pow(curLvl, 3) + 0.8 * (Mathf.Pow(curLvl, 2) + 2) * 4) + 40;
     }
 
-    //formula para calcular daño en base defensa, formula equilibrada
     private void OnChangeProgress ( )
     {
         OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs

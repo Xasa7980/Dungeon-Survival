@@ -28,7 +28,7 @@ public class InventoryItem_UI : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public GameObject keyIcon => _keyIcon;
     [SerializeField] GameObject _keyIcon;
 
-    
+    public int currentStack;
     public virtual void OnBeginDrag ( PointerEventData eventData )
     {
     }

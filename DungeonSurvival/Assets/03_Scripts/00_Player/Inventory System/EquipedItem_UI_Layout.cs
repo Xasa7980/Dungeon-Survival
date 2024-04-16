@@ -37,7 +37,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
             icon.sprite = item.item.icon;
         }
 
-        this.item = item == null ? null : item.item;
+        this.item = item == null ? null : (Item)item.item;
     }
 
     public void EquipUI ( Item item )
@@ -160,7 +160,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
                 }
                 if (equipmentSlot.item != null)
                 {
-                    bool canEquip = equipmentSlot.item.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.equipmentCategory;
+                    bool canEquip = equipmentSlot.item.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories;
                     if (canEquip)
                     {
                         equipmentSlot.item.Equip();

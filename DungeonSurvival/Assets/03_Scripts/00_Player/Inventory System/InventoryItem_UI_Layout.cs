@@ -23,9 +23,8 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
 
     private GameObject tempItemRepresentation;
     private InventoryItem_UI _tempTargetContainer;
-    private Item tempItem;
     public Item GetTempItem => tempItem;
-
+    private Item tempItem;
     private void Start()
     {
         icon.gameObject.SetActive(false);
@@ -34,7 +33,7 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
         itemInformationWindow_UI = transform.parent.GetComponent<InventoryItem_UI>().itemInformationWindow_UI;
         equipmentItemInformationWindow_UI = transform.parent.GetComponent<InventoryItem_UI>().equipmentItemInformationWindow_UI;
 
-        keyIcon.SetActive(hasKeyIcon);
+        if( keyIcon != null )keyIcon.SetActive(hasKeyIcon);
     }
 
     private void Update()
@@ -64,12 +63,13 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
             }
         }
 
-        this.item = item == null ? null : item.item;
+        this.item = item == null ? null : (Item)item.item;
     }
 
-    public void UpdateStack(InventoryItem item)
+    public void UpdateStack(InventoryItem inventoryItem)
     {
-        amountCounter.text = item.currentStack.ToString();
+        amountCounter.text = inventoryItem.currentStack.ToString();
+        currentStack = inventoryItem.currentStack;
     }
     public void RemoveItem_UI(InventoryItem inventoryItem)
     {
@@ -132,22 +132,25 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
     }
     private void SwapOrTransferItem ( InventoryItem_UI inventoryItem_UI )
     {
-        bool sourceHasItem = this.item != null;
+        bool sourceHasItem = item != null;
         bool targetHasItem = inventoryItem_UI.item != null;
 
         if (inventoryItem_UI is InventoryItem_UI_Layout)
         {
             InventoryItem_UI_Layout inventorySlot = inventoryItem_UI as InventoryItem_UI_Layout;
+            int targetCurrentStack = inventorySlot.currentStack;
+            inventorySlot.currentStack = currentStack;
+            currentStack = targetCurrentStack;
 
             if (targetHasItem)
             {
-                inventorySlot.SetItem(this.item);
+                inventorySlot.SetItem(item);
                 this.RemoveItem_UI(null); // Asume que este método puede manejar la lógica para limpiar el slot actual
             }
             else
             {
                 // Si ambos slots tienen ítems, intercámbialos
-                Item tempItem = this.item;
+                Item tempItem = item;
                 this.SetItem(inventoryItem_UI.item);
                 inventorySlot.SetItem(tempItem);
             }
@@ -159,22 +162,27 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
         {
             EquipedItem_UI_Layout equipmentSlot = inventoryItem_UI as EquipedItem_UI_Layout;
             bool equipable = item.equipable? true : false;
-            if(equipable)
+            
+            int targetCurrentStack = equipmentSlot.currentStack;
+            equipmentSlot.currentStack = currentStack;
+            currentStack = targetCurrentStack;
+
+            if (equipable)
             {
                 if (equipmentSlot.empty)
                 {
-                    equipmentSlot.SetItem(this.item);
+                    equipmentSlot.SetItem(item);
                     this.RemoveItem_UI(null);
                 }
                 else
                 {
-                    Item tempItem = this.item;
+                    Item tempItem = item;
                     this.SetItem(equipmentSlot.item);
                     equipmentSlot.SetItem(tempItem);
                 }
                 if (equipmentSlot.item != null)
                 {
-                    bool canEquip = equipmentSlot.item.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.equipmentCategory;
+                    bool canEquip = equipmentSlot.item.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories;
                     if (canEquip)
                     {
                         equipmentSlot.item.Equip();
@@ -197,13 +205,14 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
     // Implementación de UpdateUI para reflejar los cambios en el inventario
     public void UpdateUI ( )
     {
-        if (this.item != null)
+        if (item != null)
         {
             icon.gameObject.SetActive(true);
-            icon.sprite = this.item.icon;
-            if (this.item.isStackable && this.item.currentStack > 1)
+            icon.sprite = item.icon;
+            if (item.isStackable && currentStack > 1)
             {
-                amountCounter.text = this.item.currentStack.ToString();
+                item.currentAmount = currentStack;
+                amountCounter.text = currentStack.ToString();
                 amountCounter.transform.parent.gameObject.SetActive(true);
             }
             else

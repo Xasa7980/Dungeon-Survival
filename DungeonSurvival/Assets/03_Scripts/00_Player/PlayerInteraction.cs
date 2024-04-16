@@ -43,9 +43,21 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape) && interacting && possibleInteraction != null)
+        {
+            possibleInteraction.StopInteraction();
+            interacting = false;
+            anim.SetBool("Interacting", interacting);
+
+            if (possibleInteraction.disallowRootMotion)
+                anim.applyRootMotion = true;
+        }
+
+        if (PlayerComponents.instance.lockedAll) return;
+
         UpdateSurroundings();
 
-        if(possibleInteraction != null)
+        if (possibleInteraction != null)
         {
             OnInteractAnyObject?.Invoke(this, EventArgs.Empty);
             if (Input.GetButtonDown("Interact"))
@@ -76,16 +88,6 @@ public class PlayerInteraction : MonoBehaviour
 
                     possibleInteraction.FinishInteraction();
                 }
-            }
-
-            if (Input.GetButtonUp("Interact") && interacting)
-            {
-                possibleInteraction.StopInteraction();
-                interacting = false;
-                anim.SetBool("Interacting", interacting);
-
-                if (possibleInteraction.disallowRootMotion)
-                    anim.applyRootMotion = true;
             }
         }
         else

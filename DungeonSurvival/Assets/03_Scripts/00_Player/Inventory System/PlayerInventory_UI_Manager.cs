@@ -7,7 +7,6 @@ using System;
 
 public class PlayerInventory_UI_Manager : MonoBehaviour
 {
-    [PropertyOrder(5)]public ItemTagLibrary itemTagLibrary;
     public static PlayerInventory_UI_Manager current { get; private set; }
     public event EventHandler<SlotChecker> OnAnySlotChanged;
 
@@ -57,7 +56,7 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
 
         if (inventoryItem.currentStack <= 0)
         {
-            PlayerInventory.current.TryRemoveItem(e.inventoryItem.item);
+            PlayerInventory.current.TryRemoveItem((Item)e.inventoryItem.item, 0);
         }
     }
 
@@ -83,14 +82,27 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
         {
             if (!quickAccessSlots[currentSelectedIndex].empty)
             {
+                Debug.Log("Current slot is not empty");
                 switch (quickAccessSlots[currentSelectedIndex].item)
                 {
                     case Item_Backpack backpack: /* Si el item es de tipo Item_Backpack procede */
 
+                        Debug.Log("Accessed to item");
                         PlayerInventory.current.EquipBackpack(backpack);
                         break;
                     case Item usableItem when usableItem.itemTag.GetTag == "Key":
 
+                        Debug.Log("Accessed to item");
+                        PlayerInventory.current.UseItem(usableItem);
+                        break;
+                    case Item usableItem when usableItem.itemTag.GetTag == "Food":
+
+                        Debug.Log("Accessed to item");
+                        PlayerInventory.current.UseItem(usableItem);
+                        break;
+                    case Item usableItem when usableItem.itemTag.GetTag == usableItem.itemTag.GetItemTagLibrary.statBoostTags[0]:
+
+                        //Debug.Log("Accessed to item");
                         PlayerInventory.current.UseItem(usableItem);
                         break;
                 }
@@ -112,7 +124,7 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
     {
         for (int i = 0; i < equipmentItem_UI_Slots.Length; i++)
         {
-            if (equipmentItem_UI_Slots[i].itemCategory.equipmentCategory == item.equipmentDataSO.equipmentStats.equipmentCategory)
+            if (equipmentItem_UI_Slots[i].itemCategory.itemCategories == item.equipmentDataSO.equipmentStats.equipmentCategory)
             {
                 equipmentItem_UI_Slots[i].EquipUI(item);
             }
@@ -165,12 +177,12 @@ public class ItemTagLibrary
     public string itemTagString;
     public ItemTag itemTag;
 
-    public string[] foodTags = new string[] { "Meat", "Wheat", "Rice" };
-    public string[] healHPTags = new string[] { "Meat", "Wheat", "Rice" };
-    public string[] healMPTags = new string[] { "Meat", "Wheat", "Rice" };
-    public string[] repairTags = new string[] { "Meat", "Wheat", "Rice" };
-    public string[] specialTags = new string[] { "Key", "Wheat", "Rice" };
-    public string[] equipmentTags = new string[] { "Key", "Wheat", "Rice" };
+    public string[] foodTags = new string[] { "Food" };
+    public string[] healingTags = new string[] { "Healing_HP", "Healing_MP" };
+    public string[] repairTags = new string[] { "Repair" };
+    public string[] statBoostTags = new string[] { "StatBoost" };
+    public string[] specialTags = new string[] { "SpecialItem" };
+    public string[] equipmentTags = new string[] { "Equipment" };
 
     public ItemTagLibrary(string _itemTagString, ItemTag _itemTag )
     {

@@ -16,29 +16,41 @@ public class PlayerInventory : MonoBehaviour, iInventory
     public InventoryItem[] allItems { get; private set; }
     public InventoryItem[] allEquipableItems { get; private set; }
 
-    Item_Backpack backpack;
     public Item_Backpack GetEquipedBackpack => backpack;
+    Item_Backpack backpack;
     public int keys { get; private set; }
 
     [SerializeField] private PlayerInteraction playerInteraction;
     public event EventHandler OnPlaceKey;
+
+    public PlayerStats playerStats => playerStats;
+    private PlayerStats _playerStats;
+    public PlayerLocomotion playerLocomotion => playerLocomotion;
+    private PlayerLocomotion _playerLocomotion;
+
     private void Awake()
     {
         current = this;
+        allItems = new InventoryItem[maxItems];
+        allEquipableItems = new InventoryItem[maxEquipableItems];
+
     }
 
     private void Start()
     {
-        allItems = new InventoryItem[maxItems];
-        allEquipableItems = new InventoryItem[maxEquipableItems];
-        playerInteraction.OnInteractAnyObject += PlayerInteraction_OnInteractAnyObject;
+        PlayerInteraction.current.OnInteractAnyObject += PlayerInteraction_OnInteractAnyObject;
+        _playerStats = PlayerInteraction.current.gameObject.GetComponent<PlayerStats>();
+        _playerLocomotion = PlayerInteraction.current.gameObject.GetComponent<PlayerLocomotion>();
     }
     public ActivableAltar activableAltar;
     private void PlayerInteraction_OnInteractAnyObject ( object sender, System.EventArgs e )
     {
         //if(e.objectInteracted.TryGetComponent<ActivableAltar>(out ActivableAltar activableAltar))
         PlayerInteraction playerInteraction = sender as PlayerInteraction;
-        this.activableAltar = playerInteraction.possibleInteraction.GetComponent<ActivableAltar>();
+        if(playerInteraction.possibleInteraction.TryGetComponent<ActivableAltar>(out activableAltar))
+        {
+            Debug.Log("Found an activable altar");
+        }
     }
     public void AddKey()
     {
@@ -100,89 +112,123 @@ public class PlayerInventory : MonoBehaviour, iInventory
 
         item.InstantiateInWorld(PlayerLocomotion.current.transform.position + position);
     }
-    public void UseItem(Item _item )
+    public void UseItem ( Item _item )
     {
-        if(_item.TryGetAction(out ItemAction itemAction))
+        if (_item.TryGetAction(out ItemAction itemAction))
         {
-            ItemTagLibrary itemTagLibrary = PlayerInventory_UI_Manager.current.itemTagLibrary;
-            foreach (string tag in itemTagLibrary.specialTags)
+            ItemTagLibrary itemTagLibrary = _item.itemTag.GetItemTagLibrary;
+            if (itemAction is HealingItemAction)
             {
-                if (itemAction != null)
+                HealingItemAction healingItemAction = itemAction as HealingItemAction;
+                foreach (string tag in itemTagLibrary.healingTags)
                 {
-                    if (_item.itemTag.GetTag == tag)
+                    if (healingItemAction != null)
                     {
-                        ActionResult<Action> actionResult = itemAction.ExecuteAction(( ) => UseKey(_item));
+                        if (_item.itemTag.GetTag == tag)
+                        {
+                            ActionResult<float> amount = healingItemAction.ExecuteFunction<float>(_item);
+                            float healPoints = healingItemAction.healPoints;
+                            if (healingItemAction.itemFunction.functionType == ItemAction.FunctionType.Healing_HP)
+                            {
+                                playerStats.Healing(ItemAction.FunctionType.Healing_HP, amount.Value);
+                            }
+                            else if (healingItemAction.itemFunction.functionType == ItemAction.FunctionType.Healing_MP)
+                            {
+                                playerStats.Healing(ItemAction.FunctionType.Healing_MP, amount.Value);
+                            }
+                        }
+                        else
+                        {
+                            Debug.LogError("healingItemAction es null.");
+                        }
                     }
                 }
-                else
+            }
+            else if (itemAction is FoodItemAction)
+            {
+                FoodItemAction foodItemAction = itemAction as FoodItemAction;
+                foreach (string tag in itemTagLibrary.foodTags)
                 {
-                    Debug.LogError("itemAction es null.");
+                    if (foodItemAction != null)
+                    {
+                        if (_item.itemTag.GetTag == tag)
+                        {
+                            ActionResult<float> amount = foodItemAction.ExecuteFunction<float>(_item);
+                            float foodFillTime = foodItemAction.eatFillTime;
+                            Debug.Log("Feeding");
+                            //Introducir metodo de llenado de hambre
+                        }
+
+                    }
+                    else
+                    {
+                        Debug.LogError("specialItemAction es null.");
+                    }
+                }
+            }
+            else if (itemAction is StatBoostItemAction)
+            {
+                StatBoostItemAction statBoostItemAction = itemAction as StatBoostItemAction;
+                foreach (string tag in itemTagLibrary.statBoostTags)
+                {
+                    if (statBoostItemAction != null)
+                    {
+                        if (_item.itemTag.GetTag == tag)
+                        {
+                            ActionResult<float> amount = statBoostItemAction.ExecuteFunction<float>(_item);
+                            float statBoostedTime = statBoostItemAction.duration;
+                            //Introducir metodo de reparacion de equipamiento
+                        }
+
+                    }
+                    else
+                    {
+                        Debug.LogError("specialItemAction es null.");
+                    }
+                }
+            }
+            else if (itemAction is RepairItemAction)
+            {
+                RepairItemAction repairItemAction = itemAction as RepairItemAction;
+                foreach (string tag in itemTagLibrary.repairTags)
+                {
+                    if (repairItemAction != null)
+                    {
+                        if (_item.itemTag.GetTag == tag)
+                        {
+                            ActionResult<float> amount = repairItemAction.ExecuteFunction<float>(_item);
+                            float repairTime = repairItemAction.repairingFillTime;
+                            //Introducir metodo de reparacion de equipamiento
+                        }
+
+                    }
+                    else
+                    {
+                        Debug.LogError("specialItemAction es null.");
+                    }
+                }
+            }
+            else if (itemAction is SpecialItemAction)
+            {
+                SpecialItemAction specialItemAction = itemAction as SpecialItemAction;
+                foreach (string tag in itemTagLibrary.specialTags)
+                {
+                    if (specialItemAction != null)
+                    {
+                        if (_item.itemTag.GetTag == tag)
+                        {
+                            ActionResult<Action> actionResult = specialItemAction.ExecuteAction(( ) => UseKey(_item));
+                        }
+
+                    }
+                    else
+                    {
+                        Debug.LogError("specialItemAction es null.");
+                    }
                 }
             }
         }
-
-        //switch (_item.itemAction.itemFunction.functionType)
-        //{
-        //    case ItemAction.FunctionType.Food when _item.itemAction.itemFunction.itemTag == "Meat":
-        //        {
-        //            ActionResult<float> amount = itemAction.ExecuteFunction<float>(_item);
-        //            GetComponent<PlayerStats>().Healing(ItemAction.FunctionType.Healing_HP, amount.Value);
-        //            break;
-        //        }
-        //    case ItemAction.FunctionType.Healing_HP when _item.itemAction.itemFunction.itemTag == "Healing_HP":
-        //        {
-        //            ActionResult<float> amount = itemAction.ExecuteFunction<float>(_item);
-        //            GetComponent<PlayerStats>().Healing(ItemAction.FunctionType.Healing_HP, amount.Value);
-        //            break;
-        //        }
-        //    case ItemAction.FunctionType.Healing_MP when _item.itemAction.itemFunction.itemTag == "Healing_MP":
-        //        {
-        //            ActionResult<float> amount = itemAction.ExecuteFunction<float>(_item);
-        //            GetComponent<PlayerStats>().Healing(ItemAction.FunctionType.Healing_HP, amount.Value);
-        //            break;
-
-        //        }
-        //    case ItemAction.FunctionType.Boosting_Stats when _item.itemAction.itemFunction.itemTag == "Boost_Atk":
-        //        {
-        //            ActionResult<float> amount = itemAction.ExecuteFunction<float>(_item);
-        //            GetComponent<PlayerStats>().Healing(ItemAction.FunctionType.Healing_HP, amount.Value);
-        //            break;
-        //        }
-        //    case ItemAction.FunctionType.Repairing when _item.itemAction.itemFunction.itemTag == "Repair":
-        //        {
-        //            ActionResult<float> amount = itemAction.ExecuteFunction<float>(_item);
-        //            GetComponent<PlayerStats>().Healing(ItemAction.FunctionType.Healing_HP, amount.Value);
-        //            break;
-        //        }
-        //    case ItemAction.FunctionType.SpecialFunction when _item.itemAction.itemFunction.itemTag == "Key":
-        //        {
-        //            foreach (string tag in itemTagLibrary.specialTags)
-        //            {
-        //                if(itemAction != null)
-        //                {
-        //                    if (_item.itemAction.itemFunction.itemTag == tag)
-        //                    {
-        //                        ActionResult<Action> actionResult = itemAction.ExecuteAction(( ) => UseKey(_item));
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    Debug.LogError("itemAction es null.");
-        //                }
-        //            }
-        //            break;
-        //        }
-        //    case ItemAction.FunctionType.Magic when _item.itemAction.itemFunction.itemTag == "Meat":
-        //        {
-        //            ActionResult<float> amount = itemAction.ExecuteFunction<float>(_item);
-        //            GetComponent<PlayerStats>().Healing(ItemAction.FunctionType.Healing_HP, amount.Value);
-        //            break;
-        //        }
-        //    default:
-        //        break;
-        //}
     }
-
     private void UseKey(Item _item )
     {
         Item itemToUse = _item.CreateInstance() as Item;
@@ -249,13 +295,13 @@ public class PlayerInventory : MonoBehaviour, iInventory
 
         return true;
     }
-    public bool TryRemoveItem(Item item) // Por usar
+    public bool TryRemoveItem(Item item, int quatityItemsToBeRemoved ) // Por usar
     {
-        if (!((iInventory)this).TryRemoveItem(item, out int index))
+        if (!((iInventory)this).TryRemoveItem(item, out int index, quatityItemsToBeRemoved))
         {
             if (backpack != null)
             {
-                return TryRemoveItemFromBackpack(item);
+                return TryRemoveItemFromBackpack(item, quatityItemsToBeRemoved);
             }
             else
                 return false;
@@ -283,9 +329,9 @@ public class PlayerInventory : MonoBehaviour, iInventory
             return false;
     }
 
-    bool TryRemoveItemFromBackpack(Item item)
+    bool TryRemoveItemFromBackpack(Item item, int quatityItemsToBeRemoved )
     {
-        if (((iInventory)backpack).TryRemoveItem(item, out int index))
+        if (((iInventory)backpack).TryRemoveItem(item, out int index, quatityItemsToBeRemoved))
         {
             //Update backpack UI here
             if (index >= 0)

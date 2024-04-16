@@ -65,17 +65,17 @@ public class EquipmentItemInformationWindow_UI : MonoBehaviour
     {
         itemNameText.text = itemDescription;
     }
-    private void SetItemIcon(Sprite _itemIcon, Item item )
+    private void SetItemIcon( Item item )
     {
         itemIcon.transform.rotation = Quaternion.Euler(0,0,item._iconRotationZ);
         itemIcon.transform.localScale = new Vector3(item._iconScale, item._iconScale, item._iconScale);
-        itemIcon.sprite = _itemIcon;
+        itemIcon.sprite = item.icon;
     }
     public void SetItemInformation(Item item )
     {
         SetItemName(item.name);
         SetItemDescription(item.description);
-        SetItemIcon(item.icon, item);
+        SetItemIcon(item);
 
         if (!item.equipable) return;
 

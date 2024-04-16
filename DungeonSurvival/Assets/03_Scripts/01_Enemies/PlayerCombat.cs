@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -61,6 +62,8 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
 
     private void Update ( )
     {
+        Debug.Log("player is locked" + PlayerComponents.instance.lockedAll);
+        if (PlayerComponents.instance.lockedAll) return;
         CheckForEnemies();
 
         DoAttack();

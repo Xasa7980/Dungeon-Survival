@@ -16,12 +16,10 @@ public interface iItemData
 
     WorldItem interactableModel { get; }
     GameObject visualizationModel { get; }
-    ItemAction[] itemFunction { get; }
-
     bool equipable { get; }
     bool canBeInHotbar { get; }
     bool isStackable { get; }
-    int currentStack { get; }
+    int maxStack { get; }
     int currentAmount { get; set; }
     bool lookAtCursor { get; }
     float lookSpeed { get; }
@@ -37,7 +35,7 @@ public interface iItemData
     void Use ( Transform character );
 
     void Equip ( );
-
+    void Reconfigure ( Item data );
     void Unequip ( );
 }
 public struct NewItemData
@@ -46,7 +44,7 @@ public struct NewItemData
     public string description;
     public Sprite icon;
 
-    public ItemTag itemTag { get; }
+    public ItemTag itemTag { get; set; }
 
     public bool canBeDismantled;
 
@@ -57,7 +55,7 @@ public struct NewItemData
 
     public bool canBeInHotbar;
     public bool isStackable;
-    public int stackAmount;
+    public int maxStackAmount;
 
     public bool equipable;
     public bool lookAtCursor;

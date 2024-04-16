@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class InventoryItem
 {
-    public Item item { get; private set; }
+    public iItemData item { get; private set; }
     public bool stackable => item.isStackable;
-    int maxStack => item.currentStack;
+    int maxStack => item.maxStack;
     public int currentStack = 0;
 
     public InventoryItem_UI GetSlot => slot;
     InventoryItem_UI slot;
 
-    public bool isFull => !(currentStack < maxStack);
+    public bool isFull => !(currentStack <= maxStack);
 
     public InventoryItem(Item item, InventoryItem_UI slot)
     {
@@ -63,11 +63,12 @@ public class InventoryItem
     /// Remueve in item del stack y indica si este quedo vacío
     /// </summary>
     /// <returns>False si el stack esta vacio</returns>
-    public bool TryRemove()
+    public bool TryRemove( int quantityToRemove = default)
     {
         InventoryItem_UI_Layout tempSlot = slot as InventoryItem_UI_Layout;
-        currentStack--;
-        if(currentStack <= 0)
+        int amountItemsRemoved = quantityToRemove == 0 ? 1 : quantityToRemove;
+        currentStack -= amountItemsRemoved;
+        if (currentStack <= 0)
         {
             tempSlot.RemoveItem_UI(this);
         }

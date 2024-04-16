@@ -133,10 +133,14 @@ public abstract class Interactable : MonoBehaviour
     public virtual void StopInteraction()
     {
         OnInteractionStop.Invoke();
+        PlayerComponents.instance.lockedAll = false;
 
         interactionProgress = 0;
         if (interactionProgressBar)
+        {
             interactionProgressBar.fillAmount = 0;
+            appearPercent = 0;
+        }
     }
 
     /// <summary>
@@ -145,11 +149,14 @@ public abstract class Interactable : MonoBehaviour
     /// <param name="interactor"></param>
     public virtual void FinishInteraction()
     {
-        _canInteract = false;
+        PlayerComponents.instance.lockedAll = false;
         OnInteractionFinish.Invoke();
         interactionProgress = 0;
         if (interactionProgressBar)
+        {
             interactionProgressBar.fillAmount = 0;
+            appearPercent = 0;
+        }
     }
 
     public void Prepare(PlayerInteraction player)
@@ -179,7 +186,7 @@ public abstract class Interactable : MonoBehaviour
         if (HUDCoroutine != null)
             StopCoroutine(HUDCoroutine);
 
-        HUDCoroutine = StartCoroutine(Appear());
+        HUDCoroutine = StartCoroutine(Appear()); 
     }
 
     public virtual void RemoveFocus()
@@ -193,7 +200,7 @@ public abstract class Interactable : MonoBehaviour
     IEnumerator Appear()
     {
         canvas.SetActive(true);
-        Image[] images = GetComponentsInChildren<Image>();
+        Image[] images = canvas.GetComponentsInChildren<Image>();
 
         while (appearPercent < 1)
         {
@@ -219,7 +226,7 @@ public abstract class Interactable : MonoBehaviour
 
     IEnumerator Hide()
     {
-        Image[] images = GetComponentsInChildren<Image>();
+        Image[] images = canvas.GetComponentsInChildren<Image>();
 
         while (appearPercent > 0)
         {
