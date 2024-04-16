@@ -77,7 +77,8 @@ GameObject:
   - component: {fileID: 5292110429242826505}
   - component: {fileID: 1795925182435114665}
   - component: {fileID: 8492710708944987765}
-  - component: {fileID: 3603634411936637776}
+  - component: {fileID: 8311442414616295984}
+  - component: {fileID: 1846434616434425638}
   m_Layer: 0
   m_Name: FantasyShield_Chain2 1
   m_TagString: Untagged
@@ -150,19 +151,58 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3603634411936637776
-BoxCollider:
+--- !u!54 &8311442414616295984
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3603634411936637777}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.02224277, y: 0.109262474, z: 0.08347067}
-  m_Center: {x: 0.000000086953854, y: -0.04623564, z: 0.00000005605977}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &1846434616434425638
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3603634411936637777}
+  m_ConnectedBody: {fileID: 7908799525895231084}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.008395635, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &5597106996938810041
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +312,8 @@ GameObject:
   - component: {fileID: 8657139952992647617}
   - component: {fileID: 4638949604768447830}
   - component: {fileID: 7277514457313891932}
-  - component: {fileID: 6827685122035193806}
+  - component: {fileID: 5281415525305668392}
+  - component: {fileID: 1812705688812717192}
   m_Layer: 0
   m_Name: FantasyShield_Chain5 1
   m_TagString: Untagged
@@ -345,19 +386,58 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6827685122035193806
-BoxCollider:
+--- !u!54 &5281415525305668392
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6827685122035193807}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.08317974, y: 0.10958036, z: 0.026157305}
-  m_Center: {x: 0.00000008158399, y: -0.04363195, z: 0.002995727}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &1812705688812717192
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6827685122035193807}
+  m_ConnectedBody: {fileID: 8432033409606423057}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.011158202, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_UseSpring: 1
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &7107068938003873766
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +482,8 @@ GameObject:
   - component: {fileID: 845301653487120599}
   - component: {fileID: 4643760250867595375}
   - component: {fileID: 7405428638548655816}
-  - component: {fileID: 7163629428481796715}
+  - component: {fileID: 7908799525895231084}
+  - component: {fileID: 6108571536660410601}
   m_Layer: 0
   m_Name: FantasyShield_Chain3 1
   m_TagString: Untagged
@@ -475,19 +556,58 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7163629428481796715
-BoxCollider:
+--- !u!54 &7908799525895231084
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7163629428481796716}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.08319511, y: 0.10938475, z: 0.023245325}
-  m_Center: {x: 0.00000003440042, y: -0.041849475, z: 0.000000056450787}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &6108571536660410601
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7163629428481796716}
+  m_ConnectedBody: {fileID: 2218837852266151690}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.012842931, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &7250139108034713933
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +619,8 @@ GameObject:
   - component: {fileID: 8117334329700092486}
   - component: {fileID: 3385328686102290158}
   - component: {fileID: 7327500593155537431}
-  - component: {fileID: 7250139108034713932}
+  - component: {fileID: 2218837852266151690}
+  - component: {fileID: 300436381891227391}
   m_Layer: 0
   m_Name: FantasyShield_Chain4 1
   m_TagString: Untagged
@@ -572,19 +693,58 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7250139108034713932
-BoxCollider:
+--- !u!54 &2218837852266151690
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7250139108034713933}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.022241035, y: 0.109318614, z: 0.08268837}
-  m_Center: {x: -0.000000016026302, y: -0.046234418, z: 0.00006230715}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &300436381891227391
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7250139108034713933}
+  m_ConnectedBody: {fileID: 5281415525305668392}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.008424908, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &7697458423899047658
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,7 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85f64e515b72a34aa5117021604e767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawMode: 0
+  _drawMode: 0
   objectPositionMode: 1
   gizmoBoxColor: {r: 0, g: 1, b: 0, a: 0.39215687}
   _size: {x: 0.65, y: 0.81, z: 0.25}
@@ -724,7 +884,8 @@ GameObject:
   - component: {fileID: 1240106261240176872}
   - component: {fileID: 8536350157123352368}
   - component: {fileID: 3381802296325029167}
-  - component: {fileID: 8244925286238809189}
+  - component: {fileID: 7992354816490793345}
+  - component: {fileID: 8279906964740227998}
   m_Layer: 0
   m_Name: FantasyShield_Chain1 1
   m_TagString: Untagged
@@ -797,19 +958,58 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8244925286238809189
-BoxCollider:
+--- !u!54 &7992354816490793345
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8244925286238809190}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.083246924, y: 0.10934854, z: 0.022876332}
-  m_Center: {x: -0.000000010447842, y: -0.04618429, z: -1.28205e-10}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &8279906964740227998
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244925286238809190}
+  m_ConnectedBody: {fileID: 8311442414616295984}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.008489996, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_UseSpring: 0
+  m_Spring:
+    spring: 0
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &8303042110402468929
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,7 +1119,7 @@ GameObject:
   - component: {fileID: 1039355529971580235}
   - component: {fileID: 5063313184782920329}
   - component: {fileID: 1951318945518620852}
-  - component: {fileID: 9049129025888687136}
+  - component: {fileID: 8432033409606423057}
   m_Layer: 0
   m_Name: FantasyShield_Sphere
   m_TagString: Untagged
@@ -992,16 +1192,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9049129025888687136
-BoxCollider:
+--- !u!54 &8432033409606423057
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9049129025888687137}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.22295491, y: 0.17481169, z: 0.19464137}
-  m_Center: {x: 0.000009684775, y: -0.0822704, z: 0.0088802045}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
