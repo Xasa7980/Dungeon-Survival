@@ -28,7 +28,7 @@ public class UI_ItemInspector : MonoBehaviour, IDragHandler, IPointerEnterHandle
         if(objectInspected != null)
             Destroy(objectInspected.gameObject);
 
-        objectInspected = item.InstantiateInWorld(transform.position).transform;
+        objectInspected = item.InstantiateInWorld(transform.position,this).transform;
 
         MeshFilter[] filters = objectInspected.GetComponentsInChildren<MeshFilter>();
         Vector3 center = GeometryTool.GetCenterOf(filters, objectInspected, GeometryTool.CenterType.Geometrical);

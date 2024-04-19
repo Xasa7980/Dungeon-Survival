@@ -127,11 +127,27 @@ public class Item : ScriptableObject, iItemData
         return Instantiate(this);
     }
 
-    public WorldItem InstantiateInWorld(Vector3 position)
+    public WorldItem InstantiateInWorld(Vector3 position, MonoBehaviour coroutineStarter)
     {
-        return Instantiate(interactableModel, position, Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0, 360)));
+        WorldItem itemInstance = Instantiate(interactableModel, position + Vector3.up * 5, // Ajuste para iniciar por encima de la posición deseada
+                                             Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0, 360)));
+
+        coroutineStarter.StartCoroutine(MoveItemToPosition(itemInstance, position)); // Iniciar la coroutine para mover el objeto
+        return itemInstance;
     }
 
+    private IEnumerator MoveItemToPosition ( WorldItem item, Vector3 targetPosition )
+    {
+        // Mientras el ítem no esté cerca del punto de caída...
+        while (Vector3.Distance(item.transform.position, targetPosition) > 0.1f)
+        {
+            // Mueve el ítem hacia el punto de caída.
+            item.transform.position = Vector3.MoveTowards(item.transform.position, targetPosition, Time.deltaTime * 5);
+            yield return null; // Espera hasta el próximo fotograma antes de continuar
+        }
+        // Opcional: activar alguna lógica cuando el ítem toca el suelo o llegue a la posición.
+        // Por ejemplo, podrías emitir un sonido, activar una animación, etc.
+    }
     public WorldItem InstantiateInWorld(Vector3 position, Item item)
     {
         WorldItem instance = Instantiate(interactableModel, position, Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0, 360)));

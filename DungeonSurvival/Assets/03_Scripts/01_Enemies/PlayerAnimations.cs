@@ -25,29 +25,33 @@ public class PlayerAnimations : MonoBehaviour
     private const string SKILL_ATTACK_INDEX_FLOAT = "SkillAttackIndex";
 
     #region ANIMATOR STATE NAMES
-    public string ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME { get { return BASIC_ATTACK_TREE_NAME; } }
-    private const string BASIC_ATTACK_TREE_NAME = "BasicAttack_Tree";
+    public string BASIC_ATTACK_TREE_NAME { get { return _BASIC_ATTACK_TREE_NAME; } }
+    private const string _BASIC_ATTACK_TREE_NAME = "BasicAttack_Tree";
 
-    public string ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME { get { return CHARGED_ATTACK_TREE_NAME; } }
-    private const string CHARGED_ATTACK_TREE_NAME = "ChargedAttack_Tree";
+    public string CHARGED_ATTACK_TREE_NAME { get { return _CHARGED_ATTACK_TREE_NAME; } }
+    private const string _CHARGED_ATTACK_TREE_NAME = "ChargedAttack_Tree";
 
-    public string ANIMATION_STATE_SPECIAL_ATTACK_TREE_PERFORMED_NAME { get { return SPECIAL_ATTACK_TREE_NAME; } }
-    private const string SPECIAL_ATTACK_TREE_NAME = "SpecialAttack_Tree";
+    public string SPECIAL_ATTACK_TREE_NAME { get { return _SPECIAL_ATTACK_TREE_NAME; } }
+    private const string _SPECIAL_ATTACK_TREE_NAME = "SpecialAttack_Tree";
 
-    public string ANIMATION_STATE_SKILL_ATTACK_TREE_PERFORMED_NAME { get { return SKILL_ATTACK_TREE_NAME; } }
-    private const string SKILL_ATTACK_TREE_NAME = "SkillAttack_Tree ";
+    public string SKILL_ATTACK_TREE_NAME { get { return _SKILL_ATTACK_TREE_NAME; } }
+    private const string _SKILL_ATTACK_TREE_NAME = "SkillAttack_Tree ";
 
 
-    public string ANIMATION_STATE_LOADING_CHARGED_ATTACK_TREE_PERFORMED_NAME { get { return LOADING_CHARGED_ATTACK_TREE_NAME; } }
-    private const string LOADING_CHARGED_ATTACK_TREE_NAME = "LoadingChargedAttack_Tree";
+    public string LOADING_CHARGED_ATTACK_TREE_NAME { get { return _LOADING_CHARGED_ATTACK_TREE_NAME; } }
+    private const string _LOADING_CHARGED_ATTACK_TREE_NAME = "LoadingChargedAttack_Tree";
 
-    public string ANIMATION_STATE_LOADING_SPECIAL_ATTACK_TREE_PERFORMED_NAME { get { return LOADING_SPECIAL_ATTACK_TREE_NAME; } }
-    private const string LOADING_SPECIAL_ATTACK_TREE_NAME = "LoadingSpecialAttack_Tree";
+    public string LOADING_SPECIAL_ATTACK_TREE_NAME { get { return _LOADING_SPECIAL_ATTACK_TREE_NAME; } }
+    private const string _LOADING_SPECIAL_ATTACK_TREE_NAME = "LoadingSpecialAttack_Tree";
 
-    public string ANIMATION_STATE_LOADING_SKILL_ATTACK_TREE_PERFORMED_NAME { get { return LOADING_SKILL_ATTACK_TREE_NAME; } }
-    private const string LOADING_SKILL_ATTACK_TREE_NAME = "LoadingSkillAttack_Tree  ";
+    public string LOADING_SKILL_ATTACK_TREE_NAME { get { return _LOADING_SKILL_ATTACK_TREE_NAME; } }
+    private const string _LOADING_SKILL_ATTACK_TREE_NAME = "LoadingSkillAttack_Tree  ";
     #endregion
 
+    #region AnimatorTags
+    public static string ANIMATOR_TAG_IS_INTERACTING = "Interacting";
+    private const string _ANIMATOR_TAG_IS_INTERACTING = "Interacting";
+    #endregion
     [SerializeField] private float attackCombo_resetTimeMax;
     
     private float attackCombo_resetTime;
@@ -166,10 +170,10 @@ public class PlayerAnimations : MonoBehaviour
     }
     public AnimatorStateInfo SelectCurrentAnimatorState ( int layer )
     {
-        AnimatorStateInfo[] states = { GetCurrentAnimationInfo(layer, ANIMATION_STATE_BASIC_ATTACK_TREE_PERFORMED_NAME),
-                                       GetCurrentAnimationInfo(layer, ANIMATION_STATE_CHARGED_ATTACK_TREE_PERFORMED_NAME),
-                                       GetCurrentAnimationInfo(layer, ANIMATION_STATE_SPECIAL_ATTACK_TREE_PERFORMED_NAME),
-                                       GetCurrentAnimationInfo(layer, ANIMATION_STATE_SKILL_ATTACK_TREE_PERFORMED_NAME) };
+        AnimatorStateInfo[] states = { GetCurrentAnimationInfo(layer, BASIC_ATTACK_TREE_NAME),
+                                       GetCurrentAnimationInfo(layer, CHARGED_ATTACK_TREE_NAME),
+                                       GetCurrentAnimationInfo(layer, SPECIAL_ATTACK_TREE_NAME),
+                                       GetCurrentAnimationInfo(layer, SKILL_ATTACK_TREE_NAME) };
         foreach (AnimatorStateInfo state in states)
         {
             if(state.fullPathHash == _animator.GetCurrentAnimatorStateInfo(COMBAT_LAYER).fullPathHash)

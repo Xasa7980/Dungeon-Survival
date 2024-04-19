@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: Sapphire_Ore
   _description: 
-  _itemQualityLevel: 0
+  _itemQualityLevel: 2
   _canBeInHotbar: 0
   _isStackable: 1
   _icon: {fileID: 21300000, guid: 3741c0b994c28944ab8c98becab0e09b, type: 3}
   _iconType: 0
-  _maxStack: 30
+  _maxStack: 20
   _itemTag: {fileID: 11400000, guid: d4a4251741b69fd409c174debd2bc7e9, type: 2}
   _equipable: 0
   _equipmentDataSO: {fileID: 0}
@@ -36,8 +36,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 743435216615873836, guid: 7fd854eb21f653d448916eb49189726c,
+    type: 3}
+  _visualizationModel: {fileID: 743435216615873837, guid: 7fd854eb21f653d448916eb49189726c,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

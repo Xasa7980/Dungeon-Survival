@@ -34,69 +34,118 @@ public class PlayerInteraction : MonoBehaviour
     Animator anim;
 
     bool interacting;
-
+    private void Awake ( )
+    {
+        current = this;
+    }
     private void Start()
     {
         anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
-    void Update()
+    void Update ( )
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && interacting && possibleInteraction != null)
-        {
-            possibleInteraction.StopInteraction();
-            interacting = false;
-            anim.SetBool("Interacting", interacting);
 
-            if (possibleInteraction.disallowRootMotion)
-                anim.applyRootMotion = true;
-        }
-
+        HandleEscapeKey();
+        if (IsInteracting()) return;
         if (PlayerComponents.instance.lockedAll) return;
 
         UpdateSurroundings();
 
         if (possibleInteraction != null)
         {
-            OnInteractAnyObject?.Invoke(this, EventArgs.Empty);
-            if (Input.GetButtonDown("Interact"))
-            {
-                possibleInteraction.Prepare(this);
-                possibleInteraction.StartInteraction();
-                interacting = true;
-                anim.SetTrigger("Interact");
-                anim.SetBool("ContinousInteraction", possibleInteraction.interactionType == Interactable.InteractionType.Continue);
-
-                if (possibleInteraction.disallowRootMotion)
-                    anim.applyRootMotion = false;
-            }
-
-            if(possibleInteraction.interactionType == Interactable.InteractionType.Continue
-                && interacting)
-            {
-                anim.SetBool("Interacting", interacting);
-                possibleInteraction.Interact();
-
-                if (possibleInteraction.finished)
-                {
-                    interacting = false;
-                    anim.SetBool("Interacting", interacting);
-
-                    if (possibleInteraction.disallowRootMotion)
-                        anim.applyRootMotion = true;
-
-                    possibleInteraction.FinishInteraction();
-                }
-            }
+            CheckInteractionValidity();
+            HandleInteraction();
         }
         else
         {
-            interacting = false;
-            anim.SetBool("Interacting", false);
+            ResetInteraction();
+        }
+    }
+    private bool IsInteracting ( )
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash(PlayerAnimations.ANIMATOR_TAG_IS_INTERACTING);
+    }
+    private void HandleEscapeKey ( )
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && interacting && possibleInteraction != null)
+        {
+            StopCurrentInteraction();
         }
     }
 
+    private void CheckInteractionValidity ( )
+    {
+        if (!possibleInteraction.gameObject.activeInHierarchy || possibleInteraction.interactionHits <= 0)
+        {
+            StopCurrentInteraction();
+        }
+    }
+
+    private void HandleInteraction ( )
+    {
+        OnInteractAnyObject?.Invoke(this, EventArgs.Empty);
+
+        if (Input.GetButtonDown("Interact"))
+        {
+            StartInteraction();
+        }
+
+        if (possibleInteraction.interactionType == Interactable.InteractionType.Continue)
+        {
+            if (interacting && Input.GetButtonUp("Interact"))
+            {
+                StopCurrentInteraction();
+            }
+
+            if (interacting)
+            {
+                ContinueInteraction();
+            }
+        }
+    }
+    private void StartInteraction ( )
+    {
+        possibleInteraction.Prepare(this);
+        possibleInteraction.StartInteraction();
+        interacting = true;
+        anim.SetTrigger("Interact");
+        anim.SetBool("ContinousInteraction", possibleInteraction.interactionType == Interactable.InteractionType.Continue);
+        anim.SetBool("Interacting", interacting);
+        anim.applyRootMotion = !possibleInteraction.disallowRootMotion;
+    }
+
+    private void ContinueInteraction ( )
+    {
+        possibleInteraction.Interact();
+
+        if (possibleInteraction.finished)
+        {
+            FinishInteraction();
+        }
+    }
+
+    private void FinishInteraction ( )
+    {
+        interacting = false;
+        anim.SetBool("Interacting", interacting);
+        anim.applyRootMotion = !possibleInteraction.disallowRootMotion;
+        possibleInteraction.FinishInteraction();
+    }
+
+    private void StopCurrentInteraction ( )
+    {
+        possibleInteraction.StopInteraction();
+        ResetInteraction();
+    }
+
+    private void ResetInteraction ( )
+    {
+        interacting = false;
+        anim.SetBool("Interacting", interacting);
+        anim.applyRootMotion = possibleInteraction == null || !possibleInteraction.disallowRootMotion;
+    }
     void UpdateSurroundings()
     {
         if (interacting) return;

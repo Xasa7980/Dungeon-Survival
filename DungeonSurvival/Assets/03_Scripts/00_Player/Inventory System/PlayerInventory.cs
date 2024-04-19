@@ -110,7 +110,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
         Vector3 position = UnityEngine.Random.insideUnitSphere * 2;
         position.y = 0;
 
-        item.InstantiateInWorld(PlayerLocomotion.current.transform.position + position);
+        item.InstantiateInWorld(PlayerLocomotion.current.transform.position + position,this);
     }
     public void UseItem ( Item _item )
     {

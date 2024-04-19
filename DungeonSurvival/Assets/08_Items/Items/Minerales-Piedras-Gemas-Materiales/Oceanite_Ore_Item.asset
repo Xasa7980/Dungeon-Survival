@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: Oceanite_Ore
   _description: 
-  _itemQualityLevel: 0
+  _itemQualityLevel: 2
   _canBeInHotbar: 0
   _isStackable: 1
   _icon: {fileID: 21300000, guid: 72ac7e9132db9594bb5a49fc5b3c7bc1, type: 3}
   _iconType: 0
-  _maxStack: 30
+  _maxStack: 20
   _itemTag: {fileID: 11400000, guid: d4a4251741b69fd409c174debd2bc7e9, type: 2}
   _equipable: 0
   _equipmentDataSO: {fileID: 0}
@@ -36,8 +36,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 743435216615873836, guid: 7aa2d6ba9baa9d9438bd3dddfb53b5ed,
+    type: 3}
+  _visualizationModel: {fileID: 743435216615873837, guid: 7aa2d6ba9baa9d9438bd3dddfb53b5ed,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

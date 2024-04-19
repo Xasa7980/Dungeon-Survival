@@ -27,7 +27,9 @@ public abstract class Interactable : MonoBehaviour
     [Tooltip("Prioridad de la interaccion. Determina si sera mas deseable para el personaje que otra." +
         "A menor valor mayor prioridad")]
     [FoldoutGroup("Interactable"), SerializeField, Range(0, 100)] int _priority = 0;
+    [FoldoutGroup("Interactable"), SerializeField, Range(0, 100)] int _interactionHits = 1;
     public int priority => _priority;
+    public int interactionHits { get { return _interactionHits; } set { _interactionHits = value; } }
 
     [PropertyOrder(100),PropertySpace(SpaceBefore = 10)]
     [FoldoutGroup("Interactable"), SerializeField] InteractionObject _interactionObject;
@@ -92,7 +94,7 @@ public abstract class Interactable : MonoBehaviour
     [FoldoutGroup("Interactable/Events"), SerializeField]
     UnityEvent OnInteractionFinish = new UnityEvent();
 
-    protected virtual void Start()
+    public virtual void Start()
     {
         canvas.SetActive(false);
     }
@@ -191,12 +193,26 @@ public abstract class Interactable : MonoBehaviour
 
     public virtual void RemoveFocus()
     {
-        if (HUDCoroutine != null)
-            StopCoroutine(HUDCoroutine);
+        if(gameObject.activeInHierarchy)
+        {
+            if (HUDCoroutine != null)
+                StopCoroutine(HUDCoroutine);
 
-        HUDCoroutine = StartCoroutine(Hide());
+            HUDCoroutine = StartCoroutine(Hide());
+        }
+        else
+        {
+            canvas.SetActive(false);
+        }
     }
-
+    public void DisableGameObject ( )
+    {
+        if (!gameObject.activeInHierarchy)
+        {
+            this.enabled = false;
+            gameObject.SetActive(false);
+        }
+    }
     IEnumerator Appear()
     {
         canvas.SetActive(true);

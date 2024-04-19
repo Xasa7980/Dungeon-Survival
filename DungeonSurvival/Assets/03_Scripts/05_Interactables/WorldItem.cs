@@ -26,13 +26,13 @@ public class WorldItem : Interactable
                     break;
             }
 
-            Destroy(gameObject);
+            gameObject.SetActive(false); // hay objetos 2D y 3D no es bueno usar un dissolve para manipular el desactivamiento
         }
         else
         {
             if (PlayerInventory.current.TryAddItem(_item))
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
             else
             {
