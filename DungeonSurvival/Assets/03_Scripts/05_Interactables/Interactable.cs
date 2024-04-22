@@ -267,4 +267,8 @@ public abstract class Interactable : MonoBehaviour
 
         canvas.SetActive(false);
     }
+    public void HideCanvasImmediately ( )
+    {
+        canvas.SetActive(false);
+    }
 }

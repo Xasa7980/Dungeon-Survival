@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static InventoryItem_UI_Layout;
 using static UnityEditor.Progress;
 
 public class EquipedItem_UI_Layout : InventoryItem_UI
@@ -22,8 +24,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
     {
         icon.sprite = itemCategory.icon;
         UpdateIconAlpha(0.5f);
-        itemInformationWindow_UI = transform.parent.GetComponent<InventoryItem_UI>().itemInformationWindow_UI;
-        equipmentItemInformationWindow_UI = transform.parent.GetComponent<InventoryItem_UI>().equipmentItemInformationWindow_UI;
+        inventoryType = transform.parent.GetComponent<InventoryItem_UI>().inventoryType;
     }
     public void SetItemToEquipmentWindow ( InventoryItem item )
     {
@@ -62,6 +63,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
     public void RemoveItem_UI ( InventoryItem inventoryItem )
     {
         item = null;
+        inventoryItem = null;
         icon.gameObject.SetActive(false);
     }
     public override void OnBeginDrag ( PointerEventData eventData )
@@ -125,7 +127,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
         {
             InventoryItem_UI_Layout inventorySlot = inventoryItem_UI as InventoryItem_UI_Layout;
 
-            if (targetHasItem)
+            if (!targetHasItem)
             {
                 inventorySlot.SetItem(this.item);
                 this.RemoveItem_UI(null); // Asume que este método puede manejar la lógica para limpiar el slot actual
@@ -183,10 +185,14 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
     // Implementación de UpdateUI para reflejar los cambios en el inventario
     public void UpdateUI ( )
     {
-        if (this.item != null)
+        if (item != null)
         {
             icon.gameObject.SetActive(true);
-            icon.sprite = this.item.icon;
+            icon.sprite = item.icon;
+            if (item.isStackable && currentStack > 1)
+            {
+                item.currentAmount = currentStack;
+            }
         }
         else
         {
@@ -199,7 +205,53 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
     }
     public override void OnPointerClick ( PointerEventData eventData )
     {
-        // Implementar la lógica para la informacion del item.
+        Debug.Log(eventData.pointerClick.name);
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            Debug.Log("right clicked");
+            //Abrir ventana de usos para item
+            if (eventData.pointerClick.gameObject.TryGetComponent<InventoryItem_UI>(out InventoryItem_UI inventoryItem_UI))
+            {
+                if (inventoryItem_UI is InventoryItem_UI_Layout)
+                {
+                    InventoryItem_UI_Layout inventoryItem_UI_Layout = (InventoryItem_UI_Layout)inventoryItem_UI;
+                    if (inventoryItem_UI_Layout.item != null)
+                    {
+                        UI_InventoryMenuManager.instance.HandleClickToItem(inventoryItem_UI_Layout.item);
+                    }
+                }
+                else if (inventoryItem_UI is EquipedItem_UI_Layout)
+                {
+                    EquipedItem_UI_Layout equipedItem_UI_Layout = (EquipedItem_UI_Layout)inventoryItem_UI;
+                    if (equipedItem_UI_Layout.item != null)
+                    {
+                        UI_InventoryMenuManager.instance.HandleClickToItem(equipedItem_UI_Layout.item);
+                    }
+                }
+            }
+        }
+        else if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            if (eventData.pointerClick.gameObject.TryGetComponent<InventoryItem_UI>(out InventoryItem_UI inventoryItem_UI))
+            {
+                if (inventoryItem_UI is InventoryItem_UI_Layout)
+                {
+                    InventoryItem_UI_Layout inventoryItem_UI_Layout = (InventoryItem_UI_Layout)inventoryItem_UI;
+                    if (inventoryItem_UI_Layout.item != null)
+                    {
+                        UI_InventoryMenuManager.instance.HandleClickToItem(inventoryItem_UI_Layout.item);
+                    }
+                }
+                else if (inventoryItem_UI is EquipedItem_UI_Layout)
+                {
+                    EquipedItem_UI_Layout equipedItem_UI_Layout = (EquipedItem_UI_Layout)inventoryItem_UI;
+                    if (equipedItem_UI_Layout.item != null)
+                    {
+                        UI_InventoryMenuManager.instance.HandleClickToItem(equipedItem_UI_Layout.item);
+                    }
+                }
+            }
+        }
     }
     public override void OnPointerEnter ( PointerEventData eventData )
     {

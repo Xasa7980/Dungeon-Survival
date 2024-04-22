@@ -802,7 +802,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 266f68b1878f4c149bc097f52396e69b, type: 2}
-  m_Tag: 
+  m_Tag: Interacting
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -827,7 +827,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -1256,7 +1256,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 'SkillAttack_Tree '
+  m_Name: SkillAttack_Tree
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1487,7 +1487,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.20973569
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.7902643
   m_HasExitTime: 0
@@ -1530,7 +1530,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 'LoadingSkillAttack_Tree '
+  m_Name: LoadingSkillAttack_Tree
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1674,11 +1674,11 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
-  m_HasFixedDuration: 1
+  m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -1693,28 +1693,28 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -7358838354067045636}
-    m_Position: {x: -200, y: 1160, z: 0}
+    m_Position: {x: 280, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4110748916873626653}
-    m_Position: {x: 180, y: 900, z: 0}
+    m_Position: {x: 660, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7271445489926544670}
-    m_Position: {x: -570, y: 910, z: 0}
+    m_Position: {x: -90, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2145158241995413406}
-    m_Position: {x: -50, y: 900, z: 0}
+    m_Position: {x: 440, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2169175259883214018}
-    m_Position: {x: 200, y: 1170, z: 0}
+    m_Position: {x: 680, y: 530, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8456849998602572141}
-    m_Position: {x: -810, y: 1070, z: 0}
+    m_Position: {x: -330, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4593891805947025822}
-    m_Position: {x: -560, y: 1050, z: 0}
+    m_Position: {x: -80, y: 410, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 109892609701145835}
-    m_Position: {x: -280, y: 790, z: 0}
+    m_Position: {x: 200, y: 150, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 9165867750762409081}
@@ -1724,9 +1724,9 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -460, y: 600, z: 0}
-  m_EntryPosition: {x: -170, y: 1360, z: 0}
-  m_ExitPosition: {x: 230, y: 380, z: 0}
+  m_AnyStatePosition: {x: 20, y: -40, z: 0}
+  m_EntryPosition: {x: 310, y: 720, z: 0}
+  m_ExitPosition: {x: -180, y: 750, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -7358838354067045636}
 --- !u!1102 &6918377862040649044

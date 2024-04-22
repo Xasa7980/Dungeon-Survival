@@ -49,9 +49,10 @@ public class PlayerAnimations : MonoBehaviour
     #endregion
 
     #region AnimatorTags
-    public static string ANIMATOR_TAG_IS_INTERACTING = "Interacting";
+    public static string ANIMATOR_TAG_IS_INTERACTING = _ANIMATOR_TAG_IS_INTERACTING;
     private const string _ANIMATOR_TAG_IS_INTERACTING = "Interacting";
     #endregion
+
     [SerializeField] private float attackCombo_resetTimeMax;
     
     private float attackCombo_resetTime;

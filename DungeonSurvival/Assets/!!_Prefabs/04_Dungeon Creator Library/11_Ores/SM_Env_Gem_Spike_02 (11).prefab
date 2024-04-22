@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 381994989559946624}
   - component: {fileID: 2463525217451494694}
   - component: {fileID: 7258171090331466284}
+  - component: {fileID: 8131349517631623569}
   m_Layer: 8
   m_Name: SM_Env_Gem_Spike_02 (11)
   m_TagString: Untagged
@@ -197,6 +198,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8131349517631623569
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021708005404362842}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 2a2ec24812c31c247b96f441a76c8797, type: 3}
 --- !u!1 &5536546785852293179
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +317,7 @@ MonoBehaviour:
   interactionEnterClip: {fileID: 0}
   hasExitAnimation: 1
   interactionExitClip: {fileID: 7400000, guid: fc95c9d399b24a3409f5fbdf9782936b, type: 2}
-  canvas: {fileID: 0}
+  canvas: {fileID: 1566662145926105479}
   interactionProgressBar: {fileID: 0}
   appearSpeed: 1
   OnInteractionStart:

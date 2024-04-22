@@ -26,12 +26,15 @@ public class EnvironmentItem : Interactable
         }
         CalculateDroppingRates();
     }
-
+    public override void StartInteraction ( )
+    {
+        base.StartInteraction();
+        ApplyHit();
+    }
     public override void FinishInteraction ( )
     {
         base.FinishInteraction();
         DropItemsBasedOnProbability();
-        ApplyHit();
     }
 
     private void ApplyHit ( )
@@ -39,6 +42,7 @@ public class EnvironmentItem : Interactable
         interactionHits--;
         if(interactionHits <= 0)
         {
+            HideCanvasImmediately();
             DissolveGameObject();
         }
     }
@@ -116,7 +120,7 @@ public class EnvironmentItem : Interactable
         circle = circle.normalized * Mathf.Lerp(0.1f * dropRadius, dropRadius, factor); // Reescalando usando Lerp
 
         Vector3 dropPosition = new Vector3(circle.x, 0, circle.y) + transform.position;
-
+        dropPosition.y = 0;
         itemDropped.InstantiateInWorld(dropPosition, this);
     }
 }

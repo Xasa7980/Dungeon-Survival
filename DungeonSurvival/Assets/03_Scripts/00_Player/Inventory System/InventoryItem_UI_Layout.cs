@@ -30,10 +30,6 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
         icon.gameObject.SetActive(false);
         amountCounter.transform.parent.gameObject.SetActive(false);
         inventoryType = transform.parent.GetComponent<InventoryItem_UI>().inventoryType;
-        itemInformationWindow_UI = transform.parent.GetComponent<InventoryItem_UI>().itemInformationWindow_UI;
-        equipmentItemInformationWindow_UI = transform.parent.GetComponent<InventoryItem_UI>().equipmentItemInformationWindow_UI;
-
-        if( keyIcon != null )keyIcon.SetActive(hasKeyIcon);
     }
 
     private void Update()
@@ -142,7 +138,7 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
             inventorySlot.currentStack = currentStack;
             currentStack = targetCurrentStack;
 
-            if (targetHasItem)
+            if (!targetHasItem)
             {
                 inventorySlot.SetItem(item);
                 this.RemoveItem_UI(null); // Asume que este método puede manejar la lógica para limpiar el slot actual
@@ -232,29 +228,51 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
     }
     public override void OnPointerClick ( PointerEventData eventData )
     {
-        if(eventData.button == PointerEventData.InputButton.Right)
+        Debug.Log(eventData.pointerClick.name);
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
+            Debug.Log("right clicked");
             //Abrir ventana de usos para item
-            if (item.equipable)
+            if (eventData.pointerClick.gameObject.TryGetComponent<InventoryItem_UI>(out InventoryItem_UI inventoryItem_UI))
             {
-                //Usos para Equipamiento (Equipar, desequipar, destruir, tirar al suelo)
-            }
-            else
-            {
-                //Usos para item (Uso,destruir,tirar al suelo)
+                if (inventoryItem_UI is InventoryItem_UI_Layout)
+                {
+                    InventoryItem_UI_Layout inventoryItem_UI_Layout = (InventoryItem_UI_Layout)inventoryItem_UI;
+                    if (inventoryItem_UI_Layout.item != null)
+                    {
+                        UI_InventoryMenuManager.instance.HandleClickToItem(inventoryItem_UI_Layout.item);
+                    }
+                }
+                else if (inventoryItem_UI is EquipedItem_UI_Layout)
+                {
+                    EquipedItem_UI_Layout equipedItem_UI_Layout = (EquipedItem_UI_Layout)inventoryItem_UI;
+                    if (equipedItem_UI_Layout.item != null)
+                    {
+                        UI_InventoryMenuManager.instance.HandleClickToItem(equipedItem_UI_Layout.item);
+                    }
+                }
             }
         }
-        else if(eventData.button == PointerEventData.InputButton.Left)
+        else if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if(item.equipable)
+            if (eventData.pointerClick.gameObject.TryGetComponent<InventoryItem_UI>(out InventoryItem_UI inventoryItem_UI))
             {
-                equipmentItemInformationWindow_UI.gameObject.SetActive(true);
-                equipmentItemInformationWindow_UI.SetItemInformation(item);
-            }
-            else
-            {
-                itemInformationWindow_UI.gameObject.SetActive(false);
-                itemInformationWindow_UI.SetItemInformation(item);
+                if (inventoryItem_UI is InventoryItem_UI_Layout)
+                {
+                    InventoryItem_UI_Layout inventoryItem_UI_Layout = (InventoryItem_UI_Layout)inventoryItem_UI;
+                    if (inventoryItem_UI_Layout.item != null)
+                    {
+                        UI_InventoryMenuManager.instance.HandleClickToItem(inventoryItem_UI_Layout.item);
+                    }
+                }
+                else if (inventoryItem_UI is EquipedItem_UI_Layout)
+                {
+                    EquipedItem_UI_Layout equipedItem_UI_Layout = (EquipedItem_UI_Layout)inventoryItem_UI;
+                    if (equipedItem_UI_Layout.item != null)
+                    {
+                        UI_InventoryMenuManager.instance.HandleClickToItem(equipedItem_UI_Layout.item);
+                    }
+                }
             }
         }
     }

@@ -323,7 +323,7 @@ MonoBehaviour:
   interactionEnterClip: {fileID: 0}
   hasExitAnimation: 1
   interactionExitClip: {fileID: 7400000, guid: fc95c9d399b24a3409f5fbdf9782936b, type: 2}
-  canvas: {fileID: 0}
+  canvas: {fileID: 1217033242101047241}
   interactionProgressBar: {fileID: 0}
   appearSpeed: 1
   OnInteractionStart:
@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 6141750573600378138}
   - component: {fileID: 8271969765839922260}
   - component: {fileID: 6311215726741905142}
+  - component: {fileID: 4202755347947107974}
   m_Layer: 8
   m_Name: SM_Env_Gem_Large_02 (11)
   m_TagString: Untagged
@@ -428,6 +429,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4202755347947107974
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264878139525525111}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 9fe3563b526814144a68172330adc29d, type: 3}
 --- !u!1 &6773076939491116590
 GameObject:
   m_ObjectHideFlags: 0

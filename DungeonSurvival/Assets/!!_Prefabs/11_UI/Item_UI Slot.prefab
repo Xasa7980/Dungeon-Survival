@@ -678,14 +678,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba209ff7a679144bbce0d43b0ed4361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInformationWindow_UI: {fileID: 0}
-  equipmentItemInformationWindow_UI: {fileID: 0}
   _inventoryType: 0
   _itemCategory: {fileID: 0}
-  _hasKeyIcon: 0
-  _keyIcon: {fileID: 0}
+  _keyIcon: {fileID: 2901640540842491556}
   currentStack: 0
-  _toggle: {fileID: 0}
+  _toggle: {fileID: 8822003422561754036}
   icon: {fileID: 5398686318950812989}
   amountCounter: {fileID: 5850423237562582868}
   _key: 49
@@ -716,10 +713,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - eventID: 12
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
-  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls: []

@@ -15,7 +15,20 @@ public class PlayerLocomotion : MonoBehaviour
     Animator anim;
 
     [SerializeField] float characterGravity = 9;
-
+    HashSet<int> blockedAnimations = new HashSet<int>
+    {
+        Animator.StringToHash("Base Layer.InteraccionItems.Interaction"),
+        Animator.StringToHash("Base Layer.InteraccionItems.Interaction Start"),
+        Animator.StringToHash("Base Layer.InteraccionItems.Interaction End"),
+        Animator.StringToHash("Base Layer.InteraccionItems.Interacting"),
+        Animator.StringToHash("AttackLayer.BasicAttack_Tree"),
+        Animator.StringToHash("AttackLayer.LoadingChargedAttack_Tree"),
+        Animator.StringToHash("AttackLayer.ChargedAttack_Tree"),
+        Animator.StringToHash("AttackLayer.LoadingSpecialAttack_Tree"),
+        Animator.StringToHash("AttackLayer.SpecialAttack_Tree"),
+        Animator.StringToHash("AttackLayer.LoadingSkillAttack_Tree"),
+        Animator.StringToHash("AttackLayer.SkillAttack_Tree"),
+    };
     private void Awake()
     {
         current = this;
@@ -32,7 +45,14 @@ public class PlayerLocomotion : MonoBehaviour
     void Update()
     {
         if (PlayerComponents.instance.lockedAll) return;
-
+        for (int i = 0; i < anim.layerCount; i++)
+        {
+            if (blockedAnimations.Contains(anim.GetCurrentAnimatorStateInfo(i).fullPathHash))
+            {
+                anim.SetFloat("Speed", 0);
+                return;
+            }
+        }
         Vector3 frontDir = CameraController.current.transform.forward * Input.GetAxis("Vertical");
         Vector3 sideDir = CameraController.current.transform.right * Input.GetAxis("Horizontal");
         Vector3 direction = (frontDir + sideDir).normalized;
@@ -50,6 +70,5 @@ public class PlayerLocomotion : MonoBehaviour
                                                                          //y no pueda seguir caminando mientras ataca
 
         controller.Move(Vector3.down * characterGravity);
-        //controller.Move(direction * moveSpeed * Time.deltaTime);
     }
 }

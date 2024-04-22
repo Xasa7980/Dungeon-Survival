@@ -37,7 +37,7 @@ public class Item : ScriptableObject, iItemData
         _iconType == IconType.Diagonal ? 1.5f : -1.5f; //Primero se hace en editor para saber que valor poner despues de ":"
 
     [ShowIf("_isStackable"), SerializeField] int _maxStack = 3;
-    [SerializeField, DisableIf("isNotBase")] ItemTag _itemTag;
+    [SerializeField] ItemTag _itemTag;
 
     #region Verificables
     bool isRangeWeapon { get => equipable && weaponType == WeaponType.Range; }
@@ -129,8 +129,7 @@ public class Item : ScriptableObject, iItemData
 
     public WorldItem InstantiateInWorld(Vector3 position, MonoBehaviour coroutineStarter)
     {
-        WorldItem itemInstance = Instantiate(interactableModel, position + Vector3.up * 5, // Ajuste para iniciar por encima de la posición deseada
-                                             Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0, 360)));
+        WorldItem itemInstance = Instantiate(interactableModel, position + Vector3.up, Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0, 360)));
 
         coroutineStarter.StartCoroutine(MoveItemToPosition(itemInstance, position)); // Iniciar la coroutine para mover el objeto
         return itemInstance;
@@ -142,9 +141,10 @@ public class Item : ScriptableObject, iItemData
         while (Vector3.Distance(item.transform.position, targetPosition) > 0.1f)
         {
             // Mueve el ítem hacia el punto de caída.
-            item.transform.position = Vector3.MoveTowards(item.transform.position, targetPosition, Time.deltaTime * 5);
+            item.transform.position = Vector3.Slerp(item.transform.position, targetPosition, Time.deltaTime * 5);
             yield return null; // Espera hasta el próximo fotograma antes de continuar
         }
+        item.transform.position = targetPosition;
         // Opcional: activar alguna lógica cuando el ítem toca el suelo o llegue a la posición.
         // Por ejemplo, podrías emitir un sonido, activar una animación, etc.
     }

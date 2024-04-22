@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
+using TMPro;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -65,7 +66,8 @@ public class PlayerInteraction : MonoBehaviour
     }
     private bool IsInteracting ( )
     {
-        return anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash(PlayerAnimations.ANIMATOR_TAG_IS_INTERACTING);
+        int hashInteracting = Animator.StringToHash("Base Layer.InteraccionItems.Interaction");
+        return anim.GetCurrentAnimatorStateInfo(0).fullPathHash == hashInteracting;
     }
     private void HandleEscapeKey ( )
     {
@@ -109,6 +111,8 @@ public class PlayerInteraction : MonoBehaviour
     {
         possibleInteraction.Prepare(this);
         possibleInteraction.StartInteraction();
+        StartCoroutine(PlayerLookAtItem(possibleInteraction.transform.position));
+
         interacting = true;
         anim.SetTrigger("Interact");
         anim.SetBool("ContinousInteraction", possibleInteraction.interactionType == Interactable.InteractionType.Continue);
@@ -128,14 +132,17 @@ public class PlayerInteraction : MonoBehaviour
 
     private void FinishInteraction ( )
     {
+        StopCoroutine(PlayerLookAtItem(possibleInteraction.transform.position));
+        possibleInteraction.FinishInteraction();
+
         interacting = false;
         anim.SetBool("Interacting", interacting);
         anim.applyRootMotion = !possibleInteraction.disallowRootMotion;
-        possibleInteraction.FinishInteraction();
     }
 
     private void StopCurrentInteraction ( )
     {
+        StopCoroutine(PlayerLookAtItem(possibleInteraction.transform.position));
         possibleInteraction.StopInteraction();
         ResetInteraction();
     }
@@ -207,4 +214,26 @@ public class PlayerInteraction : MonoBehaviour
             possibleInteraction = null;
         }
     }
+    IEnumerator PlayerLookAtItem ( Vector3 target )
+    {
+        Vector3 directionToTarget = target - transform.position;
+        directionToTarget.y = 0;  // Opcional, mantiene la rotación solo en el plano horizontal
+
+        // Obtiene la rotación deseada hacia el target
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+
+        // Continúa la rotación mientras la diferencia de ángulo sea significativa
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        {
+            // Interpola la rotación actual hacia la rotación objetivo
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 8 * Time.deltaTime);
+
+            // Espera hasta el próximo frame antes de continuar el bucle
+            yield return null;
+        }
+
+        // Opcional: asegura que la rotación sea exactamente la deseada al finalizar
+        transform.rotation = targetRotation;
+    }
 }
+

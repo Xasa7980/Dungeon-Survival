@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: Item_Equipable_Backpack
   m_EditorClassIdentifier: 
   _displayName: Normal backpack
-  _description: 
+  _description: dea
+  _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 21300000, guid: fe5bcbfdcfb0dda45910b0fbd8ca8b9f, type: 3}
-  _stackAmount: 3
-  _itemTag: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 99678c1f06e3dfb4a9c7d9a0dc44aa82, type: 3}
+  _iconType: 0
+  _maxStack: 3
+  _itemTag: {fileID: 11400000, guid: ec5c4a9b2cdf6934296f6aada86093ac, type: 2}
   _equipable: 1
   _equipmentDataSO: {fileID: 0}
+  _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
   _lookSpeed: 3
@@ -38,7 +41,8 @@ MonoBehaviour:
   _visualizationModel: {fileID: 1056416218193148, guid: 001c79d88f696944684a91cd13c6a1a3,
     type: 3}
   _instantUse: 0
-  _itemFunction: []
-  _useAnimations: []
+  multipleAction: 0
   itemAction: {fileID: 0}
+  _itemActions: []
+  _useAnimations: []
   _maxItems: 28

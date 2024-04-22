@@ -12,7 +12,7 @@ public class ItemInformationWindow_UI : MonoBehaviour
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI itemDescriptionText;
-    [SerializeField] RectTransform prefabParent;
+    [SerializeField] RectTransform itemInfoUI_Container;
     [SerializeField] private ItemInformationTextContainer textContainer;
 
     public void CheckItemInformation ( Item item )
@@ -22,16 +22,16 @@ public class ItemInformationWindow_UI : MonoBehaviour
             if(action is HealingItemAction)
             {
                 HealingItemAction healingItemAction = (HealingItemAction)action;
-                ItemInformationTextContainer healPointsValue = Instantiate(textContainer, prefabParent.transform);
-                ItemInformationTextContainer healSpeedValue = Instantiate(textContainer, prefabParent.transform);
+                ItemInformationTextContainer healPointsValue = Instantiate(textContainer, itemInfoUI_Container.transform);
+                ItemInformationTextContainer healSpeedValue = Instantiate(textContainer, itemInfoUI_Container.transform);
                 healPointsValue.textValue.text = healingItemAction.healPoints.ToString();
                 healSpeedValue.textValue.text = healingItemAction.healingFillTime.ToString();
             }
             else if (action is FoodItemAction)
             {
                 FoodItemAction foodItemAction = (FoodItemAction)action;
-                ItemInformationTextContainer hungerRecoveringValue = Instantiate(textContainer, prefabParent.transform);
-                ItemInformationTextContainer feedSpeedValue = Instantiate(textContainer, prefabParent.transform);
+                ItemInformationTextContainer hungerRecoveringValue = Instantiate(textContainer, itemInfoUI_Container.transform);
+                ItemInformationTextContainer feedSpeedValue = Instantiate(textContainer, itemInfoUI_Container.transform);
                 hungerRecoveringValue.textValue.text = foodItemAction.hungerPoints.ToString();
                 feedSpeedValue.textValue.text = foodItemAction.eatFillTime.ToString();
             }
@@ -39,15 +39,15 @@ public class ItemInformationWindow_UI : MonoBehaviour
             {
                 StatBoostItemAction boostItemAction = (StatBoostItemAction)action;
 
-                ItemInformationTextContainer statPoints = Instantiate(textContainer, prefabParent.transform);
+                ItemInformationTextContainer statPoints = Instantiate(textContainer, itemInfoUI_Container.transform);
 
                 statPoints.textValue.text = boostItemAction.statPoints.ToString();
             }
             else if (action is RepairItemAction)
             {
                 RepairItemAction repairItemAction = (RepairItemAction)action;
-                ItemInformationTextContainer repairingQuantityValue = Instantiate(textContainer, prefabParent.transform);
-                ItemInformationTextContainer repairingSpeed = Instantiate(textContainer, prefabParent.transform);
+                ItemInformationTextContainer repairingQuantityValue = Instantiate(textContainer, itemInfoUI_Container.transform);
+                ItemInformationTextContainer repairingSpeed = Instantiate(textContainer, itemInfoUI_Container.transform);
 
                 repairingQuantityValue.textValue.text = repairItemAction.repairingPoints.ToString();
                 repairingSpeed.textValue.text = repairItemAction.repairingFillTime.ToString();

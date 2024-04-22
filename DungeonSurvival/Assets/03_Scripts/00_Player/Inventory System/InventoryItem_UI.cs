@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -14,17 +15,12 @@ public enum InventoryType
 }
 public class InventoryItem_UI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerEnterHandler
 {
-
-    public ItemInformationWindow_UI itemInformationWindow_UI;
-    public EquipmentItemInformationWindow_UI equipmentItemInformationWindow_UI;
     public InventoryType inventoryType { get { return _inventoryType; } set { _inventoryType = value; } }
     [SerializeField] private InventoryType _inventoryType;
     public Item item { get { return _item; } set { _item = value; } }
     private Item _item;
     public ItemCategory itemCategory => _itemCategory;
     [SerializeField] ItemCategory _itemCategory;
-    public bool hasKeyIcon => _hasKeyIcon;
-    [SerializeField] bool _hasKeyIcon;
     public GameObject keyIcon => _keyIcon;
     [SerializeField] GameObject _keyIcon;
 

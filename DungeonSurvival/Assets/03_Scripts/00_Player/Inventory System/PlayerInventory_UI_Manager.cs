@@ -65,17 +65,29 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
         {
             if (currentSelectedIndex < quickAccessSlots.Length - 1)
+            {
+                quickAccessSlots[currentSelectedIndex].toggle.isOn = false;
                 currentSelectedIndex++;
+            }
             else
+            {
+                quickAccessSlots[currentSelectedIndex].toggle.isOn = false;
                 currentSelectedIndex = 0;
+            }
         }
 
         if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
         {
             if (currentSelectedIndex > 0)
+            {
+                quickAccessSlots[currentSelectedIndex].toggle.isOn = false;
                 currentSelectedIndex--;
+            }
             else
+            {
+                quickAccessSlots[currentSelectedIndex].toggle.isOn = false;
                 currentSelectedIndex = quickAccessSlots.Length - 1;
+            }
         }
 
         if (Input.GetKeyDown(itemUseKey))
@@ -183,6 +195,7 @@ public class ItemTagLibrary
     public string[] statBoostTags = new string[] { "StatBoost" };
     public string[] specialTags = new string[] { "SpecialItem" };
     public string[] equipmentTags = new string[] { "Equipment" };
+    public string[] backpackTags = new string[] { "Backpack" };
 
     public ItemTagLibrary(string _itemTagString, ItemTag _itemTag )
     {
