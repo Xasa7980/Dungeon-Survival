@@ -1,9 +1,12 @@
+using Sirenix.OdinInspector.Editor.Modules;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerCombat : MonoBehaviour, ICombatBehaviour
 {
@@ -62,7 +65,6 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
 
     private void Update ( )
     {
-        Debug.Log("player is locked" + PlayerComponents.instance.lockedAll);
         if (PlayerComponents.instance.lockedAll) return;
         CheckForEnemies();
 
@@ -87,8 +89,7 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
     }
     private void DoAttack ( )
     {
-
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) //Si das con clic izquierdo y no es parte de la UI
         {
             maxChargeTime += Time.unscaledDeltaTime;
 
@@ -104,7 +105,7 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
                 index = selectedTime
             });
         }
-        else if (Input.GetMouseButton(1))
+        else if (Input.GetMouseButton(1) && !EventSystem.current.IsPointerOverGameObject())
         {
             maxChargeTime += Time.unscaledDeltaTime;
 
@@ -120,7 +121,7 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
                 index = selectedTime
             });
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             print(selectedTime >= 0);
             if (selectedTime >= 0) /* DO CHARGED ATTACK */
@@ -136,7 +137,7 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
             }
             maxChargeTime = 0;
         }
-        else if (Input.GetMouseButtonUp(1)) /* DO SKILL ATTACK */
+        else if (Input.GetMouseButtonUp(1) && !EventSystem.current.IsPointerOverGameObject()) /* DO SKILL ATTACK */
         {
             if (selectedTime >= 0)
             {

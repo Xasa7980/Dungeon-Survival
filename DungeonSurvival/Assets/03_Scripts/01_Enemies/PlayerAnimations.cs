@@ -140,6 +140,7 @@ public class PlayerAnimations : MonoBehaviour
                 {
                     basicAttackIndex ++;
                     attackAnimationTriggered = false;
+                    _animator.SetLayerWeight(COMBAT_LAYER, 0f);
                 }
                 attackCombo_resetTime += Time.deltaTime;
                 if (attackCombo_resetTime > attackCombo_resetTimeMax)

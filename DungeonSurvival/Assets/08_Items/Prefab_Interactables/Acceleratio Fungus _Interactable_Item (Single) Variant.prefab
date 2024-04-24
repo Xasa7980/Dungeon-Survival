@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 7019230531651636893, guid: 2e81a4c78cc362542859269861efa231,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: 7019230531651636893, guid: 2e81a4c78cc362542859269861efa231,
         type: 3}
@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 7019230531651636893, guid: 2e81a4c78cc362542859269861efa231,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.25
+      value: 9.58
       objectReference: {fileID: 0}
     - target: {fileID: 7019230531651636893, guid: 2e81a4c78cc362542859269861efa231,
         type: 3}
@@ -101,7 +101,7 @@ PrefabInstance:
     - target: {fileID: 7019230531651636894, guid: 2e81a4c78cc362542859269861efa231,
         type: 3}
       propertyPath: m_Name
-      value: Acceleratio Fungus _Interactable_Item (Single) Variant
+      value: Acceleratio Fungus _Interactable_Item (Single) (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7019230531651636895, guid: 2e81a4c78cc362542859269861efa231,
         type: 3}
@@ -119,10 +119,47 @@ PrefabInstance:
       propertyPath: hasStartAnimation
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7019230533022686497, guid: 2e81a4c78cc362542859269861efa231,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7019230533022686500, guid: 2e81a4c78cc362542859269861efa231,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384084676016012170, guid: 2e81a4c78cc362542859269861efa231,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 21a5fd57c8c888d44ab11a871c740c02,
+        type: 2}
+    - target: {fileID: 8384084676016012170, guid: 2e81a4c78cc362542859269861efa231,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.5754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384084676016012170, guid: 2e81a4c78cc362542859269861efa231,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.5754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384084676016012170, guid: 2e81a4c78cc362542859269861efa231,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.5754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384084676016012170, guid: 2e81a4c78cc362542859269861efa231,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8623078618439313755, guid: 21a5fd57c8c888d44ab11a871c740c02,
+        type: 2}
+    - target: {fileID: 8384084676016012170, guid: 2e81a4c78cc362542859269861efa231,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4287861651
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e81a4c78cc362542859269861efa231, type: 3}

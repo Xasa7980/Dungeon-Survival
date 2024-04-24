@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class EnvironmentItem : Interactable
 {
-    [SerializeField] private int elementRank;
+    [SerializeField] private bool hasItemDroppingChance = false;
     [SerializeField] private ItemDroppingGroup itemDroppingGroup;
+    [SerializeField, ShowIf("hasItemDroppingChance")] private float itemDroppingChance;
+
 
     [SerializeField] private float dropRadius = 2;
     [SerializeField] private int[] droppingRate;
@@ -14,11 +16,17 @@ public class EnvironmentItem : Interactable
     [SerializeField] private float appearMaxTime = 1.5f;
     [SerializeField] private float dissolveSpeed = 1;
     [SerializeField] private Renderer renderer;
+    public void  SetRenderer(Renderer renderer )
+    {
+        this.renderer = renderer;
+    }
     private Shader_Dissolve shader_Dissolve;
 
     public override void Start ( )
     {
         base.Start();
+        if (hasItemDroppingChance && !_lockInteraction) _lockInteraction = itemDroppingChance > Random.Range(0, 101);
+
         shader_Dissolve = new Shader_Dissolve();
         if(renderer == null)
         {
@@ -48,6 +56,7 @@ public class EnvironmentItem : Interactable
     }
     private void CalculateDroppingRates ( )
     {
+        if (itemDroppingGroup == null) return;
         if (itemDroppingGroup.itemsToDrop.Length == 0) return;
 
         int totalItems = itemDroppingGroup.itemsToDrop.Length;

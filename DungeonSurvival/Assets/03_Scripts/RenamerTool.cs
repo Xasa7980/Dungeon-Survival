@@ -4,62 +4,13 @@ using UnityEngine;
 
 public class RenamerTool : EditorWindow
 {
-    private string newName = "";
+    public float height = 1.5f;
+    public GameObject childObject1;
+    public GameObject childObject2;
+
     private Vector2 scrollPos;
     private List<Object> selectedObjects = new List<Object>();
-
-    [System.Flags]
-    public enum ItemTypeFlags
-    {
-        None = 0,
-        Ingrediente = 1 << 0,
-        Recurso = 1 << 1,
-        Consumible = 1 << 2,
-        Comida = 1 << 3,
-        Alquimia = 1 << 4,
-        Misc = 1 << 5,
-        Axe = 1 << 6,
-        Bow = 1 << 7,
-        Hammer = 1 << 8,
-        Sword = 1 << 9,
-        Shield = 1 << 10,
-        Spear = 1 << 11,
-        Staff = 1 << 12,
-        Bat = 1 << 13,
-        Dagger = 1 << 14,
-        Helmet = 1 << 15,
-        Chest = 1 << 16,
-        Gauntlets = 1 << 17,
-        Leggins = 1 << 18,
-        Boots = 1 << 19,
-        Necklace = 1 << 20,
-        Ring = 1 << 21
-
-    }
-    private ItemTypeFlags selectedItemTypes = ItemTypeFlags.None;
-
-    public enum FileType
-    {
-        Icon,
-        Recipe,
-        Item,
-        ItemTag,
-        ItemCategory,
-        EquipmentDataSO,
-        ItemAction
-    }
-    private FileType selectedFileType = FileType.Item;
-
-    // Abreviaturas para los tipos de items, puedes cambiarlos como prefieras
-    private Dictionary<ItemTypeFlags, string> itemTypeAbbreviations = new Dictionary<ItemTypeFlags, string>
-    {
-        { ItemTypeFlags.Ingrediente, "Ing" },
-        { ItemTypeFlags.Recurso, "Rec" },
-        { ItemTypeFlags.Consumible, "Cons" },
-        { ItemTypeFlags.Comida, "Com" },
-        { ItemTypeFlags.Alquimia, "Alq" },
-        { ItemTypeFlags.Misc, "Misc" }
-    };
+    private bool showSelectedObjects = true;  // Toggle para mostrar/ocultar objetos seleccionados
 
     [MenuItem("Tools/Renamer Tool")]
     public static void ShowWindow ( )
@@ -69,25 +20,35 @@ public class RenamerTool : EditorWindow
 
     void OnGUI ( )
     {
-        GUILayout.Label("Rename Settings", EditorStyles.boldLabel);
-
-        newName = EditorGUILayout.TextField("New Name", newName);
-
-        selectedItemTypes = (ItemTypeFlags)EditorGUILayout.EnumFlagsField("Item Type", selectedItemTypes);
-        selectedFileType = (FileType)EditorGUILayout.EnumPopup("File Type", selectedFileType);
-
-        // List of selected objects
         GUILayout.Label("Selected Objects", EditorStyles.boldLabel);
-        scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Height(150));
-        foreach (var selectedObject in selectedObjects)
+        showSelectedObjects = EditorGUILayout.Foldout(showSelectedObjects, "Show/Hide Selected Objects");
+        if (showSelectedObjects)
         {
-            EditorGUILayout.ObjectField("Object", selectedObject, typeof(Object), true);
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Height(150));
+            foreach (var selectedObject in selectedObjects)
+            {
+                EditorGUILayout.ObjectField("Object", selectedObject, typeof(Object), true);
+            }
+            EditorGUILayout.EndScrollView();
         }
-        EditorGUILayout.EndScrollView();
 
-        if (GUILayout.Button("Rename Assets/Objects"))
+        childObject1 = (GameObject)EditorGUILayout.ObjectField("Child Object 1", childObject1, typeof(GameObject), true);
+        childObject2 = (GameObject)EditorGUILayout.ObjectField("Child Object 2", childObject2, typeof(GameObject), true);
+        height = EditorGUILayout.FloatField("Height for Second Child", height);
+
+        if (GUILayout.Button("Perform All Actions"))
         {
-            RenameSelectedObjects();
+            PerformAllActions();
+        }
+
+        if (GUILayout.Button("Undo Last Action"))
+        {
+            Undo.PerformUndo();
+        }
+
+        if (GUILayout.Button("Remove Mesh Components and Set Layer"))
+        {
+            RemoveMeshComponentsAndSetLayer();
         }
     }
 
@@ -98,53 +59,125 @@ public class RenamerTool : EditorWindow
         Repaint();
     }
 
-    private void RenameSelectedObjects ( )
+    private void PerformAllActions ( )
+    {
+        AddChildrenToSelectedObjects();
+        CloneAsChildOfFirstChild();
+        RemoveAllChildrenFromFirstChild();
+        RemoveMeshComponentsAndSetLayer(); // Include this function in the all-in-one action if desired
+        Debug.Log("Performed all actions on selected objects.");
+    }
+
+    private void AddChildrenToSelectedObjects ( )
     {
         foreach (Object selectedObject in selectedObjects)
         {
-            if (selectedObject != null)
+            if (selectedObject is GameObject)
             {
-                string itemTypePrefix = GetItemTypePrefix(selectedItemTypes);
-                string fileTypeSuffix = selectedFileType.ToString();
-                string finalName = $"{itemTypePrefix}{newName}_{fileTypeSuffix}".Trim();
+                GameObject go = selectedObject as GameObject;
+                Undo.RecordObject(go, "Add Children");
 
-                string assetPath = AssetDatabase.GetAssetPath(selectedObject);
-                if (!string.IsNullOrEmpty(assetPath))
+                GameObject child1 = null;
+                if (childObject1 != null)
                 {
-                    AssetDatabase.RenameAsset(assetPath, finalName);
+                    child1 = Instantiate(childObject1, go.transform);
+                    child1.transform.localPosition = Vector3.zero;
+                    child1.transform.SetAsFirstSibling();
+                    Undo.RegisterCreatedObjectUndo(child1, "Create Child 1");
                 }
-                else if (selectedObject is GameObject)
+
+                if (childObject2 != null)
                 {
-                    GameObject go = selectedObject as GameObject;
-                    Undo.RecordObject(go, "Rename GameObject");
-                    go.name = finalName;
+                    GameObject child2 = Instantiate(childObject2, go.transform);
+                    child2.transform.localPosition = Vector3.zero + Vector3.up * height;
+                    child2.transform.SetSiblingIndex(child1 != null ? 1 : 0);
+                    Undo.RegisterCreatedObjectUndo(child2, "Create Child 2");
                 }
             }
         }
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-        Debug.Log($"Renamed {selectedObjects.Count} objects to: {newName}");
     }
 
-    private string GetItemTypePrefix ( ItemTypeFlags itemTypes )
+private void CloneAsChildOfFirstChild()
+{
+    foreach (Object selectedObject in selectedObjects)
     {
-        string prefix = "";
-        foreach (ItemTypeFlags itemType in System.Enum.GetValues(typeof(ItemTypeFlags)))
+        if (selectedObject is GameObject)
         {
-            if (itemTypes.HasFlag(itemType) && itemType != ItemTypeFlags.None)
+            GameObject go = selectedObject as GameObject;
+            if (go.transform.childCount > 0)
             {
-                // Usa la abreviatura si está disponible
-                string abbreviation;
-                if (itemTypeAbbreviations.TryGetValue(itemType, out abbreviation))
+                GameObject firstChild = go.transform.GetChild(0).gameObject;
+                GameObject secondChild = go.transform.GetChild(1).gameObject;
+                GameObject clone = Instantiate(go, firstChild.transform);
+                clone.name = $"{go.name}_Clone";
+                clone.transform.localPosition = Vector3.zero;
+                Undo.RegisterCreatedObjectUndo(clone, "Clone as Child of First Child");
+
+                // Ajustando el Renderer en EnvironmentItem si está disponible
+                EnvironmentItem envItem = go.GetComponent<EnvironmentItem>();
+                if (envItem != null && clone.GetComponent<Renderer>() != null)
                 {
-                    prefix += $"{abbreviation}_";
+                    envItem.SetRenderer(clone.GetComponent<MeshRenderer>());
+                    envItem.SetCanvas(secondChild);
                 }
-                else
+                EnvironmentItem cloneEnvironmentItem = clone.GetComponent<EnvironmentItem>();
+                if (cloneEnvironmentItem != null)
                 {
-                    prefix += $"{itemType}_";
+                    Undo.DestroyObjectImmediate(cloneEnvironmentItem);
                 }
             }
         }
-        return prefix;
+    }
+}
+    private void RemoveAllChildrenFromFirstChild ( )
+    {
+        foreach (Object selectedObject in selectedObjects)
+        {
+            if (selectedObject is GameObject)
+            {
+                GameObject go = selectedObject as GameObject;
+                if (go.transform.childCount > 0)
+                {
+                    GameObject firstChild = go.transform.GetChild(0).gameObject;
+                    if (firstChild.transform.childCount > 0)
+                    {
+                        GameObject firstGrandchild = firstChild.transform.GetChild(0).gameObject;
+                        Undo.RecordObject(firstGrandchild, "Remove All Children from First Grandchild");
+                        while (firstGrandchild.transform.childCount > 0)
+                        {
+                            Transform child = firstGrandchild.transform.GetChild(0);
+                            Undo.DestroyObjectImmediate(child.gameObject);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void RemoveMeshComponentsAndSetLayer ( )
+    {
+        foreach (Object selectedObject in selectedObjects)
+        {
+            if (selectedObject is GameObject)
+            {
+                GameObject go = selectedObject as GameObject;
+                Undo.RecordObject(go, "Remove Mesh Components and Set Layer");
+
+                MeshFilter meshFilter = go.GetComponent<MeshFilter>();
+                if (meshFilter != null)
+                {
+                    Undo.DestroyObjectImmediate(meshFilter);
+                }
+
+                Renderer selectedRenderer = go.GetComponent<Renderer>();
+                if (selectedRenderer != null)
+                {
+                    Undo.DestroyObjectImmediate(selectedRenderer);
+                }
+
+                go.layer = 6; // Set the layer to 6
+            }
+        }
+        Debug.Log($"Modified {selectedObjects.Count} objects.");
     }
 }

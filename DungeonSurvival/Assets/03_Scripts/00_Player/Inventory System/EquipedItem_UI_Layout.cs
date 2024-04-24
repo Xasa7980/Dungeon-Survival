@@ -22,9 +22,9 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
 
     private void Start ( )
     {
-        icon.sprite = itemCategory.icon;
+        if(itemCategory != null) icon.sprite = itemCategory.icon;
         UpdateIconAlpha(0.5f);
-        inventoryType = transform.parent.GetComponent<InventoryItem_UI>().inventoryType;
+        inventoryType = transform.GetComponentInParent<InventoryItem_UI>().inventoryType;
     }
     public void SetItemToEquipmentWindow ( InventoryItem item )
     {

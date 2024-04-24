@@ -228,7 +228,6 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
     }
     public override void OnPointerClick ( PointerEventData eventData )
     {
-        Debug.Log(eventData.pointerClick.name);
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             Debug.Log("right clicked");

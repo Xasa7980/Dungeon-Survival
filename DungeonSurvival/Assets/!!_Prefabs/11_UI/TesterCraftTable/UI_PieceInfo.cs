@@ -1,10 +1,11 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_PieceInfo : MonoBehaviour
 {
-    [SerializeField] Text pieceName;
+    [SerializeField] TextMeshProUGUI pieceName;
     [SerializeField] Image pieceImage;
 
     [SerializeField] Transform statsContainer;

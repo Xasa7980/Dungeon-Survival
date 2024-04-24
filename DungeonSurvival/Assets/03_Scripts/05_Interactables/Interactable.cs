@@ -9,7 +9,9 @@ public abstract class Interactable : MonoBehaviour
 {
     protected bool _canInteract = true;
     public bool canInteract => _canInteract;
-
+    
+    public bool lockInteraction { get { return _lockInteraction; } set { _lockInteraction = value; } }
+    [SerializeField]protected bool _lockInteraction;
     public enum InteractionObject
     {
         Item,
@@ -71,6 +73,11 @@ public abstract class Interactable : MonoBehaviour
     [PropertyOrder(100)]
     [FoldoutGroup("Interactable/HUD"), SerializeField]
     GameObject canvas;
+    public void SetCanvas ( GameObject canvas )
+    {
+        this.canvas = canvas;
+    }
+
     [PropertyOrder(100)]
     [FoldoutGroup("Interactable/HUD"), ShowIf("interactionType", InteractionType.Continue), SerializeField]
     Image interactionProgressBar;
@@ -105,6 +112,8 @@ public abstract class Interactable : MonoBehaviour
     /// <param name="target"></param>
     public virtual void StartInteraction()
     {
+        if (lockInteraction) return;
+
         OnInteractionStart.Invoke();
 
         if (interactionType != InteractionType.Continue)
@@ -119,6 +128,8 @@ public abstract class Interactable : MonoBehaviour
     /// <param name="target">Interactor</param>
     public virtual void Interact()
     {
+        if (lockInteraction) return;
+
         OnInteractionUpdate.Invoke();
 
         if (interactionProgress < interactionTime)
@@ -134,6 +145,8 @@ public abstract class Interactable : MonoBehaviour
     /// </summary>
     public virtual void StopInteraction()
     {
+        if (lockInteraction) return;
+
         OnInteractionStop.Invoke();
         PlayerComponents.instance.lockedAll = false;
 
@@ -151,6 +164,8 @@ public abstract class Interactable : MonoBehaviour
     /// <param name="interactor"></param>
     public virtual void FinishInteraction()
     {
+        if (lockInteraction) return;
+
         PlayerComponents.instance.lockedAll = false;
         OnInteractionFinish.Invoke();
         interactionProgress = 0;
@@ -163,6 +178,8 @@ public abstract class Interactable : MonoBehaviour
 
     public void Prepare(PlayerInteraction player)
     {
+        if (lockInteraction) return;
+
         Animator anim = player.GetComponent<Animator>();
         AnimatorOverrideController controller = (AnimatorOverrideController)anim.runtimeAnimatorController;
 
@@ -185,6 +202,8 @@ public abstract class Interactable : MonoBehaviour
 
     public virtual void SetFocus()
     {
+        if (lockInteraction) return;
+
         if (HUDCoroutine != null)
             StopCoroutine(HUDCoroutine);
 
@@ -193,7 +212,9 @@ public abstract class Interactable : MonoBehaviour
 
     public virtual void RemoveFocus()
     {
-        if(gameObject.activeInHierarchy)
+        if (lockInteraction) return;
+
+        if (gameObject.activeInHierarchy)
         {
             if (HUDCoroutine != null)
                 StopCoroutine(HUDCoroutine);
@@ -207,6 +228,8 @@ public abstract class Interactable : MonoBehaviour
     }
     public void DisableGameObject ( )
     {
+        if (lockInteraction) return;
+
         if (!gameObject.activeInHierarchy)
         {
             this.enabled = false;

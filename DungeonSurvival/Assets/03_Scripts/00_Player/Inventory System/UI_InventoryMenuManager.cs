@@ -11,6 +11,7 @@ public class UI_InventoryMenuManager : MonoBehaviour
     [Header ("Menu's")]
     [SerializeField] private CanvasGroup backpackInventory;
     [SerializeField] private CanvasGroup equipmentMenu;
+
     [SerializeField] private EquipmentItemInformationWindow_UI equipmentItemInformationWindow_UI;
     [SerializeField] private ItemInformationWindow_UI itemInformationWindow_UI;
 
@@ -20,6 +21,8 @@ public class UI_InventoryMenuManager : MonoBehaviour
     [Header("EffectsProperties")]
     [SerializeField] private float speed = 10;
 
+    private CanvasGroup equipmentItemInfoWindowCanvasGroup;
+    private CanvasGroup itemInfoWindowCanvasGroup;
     private Animator equipmentMenuAnimator;
     private Animator backpackInventoryAnimator;
     private Animator informationEquipmentWindowAnimator;
@@ -35,13 +38,22 @@ public class UI_InventoryMenuManager : MonoBehaviour
 
     private void Start ( )
     {
-        backpackInventory.alpha = 0;
-        equipmentMenu.alpha = 0;
-
         equipmentMenuAnimator = equipmentMenu.GetComponent<Animator>();
         backpackInventoryAnimator = backpackInventory.GetComponent<Animator>();
         informationEquipmentWindowAnimator = equipmentItemInformationWindow_UI.GetComponent<Animator>();
         informationItemWindowAnimator = itemInformationWindow_UI.GetComponent<Animator>();
+        equipmentItemInfoWindowCanvasGroup = equipmentItemInformationWindow_UI.GetComponent<CanvasGroup>();
+        itemInfoWindowCanvasGroup = itemInformationWindow_UI.GetComponent<CanvasGroup>();
+
+        backpackInventory.alpha = 0;
+        equipmentMenu.alpha = 0;
+        equipmentItemInfoWindowCanvasGroup.alpha = 0;
+        itemInfoWindowCanvasGroup.alpha = 0;
+
+        equipmentItemInfoWindowCanvasGroup.blocksRaycasts = false;
+        itemInfoWindowCanvasGroup.blocksRaycasts = false;
+        backpackInventory.blocksRaycasts = false;
+        equipmentMenu.blocksRaycasts = false;
 
         equipmentMenuSwitcherButton.onClick.AddListener(EquipmentMenuSwitcher);
     }
@@ -65,7 +77,6 @@ public class UI_InventoryMenuManager : MonoBehaviour
         {
             if (item.itemTag.GetTag == "Backpack")
             {
-                Debug.Log("Found a backpack");
                 SwitcherInventoryState();
             }
             else
@@ -75,7 +86,6 @@ public class UI_InventoryMenuManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("no equipable");
             SwitcherItemInformationWindow(item);
         }
     }
@@ -99,40 +109,39 @@ public class UI_InventoryMenuManager : MonoBehaviour
     }
     private void SwitcherEquipmentItemInfoWindow ( Item _item )
     {
-        CanvasGroup canvasGroup = equipmentItemInformationWindow_UI.GetComponent<CanvasGroup>();
         equipmentInformationWindowIsOn = !equipmentInformationWindowIsOn;
 
         if (equipmentInformationWindowIsOn)
         {
             informationEquipmentWindowAnimator.SetTrigger("PopUp");
-            StartCoroutine(FadeIn(canvasGroup));
+            StartCoroutine(FadeIn(equipmentItemInfoWindowCanvasGroup));
             equipmentItemInformationWindow_UI.SetItemInformation(_item);
         }
         else
         {
             informationEquipmentWindowAnimator.SetTrigger("PopOut");
-            StartCoroutine(FadeOut(canvasGroup));
+            StartCoroutine(FadeOut(equipmentItemInfoWindowCanvasGroup));
         }
     }
     private void SwitcherItemInformationWindow (Item _item )
     {
-        CanvasGroup canvasGroup = itemInformationWindow_UI.GetComponent<CanvasGroup>();
         itemInformationWindowIsOn = !itemInformationWindowIsOn;
 
         if (itemInformationWindowIsOn)
         {
             informationItemWindowAnimator.SetTrigger("PopUp");
-            StartCoroutine(FadeIn(canvasGroup));
+            StartCoroutine(FadeIn(itemInfoWindowCanvasGroup));
             itemInformationWindow_UI.SetItemInformation(_item);
         }
         else
         {
             informationItemWindowAnimator.SetTrigger("PopOut");
-            StartCoroutine(FadeOut(canvasGroup));
+            StartCoroutine(FadeOut(itemInfoWindowCanvasGroup));
         }
     }
     private IEnumerator FadeIn ( CanvasGroup _canvasGroup )
     {
+        _canvasGroup.blocksRaycasts = true;
         while (_canvasGroup.alpha < 1f)
         {
             _canvasGroup.alpha = Mathf.MoveTowards(_canvasGroup.alpha, 1f, Time.deltaTime * speed);
@@ -142,6 +151,7 @@ public class UI_InventoryMenuManager : MonoBehaviour
     }
     private IEnumerator FadeOut ( CanvasGroup _canvasGroup )
     {
+        _canvasGroup.blocksRaycasts = false;
         while (_canvasGroup.alpha > 0f)
         {
             _canvasGroup.alpha = Mathf.MoveTowards(_canvasGroup.alpha, 0f, Time.deltaTime * speed);

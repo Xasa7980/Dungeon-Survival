@@ -1,14 +1,15 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_RecipeInfo : MonoBehaviour
 {
-    [SerializeField] Text recipeName;
+    [SerializeField] TextMeshProUGUI recipeName;
     [SerializeField] Image recipeImage;
 
     [SerializeField] Image[] ingredientsImage;
-    [SerializeField] Text[] ingredientsName;
+    [SerializeField] TextMeshProUGUI[] ingredientsName;
 
     public void Configure ( Item_Recipe recipe, Vector3 position )
     {

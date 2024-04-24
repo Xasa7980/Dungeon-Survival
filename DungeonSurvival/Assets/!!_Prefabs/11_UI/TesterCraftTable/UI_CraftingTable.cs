@@ -75,6 +75,7 @@ public class UI_CraftingTable : MonoBehaviour
     {
         recipeWindow.SetActive(true);
         recipeToggle.isOn = true;
+        newItemStats.gameObject.SetActive(true);
 
         recipeInfoPanel.gameObject.SetActive(false);
         dismantleInfoPanel.gameObject.SetActive(false);

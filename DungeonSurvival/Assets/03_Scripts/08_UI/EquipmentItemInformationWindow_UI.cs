@@ -15,7 +15,6 @@ public class EquipmentItemInformationWindow_UI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemDescriptionText;
 
     public EquipmentItemInfoPanel equipmentItemInfoPanel;
-
     [Serializable]
     public struct EquipmentItemInfoPanel
     {
@@ -56,14 +55,13 @@ public class EquipmentItemInformationWindow_UI : MonoBehaviour
             }
         }
     }
-    private void SetItemName(string itemName )
+    private void SetItemName( Item item )
     {
-        itemName = itemName.ToUpper();
-        itemNameText.text = itemName;
+        itemNameText.text = item.displayName;
     }
-    private void SetItemDescription(string itemDescription )
+    private void SetItemDescription( Item item )
     {
-        itemNameText.text = itemDescription;
+        itemNameText.text = item.description;
     }
     private void SetItemIcon( Item item )
     {
@@ -73,8 +71,8 @@ public class EquipmentItemInformationWindow_UI : MonoBehaviour
     }
     public void SetItemInformation(Item item )
     {
-        SetItemName(item.name);
-        SetItemDescription(item.description);
+        SetItemName(item);
+        SetItemDescription(item);
         SetItemIcon(item);
 
         if (!item.equipable) return;

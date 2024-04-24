@@ -89,8 +89,9 @@ public class Item : ScriptableObject, iItemData
     #endregion
 
     #region PublicParams
-    public string displayName { get; set; }
-    public string description { get; set; }
+    public string displayName { get { return _displayName; } set { _displayName = value; } }
+
+    public string description { get { return _description; } set { _description = value; } }
     public int itemQualityLevel => _itemQualityLevel;
     public bool autoEquip => _autoEquip;
     public bool equiped { get; private set; }
