@@ -110,6 +110,11 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
     private void AttemptItemDrop ( PointerEventData eventData )
     {
         GameObject dropTarget = eventData.pointerEnter.gameObject;
+        if(eventData.pointerEnter.gameObject == null)
+        {
+            tempItem.InstantiateInWorld(eventData.position, tempItem);
+            tempItem.UnequipStats();
+        }
 
         if (dropTarget == null) return;
         InventoryItem_UI inventoryItem_UI = dropTarget.GetComponentInParent<InventoryItem_UI>();
@@ -172,16 +177,13 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
                 }
                 else
                 {
-                    Item tempItem = item;
-                    this.SetItem(equipmentSlot.item);
-                    equipmentSlot.SetItem(tempItem);
-                }
-                if (equipmentSlot.item != null)
-                {
                     bool canEquip = equipmentSlot.item.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories;
                     if (canEquip)
                     {
-                        equipmentSlot.item.Equip();
+                        Item tempItem = item;
+                        this.SetItem(equipmentSlot.item);
+                        equipmentSlot.SetItem(tempItem);
+                        equipmentSlot.item.EquipStats();
                         equipmentSlot.EquipUI(equipmentSlot.item);
                     }
                     else
@@ -189,6 +191,8 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
                         return;
                     }
                 }
+                UpdateUI();
+                equipmentSlot.UpdateUI();
             }
             else
             {

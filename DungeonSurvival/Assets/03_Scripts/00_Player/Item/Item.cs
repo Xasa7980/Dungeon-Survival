@@ -74,6 +74,7 @@ public class Item : ScriptableObject, iItemData
 
     [Header("World Options")]
     
+    private Interactable interactable;
     [FoldoutGroup("WorldOptions"),SerializeField] WorldItem _interactableModel;
     [FoldoutGroup("WorldOptions"), SerializeField] GameObject _visualizationModel;
     
@@ -158,14 +159,22 @@ public class Item : ScriptableObject, iItemData
 
     public virtual void EquipVisuals(Transform holster)
     {
-        Instantiate(visualizationModel, holster);
+        WorldItem instance = Instantiate(interactableModel, holster);
+        interactable = instance;
+        interactable.HideCanvasImmediately();
+        interactable.lockInteraction = true;
+        interactable.canInteract = false;
     }
 
     public virtual void UnequipVisuals(iInventory inventory)
     {
         if (inventory.TryAddItem(this, out int index))
         {
-
+            if(interactable != null)
+            {
+                interactable.lockInteraction = false;
+                interactable.canInteract = true;
+            }
         }
     }
 
@@ -209,14 +218,14 @@ public class Item : ScriptableObject, iItemData
         this._reloadAnimation = data._reloadAnimation;
 
     }
-    public void Equip ( /*PlayerStats player, EquipmentDataSO equipmentDataSO*/)
+    public void EquipStats ( /*PlayerStats player, EquipmentDataSO equipmentDataSO*/)
     {
         Debug.LogError("Misses to implement this function");
         equiped = true;
         //player.OnEquipRightWeapon
     }
 
-    public void Unequip ( )
+    public void UnequipStats ( )
     {
         equiped = false;
         throw new NotImplementedException();

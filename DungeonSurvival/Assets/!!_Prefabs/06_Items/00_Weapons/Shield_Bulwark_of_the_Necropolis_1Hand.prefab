@@ -757,7 +757,8 @@ GameObject:
   - component: {fileID: 7355421037752863945}
   - component: {fileID: -4527897327645152947}
   - component: {fileID: 5579740460345591928}
-  m_Layer: 0
+  - component: {fileID: 328352816}
+  m_Layer: 6
   m_Name: Shield_Bulwark_of_the_Necropolis_1Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -771,7 +772,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7697458423899047658}
-  m_LocalRotation: {x: 0.00000029802294, y: 0.00000020861606, z: 0.24864514, w: 0.9685947}
+  m_LocalRotation: {x: 0, y: 0, z: 0.24864757, w: 0.968594}
   m_LocalPosition: {x: 0.194, y: 0.112, z: -0.149}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.704952}
   m_ConstrainProportionsScale: 0
@@ -779,7 +780,7 @@ Transform:
   - {fileID: 159421597619243288}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 28.795}
 --- !u!95 &7355421037752863945
 Animator:
   serializedVersion: 4
@@ -813,6 +814,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentDataSO: {fileID: 11400000, guid: e76a050f81b857b498e2da5b5470abb7, type: 2}
+  _worldItem: {fileID: 328352816}
+  _equipmentItem: {fileID: 11400000, guid: d39ae25dfd12f6f43b03236b88ac032a, type: 2}
   equipmentType: 4
   equipmentElement: 3
   equipmentRank: 4
@@ -837,9 +840,55 @@ MonoBehaviour:
   objectPositionMode: 1
   gizmoBoxColor: {r: 0, g: 1, b: 0, a: 0.39215687}
   _size: {x: 0.65, y: 0.81, z: 0.25}
-  gizmoSphereColor: {r: 1, g: 0, b: 0, a: 0.38431373}
-  _radius: 0.53
-  freePosition: {x: -0.22, y: 0, z: 0}
+  gizmoSphereColor: {r: 1, g: 0, b: 0, a: 0.49803922}
+  _radius: 0.25
+  freePosition: {x: 0, y: 0, z: 0}
+--- !u!114 &328352816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7697458423899047658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb26a4ef9d8c89c4bb7b1a057ad07a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lockInteraction: 0
+  _priority: 0
+  _interactionHits: 1
+  _interactionObject: 0
+  _interactionType: 0
+  _interactionTime: 3
+  _disallowRootMotion: 0
+  interactionClip: {fileID: 0}
+  continuousInteractionClip: {fileID: 0}
+  hasStartAnimation: 0
+  interactionEnterClip: {fileID: 0}
+  hasExitAnimation: 0
+  interactionExitClip: {fileID: 0}
+  canvas: {fileID: 0}
+  interactionProgressBar: {fileID: 0}
+  appearSpeed: 1
+  OnInteractionStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionStop:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractionFinish:
+    m_PersistentCalls:
+      m_Calls: []
+  _item: {fileID: 11400000, guid: d39ae25dfd12f6f43b03236b88ac032a, type: 2}
+  hasDissolveEffect: 0
+  appearMaxTime: 1.5
+  dissolveSpeed: 3
+  dissolveMaterialShader: {fileID: 0}
+  renderer: {fileID: 0}
 --- !u!1 &8234420082104813350
 GameObject:
   m_ObjectHideFlags: 0

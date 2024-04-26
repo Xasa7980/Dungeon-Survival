@@ -51,13 +51,13 @@ public class UI_InventoryItemList_Layout : MonoBehaviour, IPointerUpHandler
 
     public void Equip()
     {
-        item.Equip();
+        item.EquipStats();
         equipedLabel.SetActive(true);
     }
 
     public void Unequip()
     {
-        item.Unequip();
+        item.UnequipStats();
         equipedLabel.SetActive(false);
     }
 }

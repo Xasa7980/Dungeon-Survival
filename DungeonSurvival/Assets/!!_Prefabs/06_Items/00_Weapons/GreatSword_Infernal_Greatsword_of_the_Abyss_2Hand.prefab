@@ -2678,13 +2678,13 @@ GameObject:
   - component: {fileID: 9037674294647284881}
   - component: {fileID: -3845498032714065701}
   - component: {fileID: -7846603754951219536}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GreatSword_Infernal_Greatsword_of_the_Abyss_2Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9037674294657125233
 Transform:
   m_ObjectHideFlags: 0
@@ -2736,6 +2736,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentDataSO: {fileID: 11400000, guid: 7fe3ce49afcd2964980445bb46f2dbb0, type: 2}
+  _worldItem: {fileID: 0}
+  _equipmentItem: {fileID: 0}
   equipmentType: 3
   equipmentElement: 2
   equipmentRank: 4
@@ -2756,13 +2758,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85f64e515b72a34aa5117021604e767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawMode: 0
+  _drawMode: 1
   objectPositionMode: 1
   gizmoBoxColor: {r: 0, g: 1, b: 0, a: 0.39215687}
   _size: {x: 0.43, y: 0.55, z: 1.95}
-  gizmoSphereColor: {r: 1, g: 0, b: 0, a: 0.38431373}
-  _radius: 0.53
-  freePosition: {x: 0, y: 0, z: 0.23}
+  gizmoSphereColor: {r: 1, g: 0, b: 0, a: 0.49803922}
+  _radius: 0.5
+  freePosition: {x: 0, y: 1, z: 0}
 --- !u!1 &9037674294656636755
 GameObject:
   m_ObjectHideFlags: 0
@@ -3302,6 +3304,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TrailEffectHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169429065091065258, guid: b154ae6db51df1f4886af44e0f4af507,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7169429065091065259, guid: b154ae6db51df1f4886af44e0f4af507,
         type: 3}

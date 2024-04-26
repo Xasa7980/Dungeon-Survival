@@ -1,6 +1,4 @@
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AreaDrawer : MonoBehaviour
@@ -33,63 +31,47 @@ public class AreaDrawer : MonoBehaviour
     public Vector3 freePosition;
     public Quaternion rotation => transform.rotation;
 
-
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected ( )
     {
         switch (drawMode)
         {
             case DrawMode.Box:
-                switch (objectPositionMode)
-                {
-                    case ObjectPositionMode.ObjectPosition:
-
-                        Gizmos.matrix = transform.localToWorldMatrix;
-                        Gizmos.color = gizmoBoxColor;
-                        Gizmos.DrawCube(Vector3.zero, size);
-                        break;
-
-                    case ObjectPositionMode.FreePosition:
-
-                        Vector3 localPositionFromWorld = transform.TransformPoint(freePosition);
-                        Quaternion localRotation = transform.rotation;
-
-                        Gizmos.color = gizmoBoxColor;
-                        Gizmos.matrix = Matrix4x4.TRS(localPositionFromWorld, localRotation, Vector3.one);
-                        Gizmos.DrawCube(Vector3.zero, size);
-                        break;
-
-                    default:
-                        break;
-                }
+                DrawBox();
                 break;
-
             case DrawMode.Sphere:
-
-                switch (objectPositionMode)
-                {
-                    case ObjectPositionMode.ObjectPosition:
-
-                        Gizmos.color = gizmoSphereColor;
-                        Gizmos.DrawSphere(Vector3.zero, radius);
-                        break;
-                    case ObjectPositionMode.FreePosition:
-
-                        Vector3 localPositionFromWorld = transform.TransformPoint(freePosition);
-                        Quaternion localRotation = transform.rotation;
-
-                        Gizmos.matrix = Matrix4x4.TRS(localPositionFromWorld, localRotation, Vector3.one);
-                        Gizmos.color = gizmoSphereColor;
-                        Vector3 realPosition = localPositionFromWorld;
-                        Gizmos.DrawSphere(Vector3.zero, radius);
-                        break;
-                    default:
-                        break;
-                }
+                DrawSphere();
                 break;
             case DrawMode.Circle:
+                // Implementa la lógica para Circle si es necesario
                 break;
             default:
                 break;
         }
+    }
+
+    void DrawBox ( )
+    {
+        Vector3 position = objectPositionMode == ObjectPositionMode.ObjectPosition ? transform.position : transform.TransformPoint(freePosition);
+        Quaternion rotation = transform.rotation;
+        Vector3 scale = transform.lossyScale;
+
+        Matrix4x4 gizmoMatrix = Matrix4x4.TRS(position, rotation, scale);
+
+        Gizmos.color = gizmoBoxColor;
+        Gizmos.matrix = gizmoMatrix;
+        Gizmos.DrawCube(Vector3.zero, size); // Usar size directamente, escalado por la matriz
+    }
+
+    void DrawSphere ( )
+    {
+        Vector3 position = objectPositionMode == ObjectPositionMode.ObjectPosition ? transform.position : transform.TransformPoint(freePosition);
+        Quaternion rotation = transform.rotation;
+        Vector3 scale = transform.lossyScale; // Considera cómo la escala afectará la esfera
+
+        Matrix4x4 gizmoMatrix = Matrix4x4.TRS(position, rotation, scale);
+
+        Gizmos.color = gizmoSphereColor;
+        Gizmos.matrix = gizmoMatrix;
+        Gizmos.DrawSphere(Vector3.zero, radius); // El radio puede necesitar ajuste basado en la escala
     }
 }

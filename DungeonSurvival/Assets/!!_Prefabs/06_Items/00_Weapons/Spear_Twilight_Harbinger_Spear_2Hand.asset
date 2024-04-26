@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f46175650a31d0146af00f2f3fd74f6f, type: 3}
-  m_Name: Sword_Crystal_Frostblade _1Hand
+  m_Name: Spear_Twilight_Harbinger_Spear_2Hand
   m_EditorClassIdentifier: 
-  equipmentName: 'Crystal_Frostblade '
-  description: This legendary sword, with its blade of purest ice and hilt that mimics
-    the frostbitten branches of winter trees, is said to freeze the air itself. Its
-    wielder commands the essence of winter, each strike chilling the soul of their
-    adversary.
-  equipmentType: 3
-  equipmentElement: 1
-  equipmentRank: 4
-  weaponHandlerType: 0
+  equipmentName: 'Twilight_Harbinger_Spear '
+  description: An uncommon-tier spear with a dual-bladed head, offering swift strikes
+    and versatility for skirmishers and pikemen alike.
+  equipmentType: 5
+  equipmentElement: 0
+  equipmentRank: 1
+  weaponHandlerType: 1
   weaponRange: 0
   equipmentStats:
     attackPoints: 40
@@ -34,10 +32,9 @@ MonoBehaviour:
   equipmentVisualEffects:
     slashParticleEffect:
     - {fileID: 0}
-    - {fileID: 0}
     equipmentSecondaryParticleEffect: {fileID: 0}
     emissiveColor: {r: 1, g: 1, b: 1, a: 1}
-    hasSlashEffect: 1
+    hasSlashEffect: 0
     hasSecondaryParticleEffect: 0
     hasDefaultParticleEffects: 0
     slashMaterials:
@@ -50,7 +47,7 @@ MonoBehaviour:
     - {fileID: 2100000, guid: ea4367fcd114730488bf7e215965bdb2, type: 2}
     - {fileID: 2100000, guid: 5c68d30f9fa6002449ae86ffffd7ae55, type: 2}
     - {fileID: 2100000, guid: c4af5cbb6397940468eb8318f68b4676, type: 2}
-    weaponSlashMaterial: {fileID: 2100000, guid: d167bd781f831aa41ab13961d63f4c6d,
+    weaponSlashMaterial: {fileID: 2100000, guid: 3297884f181cb2c41940da847c031306,
       type: 2}
   equipmentAnimationClips:
     basicAttackClips: []

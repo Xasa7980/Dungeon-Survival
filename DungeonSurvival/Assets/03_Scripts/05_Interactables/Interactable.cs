@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public abstract class Interactable : MonoBehaviour
 {
     protected bool _canInteract = true;
-    public bool canInteract => _canInteract;
+    public bool canInteract { get { return _canInteract; } set { _canInteract = value; } }
     
     public bool lockInteraction { get { return _lockInteraction; } set { _lockInteraction = value; } }
     [SerializeField]protected bool _lockInteraction;

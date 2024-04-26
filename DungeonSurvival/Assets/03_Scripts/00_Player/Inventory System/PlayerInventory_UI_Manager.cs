@@ -132,13 +132,14 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
     {
         backpackSlots[index].SetItemToInventory(item);
     }
-    public void EquipItemToEquipmentWindows ( Item item )
+    public void EquipItem ( Item item )
     {
         for (int i = 0; i < equipmentItem_UI_Slots.Length; i++)
         {
             if (equipmentItem_UI_Slots[i].itemCategory.itemCategories == item.equipmentDataSO.equipmentStats.equipmentCategory)
             {
                 equipmentItem_UI_Slots[i].EquipUI(item);
+                break;
             }
         }
     }

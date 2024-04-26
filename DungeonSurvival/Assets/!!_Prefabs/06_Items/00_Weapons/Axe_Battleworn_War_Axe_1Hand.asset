@@ -20,7 +20,7 @@ MonoBehaviour:
   equipmentElement: 0
   equipmentRank: 0
   weaponHandlerType: 0
-  weaponRange: 0
+  weaponType: 0
   equipmentStats:
     attackPoints: 40
     healthPoints: 802
@@ -33,8 +33,6 @@ MonoBehaviour:
   equipmentVisualEffects:
     slashParticleEffect:
     - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 9141768982946925765, guid: bcc07b40fffa5354b8bac79454313d76, type: 3}
     equipmentSecondaryParticleEffect: {fileID: 0}
     emissiveColor: {r: 1, g: 1, b: 1, a: 1}
     hasSlashEffect: 0

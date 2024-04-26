@@ -18,6 +18,30 @@ public class PlayerInventory : MonoBehaviour, iInventory
 
     public Item_Backpack GetEquipedBackpack => backpack;
     Item_Backpack backpack;
+
+
+    Item equippedMainWeapon;
+    Item equippedSecondaryWeapon;
+    Item equippedHelmet;
+    Item equippedChest;
+    Item equippedGloves;
+    Item equippedPants;
+    Item equippedBoots;
+    Item equippedNecklace;
+    Item equippedRing;
+    public Item[] GetEquippedItems => new Item[]
+    {
+        equippedMainWeapon,
+        equippedSecondaryWeapon,
+        equippedHelmet,
+        equippedChest,
+        equippedGloves,
+        equippedPants,
+        equippedBoots,
+        equippedNecklace,
+        equippedRing
+    };
+
     public int keys { get; private set; }
 
     [SerializeField] private PlayerInteraction playerInteraction;
@@ -81,6 +105,35 @@ public class PlayerInventory : MonoBehaviour, iInventory
         PlayerInventory_UI_Manager.current.EquipBackpack(backpackInstance);
         backpackInstance.EquipVisuals(PlayerHolsterHandler.current.backpack);
     }
+    public void EquipItem(Item item)
+    {
+        int index = 0;
+
+        for (int i = 0; i < GetEquippedItems.Length; i++)
+        {
+            if (GetEquippedItems[i] == null) continue;
+
+            if (item.itemTag == GetEquippedItems[i].itemTag)
+            {
+                Debug.Log("Already has an item, let's unequip");
+                UnequipItem(GetEquippedItems[i]);
+                index = i;
+            }
+        }
+
+        Item equipItemInstance = item.CreateInstance() as Item;
+        //this.TryRemoveItem(item,1);
+        GetEquippedItems[index] = equipItemInstance;
+        PlayerInventory_UI_Manager.current.EquipItem(equipItemInstance);
+        for (int i = 0; i < PlayerHolsterHandler.current.allActualHolsters.Length; i++)
+        {
+            if (PlayerHolsterHandler.current.allActualHolsters[i] != null)
+            {
+                equipItemInstance.EquipVisuals(PlayerHolsterHandler.current.allActualHolsters[i]);
+            }
+        }
+        Debug.Log("hea2");
+    }
 
     public void UnequipBackpack()
     {
@@ -103,6 +156,26 @@ public class PlayerInventory : MonoBehaviour, iInventory
 
         backpack = null;
         OnUnequipBackpack?.Invoke(this, EventArgs.Empty);
+    }
+    public void UnequipItem ( Item item )
+    {
+        //if (!this.TryAddItem(backpack))
+        //{
+        //backpack.InstantiateInWorld(PlayerLocomotion.current.transform.position, backpack);
+        //}
+        //else
+        //{
+        //    foreach (InventoryItem i in backpack.allItems)
+        //    {
+        //        if (i != null)
+        //        {
+        //            DropItem(i.item);
+        //        }
+        //    }
+        //}
+        Destroy(PlayerHolsterHandler.current.allActualHolsters.Where(r => r.GetChild(0).GetComponent<EquipmentDataHolder>().IsType(item)).First());
+
+        item = null;
     }
 
     void DropItem(Item item)

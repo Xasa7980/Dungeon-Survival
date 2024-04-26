@@ -34,9 +34,9 @@ public interface iItemData
     AnimationClip[] useAnimations { get; }
     void Use ( Transform character );
 
-    void Equip ( );
+    void EquipStats ( );
     void Reconfigure ( Item data );
-    void Unequip ( );
+    void UnequipStats ( );
 }
 public struct NewItemData
 {

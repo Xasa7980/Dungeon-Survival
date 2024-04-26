@@ -74,10 +74,10 @@ public class EquipmentDataSO : ScriptableObject
     public EquipmentElement equipmentElement;
     public EquipmentRank equipmentRank;
 
-    [ShowIf("@itemCategories == ItemCategories.Weapon")]
+    [ShowIf("@equipmentCategory == ItemCategories.Weapon")]
     public WeaponHandler weaponHandlerType = WeaponHandler.Hand_1;
 
-    [ShowIf("@itemCategories == ItemCategories.Weapon")]
+    [ShowIf("@equipmentCategory == ItemCategories.Weapon")]
     public WeaponType weaponType = WeaponType.Melee;
 
     [GUIColor(0.3f, 1f, 0.5f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Main Stats")]
@@ -92,6 +92,7 @@ public class EquipmentDataSO : ScriptableObject
     [OnValueChanged("SetEquipmentCategoryToStats"), OnValueChanged("SetEquipmentCategoryToVisuals")]
     private ItemCategories equipmentCategory => equipmentType >= EquipmentType.Dagger ? ItemCategories.Weapon : equipmentType < EquipmentType.Dagger && equipmentType >= EquipmentType.Boots ?
     ItemCategories.Armor : ItemCategories.Accesory;
+    public bool secondWeaponAble => equipmentCategory == ItemCategories.Weapon && weaponHandlerType == WeaponHandler.Hand_1;
     private void SetEquipmentCategoryToStats ( ) => equipmentStats.equipmentCategory = equipmentCategory;
     private void SetEquipmentRankToStats ( ) => equipmentStats.equipmentRank = equipmentRank;
     private void SetEquipmentCategoryToVisuals ( ) => equipmentVisualEffects.equipmentCategory = equipmentCategory;
@@ -227,13 +228,13 @@ public class EquipmentDataSO : ScriptableObject
 
         public Color emissiveColor;
 
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public bool hasSlashEffect;
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public bool hasSecondaryParticleEffect;
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public bool hasDefaultParticleEffects;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public bool hasSlashEffect;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public bool hasSecondaryParticleEffect;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public bool hasDefaultParticleEffects;
 
         [InfoBox("It requires an specific order on putting inside the materials, check EquipmentElement list", InfoMessageType.Warning)]
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public Material[] slashMaterials;
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public Material weaponSlashMaterial;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public Material[] slashMaterials;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public Material weaponSlashMaterial;
 
         public void SetWeaponSlashMaterial ( Material material ) => weaponSlashMaterial = material;
     }
@@ -243,7 +244,7 @@ public class EquipmentDataSO : ScriptableObject
         internal ItemCategories equipmentCategory;
         internal EquipmentRank equipmentRank;
 
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public float attackPoints;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public float attackPoints;
 
         public float healthPoints;
         public float manaPoints;
@@ -305,16 +306,16 @@ public class EquipmentDataSO : ScriptableObject
     {
         internal ItemCategories equipmentCategory;
 
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public AttacksDataSO[] basicAttackClips;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] basicAttackClips;
 
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public AttacksDataSO[] chargedAttackClips;
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public AttacksDataSO[] loadingChargedAttackClips;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] chargedAttackClips;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingChargedAttackClips;
 
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public AttacksDataSO[] specialAttackClips;
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public AttacksDataSO[] loadingSpecialAttackClips;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] specialAttackClips;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingSpecialAttackClips;
 
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public AttacksDataSO[] skillAttackClips;
-        [ShowIf("@itemCategories == ItemCategories.Weapon")] public AttacksDataSO[] loadingSkillAttackClips;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] skillAttackClips;
+        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingSkillAttackClips;
     }
 }
 

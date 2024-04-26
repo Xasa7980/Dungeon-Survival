@@ -30,7 +30,8 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
     {
         if (item == null)
         {
-            icon.gameObject.SetActive(false);
+            if(itemCategory != null) icon.sprite = itemCategory.icon;
+            else icon.gameObject.SetActive(false);
         }
         else
         {
@@ -43,6 +44,10 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
 
     public void EquipUI ( Item item )
     {
+        if(item.equipable && itemCategory != null && item.equipmentDataSO != null)
+        {
+            if (itemCategory.itemCategories != item.equipmentDataSO.equipmentStats.equipmentCategory) return;
+        }
         this.item = item;
         icon.sprite = this.item.icon;
         UpdateIconAlpha(1);
@@ -64,7 +69,8 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
     {
         item = null;
         inventoryItem = null;
-        icon.gameObject.SetActive(false);
+        if (itemCategory != null) icon.sprite = itemCategory.icon;
+        else icon.gameObject.SetActive(false);
     }
     public override void OnBeginDrag ( PointerEventData eventData )
     {
@@ -102,6 +108,11 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
     private void AttemptItemDrop ( PointerEventData eventData )
     {
         GameObject dropTarget = eventData.pointerEnter.gameObject;
+        if (eventData.pointerEnter.gameObject == null)
+        {
+            tempItem.InstantiateInWorld(eventData.position, tempItem);
+            tempItem.UnequipStats();
+        }
 
         if (dropTarget == null) return;
         InventoryItem_UI inventoryItem_UI = dropTarget.GetComponentInParent<InventoryItem_UI>();
@@ -147,32 +158,45 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
         {
             EquipedItem_UI_Layout equipmentSlot = inventoryItem_UI as EquipedItem_UI_Layout;
             bool equipable = item.equipable ? true : false;
+
             if (equipable)
             {
                 if (equipmentSlot.empty)
                 {
-                    equipmentSlot.SetItem(this.item);
-                    this.RemoveItem_UI(null);
+                    if (tempItem.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories)
+                    {
+                        equipmentSlot.SetItem(this.item);
+                        this.RemoveItem_UI(null);
+                    }
                 }
                 else
                 {
-                    Item tempItem = this.item;
-                    this.SetItem(equipmentSlot.item);
-                    equipmentSlot.SetItem(tempItem);
-                }
-                if (equipmentSlot.item != null)
-                {
-                    bool canEquip = equipmentSlot.item.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories;
-                    if (canEquip)
+                    bool matchingForSoloWeapons = tempItem.equipmentDataSO.secondWeaponAble &&
+                                                    tempItem.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories;
+
+                    bool matchedCategory = tempItem.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories && !matchingForSoloWeapons;
+                    if (matchingForSoloWeapons)
                     {
-                        equipmentSlot.item.Equip();
+                        Item tempItem = this.item;
+                        this.SetItem(equipmentSlot.item);
+                        equipmentSlot.SetItem(tempItem);
+                        equipmentSlot.item.EquipStats();
                         equipmentSlot.EquipUI(equipmentSlot.item);
+                        this.RemoveItem_UI(null);
                     }
-                    else
+                    else if (matchedCategory)
                     {
-                        return;
+                        Item tempItem = this.item;
+                        this.SetItem(equipmentSlot.item);
+                        equipmentSlot.SetItem(tempItem);
+                        equipmentSlot.item.EquipStats();
+                        equipmentSlot.EquipUI(equipmentSlot.item);
+                        this.RemoveItem_UI(null);
                     }
+                    else return;
                 }
+                UpdateUI();
+                equipmentSlot.UpdateUI();
             }
             else
             {
@@ -196,16 +220,23 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
         }
         else
         {
-            icon.gameObject.SetActive(false);
+            if (itemCategory != null) icon.sprite = itemCategory.icon;
+            else icon.gameObject.SetActive(false);
         }
     }
     public void SetItem ( Item _item )
     {
-        item = _item;
+        if(itemCategory.itemCategories == _item.equipmentDataSO.equipmentStats.equipmentCategory)
+        {
+            item = _item;
+        }
+        else
+        {
+            Debug.LogError("Este arma no puede ir aqui");
+        }
     }
     public override void OnPointerClick ( PointerEventData eventData )
     {
-        Debug.Log(eventData.pointerClick.name);
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             Debug.Log("right clicked");

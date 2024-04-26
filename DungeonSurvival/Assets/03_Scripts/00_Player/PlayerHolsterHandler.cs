@@ -7,6 +7,15 @@ public class PlayerHolsterHandler : MonoBehaviour
 {
     public static PlayerHolsterHandler current { get; private set; }
 
+    public Transform[] allActualHolsters => new Transform[]
+    {
+        rightHand,
+        leftHand,
+        primaryHolster,
+        secondaryHolster,
+        hipsRight,
+        hipsLeft
+    };
     [Title("Hands")]
     public Transform rightHand;
     public Transform leftHand;
