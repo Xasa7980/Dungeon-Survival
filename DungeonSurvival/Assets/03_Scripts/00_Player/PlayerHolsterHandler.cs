@@ -7,10 +7,9 @@ public class PlayerHolsterHandler : MonoBehaviour
 {
     public static PlayerHolsterHandler current { get; private set; }
 
+    public Transform[] weaponHolster;
     public Transform[] allActualHolsters => new Transform[]
     {
-        rightHand,
-        leftHand,
         primaryHolster,
         secondaryHolster,
         hipsRight,
@@ -32,5 +31,6 @@ public class PlayerHolsterHandler : MonoBehaviour
     private void Awake()
     {
         current = this;
+        weaponHolster = new Transform[] { rightHand, leftHand };
     }
 }

@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Spear_Twilight_Harbinger_Spear_2Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: 'Twilight_Harbinger_Spear '
+  _description: An uncommon-tier spear with a dual-bladed head, offering swift strikes
+    and versatility for skirmishers and pikemen alike.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: e6f7bb4182da11a49aab7f645f7e3628, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: 48a69e3ed4cc30947995ffb5c2b163c4, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -36,8 +37,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 1180322318, guid: 4f78a1892ef15534fad967c35cb7a470,
+    type: 3}
+  _visualizationModel: {fileID: 7961311237650292712, guid: 4f78a1892ef15534fad967c35cb7a470,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

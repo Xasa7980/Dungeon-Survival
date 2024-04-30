@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Axe_Twinblade_War_Axe_2Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Twinblade_War_Axe
+  _description: Sturdy axe featuring a dawn-hued blade and a weathered handle, perfect
+    for the itinerant warrior.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 9a78ba1a002af484cbbdac4c8ff43bb4, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: ed6250e41ecdcb64ea18d50fdef5b2d3, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -36,8 +37,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 966256678, guid: 646274c7cd3066040a0a6c5f54b03476,
+    type: 3}
+  _visualizationModel: {fileID: 3562645002153548335, guid: 646274c7cd3066040a0a6c5f54b03476,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

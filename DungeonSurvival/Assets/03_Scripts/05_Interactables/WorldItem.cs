@@ -48,10 +48,6 @@ public class WorldItem : Interactable
                     
                     PlayerInventory.current.EquipBackpack(backpack);
                     break;
-                case Item item:
-
-                    PlayerInventory.current.EquipItem(item);
-                    break;
             }
 
             if(!hasDissolveEffect) gameObject.SetActive(false); // hay objetos 2D y 3D no es bueno usar un dissolve para manipular el desactivamiento

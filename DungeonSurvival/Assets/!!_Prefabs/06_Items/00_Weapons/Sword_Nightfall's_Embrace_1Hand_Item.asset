@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Sword_Nightfall's_Embrace_1Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Nightfall's_Embrace
+  _description: This legendary sword, with its sinuous blade that flows like liquid
+    shadow and a hilt adorned with a pale gem, is whispered to be forged in darkness.
+    It offers unparalleled sharpness and a touch of chill with each slice, as if
+    cutting through the very fabric of night.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 79621e9862688784aad5d7fe3dbdffd9, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: 2a2eba8b0a936a54a9d5b5972462cb44, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -36,8 +39,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 1618205220, guid: d2cd275974dd8374bbd35ea34c906bbd,
+    type: 3}
+  _visualizationModel: {fileID: 2287329489993524848, guid: d2cd275974dd8374bbd35ea34c906bbd,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

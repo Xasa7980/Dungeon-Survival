@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Shield_Rune_Etched_Legendary_Aegis_1Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Rune_Etched_Legendary_Aegis
+  _description: A legendary-tier shield imbued with ancient runes along its perimeter.
+    Offers mystical protection that can turn the tide of any skirmish.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 1277a04ce240dc74fa05a3777af493cb, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: c47cc883c8cdc9649990ec8fedf1ef04, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -36,8 +37,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 176793688, guid: c78570b6c3a78e347aa0bfae088a58e9,
+    type: 3}
+  _visualizationModel: {fileID: 6759009647609795420, guid: c78570b6c3a78e347aa0bfae088a58e9,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

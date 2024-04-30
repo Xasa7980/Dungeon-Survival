@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Bat_Ironspike_Bludgeon_1Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Ironspike_Bludgeon
+  _description: This common bat, fitted with a spiked iron ball at its end, is a
+    simple yet effective weapon for close-range combat. It is favored by guards and
+    bruisers for its ability to inflict significant damage with a single swing.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: b4d4ae63132e23f4db90b6e8cc183467, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: 85e0588a554b3fe43a03ecc52fa1fa4e, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -36,8 +38,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 925038269, guid: e7cd8e2d992feb047a0a599e03d7284a,
+    type: 3}
+  _visualizationModel: {fileID: 4165551776755253109, guid: e7cd8e2d992feb047a0a599e03d7284a,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

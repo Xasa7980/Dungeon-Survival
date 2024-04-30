@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Staff_Staff_of_the_Eternal_Guardian_2Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Staff_of_the_Eternal_Guardian
+  _description: This legendary staff, with its twin emerald crests and a sapphire
+    orb nestled at the center, channels the ancient power of nature. It serves as
+    a conduit for the wielder's will, merging the might of the earth and the sky
+    into a single force.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 1ee8720c4b7ec7749b02555ce0708aef, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: ae1e1daf5c8d65f4ead0d62f35bfb00b, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -36,8 +39,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 111394894, guid: 363fbc5d5ad1d754399f663d95cb2d04,
+    type: 3}
+  _visualizationModel: {fileID: 2046810561866997392, guid: 363fbc5d5ad1d754399f663d95cb2d04,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

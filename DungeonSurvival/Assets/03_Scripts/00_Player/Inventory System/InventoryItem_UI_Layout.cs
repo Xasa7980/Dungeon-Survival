@@ -19,7 +19,6 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
     [SerializeField] KeyCode _key;
 
     [SerializeField] Vector2 tempImageSize = new Vector2(100, 100);
-    public bool empty => item == null;
 
     private GameObject tempItemRepresentation;
     private InventoryItem_UI _tempTargetContainer;
@@ -145,7 +144,7 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
 
             if (!targetHasItem)
             {
-                inventorySlot.SetItem(item);
+                inventorySlot.SetItem(tempItem);
                 this.RemoveItem_UI(null); // Asume que este método puede manejar la lógica para limpiar el slot actual
             }
             else
@@ -162,45 +161,68 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
         else if (inventoryItem_UI is EquipedItem_UI_Layout)
         {
             EquipedItem_UI_Layout equipmentSlot = inventoryItem_UI as EquipedItem_UI_Layout;
-            bool equipable = item.equipable? true : false;
-            
+            bool equipable = tempItem.equipable ? true : false;
             int targetCurrentStack = equipmentSlot.currentStack;
             equipmentSlot.currentStack = currentStack;
             currentStack = targetCurrentStack;
 
             if (equipable)
             {
-                if (equipmentSlot.empty)
+                if (equipmentSlot.empty) //Si esta vacio
                 {
-                    equipmentSlot.SetItem(item);
-                    this.RemoveItem_UI(null);
-                }
-                else
-                {
-                    bool canEquip = equipmentSlot.item.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories;
-                    if (canEquip)
+                    if(tempItem.equipmentDataSO != null)
                     {
-                        Item tempItem = item;
-                        this.SetItem(equipmentSlot.item);
-                        equipmentSlot.SetItem(tempItem);
-                        equipmentSlot.item.EquipStats();
-                        equipmentSlot.EquipUI(equipmentSlot.item);
+                        ItemCategories tempItemCategory = tempItem.equipmentDataSO.equipmentStats.equipmentCategory; 
+                        if(tempItemCategory == equipmentSlot.itemCategory.itemCategories)
+                        {
+                            equipmentSlot.SetItem(tempItem);
+                            PlayerInventory.current.EquipItem(equipmentSlot.item, equipmentSlot);
+                            RemoveItem_UI(null);
+                        }
+                        else
+                        {
+                            Debug.Log("Not matched for this slot");
+                            return;
+                        }
                     }
                     else
                     {
+                        Debug.LogError("Not found equipmentDataSO");
                         return;
                     }
                 }
-                UpdateUI();
-                equipmentSlot.UpdateUI();
+                else
+                {
+                    if (tempItem.equipmentDataSO == null) return;
+                    bool matchedCategory = tempItem.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories;
+
+                    if (matchedCategory) //Si el equipo es un arma y es de la misma mano que la otra
+                    {
+                        Debug.Log("Matched2" + item.equipmentDataSO.equipmentStats.equipmentCategory.ToString());
+                        Item tempItem = this.item;
+
+                        this.SetItem(equipmentSlot.item);
+
+                        PlayerInventory.current.UnequipItem(equipmentSlot.item, equipmentSlot); //Me quito el equipo del slot
+                        PlayerInventory.current.EquipItem(tempItem, equipmentSlot);
+
+                        equipmentSlot.SetItem(tempItem); //Añado el item al slot
+                    }
+                    else
+                    {
+                        Debug.Log("Not matched to equipment");
+                        return;
+                    }
+                }
             }
             else
             {
                 Debug.Log("Not EquipableItem");
                 return;
             }
+            UpdateUI();
+            equipmentSlot.UpdateUI();
         }
-
     }
     // Implementación de UpdateUI para reflejar los cambios en el inventario
     public void UpdateUI ( )
@@ -229,6 +251,40 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
     public void SetItem(Item _item )
     {
         item = _item;
+    }
+    public void TransferItemToAnotherSlot ( EquipedItem_UI_Layout destinationSlot )
+    {
+        if (item == null)
+        {
+            Debug.LogError("Transfer failed. Item is null.");
+            return;
+        }
+
+        if (!destinationSlot.CanReceiveItem(item))
+        {
+            Debug.LogError("Transfer failed. Destination slot cannot receive the item.");
+            return;
+        }
+
+        // Transferir el ítem al slot destino
+        destinationSlot.SetItem(item);
+
+        // Actualizar UI del slot destino
+        destinationSlot.UpdateUI();
+
+        // Limpiar el ítem actual del slot origen
+        RemoveItem_UI(null);
+
+        // Actualizar UI del slot origen
+        UpdateUI();
+        Debug.Log("Item successfully transferred to another slot.");
+    }
+
+    public bool CanReceiveItem ( Item _item )
+    {
+        bool canReceive = item == null || item.equipmentDataSO.equipmentStats.equipmentCategory == _item.equipmentDataSO.equipmentStats.equipmentCategory;
+        Debug.Log($"CanReceiveItem called: item is null: {item == null}, categories match: {item != null && item.equipmentDataSO.equipmentStats.equipmentCategory == _item.equipmentDataSO.equipmentStats.equipmentCategory}");
+        return canReceive;
     }
     public override void OnPointerClick ( PointerEventData eventData )
     {

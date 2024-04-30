@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Staff_Aqua_Regalia_2Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Aqua_Regalia
+  _description: '"Aqua_Regalia" is a mythic staff that channels the depth of the
+    seas. Its deep blue crystal top appears as a droplet poised above a wellspring,
+    granting its bearer mastery over the flow of waters.'
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: a47e621f4b4246640be4c40997811dec, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: 2600cdf53409e8540b1b13a356f53c05, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -36,8 +38,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 251152522, guid: 6d4c9fba8c4cdeb40b0946b7007c4eac,
+    type: 3}
+  _visualizationModel: {fileID: 4749358155146335593, guid: 6d4c9fba8c4cdeb40b0946b7007c4eac,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

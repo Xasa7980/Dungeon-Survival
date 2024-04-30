@@ -63,12 +63,12 @@ public class EquipmentDataSO : ScriptableObject
     [Title("$equipmentName", "$description", TitleAlignments.Centered)]
     [PropertySpace(SpaceBefore = 10, SpaceAfter = 10)]
     [SerializeField] 
-    private string equipmentName;
+    public string equipmentName;
 
     [GUIColor(0.15f, 0.8f, 0.8f, 1f)]
     [TextArea]
-    [SerializeField] 
-    private string description;
+    [SerializeField]
+    public string description;
 
     public EquipmentType equipmentType;
     public EquipmentElement equipmentElement;

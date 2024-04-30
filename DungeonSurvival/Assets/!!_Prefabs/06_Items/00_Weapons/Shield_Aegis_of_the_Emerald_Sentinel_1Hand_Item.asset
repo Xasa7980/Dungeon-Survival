@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Shield_Aegis_of_the_Emerald_Sentinel_1Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Aegis_of_the_Emerald_Sentinel
+  _description: This legendary shield, with its robust golden contours and a centerpiece
+    of glowing emerald, is the guardian's ultimate bastion. It is revered for its
+    ability to absorb vast amounts of damage while radiating an aura of protection.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 1c4eab098f870ab4a9a279d78c61453d, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: f633e6815021a704285e3e80a982f49a, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -36,8 +38,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 1783174989, guid: f754287aa7c556d4c84180ba175a8c56,
+    type: 3}
+  _visualizationModel: {fileID: 6688845007745180543, guid: f754287aa7c556d4c84180ba175a8c56,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

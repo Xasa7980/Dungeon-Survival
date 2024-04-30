@@ -19,6 +19,7 @@ public class InventoryItem_UI : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     [SerializeField] private InventoryType _inventoryType;
     public Item item { get { return _item; } set { _item = value; } }
     private Item _item;
+    public bool empty => item == null;
     public ItemCategory itemCategory => _itemCategory;
     [SerializeField] ItemCategory _itemCategory;
     public GameObject keyIcon => _keyIcon;

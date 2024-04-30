@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Axe_Dusk_Raider's_Axe_2Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Dusk_Raider's_Axe
+  _description: This common axe, favored by night marauders and thieves, features
+    a heavy double blade that can deliver devastating blows. Its darkened steel and
+    simple design ensure it is both unassuming and effective in close quarters.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 1172ec629597afc45ac6f9593e25b6b2, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
-  _durability: 1
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: 0b1b81e48b750ca468f62965125e5b95, type: 2}
+  _durability: 80
   _protectionAngle: 0
   _lookAtCursor: 0
   _lookSpeed: 3
@@ -36,8 +38,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 1770711420, guid: 0a2d1b5da109fb545ae466dd00fa1ccd,
+    type: 3}
+  _visualizationModel: {fileID: 1859606659016536966, guid: 0a2d1b5da109fb545ae466dd00fa1ccd,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

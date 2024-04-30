@@ -17,8 +17,8 @@ public class SwooshTest : MonoBehaviour
     }
     void Start ( )
     {
-        _trailRight = playerStats.EquipmentDataHolder_RightHand.GetWeaponTrail();
-        _trailLeft = playerStats.EquipmentDataHolder_LeftHand.GetWeaponTrail();
+        //_trailRight = playerStats.EquipmentDataHolder_RightHand.GetWeaponTrail();
+        //_trailLeft = playerStats.EquipmentDataHolder_LeftHand.GetWeaponTrail();
         DeactivateTrail();
     }
 

@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Bat_Vanguard's_Defender_Bat_1Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Vanguard's_Defender_Bat
+  _description: This uncommon bat, with a metallic spiked head and a rugged, leather-wrapped
+    handle, is a solid choice for close-quarters defense. Its formidable design is
+    geared towards repelling attackers and guarding the frontline.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 9d8ed8429da989641ab22212123e1d5d, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: d7efcff3dfd28e647b9d0acf0a3de2da, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -36,8 +38,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 1517237604, guid: 3d5c36e97ac73f442a502b6df881aa29,
+    type: 3}
+  _visualizationModel: {fileID: 8772411809605274851, guid: 3d5c36e97ac73f442a502b6df881aa29,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

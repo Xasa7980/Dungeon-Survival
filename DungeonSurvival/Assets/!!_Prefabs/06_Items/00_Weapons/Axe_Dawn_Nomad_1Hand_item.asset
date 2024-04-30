@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Axe_Dawn_Nomad_1Hand_item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Dawn_Nomad
+  _description: Sturdy axe featuring a dawn-hued blade and a weathered handle, perfect
+    for the itinerant warrior.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 203c4ae1606eebd40b7655998fcc12b5, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
-  _durability: 1
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: 1e20fd4961563034fb1dde4be43fa43d, type: 2}
+  _durability: 80
   _protectionAngle: 0
   _lookAtCursor: 0
   _lookSpeed: 3
@@ -36,8 +37,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 2112440441, guid: 4f77085952199384ba80cf02c703c562,
+    type: 3}
+  _visualizationModel: {fileID: 5001463533178956437, guid: 4f77085952199384ba80cf02c703c562,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

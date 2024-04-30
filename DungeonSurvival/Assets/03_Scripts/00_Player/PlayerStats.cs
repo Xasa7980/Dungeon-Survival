@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static EquipmentDataSO;
 
@@ -11,7 +12,7 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     public bool IsDualWeaponWielding => equipmentDataHolder_RightHand != null && equipmentDataHolder_RightHand.GetEquipmentType() != EquipmentType.Shield &&
-    equipmentDataHolder_LeftHand != null && equipmentDataHolder_LeftHand.GetEquipmentType() >= EquipmentType.Dagger;
+    equipmentDataHolder_LeftHand != null && !equipmentDataHolder_LeftHand.Is2HandWeapon;
 
     [SerializeField] private PlayerDataSO playerDataSO;
 
@@ -118,16 +119,13 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
 
         if(equipmentDataHolder_RightHand.GetDetectionArea() == null)
         {
-
+            return;
         }
         rightDetectionArea = equipmentDataHolder_RightHand.GetDetectionArea();
         leftDetectionArea = equipmentDataHolder_LeftHand.GetDetectionArea();
     }
     private void Update ( )
     {
-        //Debug.Log(noWeaponsEquiped);
-        //Debug.Log(IsDualWeaponWielding);
-        //Debug.Log(equipmentDataHolder_RightHand);
         if (Input.GetKeyDown(KeyCode.K))
         {
             //GetDamage(5);

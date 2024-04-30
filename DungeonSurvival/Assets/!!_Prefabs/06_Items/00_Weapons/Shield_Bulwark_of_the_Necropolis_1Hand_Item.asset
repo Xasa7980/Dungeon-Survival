@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: Shield_Bulwark_of_the_Necropolis_1Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Bulwark_of_the_Necropolis
+  _description: This legendary shield, etched with runes of the underworld and adorned
+    with a skull, serves as a grim sentinel against the living. Its very presence
+    saps the warmth from the air, and it is rumored to whisper secrets of the dead
+    to its bearer.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 8eecf401acaf48e44a85ed34b6287933, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: e76a050f81b857b498e2da5b5470abb7, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -36,8 +39,10 @@ MonoBehaviour:
   _autoEquip: 0
   _canBeDismantled: 0
   _resultingPieces: []
-  _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _interactableModel: {fileID: 328352816, guid: e19c319135ded734d83baf94feb7f7c7,
+    type: 3}
+  _visualizationModel: {fileID: 7697458423899047658, guid: e19c319135ded734d83baf94feb7f7c7,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

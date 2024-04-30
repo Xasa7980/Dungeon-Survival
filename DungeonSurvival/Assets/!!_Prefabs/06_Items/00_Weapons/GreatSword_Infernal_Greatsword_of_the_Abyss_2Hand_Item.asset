@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa873037f8d5fe4ab04caa296a876fc, type: 3}
   m_Name: GreatSword_Infernal_Greatsword_of_the_Abyss_2Hand_Item
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
+  _displayName: Infernal_Greatsword_of_the_Abyss
+  _description: This mythic greatsword, with its blade forged in the fires of hell
+    and veins of lava coursing through it, embodies the unbridled chaos of the abyss.
+    Its ominous glow and heat can incinerate the essence of its foes, leaving nothing
+    but ash in its wake.
   _itemQualityLevel: 0
   _canBeInHotbar: 0
   _isStackable: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: fcd01523aab6cee4f95b355e32f4244a, type: 3}
   _iconType: 0
   _maxStack: 3
-  _itemTag: {fileID: 0}
-  _equipable: 0
-  _equipmentDataSO: {fileID: 0}
+  _itemTag: {fileID: 11400000, guid: 24dce5538995d194c89cdfee164bb481, type: 2}
+  _equipable: 1
+  _equipmentDataSO: {fileID: 11400000, guid: 7fe3ce49afcd2964980445bb46f2dbb0, type: 2}
   _durability: 1
   _protectionAngle: 0
   _lookAtCursor: 0
@@ -37,7 +40,8 @@ MonoBehaviour:
   _canBeDismantled: 0
   _resultingPieces: []
   _interactableModel: {fileID: 0}
-  _visualizationModel: {fileID: 0}
+  _visualizationModel: {fileID: 9037674294656636753, guid: 6c80b199b2e28b849a1f778c894edba2,
+    type: 3}
   _instantUse: 0
   multipleAction: 0
   itemAction: {fileID: 0}

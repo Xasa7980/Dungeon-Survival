@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PlayerInventory : MonoBehaviour, iInventory
 {
@@ -18,7 +19,8 @@ public class PlayerInventory : MonoBehaviour, iInventory
 
     public Item_Backpack GetEquipedBackpack => backpack;
     Item_Backpack backpack;
-
+    [SerializeField] private EquipedItem_UI_Layout mainWeaponSlot;
+    [SerializeField] private EquipedItem_UI_Layout secondaryWeaponSlot;
 
     Item equippedMainWeapon;
     Item equippedSecondaryWeapon;
@@ -29,18 +31,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
     Item equippedBoots;
     Item equippedNecklace;
     Item equippedRing;
-    public Item[] GetEquippedItems => new Item[]
-    {
-        equippedMainWeapon,
-        equippedSecondaryWeapon,
-        equippedHelmet,
-        equippedChest,
-        equippedGloves,
-        equippedPants,
-        equippedBoots,
-        equippedNecklace,
-        equippedRing
-    };
+    public Item[] getEquippedItems;
 
     public int keys { get; private set; }
 
@@ -57,7 +48,18 @@ public class PlayerInventory : MonoBehaviour, iInventory
         current = this;
         allItems = new InventoryItem[maxItems];
         allEquipableItems = new InventoryItem[maxEquipableItems];
-
+        getEquippedItems = new Item[9]
+        {
+            equippedMainWeapon,
+            equippedSecondaryWeapon,
+            equippedHelmet,
+            equippedChest,
+            equippedGloves,
+            equippedPants,
+            equippedBoots,
+            equippedNecklace,
+            equippedRing
+        };
     }
 
     private void Start()
@@ -105,36 +107,6 @@ public class PlayerInventory : MonoBehaviour, iInventory
         PlayerInventory_UI_Manager.current.EquipBackpack(backpackInstance);
         backpackInstance.EquipVisuals(PlayerHolsterHandler.current.backpack);
     }
-    public void EquipItem(Item item)
-    {
-        int index = 0;
-
-        for (int i = 0; i < GetEquippedItems.Length; i++)
-        {
-            if (GetEquippedItems[i] == null) continue;
-
-            if (item.itemTag == GetEquippedItems[i].itemTag)
-            {
-                Debug.Log("Already has an item, let's unequip");
-                UnequipItem(GetEquippedItems[i]);
-                index = i;
-            }
-        }
-
-        Item equipItemInstance = item.CreateInstance() as Item;
-        //this.TryRemoveItem(item,1);
-        GetEquippedItems[index] = equipItemInstance;
-        PlayerInventory_UI_Manager.current.EquipItem(equipItemInstance);
-        for (int i = 0; i < PlayerHolsterHandler.current.allActualHolsters.Length; i++)
-        {
-            if (PlayerHolsterHandler.current.allActualHolsters[i] != null)
-            {
-                equipItemInstance.EquipVisuals(PlayerHolsterHandler.current.allActualHolsters[i]);
-            }
-        }
-        Debug.Log("hea2");
-    }
-
     public void UnequipBackpack()
     {
         //if (!this.TryAddItem(backpack))
@@ -157,27 +129,113 @@ public class PlayerInventory : MonoBehaviour, iInventory
         backpack = null;
         OnUnequipBackpack?.Invoke(this, EventArgs.Empty);
     }
-    public void UnequipItem ( Item item )
+    public void EquipItem(Item item, EquipedItem_UI_Layout equipedItem_UI_Layout )
     {
-        //if (!this.TryAddItem(backpack))
-        //{
-        //backpack.InstantiateInWorld(PlayerLocomotion.current.transform.position, backpack);
-        //}
-        //else
-        //{
-        //    foreach (InventoryItem i in backpack.allItems)
-        //    {
-        //        if (i != null)
-        //        {
-        //            DropItem(i.item);
-        //        }
-        //    }
-        //}
-        Destroy(PlayerHolsterHandler.current.allActualHolsters.Where(r => r.GetChild(0).GetComponent<EquipmentDataHolder>().IsType(item)).First());
+        Transform selectedHolster = SelectHolster(item, equipedItem_UI_Layout);
 
-        item = null;
+
+        if (selectedHolster != null && item != null && item.equipable)
+        {
+            Item equipItemInstance = item.CreateInstance() as Item;
+            Debug.Log("Item equipped in " + selectedHolster.name);
+            DetermineWhichEquipmentToUnequip(equipItemInstance, equipedItem_UI_Layout);
+            equipedItem_UI_Layout.EquipUI(equipItemInstance);
+            equipItemInstance.EquipVisuals(selectedHolster);
+        }
+    }
+    private void DetermineWhichEquipmentToUnequip ( Item item, EquipedItem_UI_Layout equipedItem_UI_Layout )
+    {
+        bool mainWeaponSlotHasWeapon = mainWeaponSlot.targetHolster.childCount > 0 && mainWeaponSlot.item != null;
+        bool secondaryWeaponSlotHasWeapon = secondaryWeaponSlot.targetHolster.childCount > 0 && secondaryWeaponSlot.item != null;
+        // Simplifica la lógica comprobando primero el tipo de arma
+        if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_2)
+        {
+            // Si se equipa un arma de dos manos, desequipa todo
+            if (mainWeaponSlotHasWeapon)
+            {
+                TryAddItem(mainWeaponSlot.item);
+                UnequipItem(mainWeaponSlot.item, mainWeaponSlot);
+            }
+            if (secondaryWeaponSlotHasWeapon)
+            {
+                TryAddItem(secondaryWeaponSlot.item);
+                UnequipItem(secondaryWeaponSlot.item, secondaryWeaponSlot);
+            }
+
+            if(equipedItem_UI_Layout == secondaryWeaponSlot && !secondaryWeaponSlot.empty) equipedItem_UI_Layout.TransferItemToAnotherSlot(mainWeaponSlot);
+        }
+        else if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_1)
+        {
+            if (equipedItem_UI_Layout == secondaryWeaponSlot && !mainWeaponSlotHasWeapon && mainWeaponSlot.empty)
+            {
+                secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
+                mainWeaponSlot.EquipUI(item);
+                UnequipItem(secondaryWeaponSlot.item, secondaryWeaponSlot);
+                
+            }
+        }
+    }
+    private Transform SelectHolster ( Item item, EquipedItem_UI_Layout layout )
+    {
+        bool mainWeaponSlotHasWeapon = mainWeaponSlot.targetHolster.childCount > 0;
+        bool secondaryWeaponSlotHasWeapon = secondaryWeaponSlot.targetHolster.childCount > 0;
+
+        if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_1)
+        {
+            if (layout != mainWeaponSlot && !mainWeaponSlotHasWeapon)
+            {
+                Debug.Log("Item equipped in " + mainWeaponSlot.targetHolster);
+                mainWeaponSlot.EquipUI(item);
+                if (secondaryWeaponSlotHasWeapon)
+                {
+                    secondaryWeaponSlot.UnequipUI();
+                }
+                return mainWeaponSlot.targetHolster;
+            }
+            else
+            {
+                if (layout == secondaryWeaponSlot
+                    )
+                {
+                    Debug.Log("Item equipped in 23333 " + secondaryWeaponSlot.targetHolster);
+                    secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
+                }
+                layout.EquipUI(item);
+                return layout.targetHolster;
+            }
+        }
+        else if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_2)
+        {
+            if (layout != mainWeaponSlot)
+            {
+                Debug.Log("Item equipped in " + mainWeaponSlot.targetHolster);
+                secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
+                mainWeaponSlot.EquipUI(item);
+                return mainWeaponSlot.targetHolster;
+            }
+        }
+        Debug.Log("by default in 4455: " + mainWeaponSlot.targetHolster);
+        layout.EquipUI(item);
+        return layout.targetHolster;
     }
 
+    public void UnequipItem ( Item item, EquipedItem_UI_Layout equipedItem_UI_Layout )
+    {
+        if (equipedItem_UI_Layout.targetHolster.childCount > 0)
+        {
+            Transform childTransform = equipedItem_UI_Layout.targetHolster.GetChild(0);
+            if (childTransform != null && childTransform.gameObject != null)
+            {
+                equipedItem_UI_Layout.UnequipUI();
+                equipedItem_UI_Layout.RemoveItem_UI(null);
+                Destroy(childTransform.gameObject);
+            }
+            else
+            {
+                Debug.LogError("Attempted to destroy a non-existent gameObject");
+            }
+        }
+    }
     void DropItem(Item item)
     {
         Vector3 position = UnityEngine.Random.insideUnitSphere * 2;
@@ -323,17 +381,14 @@ public class PlayerInventory : MonoBehaviour, iInventory
         {
             if (backpack != null)
             {
-                Debug.Log("added to backpack");
                 return TryAddItemToBackPack(item);
             }
 
-            Debug.Log("added to quickAcces");
             return false;
         }
 
         if (index >= 0)
         {
-            Debug.Log("added to quickAcces by default");
             PlayerInventory_UI_Manager.current.AddItemToQuickAccess(index, allItems[index]);
         }
 
@@ -348,17 +403,13 @@ public class PlayerInventory : MonoBehaviour, iInventory
         {
             if (backpack != null)
             {
-                Debug.Log("added to backpack");
                 return TryAddItemToBackPack(item);
             }
-
-            Debug.Log("added to quickAcces");
             return false;
         }
 
         if (index >= 0)
         {
-            Debug.Log("added to quickAcces by default");
             if(targetSlot.inventoryType != InventoryType.BackpackInventory)
             {
                 PlayerInventory_UI_Manager.current.AddItemToQuickAccess(index, allItems[index]);

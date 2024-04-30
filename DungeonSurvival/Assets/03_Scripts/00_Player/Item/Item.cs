@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using System;
 using System.Linq;
 using System.Collections.Concurrent;
+using static EquipmentDataSO;
 
 [CreateAssetMenu(menuName = "Dungeon Survival/Inventory/item")]
 public class Item : ScriptableObject, iItemData
@@ -86,6 +87,18 @@ public class Item : ScriptableObject, iItemData
     [SerializeField, ShowIf("@multipleAction")] ItemAction[] _itemActions;
     [SerializeField, HideIf("_instantUse")] protected AnimationClip[] _useAnimations;
 
+    private void OnValidate ( )
+    {
+        if(equipmentDataSO != null)
+        {
+
+            displayName = equipmentDataSO.equipmentName;
+            description = equipmentDataSO.description;
+        }
+    }
+    [OnValueChanged("SetEquipmentName"), OnValueChanged("SetEquipmentDescription")]
+    private void SetEquipmentName ( ) => displayName = equipmentDataSO.equipmentName;
+    private void SetEquipmentDescription ( ) => description = equipmentDataSO.description;
 
     #endregion
 
@@ -220,7 +233,7 @@ public class Item : ScriptableObject, iItemData
     }
     public void EquipStats ( /*PlayerStats player, EquipmentDataSO equipmentDataSO*/)
     {
-        Debug.LogError("Misses to implement this function");
+        Debug.Log("Misses to implement this function");
         equiped = true;
         //player.OnEquipRightWeapon
     }
