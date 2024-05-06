@@ -21,11 +21,11 @@ public class EquipmentDataHolder : MonoBehaviour
     [SerializeField] private EquipmentElement equipmentElement;
     [SerializeField] private EquipmentRank equipmentRank;
     [SerializeField] private ItemCategories equipmentCategory;
-    [ShowIf("@equipmentCategory == ItemCategories.Weapon"), SerializeField] private WeaponHandler weaponHandlerType;
-    [ShowIf("@equipmentCategory == ItemCategories.Weapon"), SerializeField] private WeaponType weaponRange;
+    [ShowIf("@itemCategory == ItemCategories.Weapon"), SerializeField] private WeaponHandler weaponHandlerType;
+    [ShowIf("@itemCategory == ItemCategories.Weapon"), SerializeField] private EquipmentCategory weaponRange;
 
-    [ShowIf("@equipmentCategory == ItemCategories.Weapon"), SerializeField] public Material slashMaterial;
-    [ShowIf("@equipmentCategory == ItemCategories.Weapon"), SerializeField] private List<Transform> slashGameObject = new List<Transform>();
+    [ShowIf("@itemCategory == ItemCategories.Weapon"), SerializeField] public Material slashMaterial;
+    [ShowIf("@itemCategory == ItemCategories.Weapon"), SerializeField] private List<Transform> slashGameObject = new List<Transform>();
 
     private MeleeWeaponTrail weaponTrail;
     private AreaDrawer detectionArea;
@@ -49,7 +49,7 @@ public class EquipmentDataHolder : MonoBehaviour
         equipmentDataSO.equipmentElement = equipmentElement;
         equipmentDataSO.equipmentRank = equipmentRank;
         equipmentDataSO.weaponHandlerType = weaponHandlerType;
-        equipmentDataSO.weaponType = weaponRange;
+        equipmentDataSO.equipmentCategory = weaponRange;
         equipmentDataSO.equipmentVisualEffects.slashParticleEffect = slashGameObject;
         slashMaterial = equipmentDataSO.equipmentVisualEffects.weaponSlashMaterial;
     }

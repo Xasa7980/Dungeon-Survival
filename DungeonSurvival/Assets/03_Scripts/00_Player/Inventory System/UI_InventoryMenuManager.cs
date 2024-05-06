@@ -75,7 +75,7 @@ public class UI_InventoryMenuManager : MonoBehaviour
     {
         if (item.equipable)
         {
-            if (item.itemTag.GetTag == "Backpack")
+            if (item.itemTag.GetCategoryTag == "Backpack")
             {
                 SwitcherInventoryState();
             }

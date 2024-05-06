@@ -19,7 +19,7 @@ public class WorldItem : Interactable
     [SerializeField, GUIColor(0.3f, 0.8f, 0.8f, 1f)] private bool hasDissolveEffect;
     [SerializeField,ShowIf("hasDissolveEffect")] private float appearMaxTime = 1.5f;
     [SerializeField, ShowIf("hasDissolveEffect")] private float dissolveSpeed = 3;
-    [SerializeField, ShowIf("hasDissolveEffect")] private Material dissolveMaterialShader;
+    [SerializeField, ShowIf("hasDissolveEffect")] private Material dissolveMaterialShader; //En el caso de querer incorporar un material de dissolve en caso de que no este puesto
     [SerializeField, ShowIf("hasDissolveEffect")] private Renderer renderer;
     public void SetRenderer ( Renderer renderer )
     {
@@ -61,7 +61,6 @@ public class WorldItem : Interactable
         {
             if (PlayerInventory.current.TryAddItem(_item))
             {
-                Debug.Log("hi2");
                 if (!hasDissolveEffect) gameObject.SetActive(false);
                 else
                 {

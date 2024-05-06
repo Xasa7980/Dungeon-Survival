@@ -21,7 +21,7 @@ public class UI_InventoryItemList_Layout : MonoBehaviour, IPointerUpHandler
         instance.item = item;
 
         instance.itemNameText.text = item.displayName;
-        instance.amount.text = "x" + item.currentAmount;
+        //instance.amount.text = "x" + item.currentAmount;
 
         instance.toggle = instance.GetComponent<Toggle>();
         instance.toggle.group = parent.GetComponent<ToggleGroup>();

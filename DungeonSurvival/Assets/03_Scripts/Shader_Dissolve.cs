@@ -13,18 +13,30 @@ public class Shader_Dissolve
         monoBehaviourClass.StartCoroutine(IncreaseFloatValue(speed, increaseLimit, renderer, rendererParent));
     }
 
-    private IEnumerator IncreaseFloatValue ( float speed, float increaseLimit, Renderer renderer, GameObject rendererParent ) //Spawnear objeto
+    private IEnumerator IncreaseFloatValue ( float speed, float increaseLimit, Renderer renderer, GameObject rendererParent )
     {
         MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
-        renderer.GetPropertyBlock(materialPropertyBlock);
 
-        float currentValue = materialPropertyBlock.GetFloat(CUT_OFF_HEIGHT);
-        while (currentValue < increaseLimit)
+        while (true)
         {
-            currentValue += speed * Time.deltaTime; // Aumenta currentValue por speed cada segundo
-            materialPropertyBlock.SetFloat(CUT_OFF_HEIGHT, currentValue); // Establece el valor actualizado en el shader
-            renderer.SetPropertyBlock(materialPropertyBlock);
-            yield return null; // Espera hasta el próximo frame
+            bool allMaterialsMaxed = true;
+            for (int i = 0; i < renderer.materials.Length; i++)
+            {
+                renderer.GetPropertyBlock(materialPropertyBlock, i);
+                float currentValue = materialPropertyBlock.GetFloat(CUT_OFF_HEIGHT);
+                currentValue += speed * Time.deltaTime;
+                currentValue = Mathf.Min(currentValue, increaseLimit);
+                materialPropertyBlock.SetFloat(CUT_OFF_HEIGHT, currentValue);
+                renderer.SetPropertyBlock(materialPropertyBlock, i);
+
+                if (currentValue < increaseLimit)
+                    allMaterialsMaxed = false;
+            }
+
+            if (allMaterialsMaxed)
+                break;
+
+            yield return null;
         }
     }
     public void DissolveGameObject ( float speed, float decreaseValueLimit, Renderer renderer, GameObject rendererParent, MonoBehaviour monoBehaviourClass )
@@ -35,18 +47,30 @@ public class Shader_Dissolve
     private IEnumerator DecreaseFloatValue ( float speed, float decreaseValueLimit, Renderer renderer, GameObject rendererParent )
     {
         MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
-        renderer.GetPropertyBlock (materialPropertyBlock);
 
-        float currentValue = renderer.material.GetFloat(CUT_OFF_HEIGHT);
-        Debug.Log(currentValue);
-        while (currentValue + 1 > decreaseValueLimit)
+        while (true)
         {
-            currentValue -= speed * Time.deltaTime; // Disminuye currentValue por speed cada segundo
-            materialPropertyBlock.SetFloat(CUT_OFF_HEIGHT, currentValue); // Establece el valor actualizado en el shader
-            renderer.SetPropertyBlock(materialPropertyBlock);
-            yield return null; // Espera hasta el próximo frame
+            bool allMaterialsMinimized = true;
+            for (int i = 0; i < renderer.materials.Length; i++)
+            {
+                renderer.GetPropertyBlock(materialPropertyBlock, i);
+                float currentValue = materialPropertyBlock.GetFloat(CUT_OFF_HEIGHT);
+                currentValue -= speed * Time.deltaTime;
+                currentValue = Mathf.Max(currentValue, decreaseValueLimit);
+                materialPropertyBlock.SetFloat(CUT_OFF_HEIGHT, currentValue);
+                renderer.SetPropertyBlock(materialPropertyBlock, i);
+
+                if (currentValue > decreaseValueLimit)
+                    allMaterialsMinimized = false;
+            }
+
+            if (allMaterialsMinimized)
+            {
+                rendererParent.gameObject.SetActive(false);
+                break;
+            }
+
+            yield return null;
         }
-        Debug.Log("destroyed");
-        rendererParent.gameObject.SetActive(false);
     }
 }

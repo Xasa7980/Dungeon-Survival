@@ -80,7 +80,7 @@ public class UI_Inventory_Panel : UI_Panel
 
     void FilterType(ItemTag itemTag)
     {
-        itemTagName.text = itemTag.GetTag;
+        itemTagName.text = itemTag.GetCategoryTag;
         currentTag = itemTag;
 
         List<iItemData> items = new List<iItemData>();

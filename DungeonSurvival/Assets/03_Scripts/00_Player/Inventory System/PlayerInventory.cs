@@ -19,49 +19,51 @@ public class PlayerInventory : MonoBehaviour, iInventory
 
     public Item_Backpack GetEquipedBackpack => backpack;
     Item_Backpack backpack;
-    [SerializeField] private EquipedItem_UI_Layout mainWeaponSlot;
-    [SerializeField] private EquipedItem_UI_Layout secondaryWeaponSlot;
-
-    Item equippedMainWeapon;
-    Item equippedSecondaryWeapon;
-    Item equippedHelmet;
-    Item equippedChest;
-    Item equippedGloves;
-    Item equippedPants;
-    Item equippedBoots;
-    Item equippedNecklace;
-    Item equippedRing;
-    public Item[] getEquippedItems;
 
     public int keys { get; private set; }
 
     [SerializeField] private PlayerInteraction playerInteraction;
-    public event EventHandler OnPlaceKey;
 
     public PlayerStats playerStats => playerStats;
     private PlayerStats _playerStats;
     public PlayerLocomotion playerLocomotion => playerLocomotion;
     private PlayerLocomotion _playerLocomotion;
 
+    [SerializeField] private EquipedItem_UI_Layout mainWeaponSlot;
+    [SerializeField] private EquipedItem_UI_Layout secondaryWeaponSlot;
+    [SerializeField] private EquipedItem_UI_Layout helmetSlot;
+    [SerializeField] private EquipedItem_UI_Layout chestSlot;
+    [SerializeField] private EquipedItem_UI_Layout glovesSlot;
+    [SerializeField] private EquipedItem_UI_Layout pantsSlot;
+    [SerializeField] private EquipedItem_UI_Layout bootsSlot;
+    [SerializeField] private EquipedItem_UI_Layout necklaceSlot;
+    [SerializeField] private EquipedItem_UI_Layout ringSlot;
+
+    private Dictionary<EquipedItem_UI_Layout, Transform> equipSlots;
+
     private void Awake()
     {
         current = this;
         allItems = new InventoryItem[maxItems];
         allEquipableItems = new InventoryItem[maxEquipableItems];
-        getEquippedItems = new Item[9]
-        {
-            equippedMainWeapon,
-            equippedSecondaryWeapon,
-            equippedHelmet,
-            equippedChest,
-            equippedGloves,
-            equippedPants,
-            equippedBoots,
-            equippedNecklace,
-            equippedRing
-        };
+        InitializeEquipSlots();
     }
 
+    private void InitializeEquipSlots ( )
+    {
+        equipSlots = new Dictionary<EquipedItem_UI_Layout, Transform>
+        {
+            {mainWeaponSlot, mainWeaponSlot.targetHolster},
+            {secondaryWeaponSlot, secondaryWeaponSlot.targetHolster},
+            {helmetSlot, helmetSlot.targetHolster},
+            {chestSlot, chestSlot.targetHolster},
+            {glovesSlot, glovesSlot.targetHolster},
+            {pantsSlot, pantsSlot.targetHolster},
+            {bootsSlot, bootsSlot.targetHolster},
+            {necklaceSlot, necklaceSlot.targetHolster},
+            {ringSlot, ringSlot.targetHolster}
+        };
+    }
     private void Start()
     {
         PlayerInteraction.current.OnInteractAnyObject += PlayerInteraction_OnInteractAnyObject;
@@ -129,111 +131,131 @@ public class PlayerInventory : MonoBehaviour, iInventory
         backpack = null;
         OnUnequipBackpack?.Invoke(this, EventArgs.Empty);
     }
-    public void EquipItem(Item item, EquipedItem_UI_Layout equipedItem_UI_Layout )
+    public void EquipItem ( Item item, EquipedItem_UI_Layout equipedItem_UI_Layout )
     {
-        Transform selectedHolster = SelectHolster(item, equipedItem_UI_Layout);
-
-
-        if (selectedHolster != null && item != null && item.equipable)
+        if (item != null && item.equipable && item.equipmentDataSO != null)
         {
-            Item equipItemInstance = item.CreateInstance() as Item;
-            Debug.Log("Item equipped in " + selectedHolster.name);
-            DetermineWhichEquipmentToUnequip(equipItemInstance, equipedItem_UI_Layout);
-            equipedItem_UI_Layout.EquipUI(equipItemInstance);
-            equipItemInstance.EquipVisuals(selectedHolster);
-        }
-    }
-    private void DetermineWhichEquipmentToUnequip ( Item item, EquipedItem_UI_Layout equipedItem_UI_Layout )
-    {
-        bool mainWeaponSlotHasWeapon = mainWeaponSlot.targetHolster.childCount > 0 && mainWeaponSlot.item != null;
-        bool secondaryWeaponSlotHasWeapon = secondaryWeaponSlot.targetHolster.childCount > 0 && secondaryWeaponSlot.item != null;
-        // Simplifica la lógica comprobando primero el tipo de arma
-        if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_2)
-        {
-            // Si se equipa un arma de dos manos, desequipa todo
-            if (mainWeaponSlotHasWeapon)
+            Transform holsterToUse;
+            if (item.equipmentDataSO.equipmentCategory == EquipmentCategory.Armor && item.equipmentDataSO.armorIndex >= 0)
             {
-                TryAddItem(mainWeaponSlot.item);
-                UnequipItem(mainWeaponSlot.item, mainWeaponSlot);
+                holsterToUse = equipedItem_UI_Layout.targetHolster;
+                ActivateArmor(holsterToUse, item.equipmentDataSO.armorIndex);
             }
-            if (secondaryWeaponSlotHasWeapon)
+            else if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_2)
             {
-                TryAddItem(secondaryWeaponSlot.item);
-                UnequipItem(secondaryWeaponSlot.item, secondaryWeaponSlot);
+                // Desequipar ambas manos antes de equipar un arma de dos manos
+                UnequipWeaponsIfNeeded(equipedItem_UI_Layout);
+                holsterToUse = mainWeaponSlot.targetHolster;
+                EquipWeapon(item, mainWeaponSlot, holsterToUse);
+                if(equipedItem_UI_Layout == secondaryWeaponSlot)secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
             }
-
-            if(equipedItem_UI_Layout == secondaryWeaponSlot && !secondaryWeaponSlot.empty) equipedItem_UI_Layout.TransferItemToAnotherSlot(mainWeaponSlot);
-        }
-        else if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_1)
-        {
-            if (equipedItem_UI_Layout == secondaryWeaponSlot && !mainWeaponSlotHasWeapon && mainWeaponSlot.empty)
+            else if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_1)
             {
-                secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
-                mainWeaponSlot.EquipUI(item);
-                UnequipItem(secondaryWeaponSlot.item, secondaryWeaponSlot);
-                
-            }
-        }
-    }
-    private Transform SelectHolster ( Item item, EquipedItem_UI_Layout layout )
-    {
-        bool mainWeaponSlotHasWeapon = mainWeaponSlot.targetHolster.childCount > 0;
-        bool secondaryWeaponSlotHasWeapon = secondaryWeaponSlot.targetHolster.childCount > 0;
-
-        if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_1)
-        {
-            if (layout != mainWeaponSlot && !mainWeaponSlotHasWeapon)
-            {
-                Debug.Log("Item equipped in " + mainWeaponSlot.targetHolster);
-                mainWeaponSlot.EquipUI(item);
-                if (secondaryWeaponSlotHasWeapon)
+                if (equipedItem_UI_Layout == secondaryWeaponSlot && mainWeaponSlot.targetHolster.childCount == 0)
                 {
-                    secondaryWeaponSlot.UnequipUI();
+                    // Si el slot principal está vacío y se intenta equipar en el secundario, equipar en el principal
+                    holsterToUse = mainWeaponSlot.targetHolster;
+                    EquipWeapon(item, mainWeaponSlot, holsterToUse);
+                    secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
                 }
-                return mainWeaponSlot.targetHolster;
+                else if (equipedItem_UI_Layout == secondaryWeaponSlot && mainWeaponSlot.targetHolster.childCount > 0 && mainWeaponSlot.item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_2)
+                {
+                    TryAddItem(mainWeaponSlot.item);
+                    UnequipItem(mainWeaponSlot.item, mainWeaponSlot); // Asegúrate de desequipar el ítem antes de transferir otro ítem al slot.
+                    holsterToUse = mainWeaponSlot.targetHolster;
+                    EquipWeapon(item, mainWeaponSlot, holsterToUse);
+                    secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
+                }
+                else
+                {
+                    // Equipar en el holster designado
+                    if(equipedItem_UI_Layout.item != null)
+                    {
+                        UnequipItem(equipedItem_UI_Layout.item, equipedItem_UI_Layout); // Asegúrate de desequipar el ítem antes de transferir otro ítem al slot.
+                    }
+                    holsterToUse = equipedItem_UI_Layout.targetHolster;
+                    EquipWeapon(item, equipedItem_UI_Layout, holsterToUse);
+                }
             }
             else
             {
-                if (layout == secondaryWeaponSlot
-                    )
-                {
-                    Debug.Log("Item equipped in 23333 " + secondaryWeaponSlot.targetHolster);
-                    secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
-                }
-                layout.EquipUI(item);
-                return layout.targetHolster;
+                equipSlots.TryGetValue(equipedItem_UI_Layout, out holsterToUse);
+                EquipWeapon(item, equipedItem_UI_Layout, holsterToUse);
             }
         }
-        else if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_2)
+        else
         {
-            if (layout != mainWeaponSlot)
-            {
-                Debug.Log("Item equipped in " + mainWeaponSlot.targetHolster);
-                secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
-                mainWeaponSlot.EquipUI(item);
-                return mainWeaponSlot.targetHolster;
-            }
+            Debug.LogError("Item is null, not equipable, or EquipmentDataSO is missing.");
+            return;
         }
-        Debug.Log("by default in 4455: " + mainWeaponSlot.targetHolster);
-        layout.EquipUI(item);
-        return layout.targetHolster;
+    }
+    private void EquipWeapon ( Item item, EquipedItem_UI_Layout layout, Transform holster )
+    {
+        Item equipItemInstance = item.CreateInstance() as Item;
+
+        layout.EquipUI(equipItemInstance);
+        equipItemInstance.EquipVisuals(holster);
+    }
+
+    private void ActivateArmor ( Transform armorParent, int index )
+    {
+        for (int i = 0; i < armorParent.childCount; i++)
+        {
+            armorParent.GetChild(i).gameObject.SetActive(i == index);
+        }
     }
 
     public void UnequipItem ( Item item, EquipedItem_UI_Layout equipedItem_UI_Layout )
     {
-        if (equipedItem_UI_Layout.targetHolster.childCount > 0)
+        if (equipSlots.TryGetValue(equipedItem_UI_Layout, out Transform holster) && holster.childCount > 0)
         {
-            Transform childTransform = equipedItem_UI_Layout.targetHolster.GetChild(0);
-            if (childTransform != null && childTransform.gameObject != null)
+            if (item.equipmentDataSO.equipmentCategory == EquipmentCategory.Armor)
             {
-                equipedItem_UI_Layout.UnequipUI();
-                equipedItem_UI_Layout.RemoveItem_UI(null);
-                Destroy(childTransform.gameObject);
+                for (int i = 0; i < holster.childCount; i++)
+                {
+                    holster.GetChild(i).gameObject.SetActive(i == 0);
+                }
+                Debug.Log("Deactivated armor and activated default armor at position 0.");
             }
             else
             {
-                Debug.LogError("Attempted to destroy a non-existent gameObject");
+                Transform childTransform = holster.GetChild(0);
+                if (childTransform != null && childTransform.gameObject != null)
+                {
+                    equipedItem_UI_Layout.UnequipUI();
+                    Destroy(childTransform.gameObject);
+                }
+                else
+                {
+                    Debug.LogError("Attempted to destroy a non-existent gameObject");
+                }
             }
+        }
+    }
+
+    private void UnequipWeaponsIfNeeded ( EquipedItem_UI_Layout layout )
+    {
+        if(layout == secondaryWeaponSlot)
+        {
+            if(mainWeaponSlot.item != null)
+            {
+                TryAddItem(mainWeaponSlot.item);
+            }
+        }
+        else if(layout == mainWeaponSlot)
+        {
+            if (secondaryWeaponSlot.item != null)
+            {
+                TryAddItem(secondaryWeaponSlot.item);
+            }
+        }
+        if (mainWeaponSlot.targetHolster.childCount > 0)
+        {
+            UnequipItem(mainWeaponSlot.item, mainWeaponSlot);
+        }
+        if (secondaryWeaponSlot.targetHolster.childCount > 0)
+        {
+            UnequipItem(secondaryWeaponSlot.item, secondaryWeaponSlot);
         }
     }
     void DropItem(Item item)
@@ -245,135 +267,18 @@ public class PlayerInventory : MonoBehaviour, iInventory
     }
     public void UseItem ( Item _item )
     {
-        if (_item.TryGetAction(out ItemAction itemAction))
+        if (_item == null || string.IsNullOrWhiteSpace(_item.itemTag.GetItemTag))
         {
-            ItemTagLibrary itemTagLibrary = _item.itemTag.GetItemTagLibrary;
-            if (itemAction is HealingItemAction)
-            {
-                HealingItemAction healingItemAction = itemAction as HealingItemAction;
-                foreach (string tag in itemTagLibrary.healingTags)
-                {
-                    if (healingItemAction != null)
-                    {
-                        if (_item.itemTag.GetTag == tag)
-                        {
-                            ActionResult<float> amount = healingItemAction.ExecuteFunction<float>(_item);
-                            float healPoints = healingItemAction.healPoints;
-                            if (healingItemAction.itemFunction.functionType == ItemAction.FunctionType.Healing_HP)
-                            {
-                                playerStats.Healing(ItemAction.FunctionType.Healing_HP, amount.Value);
-                            }
-                            else if (healingItemAction.itemFunction.functionType == ItemAction.FunctionType.Healing_MP)
-                            {
-                                playerStats.Healing(ItemAction.FunctionType.Healing_MP, amount.Value);
-                            }
-                        }
-                        else
-                        {
-                            Debug.LogError("healingItemAction es null.");
-                        }
-                    }
-                }
-            }
-            else if (itemAction is FoodItemAction)
-            {
-                FoodItemAction foodItemAction = itemAction as FoodItemAction;
-                foreach (string tag in itemTagLibrary.foodTags)
-                {
-                    if (foodItemAction != null)
-                    {
-                        if (_item.itemTag.GetTag == tag)
-                        {
-                            ActionResult<float> amount = foodItemAction.ExecuteFunction<float>(_item);
-                            float foodFillTime = foodItemAction.eatFillTime;
-                            Debug.Log("Feeding");
-                            //Introducir metodo de llenado de hambre
-                        }
-
-                    }
-                    else
-                    {
-                        Debug.LogError("specialItemAction es null.");
-                    }
-                }
-            }
-            else if (itemAction is StatBoostItemAction)
-            {
-                StatBoostItemAction statBoostItemAction = itemAction as StatBoostItemAction;
-                foreach (string tag in itemTagLibrary.statBoostTags)
-                {
-                    if (statBoostItemAction != null)
-                    {
-                        if (_item.itemTag.GetTag == tag)
-                        {
-                            ActionResult<float> amount = statBoostItemAction.ExecuteFunction<float>(_item);
-                            float statBoostedTime = statBoostItemAction.duration;
-                            //Introducir metodo de reparacion de equipamiento
-                        }
-
-                    }
-                    else
-                    {
-                        Debug.LogError("specialItemAction es null.");
-                    }
-                }
-            }
-            else if (itemAction is RepairItemAction)
-            {
-                RepairItemAction repairItemAction = itemAction as RepairItemAction;
-                foreach (string tag in itemTagLibrary.repairTags)
-                {
-                    if (repairItemAction != null)
-                    {
-                        if (_item.itemTag.GetTag == tag)
-                        {
-                            ActionResult<float> amount = repairItemAction.ExecuteFunction<float>(_item);
-                            float repairTime = repairItemAction.repairingFillTime;
-                            //Introducir metodo de reparacion de equipamiento
-                        }
-
-                    }
-                    else
-                    {
-                        Debug.LogError("specialItemAction es null.");
-                    }
-                }
-            }
-            else if (itemAction is SpecialItemAction)
-            {
-                SpecialItemAction specialItemAction = itemAction as SpecialItemAction;
-                foreach (string tag in itemTagLibrary.specialTags)
-                {
-                    if (specialItemAction != null)
-                    {
-                        if (_item.itemTag.GetTag == tag)
-                        {
-                            ActionResult<Action> actionResult = specialItemAction.ExecuteAction(( ) => UseKey(_item));
-                        }
-
-                    }
-                    else
-                    {
-                        Debug.LogError("specialItemAction es null.");
-                    }
-                }
-            }
-        }
-    }
-    private void UseKey(Item _item )
-    {
-        Item itemToUse = _item.CreateInstance() as Item;
-
-        if (activableAltar == null)
-        {
+            Debug.LogError("Invalid item or item tag.");
             return;
         }
-        if (activableAltar.AltarIsEnabled()) return;
 
-        OnPlaceKey?.Invoke(this, EventArgs.Empty);
-        LoadSceneManager.instance.LoadSceneAsync();
-        activableAltar.SetAltarState(true);
-        activableAltar.TurnExitOn();
+        iItemPerformingAction action = ItemActionFactory.Instance.GetActionByItemTag(_item.itemTag.GetItemTag, this, _item, _item.consumable ? _item.effectAmount : 10, _item.hasDuration ? _item.effectDuration : 0);
+        if (action != null)
+        {
+            action.PerformSpecialAction(this, _item);
+        }
+
     }
     public bool TryAddItem(Item item) //Por usar
     {

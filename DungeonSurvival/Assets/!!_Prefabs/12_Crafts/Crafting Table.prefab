@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7167032095977862784}
   - component: {fileID: 632720204776394133}
   - component: {fileID: 5981860910237397946}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Piece (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 4805580396112205629}
   - component: {fileID: 3508395542949911939}
   - component: {fileID: 7945806291689029792}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Piece (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 6144229483243004656}
   - component: {fileID: 3868449824057664347}
   - component: {fileID: 780268178328112014}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 4653956922134624073}
   - component: {fileID: 1105030424259037430}
   - component: {fileID: 2232394828351849581}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 5810355098061252855}
   - component: {fileID: 8338867064559656850}
   - component: {fileID: 72542834879989822}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Mesh3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 6487818754213675891}
   - component: {fileID: 7165847393293955753}
   - component: {fileID: 8614855586554025370}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 2690178493795885712}
   - component: {fileID: 3849614756976738}
   - component: {fileID: 627358029928926755}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Mesh4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 4475391717131720442}
   - component: {fileID: 6137865037318342778}
   - component: {fileID: 3824742883483839637}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Piece (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +807,7 @@ GameObject:
   - component: {fileID: 1437978653398645428}
   - component: {fileID: 2760779040383071597}
   - component: {fileID: 4894657668572052964}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rune Slot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5101409319056892452}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Group2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7560217781344823267}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Group5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -978,7 +978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5321610361487921720}
   - component: {fileID: 1631796132495823613}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Runes Slots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 2081538620972702599}
   - component: {fileID: 231574719205826015}
   - component: {fileID: 3303907829870614871}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Mesh1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1160,7 +1160,7 @@ GameObject:
   - component: {fileID: 8694273172570701937}
   - component: {fileID: 8456195772604298632}
   - component: {fileID: 2536870875058733057}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CraftingInterface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1267,7 +1267,7 @@ GameObject:
   - component: {fileID: 777561683227500935}
   - component: {fileID: 4061556966243795885}
   - component: {fileID: 8560025423541772354}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1347,7 +1347,7 @@ GameObject:
   - component: {fileID: 2702209425634073157}
   - component: {fileID: 4761716910227142389}
   - component: {fileID: 7609161404764426164}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Mesh2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1473,8 +1473,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.39, y: 0.8297889, z: 0.69}
-  m_Center: {x: 0, y: 0.4045347, z: 0}
+  m_Size: {x: 1.36, y: 0.22, z: 0.25}
+  m_Center: {x: 0, y: 0.9, z: 0.58}
 --- !u!114 &7866988309584246122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1487,7 +1487,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4a432f172ae4840a689b2c8ff7eced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lockInteraction: 0
   _priority: 0
+  _interactionHits: 1
   _interactionObject: 0
   _interactionType: 0
   _interactionTime: 3
@@ -1574,7 +1576,7 @@ GameObject:
   - component: {fileID: 1465603070256436190}
   - component: {fileID: 1294830797251589484}
   - component: {fileID: 5831882332671344245}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1650,7 +1652,7 @@ GameObject:
   - component: {fileID: 4118223685108842473}
   - component: {fileID: 7019303779579778224}
   - component: {fileID: 815261231249791598}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Mesh5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1794,7 +1796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4570020387507237467}
   - component: {fileID: 4570020387507237464}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1832,8 +1834,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.39, y: 0.8297889, z: 0.69}
-  m_Center: {x: 0, y: 0.4045347, z: 0}
+  m_Size: {x: 1.59, y: 1.08, z: 0.89}
+  m_Center: {x: 0, y: 0.459, z: 0}
 --- !u!1 &4891550014977082099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,7 +1847,7 @@ GameObject:
   - component: {fileID: 1644994757657795403}
   - component: {fileID: 7644752878281153046}
   - component: {fileID: 1037106861628920182}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1921,7 +1923,7 @@ GameObject:
   - component: {fileID: 3954366099504236701}
   - component: {fileID: 4904423747584056196}
   - component: {fileID: 6176516243536680455}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rune Slot (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2074,7 +2076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4782757683282711333}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Group4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2109,7 +2111,7 @@ GameObject:
   - component: {fileID: 2386060965775053620}
   - component: {fileID: 5568838929603954115}
   - component: {fileID: 1264106857074949040}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2242,7 +2244,7 @@ GameObject:
   - component: {fileID: 5778601333715645923}
   - component: {fileID: 105352939360158528}
   - component: {fileID: 8308422471345329808}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2318,7 +2320,7 @@ GameObject:
   - component: {fileID: 8385568951450399644}
   - component: {fileID: 3401014221874918739}
   - component: {fileID: 5909940151727913102}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2398,7 +2400,7 @@ GameObject:
   - component: {fileID: 6000493609158056355}
   - component: {fileID: 8538691978436104365}
   - component: {fileID: 3370230790056341622}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2475,7 +2477,7 @@ GameObject:
   - component: {fileID: 2143245767405017393}
   - component: {fileID: 2920058449781126066}
   - component: {fileID: 8343001964864651957}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Piece (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2606,7 +2608,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1007504152832148946}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Group3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2641,7 +2643,7 @@ GameObject:
   - component: {fileID: 2914278007531946444}
   - component: {fileID: 5704382596002063712}
   - component: {fileID: 6704101603597273135}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Craft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2775,7 +2777,7 @@ GameObject:
   - component: {fileID: 6476317343798563359}
   - component: {fileID: 2358100572928657985}
   - component: {fileID: 8012421296797049124}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Clear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2939,7 +2941,7 @@ GameObject:
   - component: {fileID: 7054194317844215256}
   - component: {fileID: 1260181252404247608}
   - component: {fileID: 5999789722477504371}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rune Slot (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3016,7 +3018,7 @@ GameObject:
   - component: {fileID: 3974466361539470876}
   - component: {fileID: 8683350120593259098}
   - component: {fileID: 5814299290004797994}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3090,7 +3092,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3805056437133249126}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Group1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

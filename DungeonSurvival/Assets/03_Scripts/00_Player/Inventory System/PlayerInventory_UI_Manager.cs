@@ -23,6 +23,7 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
         get => _currentSelectedIndex;
         private set
         {
+            quickAccessSlots[_currentSelectedIndex].toggle.isOn = false;
             _currentSelectedIndex = value;
             quickAccessSlots[_currentSelectedIndex].toggle.isOn = true;
         }
@@ -99,22 +100,12 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
                 {
                     case Item_Backpack backpack: /* Si el item es de tipo Item_Backpack procede */
 
-                        Debug.Log("Accessed to item");
+                        Debug.Log("Accessed to backpack item");
                         PlayerInventory.current.EquipBackpack(backpack);
                         break;
-                    case Item usableItem when usableItem.itemTag.GetTag == "Key":
+                    case Item usableItem:
 
                         Debug.Log("Accessed to item");
-                        PlayerInventory.current.UseItem(usableItem);
-                        break;
-                    case Item usableItem when usableItem.itemTag.GetTag == "Food":
-
-                        Debug.Log("Accessed to item");
-                        PlayerInventory.current.UseItem(usableItem);
-                        break;
-                    case Item usableItem when usableItem.itemTag.GetTag == usableItem.itemTag.GetItemTagLibrary.statBoostTags[0]:
-
-                        //Debug.Log("Accessed to item");
                         PlayerInventory.current.UseItem(usableItem);
                         break;
                 }
@@ -190,13 +181,21 @@ public class ItemTagLibrary
     public string itemTagString;
     public ItemTag itemTag;
 
-    public string[] foodTags = new string[] { "Food" };
-    public string[] healingTags = new string[] { "Healing_HP", "Healing_MP" };
-    public string[] repairTags = new string[] { "Repair" };
-    public string[] statBoostTags = new string[] { "StatBoost" };
-    public string[] specialTags = new string[] { "SpecialItem" };
-    public string[] equipmentTags = new string[] { "Equipment" };
-    public string[] backpackTags = new string[] { "Backpack" };
+    public string foodItemCategoryTag = "Food";
+    public string[] healingItemCategoryTag = new string[] { "Healing_HP", "Healing_MP" };
+    public string repairItemCategoryTag = "Repair";
+    public string statBoostItemCategoryTag = "StatBoost";
+    public string specialItemCategoryTag = "SpecialItem";
+    public string equipmentItemCategoryTag = "Equipment";
+    public string backpackItemCategoryTag = "Backpack";
+
+    public string[] foodItemTags = new string[] { "Hamburguer", "Spagghetti" };
+    public string[] healingItemTags = new string[] { "Healing_HP", "Healing_MP" };
+    public string[] repairItemTags = new string[] { "Healing_HP", "Repair_Hammer" };
+    public string[] statBoostItemTags = new string[] { "HP_Booster", "Attack_Booster" };
+    public string[] specialItemTags = new string[] { "Key", "quest" };
+    public string[] equipmentItemTags = new string[] { "Healing_HP", "Healing_MP" };
+    public string[] backpackItemTags = new string[] { "Healing_HP", "Healing_MP" };
 
     public ItemTagLibrary(string _itemTagString, ItemTag _itemTag )
     {

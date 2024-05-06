@@ -11,6 +11,12 @@ using static EquipmentDataSO;
 [CreateAssetMenu(menuName = "Dungeon Survival/Inventory/item")]
 public class Item : ScriptableObject, iItemData
 {
+    public enum ItemType
+    {
+        Sellable,
+        Consumable,
+        Equipable,
+    }
     public enum IconType
     {
         Normal,
@@ -30,6 +36,7 @@ public class Item : ScriptableObject, iItemData
 
     [SerializeField] Sprite _icon;
     [SerializeField] IconType _iconType;
+    [SerializeField] ItemType _itemType;
     public float _iconRotationZ => _iconType == IconType.Normal ? 0 : 
         _iconType == IconType.NormalInverted ? 0 :
         _iconType == IconType.Diagonal ? 135.2f : -135.2f; //Primero se hace en editor para saber que valor poner despues de ":"
@@ -41,16 +48,17 @@ public class Item : ScriptableObject, iItemData
     [SerializeField] ItemTag _itemTag;
 
     #region Verificables
-    bool isRangeWeapon { get => equipable && weaponType == WeaponType.Range; }
+    bool isRangeWeapon { get => equipable && weaponType == EquipmentCategory.Range; }
     bool showReloadField { get => isRangeWeapon && hasRealoadAnimation; }
     bool showLookSpeedField { get => _lookAtCursor && _equipable; }
-    bool showIfNotArmor { get => equipable && weaponType != WeaponType.Armor; }
-    bool showIfIsShield { get => equipable && weaponType == WeaponType.Shield; }
+    bool showIfNotArmor { get => equipable && weaponType != EquipmentCategory.Armor; }
+    bool showIfIsShield { get => equipable && weaponType == EquipmentCategory.Shield; }
     bool isNotBase { get => GetType() != typeof(Item); }
 
     #endregion
-
+    #region Equiping
     [Header("Equiping")]
+    
     [SerializeField] bool _equipable;
 
     [FoldoutGroup("EquipUI"), SerializeField,ShowIf("equipable")] EquipmentDataSO _equipmentDataSO;
@@ -67,26 +75,29 @@ public class Item : ScriptableObject, iItemData
     [FoldoutGroup("EquipUI"), SerializeField, ShowIf("showReloadField")] AnimationClip _reloadAnimation;
 
     [FoldoutGroup("EquipUI"), SerializeField] bool _autoEquip;
-
+    #endregion
+    #region Dismantle
     [Header("Dismantle")]
     
     [FoldoutGroup("Dismantle"),SerializeField] bool _canBeDismantled;
     [FoldoutGroup("Dismantle"),SerializeField, ShowIf("_canBeDismantled")] Item[] _resultingPieces = new Item[0];
-
+    #endregion
+    #region World Options
     [Header("World Options")]
     
     private Interactable interactable;
     [FoldoutGroup("WorldOptions"),SerializeField] WorldItem _interactableModel;
     [FoldoutGroup("WorldOptions"), SerializeField] GameObject _visualizationModel;
-    
+    #endregion
+    #region Dismantle
     [Header("item Use Properties")]
 
     [SerializeField] bool _instantUse = false;
-    [SerializeField] private bool multipleAction;
-    [SerializeField, ShowIf("@!multipleAction")] private ItemAction itemAction;
-    [SerializeField, ShowIf("@multipleAction")] ItemAction[] _itemActions;
+    [SerializeField, ShowIf("@consumable")] bool _hasDuration;
+    [SerializeField, ShowIf("@consumable")] int _effectAmount;
+    [SerializeField, ShowIf("@consumable && hasDuration")] int _effectDuration;
     [SerializeField, HideIf("_instantUse")] protected AnimationClip[] _useAnimations;
-
+    #endregion
     private void OnValidate ( )
     {
         if(equipmentDataSO != null)
@@ -106,15 +117,19 @@ public class Item : ScriptableObject, iItemData
     public string displayName { get { return _displayName; } set { _displayName = value; } }
 
     public string description { get { return _description; } set { _description = value; } }
-    public int itemQualityLevel => _itemQualityLevel;
     public bool autoEquip => _autoEquip;
     public bool equiped { get; private set; }
     public bool equipable { get { return _equipable; } set { _equipable = value; } }
-    public int durability => durability;
+    public bool consumable => _itemType == ItemType.Consumable;
+    public bool sellable => _itemType == ItemType.Sellable;
+    public bool hasDuration { get { return _hasDuration; } set { _hasDuration = value; } }
     public bool canBeInHotbar { get { return _canBeInHotbar; } set { _canBeInHotbar = value; } }
     public bool isStackable { get { return _isStackable; } set { _isStackable = value; } }
+    public int itemQualityLevel => _itemQualityLevel;
+    public int durability => durability;
     public int maxStack { get { return _maxStack; } set { _maxStack = value; } }
-    public int currentAmount { get; set; }
+    public int effectAmount { get { return _effectAmount; } set { _effectAmount = value; } }
+    public int effectDuration { get { return _effectDuration; } set { _effectDuration = value; } }
     public bool lookAtCursor { get { return _lookAtCursor; } set { _lookAtCursor = value; } }
     public float lookSpeed { get { return _lookSpeed; } set { _lookSpeed = value; } }
     public bool canMove { get { return _canMove; } set { _canMove = value; } }
@@ -126,7 +141,7 @@ public class Item : ScriptableObject, iItemData
     public Item[] resultingPieces { get { return _resultingPieces; } set { _resultingPieces = value; } }
     public WorldItem interactableModel => _interactableModel;
     public GameObject visualizationModel => _visualizationModel;
-    public WeaponType weaponType { get { return _equipmentDataSO.weaponType; } set { _equipmentDataSO.weaponType = value; } }
+    public EquipmentCategory weaponType { get { return _equipmentDataSO.equipmentCategory; } set { _equipmentDataSO.equipmentCategory = value; } }
     public EquipmentDataSO equipmentDataSO => _equipmentDataSO;
     public AnimationClip useItemAnimation => _useAnimation;
     public AnimationClip continueUsingItemAnimation => _useContinuousAnimation;
@@ -222,7 +237,7 @@ public class Item : ScriptableObject, iItemData
         this._lookAtCursor = data.lookAtCursor;
         this._lookSpeed = data.lookSpeed;
         this._canMove = data.canMove;
-        if(this.equipable) this.equipmentDataSO.weaponType = data.weaponType;
+        if(this.equipable) this.equipmentDataSO.equipmentCategory = data.weaponType;
         //this._useItemAnimation = data.idleAnimation;
         //this._walkAnimation = data.walkAnimation;
         //this._runAnimation = data.runAnimation;
@@ -242,42 +257,5 @@ public class Item : ScriptableObject, iItemData
     {
         equiped = false;
         throw new NotImplementedException();
-    }
-
-    public bool TryGetAction ( out ItemAction itemAction )
-    {
-        if (multipleAction)
-        {
-            itemAction = null;
-            return false;
-        }
-        if (this.itemAction != null)
-        {
-            itemAction = this.itemAction;
-            return true;
-        }
-        else
-        {
-            itemAction = null;
-            return false;
-        }
-    }
-    public bool TryGetMultipleActions(out ItemAction[] itemActions )
-    {
-        if(!multipleAction)
-        {
-            itemActions = null;
-            return false;
-        }
-        if (this._itemActions.Length > 0)
-        {
-            itemActions = this._itemActions;
-            return true;
-        }
-        else
-        {
-            itemActions = null;
-            return false;
-        }
     }
 }

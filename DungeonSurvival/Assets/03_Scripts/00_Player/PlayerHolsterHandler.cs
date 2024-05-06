@@ -22,6 +22,17 @@ public class PlayerHolsterHandler : MonoBehaviour
     [Title("Holsters")]
     public Transform primaryHolster;
     public Transform secondaryHolster;
+
+    public Transform helmetHolster;
+    public Transform chestHolster;
+    public Transform glovesHolsterRight;
+    public Transform glovesHolsterLeft;
+    public Transform leggingsHolster;
+    public Transform bootsHolsterRight;
+    public Transform bootsHolsterLeft;
+    public Transform necklaceHolster;
+    public Transform ringHolster;
+
     public Transform hipsRight;
     public Transform hipsLeft;
 

@@ -20,11 +20,10 @@ public interface iItemData
     bool canBeInHotbar { get; }
     bool isStackable { get; }
     int maxStack { get; }
-    int currentAmount { get; set; }
     bool lookAtCursor { get; }
     float lookSpeed { get; }
     bool canMove { get; }
-    WeaponType weaponType { get; }
+    EquipmentCategory weaponType { get; }
 
     AnimationClip useItemAnimation { get; }
     AnimationClip continueUsingItemAnimation { get; }
@@ -61,7 +60,7 @@ public struct NewItemData
     public bool lookAtCursor;
     public float lookSpeed;
     public bool canMove;
-    public WeaponType weaponType;
+    public EquipmentCategory weaponType;
 
     AnimationClip useItemAnimation;
     AnimationClip continueUsingItemAnimation;

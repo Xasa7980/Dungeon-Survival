@@ -56,10 +56,15 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
 
     public void UnequipUI ( )
     {
-        //item = null;
-        RemoveItem_UI(null);
-        if (itemCategory != null) icon.sprite = itemCategory.icon;
-        else icon.gameObject.SetActive(false);
+        if (itemCategory != null)
+        {
+            icon.sprite = itemCategory.icon;
+        }
+        else
+        {
+            icon.gameObject.SetActive(false);
+        }
+        RemoveItem_UI();  // Asegúrate de que esto limpia adecuadamente cualquier estado restante
     }
     private void UpdateIconAlpha ( float alpha )
     {
@@ -67,10 +72,9 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
         color.a = alpha;
         icon.color = color;
     }
-    public void RemoveItem_UI ( InventoryItem inventoryItem )
+    public void RemoveItem_UI ( )
     {
         item = null;
-        inventoryItem = null;
         if (itemCategory != null) icon.sprite = itemCategory.icon;
         else icon.gameObject.SetActive(false);
     }
@@ -144,7 +148,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
             {
                 inventorySlot.SetItem(this.item);
                 PlayerInventory.current.UnequipItem(tempItem, this);
-                this.RemoveItem_UI(null); // Asume que este método puede manejar la lógica para limpiar el slot actual)
+                this.RemoveItem_UI(); // Asume que este método puede manejar la lógica para limpiar el slot actual)
             }
             else //Si tiene items
             {
@@ -204,9 +208,9 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
                         this.SetItem(equipmentSlot.item);
 
                         PlayerInventory.current.EquipItem(equipmentSlot.item,this);
-                        PlayerInventory.current.EquipItem(tempItem,equipmentSlot);
                         
                         equipmentSlot.SetItem(tempItem); //Añado el item al slot
+                        PlayerInventory.current.EquipItem(equipmentSlot.item,equipmentSlot);
                     }
                     else
                     {
@@ -244,19 +248,15 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
         destinationSlot.UpdateUI();
 
         // Limpiar el ítem actual del slot origen
-        Debug.Log(item);
-        UnequipUI();
+        UnequipUI(); // Asegúrate de que UnequipUI no depende del estado del ítem
         item = null;
-        Debug.Log(item);
+
         // Actualizar UI del slot origen
         UpdateUI();
-        Debug.Log("Item successfully transferred to another slot.");
     }
-
     public bool CanReceiveItem ( Item _item )
     {
         bool canReceive = item == null || item.equipmentDataSO.equipmentStats.equipmentCategory == _item.equipmentDataSO.equipmentStats.equipmentCategory;
-        Debug.Log($"CanReceiveItem called: item is null: {item == null}, categories match: {item != null && item.equipmentDataSO.equipmentStats.equipmentCategory == _item.equipmentDataSO.equipmentStats.equipmentCategory}");
         return canReceive;
     }
     // Implementación de UpdateUI para reflejar los cambios en el inventario
@@ -266,10 +266,6 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
         {
             icon.gameObject.SetActive(true);
             icon.sprite = item.icon;
-            if (item.isStackable && currentStack > 1)
-            {
-                item.currentAmount = currentStack;
-            }
         }
         else
         {

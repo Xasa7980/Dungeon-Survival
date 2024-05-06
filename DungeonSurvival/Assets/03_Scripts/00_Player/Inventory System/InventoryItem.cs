@@ -70,7 +70,7 @@ public class InventoryItem
         currentStack -= amountItemsRemoved;
         if (currentStack <= 0)
         {
-            tempSlot.RemoveItem_UI(this);
+            tempSlot.RemoveItem_UI();
         }
         tempSlot.UpdateStack(this);
 

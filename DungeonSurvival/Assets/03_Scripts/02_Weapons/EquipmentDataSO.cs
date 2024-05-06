@@ -48,7 +48,7 @@ public enum WeaponHandler
     Hand_1,
     Hand_2
 }
-public enum WeaponType
+public enum EquipmentCategory
 {
     Melee,
     Range,
@@ -74,11 +74,12 @@ public class EquipmentDataSO : ScriptableObject
     public EquipmentElement equipmentElement;
     public EquipmentRank equipmentRank;
 
-    [ShowIf("@equipmentCategory == ItemCategories.Weapon")]
+    [ShowIf("@itemCategory == ItemCategories.Weapon")]
     public WeaponHandler weaponHandlerType = WeaponHandler.Hand_1;
+    [ShowIf("@itemCategory == ItemCategories.Armor")]
+    public int armorIndex;
 
-    [ShowIf("@equipmentCategory == ItemCategories.Weapon")]
-    public WeaponType weaponType = WeaponType.Melee;
+    public EquipmentCategory equipmentCategory = EquipmentCategory.Melee;
 
     [GUIColor(0.3f, 1f, 0.5f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Main Stats")]
     public EquipmentStats equipmentStats;
@@ -90,13 +91,13 @@ public class EquipmentDataSO : ScriptableObject
     public EquipmentAnimations equipmentAnimationClips;
 
     [OnValueChanged("SetEquipmentCategoryToStats"), OnValueChanged("SetEquipmentCategoryToVisuals")]
-    private ItemCategories equipmentCategory => equipmentType >= EquipmentType.Dagger ? ItemCategories.Weapon : equipmentType < EquipmentType.Dagger && equipmentType >= EquipmentType.Boots ?
+    private ItemCategories itemCategory => equipmentType >= EquipmentType.Dagger ? ItemCategories.Weapon : equipmentType < EquipmentType.Dagger && equipmentType >= EquipmentType.Boots ?
     ItemCategories.Armor : ItemCategories.Accesory;
-    public bool secondWeaponAble => equipmentCategory == ItemCategories.Weapon && weaponHandlerType == WeaponHandler.Hand_1;
-    private void SetEquipmentCategoryToStats ( ) => equipmentStats.equipmentCategory = equipmentCategory;
+    public bool secondWeaponAble => itemCategory == ItemCategories.Weapon && weaponHandlerType == WeaponHandler.Hand_1;
+    private void SetEquipmentCategoryToStats ( ) => equipmentStats.equipmentCategory = itemCategory;
     private void SetEquipmentRankToStats ( ) => equipmentStats.equipmentRank = equipmentRank;
-    private void SetEquipmentCategoryToVisuals ( ) => equipmentVisualEffects.equipmentCategory = equipmentCategory;
-    private void SetEquipmentCategoryToAnimationClips ( ) => equipmentAnimationClips.equipmentCategory = equipmentCategory;
+    private void SetEquipmentCategoryToVisuals ( ) => equipmentVisualEffects.equipmentCategory = itemCategory;
+    private void SetEquipmentCategoryToAnimationClips ( ) => equipmentAnimationClips.equipmentCategory = itemCategory;
     private void OnValidate ( )
     {
         UpdateSlashColor();
@@ -228,13 +229,13 @@ public class EquipmentDataSO : ScriptableObject
 
         public Color emissiveColor;
 
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public bool hasSlashEffect;
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public bool hasSecondaryParticleEffect;
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public bool hasDefaultParticleEffects;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public bool hasSlashEffect;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public bool hasSecondaryParticleEffect;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public bool hasDefaultParticleEffects;
 
         [InfoBox("It requires an specific order on putting inside the materials, check EquipmentElement list", InfoMessageType.Warning)]
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public Material[] slashMaterials;
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public Material weaponSlashMaterial;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public Material[] slashMaterials;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public Material weaponSlashMaterial;
 
         public void SetWeaponSlashMaterial ( Material material ) => weaponSlashMaterial = material;
     }
@@ -244,7 +245,7 @@ public class EquipmentDataSO : ScriptableObject
         internal ItemCategories equipmentCategory;
         internal EquipmentRank equipmentRank;
 
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public float attackPoints;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public float attackPoints;
 
         public float healthPoints;
         public float manaPoints;
@@ -306,16 +307,16 @@ public class EquipmentDataSO : ScriptableObject
     {
         internal ItemCategories equipmentCategory;
 
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] basicAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] basicAttackClips;
 
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] chargedAttackClips;
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingChargedAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] chargedAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingChargedAttackClips;
 
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] specialAttackClips;
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingSpecialAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] specialAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingSpecialAttackClips;
 
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] skillAttackClips;
-        [ShowIf("@equipmentCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingSkillAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] skillAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingSkillAttackClips;
     }
 }
 

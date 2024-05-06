@@ -66,10 +66,9 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
         amountCounter.text = inventoryItem.currentStack.ToString();
         currentStack = inventoryItem.currentStack;
     }
-    public void RemoveItem_UI(InventoryItem inventoryItem)
+    public void RemoveItem_UI()
     {
         item = null; 
-        inventoryItem = null;
         icon.gameObject.SetActive(false);
         amountCounter.transform.parent.gameObject.SetActive(false);
     }
@@ -145,7 +144,7 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
             if (!targetHasItem)
             {
                 inventorySlot.SetItem(tempItem);
-                this.RemoveItem_UI(null); // Asume que este método puede manejar la lógica para limpiar el slot actual
+                this.RemoveItem_UI(); // Asume que este método puede manejar la lógica para limpiar el slot actual
             }
             else
             {
@@ -177,7 +176,7 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
                         {
                             equipmentSlot.SetItem(tempItem);
                             PlayerInventory.current.EquipItem(equipmentSlot.item, equipmentSlot);
-                            RemoveItem_UI(null);
+                            RemoveItem_UI();
                         }
                         else
                         {
@@ -203,10 +202,9 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
 
                         this.SetItem(equipmentSlot.item);
 
-                        PlayerInventory.current.UnequipItem(equipmentSlot.item, equipmentSlot); //Me quito el equipo del slot
-                        PlayerInventory.current.EquipItem(tempItem, equipmentSlot);
 
                         equipmentSlot.SetItem(tempItem); //Añado el item al slot
+                        PlayerInventory.current.EquipItem(equipmentSlot.item, equipmentSlot);
                     }
                     else
                     {
@@ -233,7 +231,6 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
             icon.sprite = item.icon;
             if (item.isStackable && currentStack > 1)
             {
-                item.currentAmount = currentStack;
                 amountCounter.text = currentStack.ToString();
                 amountCounter.transform.parent.gameObject.SetActive(true);
             }
@@ -273,7 +270,7 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
         destinationSlot.UpdateUI();
 
         // Limpiar el ítem actual del slot origen
-        RemoveItem_UI(null);
+        RemoveItem_UI();
 
         // Actualizar UI del slot origen
         UpdateUI();

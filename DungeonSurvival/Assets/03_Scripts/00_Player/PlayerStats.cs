@@ -169,13 +169,13 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
                 Mathf.RoundToInt(damage + (Mathf.Pow(damage, 2.3f)) / 10) / ((int)defensePoints + (int)defensePoints)
             );
     }
-    public void Healing ( ItemAction.FunctionType functionType, float healingAmount )
+    public void Healing ( float healingAmount, Item item )
     {
-        if(functionType == ItemAction.FunctionType.Healing_HP)
+        if(item.itemTag.GetItemTag == "healing" )
         {
             healthPoints = Mathf.Clamp(healthPoints, healthPoints + healingAmount, maxHealthPoints);
         }
-        else if(functionType == ItemAction.FunctionType.Healing_MP)
+        else if (item.itemTag.GetItemTag == "healing")
         {
             manaPoints = Mathf.Clamp(manaPoints, manaPoints + healingAmount, maxManaPoints);
         }
@@ -215,15 +215,21 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
         BoostSimpleStat(ref criticalDamage, boostingAmount, itemQualityLevel);
     }
 
-    private void BoostStat ( ref float statToBoost, ref float currentStat, float boostingAmount, int itemQualityLevel )
+    private void BoostStat ( ref float statToBoost, ref float currentStat, float boostingAmount, int itemQualityLevel, float duration = default )
     {
-        float boostingMultiplier = GetBoostingMultiplier(itemQualityLevel);
-        float quantityBoosted = statToBoost + (boostingAmount * boostingMultiplier);
-        float delta = quantityBoosted - statToBoost;
-        currentStat += delta;
-        statToBoost = quantityBoosted;
-    }
 
+        float boostingMultiplier = GetBoostingMultiplier(itemQualityLevel);
+        float quantityBoosted = boostingAmount * boostingMultiplier;
+        StartCoroutine(RevertStatBoost(this, duration));
+        currentStat += quantityBoosted;
+        statToBoost += quantityBoosted;
+    }
+    private IEnumerator RevertStatBoost (PlayerStats playerStats, float duration )
+    {
+        float originalMaxHealth = playerStats.maxHealthPoints;
+        yield return new WaitForSeconds(duration);
+        
+    }
     private void BoostSimpleStat ( ref float stat, float boostingAmount, int itemQualityLevel )
     {
         stat += boostingAmount * GetBoostingMultiplier(itemQualityLevel);
@@ -345,4 +351,14 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
     }
 
 }
+public class StatModifier
+{
+    public float Duration;
+    public float Amount;
 
+    public StatModifier ( float amount, float duration, Action<float> apply, Action<float> revert )
+    {
+        Amount = amount;
+        Duration = duration;
+    }
+}

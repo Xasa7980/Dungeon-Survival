@@ -51,37 +51,6 @@ MonoBehaviour:
   gizmoSphereColor: {r: 1, g: 0, b: 0, a: 1}
   _radius: 1
   freePosition: {x: 0, y: 0, z: 0}
---- !u!1 &330600189442484318
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8582034415398063069}
-  m_Layer: 0
-  m_Name: WeaponHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8582034415398063069
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330600189442484318}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9103133349107485568}
-  m_RootOrder: 18
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2141145672784595004
 GameObject:
   m_ObjectHideFlags: 0
@@ -31391,7 +31360,6 @@ Transform:
   - {fileID: 9103001143379468436}
   - {fileID: 9100097231486894230}
   - {fileID: 9100169375939708924}
-  - {fileID: 8582034415398063069}
   m_Father: {fileID: 9100554802223366664}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
