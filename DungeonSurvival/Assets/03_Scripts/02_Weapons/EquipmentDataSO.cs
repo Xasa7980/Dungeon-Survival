@@ -43,12 +43,7 @@ public enum EquipmentRank
     Mythic,
     Legendary,
 }
-public enum WeaponHandler
-{
-    Hand_1,
-    Hand_2
-}
-public enum EquipmentCategory
+public enum CombatGearType
 {
     Melee,
     Range,
@@ -79,7 +74,7 @@ public class EquipmentDataSO : ScriptableObject
     [ShowIf("@itemCategory == ItemCategories.Armor")]
     public int armorIndex;
 
-    public EquipmentCategory equipmentCategory = EquipmentCategory.Melee;
+    public CombatGearType combatGearType = CombatGearType.Melee;
 
     [GUIColor(0.3f, 1f, 0.5f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Main Stats")]
     public EquipmentStats equipmentStats;
@@ -90,14 +85,14 @@ public class EquipmentDataSO : ScriptableObject
     [GUIColor(0.3f, 1f, 0.8f, 1f), PropertySpace(SpaceBefore = 10, SpaceAfter = 10), FoldoutGroup("Animation Options")]
     public EquipmentAnimations equipmentAnimationClips;
 
-    [OnValueChanged("SetEquipmentCategoryToStats"), OnValueChanged("SetEquipmentCategoryToVisuals")]
-    private ItemCategories itemCategory => equipmentType >= EquipmentType.Dagger ? ItemCategories.Weapon : equipmentType < EquipmentType.Dagger && equipmentType >= EquipmentType.Boots ?
-    ItemCategories.Armor : ItemCategories.Accesory;
-    public bool secondWeaponAble => itemCategory == ItemCategories.Weapon && weaponHandlerType == WeaponHandler.Hand_1;
-    private void SetEquipmentCategoryToStats ( ) => equipmentStats.equipmentCategory = itemCategory;
+    [OnValueChanged("SetItemCategoryToStats"), OnValueChanged("SetItemCategoryToVisuals")]
+    private ItemCategories itemCategory => equipmentType >= EquipmentType.Dagger ? ItemCategories.Weapon : 
+                                           equipmentType < EquipmentType.Dagger && equipmentType >= EquipmentType.Boots ?
+                                           ItemCategories.Armor : ItemCategories.Accesory;
+    private void SetEquipmentCategoryToStats ( ) => equipmentStats.itemCategory = itemCategory;
     private void SetEquipmentRankToStats ( ) => equipmentStats.equipmentRank = equipmentRank;
-    private void SetEquipmentCategoryToVisuals ( ) => equipmentVisualEffects.equipmentCategory = itemCategory;
-    private void SetEquipmentCategoryToAnimationClips ( ) => equipmentAnimationClips.equipmentCategory = itemCategory;
+    private void SetItemCategoryToVisuals ( ) => equipmentVisualEffects.itemCategory = itemCategory;
+    private void SetItemCategoryToAnimationClips ( ) => equipmentAnimationClips.itemCategory = itemCategory;
     private void OnValidate ( )
     {
         UpdateSlashColor();
@@ -220,7 +215,7 @@ public class EquipmentDataSO : ScriptableObject
     [System.Serializable]
     public class EquipmentVisualEffects
     {
-        internal ItemCategories equipmentCategory;
+        internal ItemCategories itemCategory;
 
         //[InfoBox("This particle effect only is enabled when Equipment rank is high and the equipment has particles", InfoMessageType.Warning)]
         public List<Transform> slashParticleEffect;
@@ -242,7 +237,7 @@ public class EquipmentDataSO : ScriptableObject
     [System.Serializable]
     public class EquipmentStats
     {
-        internal ItemCategories equipmentCategory;
+        internal ItemCategories itemCategory;
         internal EquipmentRank equipmentRank;
 
         [ShowIf("@itemCategory == ItemCategories.Weapon")] public float attackPoints;
@@ -305,7 +300,7 @@ public class EquipmentDataSO : ScriptableObject
     [System.Serializable]
     public class EquipmentAnimations
     {
-        internal ItemCategories equipmentCategory;
+        internal ItemCategories itemCategory;
 
         [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] basicAttackClips;
 

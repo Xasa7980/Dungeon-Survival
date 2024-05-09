@@ -8,6 +8,15 @@ using System.Linq;
 using System.Collections.Concurrent;
 using static EquipmentDataSO;
 
+public enum ItemCategories
+{
+    Weapon,
+    Armor,
+    Accesory,
+    Recipe,
+    CraftPiece,
+    CraftRune
+}
 [CreateAssetMenu(menuName = "Dungeon Survival/Inventory/item")]
 public class Item : ScriptableObject, iItemData
 {
@@ -48,11 +57,11 @@ public class Item : ScriptableObject, iItemData
     [SerializeField] ItemTag _itemTag;
 
     #region Verificables
-    bool isRangeWeapon { get => equipable && weaponType == EquipmentCategory.Range; }
+    bool isRangeWeapon { get => equipable && weaponType == CombatGearType.Range; }
     bool showReloadField { get => isRangeWeapon && hasRealoadAnimation; }
     bool showLookSpeedField { get => _lookAtCursor && _equipable; }
-    bool showIfNotArmor { get => equipable && weaponType != EquipmentCategory.Armor; }
-    bool showIfIsShield { get => equipable && weaponType == EquipmentCategory.Shield; }
+    bool showIfNotArmor { get => equipable && weaponType != CombatGearType.Armor; }
+    bool showIfIsShield { get => equipable && weaponType == CombatGearType.Shield; }
     bool isNotBase { get => GetType() != typeof(Item); }
 
     #endregion
@@ -141,7 +150,7 @@ public class Item : ScriptableObject, iItemData
     public Item[] resultingPieces { get { return _resultingPieces; } set { _resultingPieces = value; } }
     public WorldItem interactableModel => _interactableModel;
     public GameObject visualizationModel => _visualizationModel;
-    public EquipmentCategory weaponType { get { return _equipmentDataSO.equipmentCategory; } set { _equipmentDataSO.equipmentCategory = value; } }
+    public CombatGearType weaponType { get { return _equipmentDataSO.combatGearType; } set { _equipmentDataSO.combatGearType = value; } }
     public EquipmentDataSO equipmentDataSO => _equipmentDataSO;
     public AnimationClip useItemAnimation => _useAnimation;
     public AnimationClip continueUsingItemAnimation => _useContinuousAnimation;
@@ -237,7 +246,7 @@ public class Item : ScriptableObject, iItemData
         this._lookAtCursor = data.lookAtCursor;
         this._lookSpeed = data.lookSpeed;
         this._canMove = data.canMove;
-        if(this.equipable) this.equipmentDataSO.equipmentCategory = data.weaponType;
+        if(this.equipable) this.equipmentDataSO.combatGearType = data.weaponType;
         //this._useItemAnimation = data.idleAnimation;
         //this._walkAnimation = data.walkAnimation;
         //this._runAnimation = data.runAnimation;

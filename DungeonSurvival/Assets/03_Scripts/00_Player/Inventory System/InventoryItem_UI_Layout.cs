@@ -171,7 +171,7 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
                 {
                     if(tempItem.equipmentDataSO != null)
                     {
-                        ItemCategories tempItemCategory = tempItem.equipmentDataSO.equipmentStats.equipmentCategory; 
+                        ItemCategories tempItemCategory = tempItem.equipmentDataSO.equipmentStats.itemCategory; 
                         if(tempItemCategory == equipmentSlot.itemCategory.itemCategories)
                         {
                             equipmentSlot.SetItem(tempItem);
@@ -193,11 +193,11 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
                 else
                 {
                     if (tempItem.equipmentDataSO == null) return;
-                    bool matchedCategory = tempItem.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories;
+                    bool matchedCategory = tempItem.equipmentDataSO.equipmentStats.itemCategory == equipmentSlot.itemCategory.itemCategories;
 
                     if (matchedCategory) //Si el equipo es un arma y es de la misma mano que la otra
                     {
-                        Debug.Log("Matched2" + item.equipmentDataSO.equipmentStats.equipmentCategory.ToString());
+                        Debug.Log("Matched2" + item.equipmentDataSO.equipmentStats.itemCategory.ToString());
                         Item tempItem = this.item;
 
                         this.SetItem(equipmentSlot.item);
@@ -279,8 +279,8 @@ public class InventoryItem_UI_Layout : InventoryItem_UI
 
     public bool CanReceiveItem ( Item _item )
     {
-        bool canReceive = item == null || item.equipmentDataSO.equipmentStats.equipmentCategory == _item.equipmentDataSO.equipmentStats.equipmentCategory;
-        Debug.Log($"CanReceiveItem called: item is null: {item == null}, categories match: {item != null && item.equipmentDataSO.equipmentStats.equipmentCategory == _item.equipmentDataSO.equipmentStats.equipmentCategory}");
+        bool canReceive = item == null || item.equipmentDataSO.equipmentStats.itemCategory == _item.equipmentDataSO.equipmentStats.itemCategory;
+        Debug.Log($"CanReceiveItem called: item is null: {item == null}, categories match: {item != null && item.equipmentDataSO.equipmentStats.itemCategory == _item.equipmentDataSO.equipmentStats.itemCategory}");
         return canReceive;
     }
     public override void OnPointerClick ( PointerEventData eventData )

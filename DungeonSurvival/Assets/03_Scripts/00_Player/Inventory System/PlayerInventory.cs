@@ -136,7 +136,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
         if (item != null && item.equipable && item.equipmentDataSO != null)
         {
             Transform holsterToUse;
-            if (item.equipmentDataSO.equipmentCategory == EquipmentCategory.Armor && item.equipmentDataSO.armorIndex >= 0)
+            if (item.equipmentDataSO.combatGearType == CombatGearType.Armor && item.equipmentDataSO.armorIndex >= 0)
             {
                 holsterToUse = equipedItem_UI_Layout.targetHolster;
                 ActivateArmor(holsterToUse, item.equipmentDataSO.armorIndex);
@@ -209,7 +209,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
     {
         if (equipSlots.TryGetValue(equipedItem_UI_Layout, out Transform holster) && holster.childCount > 0)
         {
-            if (item.equipmentDataSO.equipmentCategory == EquipmentCategory.Armor)
+            if (item.equipmentDataSO.combatGearType == CombatGearType.Armor)
             {
                 for (int i = 0; i < holster.childCount; i++)
                 {

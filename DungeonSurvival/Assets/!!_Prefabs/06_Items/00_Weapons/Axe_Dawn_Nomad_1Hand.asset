@@ -19,7 +19,8 @@ MonoBehaviour:
   equipmentElement: 0
   equipmentRank: 1
   weaponHandlerType: 0
-  weaponRange: 0
+  armorIndex: 0
+  combatGearType: 0
   equipmentStats:
     attackPoints: 40
     healthPoints: 802
@@ -30,9 +31,7 @@ MonoBehaviour:
     criticalRate: 30
     criticalDamage: 37
   equipmentVisualEffects:
-    slashParticleEffect:
-    - {fileID: 0}
-    - {fileID: 2545352250836288820, guid: 4f77085952199384ba80cf02c703c562, type: 3}
+    slashParticleEffect: []
     equipmentSecondaryParticleEffect: {fileID: 0}
     emissiveColor: {r: 1, g: 1, b: 1, a: 1}
     hasSlashEffect: 0
@@ -51,10 +50,21 @@ MonoBehaviour:
     weaponSlashMaterial: {fileID: 2100000, guid: 3297884f181cb2c41940da847c031306,
       type: 2}
   equipmentAnimationClips:
-    basicAttackClips: []
-    chargedAttackClips: []
+    basicAttackClips:
+    - {fileID: 11400000, guid: e8f8ceaa28bd6834c827536559407759, type: 2}
+    - {fileID: 11400000, guid: 537948ff2bb8b644c95a35fd79cb868d, type: 2}
+    - {fileID: 11400000, guid: 8162e23b72fbe104a892a28555a9c57c, type: 2}
+    - {fileID: 11400000, guid: 39031d770a75c1c439a193391c5fcdc6, type: 2}
+    - {fileID: 11400000, guid: 2c0f26f2b1eb2ac479061309e95a090f, type: 2}
+    - {fileID: 11400000, guid: d4e525f86dc2e13459644f4dda9b7568, type: 2}
+    - {fileID: 11400000, guid: b06a84bf7d4f4a14ab3fa5457730afb1, type: 2}
+    chargedAttackClips:
+    - {fileID: 11400000, guid: 8238d2baa97ce5d49b0c5b476248e2e7, type: 2}
+    - {fileID: 11400000, guid: eb17d4b0cadae7048b3f9204f442e53f, type: 2}
     loadingChargedAttackClips: []
-    specialAttackClips: []
+    specialAttackClips:
+    - {fileID: 11400000, guid: ee9d682e70d8ce84099baaae2808d009, type: 2}
+    - {fileID: 11400000, guid: c46e57c8dffb9c34bb476b8b6d9170c3, type: 2}
     loadingSpecialAttackClips: []
     skillAttackClips: []
     loadingSkillAttackClips: []

@@ -48,7 +48,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
 
         if (this.item.equipable && itemCategory != null && item.equipmentDataSO != null)
         {
-            if (itemCategory.itemCategories != _item.equipmentDataSO.equipmentStats.equipmentCategory) return;
+            if (itemCategory.itemCategories != _item.equipmentDataSO.equipmentStats.itemCategory) return;
         }
         icon.sprite = this.item.icon;
         UpdateIconAlpha(1);
@@ -153,7 +153,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
             else //Si tiene items
             {
                 Item tempItem = this.item;
-                if (inventorySlot.item.equipmentDataSO.equipmentStats.equipmentCategory == itemCategory.itemCategories)
+                if (inventorySlot.item.equipmentDataSO.equipmentStats.itemCategory == itemCategory.itemCategories)
                 {
                     PlayerInventory.current.UnequipItem(item, this);
                     SetItem(inventorySlot.item);
@@ -176,7 +176,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
                 {
                     if (tempItem.equipmentDataSO != null)
                     {
-                        ItemCategories tempItemCategory = tempItem.equipmentDataSO.equipmentStats.equipmentCategory;
+                        ItemCategories tempItemCategory = tempItem.equipmentDataSO.equipmentStats.itemCategory;
                         if (tempItemCategory == equipmentSlot.itemCategory.itemCategories)
                         {
                             equipmentSlot.SetItem(tempItem);
@@ -197,12 +197,12 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
                 }
                 else
                 {
-                    bool matchedCategory = tempItem.equipmentDataSO.equipmentStats.equipmentCategory == equipmentSlot.itemCategory.itemCategories &&
+                    bool matchedCategory = tempItem.equipmentDataSO.equipmentStats.itemCategory == equipmentSlot.itemCategory.itemCategories &&
                                            tempItem.equipmentDataSO.weaponHandlerType == equipmentSlot.item.equipmentDataSO.weaponHandlerType;
 
                     if (matchedCategory) //Si el equipo es un arma y es de la misma mano que la otra
                     {
-                        Debug.Log("Matched2" + item.equipmentDataSO.equipmentStats.equipmentCategory.ToString());
+                        Debug.Log("Matched2" + item.equipmentDataSO.equipmentStats.itemCategory.ToString());
                         Item tempItem = this.item;
 
                         this.SetItem(equipmentSlot.item);
@@ -256,7 +256,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
     }
     public bool CanReceiveItem ( Item _item )
     {
-        bool canReceive = item == null || item.equipmentDataSO.equipmentStats.equipmentCategory == _item.equipmentDataSO.equipmentStats.equipmentCategory;
+        bool canReceive = item == null || item.equipmentDataSO.equipmentStats.itemCategory == _item.equipmentDataSO.equipmentStats.itemCategory;
         return canReceive;
     }
     // Implementación de UpdateUI para reflejar los cambios en el inventario
@@ -276,7 +276,7 @@ public class EquipedItem_UI_Layout : InventoryItem_UI
     }
     public void SetItem ( Item _item )
     {
-        if(itemCategory.itemCategories == _item.equipmentDataSO.equipmentStats.equipmentCategory)
+        if(itemCategory.itemCategories == _item.equipmentDataSO.equipmentStats.itemCategory)
         {
             item = _item;
         }

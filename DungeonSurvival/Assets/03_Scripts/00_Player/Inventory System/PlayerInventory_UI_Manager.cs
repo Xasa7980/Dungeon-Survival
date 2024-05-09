@@ -127,7 +127,7 @@ public class PlayerInventory_UI_Manager : MonoBehaviour
     {
         for (int i = 0; i < equipmentItem_UI_Slots.Length; i++)
         {
-            if (equipmentItem_UI_Slots[i].itemCategory.itemCategories == item.equipmentDataSO.equipmentStats.equipmentCategory)
+            if (equipmentItem_UI_Slots[i].itemCategory.itemCategories == item.equipmentDataSO.equipmentStats.itemCategory)
             {
                 equipmentItem_UI_Slots[i].EquipUI(item);
                 break;

@@ -23,7 +23,7 @@ public interface iItemData
     bool lookAtCursor { get; }
     float lookSpeed { get; }
     bool canMove { get; }
-    EquipmentCategory weaponType { get; }
+    CombatGearType weaponType { get; }
 
     AnimationClip useItemAnimation { get; }
     AnimationClip continueUsingItemAnimation { get; }
@@ -60,7 +60,7 @@ public struct NewItemData
     public bool lookAtCursor;
     public float lookSpeed;
     public bool canMove;
-    public EquipmentCategory weaponType;
+    public CombatGearType weaponType;
 
     AnimationClip useItemAnimation;
     AnimationClip continueUsingItemAnimation;
