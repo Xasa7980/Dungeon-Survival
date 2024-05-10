@@ -92,7 +92,7 @@ public class AnimationClipContainerSO : ScriptableObject
     public AnimationClip attackBasicClip_03;
     [ShowIf("@attackCategory == AttackCategory.basic"), FoldoutGroup("Basic Attacks")]
     public AnimationClip attackBasicClip_04;
-
+    
     [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")]
     public AnimationClip chargedAttackClip_01;
     [ShowIf("@attackCategory == AttackCategory.charged"), FoldoutGroup("Charged Attacks")]
