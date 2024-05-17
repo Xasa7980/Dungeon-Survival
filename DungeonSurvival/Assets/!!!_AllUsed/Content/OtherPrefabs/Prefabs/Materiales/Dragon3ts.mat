@@ -11,7 +11,8 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: fd42847feb7e352439f0ceed3532b186,
     type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _USEFRESNEL_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -90,7 +91,7 @@ Material:
     - _BackFresnel: -4
     - _BackFresnelEmission: 1
     - _BumpScale: 1
-    - _Cutoff: 1
+    - _Cutoff: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Emission: 4
@@ -123,7 +124,7 @@ Material:
     - _BackFresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0.3844014, g: 0.27843142, b: 1, a: 1}
+    - _FresnelColor: {r: 1, g: 0.8170336, b: 0.27843142, a: 1}
     - _FrontFacesColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpeedMainTexUVNoiseZW: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

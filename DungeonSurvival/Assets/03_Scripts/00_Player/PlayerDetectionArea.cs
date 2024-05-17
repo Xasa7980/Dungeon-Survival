@@ -25,7 +25,7 @@ public class PlayerDetectionArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerInteraction>())
+        if (other.GetComponent<iDamageable>() != null)
         {
             playerInside = true;
 
@@ -35,7 +35,7 @@ public class PlayerDetectionArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerInteraction>())
+        if (other.GetComponent<iDamageable>() != null)
         {
             playerInside = false;
 

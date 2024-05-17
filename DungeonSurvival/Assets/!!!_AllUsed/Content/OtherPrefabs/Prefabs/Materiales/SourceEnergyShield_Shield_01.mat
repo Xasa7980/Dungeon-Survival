@@ -28,11 +28,14 @@ Material:
   - _RAMPENABLED_ON
   - _TRISGLAREENABLED_ON
   - _VERTICALGRADIENTENABLED_ON
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _DEPTHMASKFLIP_ON
+  - _DISSOLVETEXTUREFLIP_ON
+  - _INNERRIMENABLED_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:

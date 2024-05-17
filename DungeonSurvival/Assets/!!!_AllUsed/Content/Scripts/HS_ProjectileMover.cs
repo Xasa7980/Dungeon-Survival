@@ -1,122 +1,175 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class HS_ProjectileMover : MonoBehaviour
 {
-    [SerializeField] protected float speed = 15f;
-    [SerializeField] protected float hitOffset = 0f;
-    [SerializeField] protected bool UseFirePointRotation;
-    [SerializeField] protected Vector3 rotationOffset = new Vector3(0, 0, 0);
-    [SerializeField] protected GameObject hit;
-    [SerializeField] protected ParticleSystem hitPS;
-    [SerializeField] protected GameObject flash;
-    [SerializeField] protected Rigidbody rb;
-    [SerializeField] protected Collider col;
-    [SerializeField] protected Light lightSourse;
-    [SerializeField] protected GameObject[] Detached;
-    [SerializeField] protected ParticleSystem projectilePS;
-    private bool startChecker = false;
-    [SerializeField]protected bool notDestroy = false;
+    [SerializeField] private float speed = 15f;
+    [SerializeField] private float hitOffset = 0f;
+    [SerializeField] private bool isDestroyable = false;
+    [SerializeField] private bool useFirePointRotation;
+    [SerializeField, ShowIf("@useFirePointRotation")] private Vector3 rotationOffset = Vector3.zero;
+    [SerializeField] private int damage;
+    [SerializeField] private float checkThreshold = 0.2f;
+    [SerializeField] private float lifetime = 10f;
+    [SerializeField] private LayerMask impactMask;
 
-    protected virtual void Start()
+    private Collider projectileCollider;
+    private Collider parentCollider;
+    private bool isRecharged = false;
+
+    [Header("MainEffect")]
+    [SerializeField] private ParticleSystem projectilePS;
+    [SerializeField] private ParticleSystem[] childParticles => transform.GetComponentsInChildren<ParticleSystem>();
+
+    [Header("SubEffects")]
+    
+    [SerializeField, ShowIf("@hitPS != null")] private ParticleSystem hitPS;
+    [SerializeField] private GameObject flashEffect;
+    [SerializeField] private Light lightSource;
+
+    private void Start ( )
     {
-        if (!startChecker)
+        projectileCollider = GetComponent<Collider>();
+        parentCollider = transform.parent?.GetComponentInParent<Collider>();
+
+        if(GetComponent<ParticleSystem>() != null )
         {
-            /*lightSourse = GetComponent<Light>();
-            rb = GetComponent<Rigidbody>();
-            col = GetComponent<Collider>();
-            if (hit != null)
-                hitPS = hit.GetComponent<ParticleSystem>();*/
-            if (flash != null)
-            {
-                flash.transform.parent = null;
-            }
+            projectilePS = GetComponent<ParticleSystem>();
         }
-        if (notDestroy)
+        // Ignorar colisiones entre el proyectil y el padre
+        if (parentCollider != null && projectileCollider != null)
+        {
+            Physics.IgnoreCollision(projectileCollider, parentCollider);
+            Physics.IgnoreCollision(projectileCollider, parentCollider.transform.GetChild(0)?.GetComponent<Collider>());
+        }
+
+        // Desacoplar el efecto de destello si está presente
+        if (flashEffect != null)
+        {
+            flashEffect.transform.parent = null;
+        }
+
+        // Iniciar temporizador para la autodestrucción o desactivación
+        if (!isDestroyable)
+        {
             StartCoroutine(DisableTimer(5));
+        }
         else
+        {
             Destroy(gameObject, 5);
-        startChecker = true;
+        }
     }
 
-    protected virtual IEnumerator DisableTimer(float time)
+    // Desactivar el proyectil después de un tiempo si no ha colisionado con nada
+    private IEnumerator DisableTimer ( float time )
     {
         yield return new WaitForSeconds(time);
-        if(gameObject.activeSelf)
+        if (gameObject.activeSelf)
+        {
             gameObject.SetActive(false);
-        yield break;
-    }
-
-    protected virtual void OnEnable()
-    {
-        if (startChecker)
-        {
-            if (flash != null)
-            {
-                flash.transform.parent = null;
-            }
-            if (lightSourse != null)
-                lightSourse.enabled = true;
-            col.enabled = true;
-            rb.constraints = RigidbodyConstraints.None;
         }
     }
 
-    protected virtual void FixedUpdate()
+    private void OnEnable ( )
     {
-        if (speed != 0)
+        isRecharged = false;
+
+        if (flashEffect != null)
         {
-            rb.velocity = transform.forward * speed;      
+            flashEffect.transform.parent = null;
         }
+
+        if (lightSource != null)
+        {
+            lightSource.enabled = true;
+        }
+
+        projectileCollider.enabled = true;
+
+        // Iniciar el sistema de partículas del proyectil
+        projectilePS.Play();
+        StartCoroutine(DisableTimer(3));
     }
 
-    //https ://docs.unity3d.com/ScriptReference/Rigidbody.OnCollisionEnter.html
-    protected virtual void OnCollisionEnter(Collision collision)
+    private void FixedUpdate ( )
     {
-        //Lock all axes movement and rotation
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        //speed = 0;
-        if (lightSourse != null)
-            lightSourse.enabled = false;
-        col.enabled = false;
-        projectilePS.Stop();
+        if (!isRecharged) return;
+
+        transform.position += transform.forward * speed * Time.deltaTime;
+    }
+
+    private void OnCollisionEnter ( Collision collision )
+    {
+        // Evitar colisiones con objetos con el layer default, obstaculos o IgnoreChildrenCollider
+        if (collision.gameObject.layer == 11 || collision.gameObject.layer == 0 || collision.gameObject.layer == 8) return;
+
+        // Apagar la luz y desactivar el collider del proyectil
+        if (lightSource != null) lightSource.enabled = false;
+
         projectilePS.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
+        // Obtener información sobre el contacto
         ContactPoint contact = collision.contacts[0];
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
         Vector3 pos = contact.point + contact.normal * hitOffset;
-
-        //Spawn hit effect on collision
-        if (hit != null)
+        if (collision.gameObject.TryGetComponent(out iDamageable damageable))
         {
-            hit.transform.rotation = rot;
-            hit.transform.position = pos;
-            if (UseFirePointRotation) { hit.transform.rotation = gameObject.transform.rotation * Quaternion.Euler(0, 180f, 0); }
-            else if (rotationOffset != Vector3.zero) { hit.transform.rotation = Quaternion.Euler(rotationOffset); }
-            else { hit.transform.LookAt(contact.point + contact.normal); }
-            hitPS.Play();
+            damageable.ApplyDamage(damage, true);
         }
 
-        //Removing trail from the projectile on cillision enter or smooth removing. Detached elements must have "AutoDestroying script"
-        foreach (var detachedPrefab in Detached)
+        // Generar el efecto de impacto
+        if (hitPS != null)
         {
-            if (detachedPrefab != null)
+            hitPS.transform.SetPositionAndRotation(pos, rot);
+
+            if (useFirePointRotation)
             {
-                ParticleSystem detachedPS = detachedPrefab.GetComponent<ParticleSystem>();
-                detachedPS.Stop();
+                hitPS.transform.rotation = transform.rotation * Quaternion.Euler(0, 180f, 0);
             }
-        }
-        if (notDestroy)
-            StartCoroutine(DisableTimer(hitPS.main.duration));
-        else
-        {
-            if (hitPS != null)
+            else if (rotationOffset != Vector3.zero)
             {
-                Destroy(gameObject, hitPS.main.duration);
+                hitPS.transform.rotation = Quaternion.Euler(rotationOffset);
             }
             else
-                Destroy(gameObject, 1);
+            {
+                hitPS.transform.LookAt(contact.point + contact.normal);
+            }
+            hitPS?.Play();
         }
+
+        // Detener las partículas secundarias
+        //foreach (var childParticle in childParticles)
+        //{
+        //    childParticle?.Stop();
+        //}
+
+        // Destruir o desactivar el proyectil según si es destruible
+        if (!isDestroyable)
+        {
+            if (hitPS != null) StartCoroutine(DisableTimer(hitPS.main.duration));
+            else StartCoroutine(DisableTimer(1));
+        }
+        else
+        {
+            if (hitPS != null) Destroy(gameObject, hitPS.main.duration);
+            else Destroy(gameObject, 1);
+        }
+    }
+
+    // Configurar propiedades adicionales para el proyectil
+    public HS_ProjectileMover SetProperties ( Transform shootPoint, int additionalDamage = 0 )
+    {
+        damage += additionalDamage;
+        isRecharged = false;
+        return this;
+    }
+
+    // Método para lanzar la flecha/proyectil
+    public void ReleaseArrow ( )
+    {
+        isRecharged = true;
+        projectilePS.Play();
     }
 }

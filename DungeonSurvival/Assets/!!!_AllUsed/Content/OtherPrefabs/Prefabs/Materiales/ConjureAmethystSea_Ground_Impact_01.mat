@@ -26,11 +26,16 @@ Material:
   m_ValidKeywords:
   - _CRACKSENABLED_ON
   - _LAVANOISEENABLED_ON
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _DISSOLVETEXTUREFLIP1_ON
+  - _DISSOLVETEXTUREFLIP_ON
+  - _KEYWORD0_ON
+  - _SECONDMASKPROFILEENABLED_ON
+  - _TEST_ON
   m_LightmapFlags: 0
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:

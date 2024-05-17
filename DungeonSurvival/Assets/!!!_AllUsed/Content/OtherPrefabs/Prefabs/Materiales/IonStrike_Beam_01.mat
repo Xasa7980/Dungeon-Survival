@@ -13,7 +13,11 @@ Material:
   m_ValidKeywords:
   - _DISTORTIONENABLED_ON
   - _RAMPENABLED_ON
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _DISSOLVETEXTUREFLIP_ON
+  - _EMISSIONVERTEXSTREAMENABLED_ON
+  - _FBPARTICLEFRAMECONTROLENABLED_ON
+  - _MVPARTICLEFRAMECONTROLENABLED_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

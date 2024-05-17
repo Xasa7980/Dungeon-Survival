@@ -25,7 +25,8 @@ Material:
     type: 3}
   m_ValidKeywords:
   - _RAMPENABLED_ON
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _DISSOLVETEXTUREFLIP_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -35,52 +36,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Cracks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _DissolveTexture:
         m_Texture: {fileID: 2800000, guid: 7946756a0d414f759c470943148ed64a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _LavaAppearMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _LavaNoise:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _LavaNoiseDistortion:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 60c8fa4dc7a441498e915ef079fc59ff, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _OpacityMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _PackedTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _Ramp:
         m_Texture: {fileID: 2800000, guid: 45ee17d8b8214aa5b62ad7e6aa662e0d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SecondMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SecondMaskProfile:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SurfaceNoise:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _tex4coord:
@@ -109,75 +74,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlbedoMapExp: 1
-    - _CRACKSENABLED: 0
-    - _CracksNegate: 0
-    - _CracksNegateSlope: 0
-    - _CracksScaleU: 1
-    - _CracksScaleV: 1
     - _DISSOLVETEXTUREFLIP: 1
     - _DissolveExp: 8
     - _DissolveExpReversed: 2
     - _DissolveExpReversed1: 8
-    - _DissolveTextureRandomMax: 1.1
-    - _DissolveTextureRandomMin: 0.9
     - _DissolveTextureScale: 0.25
-    - _DissolveTextureScaleU: 1
-    - _DissolveTextureScaleV: 1
-    - _FinalOpacityExp: 1
     - _FinalOpacityPower: 0.84
     - _FinalPower: 5.6
     - _FlipbookColums: 1
     - _FlipbookFrame: 0.1
     - _FlipbookRows: 1
-    - _HeightBoost: 1
-    - _HeightMapNegate: 0
-    - _HeightSlopeControl: 0
-    - _LAVANOISEENABLED: 0
-    - _LavaAppearMaskExp: 1
-    - _LavaAppearMaskScaleU: 1
-    - _LavaAppearMaskScaleV: 1
-    - _LavaDistortionSlopeNegate: 1
-    - _LavaDistortionSlopeStyle: 0
-    - _LavaNoiseDistortionAmount: 0
-    - _LavaNoiseDistortionScaleU: 1
-    - _LavaNoiseDistortionScaleV: 1
-    - _LavaNoiseDistortionScrollSpeed: 0.075
-    - _LavaNoiseNegate: 0
-    - _LavaNoiseScaleU: 1
-    - _LavaNoiseScaleV: 1
-    - _LavaNoiseScrollSpeed: 0
-    - _LavaOnlyInValleysExp: 1
-    - _LavaOnlyInValleysNegate: 1
     - _MainTexRotation: 0
-    - _OpacityMaskExp: 0.2
-    - _OpacityMaskPower: 1
-    - _OpacityMaskScaler: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RAMPAFFECTEDBYVERTEXCOLOR: 0
     - _RAMPENABLED: 1
     - _RampAffectedByDynamics: 0.283
     - _RampOffsetExp: 0.95
-    - _RampOffsetMultiply: 1
-    - _RampSmoothstepMax: 0.75
-    - _RampSmoothstepMin: 0.25
-    - _SURFACENOISEENABLED: 0
-    - _SecondMaskEdgeGlow: 0
-    - _SecondMaskExp: 1
-    - _SecondMaskScaleU: 1
-    - _SecondMaskScaleV: 1
-    - _SurfaceNoiseAdd: 0
-    - _SurfaceNoiseExp: 1
-    - _SurfaceNoiseScaleU: 1
-    - _SurfaceNoiseScaleV: 1
-    - _VALLEYSEMISSIONBOOSTENABLED: 0
-    - _ValleysEmissionBoostAmount: 80
-    - _ValleysEmissionBoostBloom: 1
     - __dirty: 0
     m_Colors:
-    - _AlbedoColor: {r: 0.62352943, g: 0.47450978, b: 0.42745098, a: 1}
-    - _AlbedoColor2: {r: 0, g: 0, b: 0, a: 1}
     - _FinalColor: {r: 0.9972335, g: 1, b: 0, a: 1}
     - _MainTexChannels: {r: 1, g: 0, b: 0, a: 0}
     - _RampColorTint: {r: 1, g: 0.99292374, b: 0.50377357, a: 1}

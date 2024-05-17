@@ -11,20 +11,19 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: c444735a99fc1c64cb2c3aca113bbbe4,
     type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _DISSOLVETEXTUREFLIP_ON
+  - _EMISSIONVERTEXSTREAMENABLED_ON
+  - _MVPARTICLEFRAMECONTROLENABLED_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Cracks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _CustomColorMask:
         m_Texture: {fileID: 2800000, guid: 89055bbbc6b943fd8065bad66c15c97d, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -57,18 +56,6 @@ Material:
         m_Texture: {fileID: 2800000, guid: 35bc48dad7fe46a4f82965e223b86f2e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _LavaAppearMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _LavaNoise:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _LavaNoiseDistortion:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MVMainMask:
         m_Texture: {fileID: 2800000, guid: bc6197fcaa184557a6b8f74c52b6fd10, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -89,14 +76,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _OpacityMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _PackedTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _RadialDistortionNoise:
         m_Texture: {fileID: 2800000, guid: a9fcba2b3c04c484081fd31c7a5b9101, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -105,19 +84,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: 8ca7577545d545fa80aa57ec8ecc3795, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SecondMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SecondMaskProfile:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SecondaryMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SurfaceNoise:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -151,12 +118,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlbedoMapExp: 1
-    - _CRACKSENABLED: 0
-    - _CracksNegate: 0
-    - _CracksNegateSlope: 0
-    - _CracksScaleU: 1
-    - _CracksScaleV: 1
     - _CustomColorMaskAffectedByDynamics: 1
     - _CustomColorMaskEnabled: 0
     - _CustomColorMaskSwitch: 1
@@ -200,25 +161,6 @@ Material:
     - _FinalOpacityExp1: 1.125
     - _FinalOpacityPower: 1
     - _FinalPower: 1.5
-    - _HeightBoost: 1
-    - _HeightMapNegate: 0
-    - _HeightSlopeControl: 0
-    - _LAVANOISEENABLED: 0
-    - _LavaAppearMaskExp: 1
-    - _LavaAppearMaskScaleU: 1
-    - _LavaAppearMaskScaleV: 1
-    - _LavaDistortionSlopeNegate: 1
-    - _LavaDistortionSlopeStyle: 0
-    - _LavaNoiseDistortionAmount: 0
-    - _LavaNoiseDistortionScaleU: 1
-    - _LavaNoiseDistortionScaleV: 1
-    - _LavaNoiseDistortionScrollSpeed: 0.075
-    - _LavaNoiseNegate: 0
-    - _LavaNoiseScaleU: 1
-    - _LavaNoiseScaleV: 1
-    - _LavaNoiseScrollSpeed: 0
-    - _LavaOnlyInValleysExp: 1
-    - _LavaOnlyInValleysNegate: 1
     - _MDFOU: 1
     - _MDFOV: 1
     - _MVAnimationSpeed: 15
@@ -250,9 +192,6 @@ Material:
     - _Noise01ScrollSpeed1: 0
     - _Noise01ScrollSpeedU: 0
     - _Noise01ScrollSpeedV: -0.15
-    - _OpacityMaskExp: 0.2
-    - _OpacityMaskPower: 1
-    - _OpacityMaskScaler: 1
     - _QueueControl: 1
     - _QueueOffset: 0
     - _RAMPAFFECTEDBYVERTEXCOLOR: 0
@@ -264,29 +203,13 @@ Material:
     - _RampOffsetExp: 2
     - _RampOffsetMultiply: 1
     - _RampOffsetMultiply1: 1
-    - _RampSmoothstepMax: 0.75
-    - _RampSmoothstepMin: 0.25
-    - _SURFACENOISEENABLED: 0
-    - _SecondMaskEdgeGlow: 0
-    - _SecondMaskExp: 1
-    - _SecondMaskScaleU: 1
-    - _SecondMaskScaleV: 1
     - _SecondaryMaskEnabled: 0
     - _SecondaryMaskNegate: 1
     - _SecondaryMaskVSMoveU: 0
     - _SecondaryMaskVSMoveV: 0
     - _SecondayMaskVSMoveV: 0
-    - _SurfaceNoiseAdd: 0
-    - _SurfaceNoiseExp: 1
-    - _SurfaceNoiseScaleU: 1
-    - _SurfaceNoiseScaleV: 1
-    - _VALLEYSEMISSIONBOOSTENABLED: 0
-    - _ValleysEmissionBoostAmount: 80
-    - _ValleysEmissionBoostBloom: 1
     - __dirty: 0
     m_Colors:
-    - _AlbedoColor: {r: 0.62352943, g: 0.47450978, b: 0.42745098, a: 1}
-    - _AlbedoColor2: {r: 0, g: 0, b: 0, a: 1}
     - _CustomColorMaskChannels: {r: 1, g: 0, b: 0, a: 0}
     - _FinalColor: {r: 0.6745283, g: 0.90137225, b: 1, a: 1}
     - _MVMainMaskChannels: {r: 1, g: 0, b: 0, a: 0}

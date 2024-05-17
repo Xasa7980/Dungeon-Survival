@@ -6,7 +6,7 @@ using UnityEngine;
 public class ArrowThrowerTrap : ActivableTrap
 {
     [SerializeField] Transform shootPoint;
-    [SerializeField] Projectile projectile;
+    [SerializeField] ObjectPool projectilePool;
     bool inUse;
     [SerializeField] float preparationTime = 1;
     [SerializeField] float fireInterval = 2;
@@ -15,8 +15,8 @@ public class ArrowThrowerTrap : ActivableTrap
     {
         active = true;
 
-        Projectile arrow = projectile.Create(shootPoint);
-        arrow.transform.parent = shootPoint;
+        HS_ProjectileMover arrow = projectilePool.RequestGameObject().GetComponent<HS_ProjectileMover>();
+        //arrow.transform.parent = shootPoint;
 
         arrow.transform.localPosition = -Vector3.forward;
 
@@ -33,8 +33,8 @@ public class ArrowThrowerTrap : ActivableTrap
 
         yield return new WaitForSeconds(preparationTime);
 
-        arrow.transform.parent = null;
-        arrow.Release();
+        //arrow.transform.parent = null;
+        arrow.ReleaseArrow();
 
         yield return new WaitForSeconds(fireInterval);
 

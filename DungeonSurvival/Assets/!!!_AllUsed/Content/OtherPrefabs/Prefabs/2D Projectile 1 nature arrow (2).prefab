@@ -9659,10 +9659,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8218698402756980383}
   - component: {fileID: 8124794202789459763}
-  - component: {fileID: 8328903589564264277}
   - component: {fileID: 8125327475749613933}
-  - component: {fileID: 1920210084601331603}
-  - component: {fileID: 4954040106334330672}
+  - component: {fileID: 2832419115531659850}
   m_Layer: 0
   m_Name: 2D Projectile 1 nature arrow (2)
   m_TagString: Untagged
@@ -9770,7 +9768,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 3.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -14464,26 +14462,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &8328903589564264277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8216088088836362281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e49040cdee09a4fbfb8cd6d0cc243d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  hitOffset: 0.1
-  UseFirePointRotation: 0
-  rotationOffset: {x: 0, y: 0, z: 0}
-  hit: {fileID: 1438542530079480, guid: 21710859533a00746ad2bdd323061a2d, type: 3}
-  flash: {fileID: 1437680763721510, guid: a311f5de96916bf44bcb1dae61840939, type: 3}
-  Detached:
-  - {fileID: 8216004346626710729}
 --- !u!199 &8125327475749613933
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -14556,43 +14534,22 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!50 &1920210084601331603
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!54 &2832419115531659850
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8216088088836362281}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!58 &4954040106334330672
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8216088088836362281}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Mass: 0.01
+  m_Drag: 5
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
 --- !u!1 &8216168191501760223
 GameObject:
   m_ObjectHideFlags: 0
@@ -14709,7 +14666,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 3.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2

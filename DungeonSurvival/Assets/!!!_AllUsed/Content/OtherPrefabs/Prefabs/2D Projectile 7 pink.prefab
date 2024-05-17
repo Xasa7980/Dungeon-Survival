@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 3.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.98487085, g: 0.5330188, b: 1, a: 0.2509804}
+      maxColor: {r: 1, g: 0.9771081, b: 0.53333336, a: 0.2509804}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4998,7 +4998,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 3.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5105,7 +5105,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.4850035, g: 0.30397826, b: 0.6509434, a: 1}
+      maxColor: {r: 0.99642336, g: 1, b: 0.638, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9880,7 +9880,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 3.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -9987,7 +9987,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.455226, g: 0.13127448, b: 0.4716981, a: 1}
+      maxColor: {r: 1, g: 0.8399454, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -13817,7 +13817,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    minVertexDistance: 0.1
+    minVertexDistance: 0.05
     textureMode: 0
     ribbonCount: 1
     shadowBias: 0.5
@@ -14657,10 +14657,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1483306312479169640}
   - component: {fileID: 1604623092212600852}
-  - component: {fileID: 1518719366552165350}
   - component: {fileID: 1605035349644901478}
-  - component: {fileID: 951124424065682895}
-  - component: {fileID: 6621485232138770545}
+  - component: {fileID: 3261832898910081378}
+  - component: {fileID: 946790442579938363}
+  - component: {fileID: 2963477285387770468}
   m_Layer: 0
   m_Name: 2D Projectile 7 pink
   m_TagString: Untagged
@@ -14701,7 +14701,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -14769,7 +14769,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 3.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -14876,7 +14876,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.98487085, g: 0.5330188, b: 1, a: 0.3137255}
+      maxColor: {r: 0.85969234, g: 1, b: 0, a: 0.3137255}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19463,25 +19463,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &1518719366552165350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478292054775506842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e49040cdee09a4fbfb8cd6d0cc243d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 12
-  hitOffset: 0.1
-  UseFirePointRotation: 0
-  rotationOffset: {x: 0, y: 0, z: 0}
-  hit: {fileID: 1029544359644514, guid: aab2daf1fd2b23f4a9bdbbb38fc95704, type: 3}
-  flash: {fileID: 1016717492136352, guid: d9a16b144bb6373498d4374fb5d0d3b2, type: 3}
-  Detached: []
 --- !u!199 &1605035349644901478
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -19554,40 +19535,60 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!58 &951124424065682895
-CircleCollider2D:
+--- !u!54 &3261832898910081378
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478292054775506842}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 5
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
+--- !u!114 &946790442579938363
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478292054775506842}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.1
---- !u!50 &6621485232138770545
-Rigidbody2D:
-  serializedVersion: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eafd55ed8ce02f4996c4da0634bb8c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+  hitOffset: 0
+  isDestroyable: 0
+  useFirePointRotation: 0
+  rotationOffset: {x: 0, y: 0, z: 0}
+  hitEffect: {fileID: 0}
+  hitPS: {fileID: 0}
+  flashEffect: {fileID: 0}
+  lightSource: {fileID: 0}
+  projectilePS: {fileID: 0}
+  damage: 0
+  impactMask:
+    serializedVersion: 2
+    m_Bits: 8
+  checkThreshold: 0.2
+  lifetime: 10
+--- !u!65 &2963477285387770468
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478292054775506842}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.9411294, y: 3.9411294, z: 3.9411294}
+  m_Center: {x: 0, y: 0, z: 0}

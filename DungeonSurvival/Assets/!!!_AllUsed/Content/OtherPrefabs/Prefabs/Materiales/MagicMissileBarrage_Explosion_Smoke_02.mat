@@ -24,7 +24,9 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: c444735a99fc1c64cb2c3aca113bbbe4,
     type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _DISSOLVETEXTUREFLIP_ON
+  - _EMISSIONVERTEXSTREAMENABLED_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

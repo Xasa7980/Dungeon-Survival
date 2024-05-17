@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.93575424, b: 0.4764151, a: 1}
+      maxColor: {r: 1, g: 0.089635246, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5116,7 +5116,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.56610817, b: 0.32941175, a: 0.5019608}
+      maxColor: {r: 1, g: 0.6961648, b: 0.32941175, a: 0.5019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10089,7 +10089,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.41010085, b: 0.2216981, a: 0.5019608}
+      maxColor: {r: 0.5849056, g: 0.19415359, b: 0, a: 0.5019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14767,10 +14767,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7492580211253232222}
   - component: {fileID: 7292557051835956122}
-  - component: {fileID: 7377635311797875704}
   - component: {fileID: 7291670378965725432}
-  - component: {fileID: 3905501100511282397}
-  - component: {fileID: 444074012202379180}
+  - component: {fileID: 3892704735438537705}
+  - component: {fileID: 8097291822605507090}
+  - component: {fileID: 8277565980856304414}
   m_Layer: 0
   m_Name: 2D Projectile 18 nova orange
   m_TagString: Untagged
@@ -14987,7 +14987,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0, b: 0, a: 1}
+      maxColor: {r: 1, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19583,25 +19583,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &7377635311797875704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7489896817228574222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e49040cdee09a4fbfb8cd6d0cc243d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7
-  hitOffset: 0.1
-  UseFirePointRotation: 0
-  rotationOffset: {x: 0, y: 0, z: 0}
-  hit: {fileID: 1299586717950946, guid: 5740ae2e014a8b14886dad7e67951070, type: 3}
-  flash: {fileID: 1920765516895132, guid: df8bef245b1373047a1e1320f5ed6ac2, type: 3}
-  Detached: []
 --- !u!199 &7291670378965725432
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -19623,7 +19604,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 906522bf32691f9408c7e24cc0ee30a3, type: 2}
+  - {fileID: 2100000, guid: c3d67d195ec29ea41b4e66498a6687ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19674,43 +19655,63 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!58 &3905501100511282397
-CircleCollider2D:
+--- !u!54 &3892704735438537705
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489896817228574222}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 5
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
+--- !u!65 &8097291822605507090
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489896817228574222}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7040002, y: 1.7040002, z: 1.7040002}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8277565980856304414
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7489896817228574222}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.2
---- !u!50 &444074012202379180
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7489896817228574222}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eafd55ed8ce02f4996c4da0634bb8c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+  hitOffset: 0
+  isDestroyable: 0
+  useFirePointRotation: 0
+  rotationOffset: {x: 0, y: 0, z: 0}
+  hitEffect: {fileID: 0}
+  hitPS: {fileID: 0}
+  flashEffect: {fileID: 0}
+  lightSource: {fileID: 0}
+  projectilePS: {fileID: 0}
+  damage: 0
+  impactMask:
+    serializedVersion: 2
+    m_Bits: 8
+  checkThreshold: 0.2
+  lifetime: 10
 --- !u!1 &7489912940941180590
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+//Este script se usa para que la particula al detectar una colision haga algo
 public class HS_ParticleCollisionInstance : MonoBehaviour
 {
     public GameObject[] EffectsOnCollision;
@@ -12,18 +13,19 @@ public class HS_ParticleCollisionInstance : MonoBehaviour
     public Vector3 rotationOffset = new Vector3(0,0,0);
     public bool useOnlyRotationOffset = true;
     public bool UseFirePointRotation;
-    public bool DestoyMainEffect = false;
-    private ParticleSystem part;
+    public bool DestroyMainEffect = false;
+    public bool DisableMainEffect = true;
+    private ParticleSystem particleToCollide;
     private List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
     private ParticleSystem ps;
 
     void Start()
     {
-        part = GetComponent<ParticleSystem>();
+        particleToCollide = GetComponent<ParticleSystem>();
     }
     void OnParticleCollision(GameObject other)
     {      
-        int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);     
+        int numCollisionEvents = particleToCollide.GetCollisionEvents(other, collisionEvents);     
         for (int i = 0; i < numCollisionEvents; i++)
         {
             foreach (var effect in EffectsOnCollision)
@@ -40,9 +42,18 @@ public class HS_ParticleCollisionInstance : MonoBehaviour
                 Destroy(instance, DestroyTimeDelay);
             }
         }
-        if (DestoyMainEffect == true)
+        if (DestroyMainEffect)
         {
             Destroy(gameObject, DestroyTimeDelay + 0.5f);
+        }
+        if (DisableMainEffect)
+        {
+            float a = 0;
+            while (a < DestroyTimeDelay + 0.5f)
+            {
+                a += Time.deltaTime;
+                gameObject.SetActive(false);
+            }
         }
     }
 }

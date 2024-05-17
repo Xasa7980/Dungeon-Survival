@@ -50,7 +50,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 190f03e800924ac45966dff7ad924828, type: 3}
+        m_Texture: {fileID: 2800000, guid: 75ee48827893f0c4781417fb9def11ea, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: beea0694d337e23449c7d21e4dfef1cb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -101,7 +101,7 @@ Material:
     - _Depthpower: 0.2
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
-    - _Emission: 2
+    - _Emission: 15
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

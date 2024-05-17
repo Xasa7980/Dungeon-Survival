@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8400362119701684757}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.028}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4835,10 +4835,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8403603618121574835}
   - component: {fileID: 8525448993862436599}
-  - component: {fileID: 8431933633583386401}
   - component: {fileID: 8526723746538426031}
-  - component: {fileID: 7401950249911044784}
-  - component: {fileID: 1145132499938207775}
+  - component: {fileID: 7765991024842502212}
+  - component: {fileID: 3822213391755395015}
+  - component: {fileID: 8570515338777215232}
   m_Layer: 0
   m_Name: 2D Projectile 6 blue fire
   m_TagString: Untagged
@@ -4877,7 +4877,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4945,7 +4945,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 3.5
       minScalar: 0.2
       maxCurve:
         serializedVersion: 2
@@ -5114,7 +5114,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 1
       minScalar: 0.02
       maxCurve:
         serializedVersion: 2
@@ -5379,7 +5379,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 6.283185
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5490,8 +5490,8 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 5
-    angle: 25
+    type: 4
+    angle: 5
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
@@ -5577,7 +5577,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.01
+      value: 15
       mode: 0
       spread: 0
       speed:
@@ -5634,7 +5634,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 360
+      value: 0
       mode: 0
       spread: 0
       speed:
@@ -5860,7 +5860,7 @@ ParticleSystem:
       repeatInterval: 0.01
       probability: 1
   SizeModule:
-    enabled: 1
+    enabled: 0
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -5872,14 +5872,14 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 28.790325
-          outSlope: 28.790325
+          inSlope: -0.3721163
+          outSlope: -0.3721163
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.090895966
+          outWeight: 0.64775443
         - serializedVersion: 3
-          time: 0.07858276
+          time: 0.18857235
           value: 1
           inSlope: 0
           outSlope: 0
@@ -9639,26 +9639,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &8431933633583386401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8400439964703580493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e49040cdee09a4fbfb8cd6d0cc243d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  hitOffset: 0.1
-  UseFirePointRotation: 0
-  rotationOffset: {x: 0, y: 0, z: 0}
-  hit: {fileID: 1998750652454270, guid: 8a1ac1dbe39224143972fa1a908b0abf, type: 3}
-  flash: {fileID: 1960835308829046, guid: adca1c5f787b050449984aedac0cbdc5, type: 3}
-  Detached:
-  - {fileID: 8400362119701684757}
 --- !u!199 &8526723746538426031
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -9680,7 +9660,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0711ea139cbfdb04aa3f8bbbb67bca98, type: 2}
+  - {fileID: 2100000, guid: 991ce8ab7d217524583108593e2ac2da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9701,7 +9681,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 1
+  m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -9712,7 +9692,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 2
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 1
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
@@ -9722,7 +9702,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 1e5e28112e8d9024996a2a24a654b33f, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -9731,43 +9711,62 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!58 &7401950249911044784
-CircleCollider2D:
+--- !u!54 &7765991024842502212
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8400439964703580493}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 5
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
+--- !u!114 &3822213391755395015
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8400439964703580493}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.1
---- !u!50 &1145132499938207775
-Rigidbody2D:
-  serializedVersion: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eafd55ed8ce02f4996c4da0634bb8c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+  hitOffset: 0
+  isDestroyable: 0
+  useFirePointRotation: 0
+  rotationOffset: {x: 0, y: 0, z: 0}
+  damage: 0
+  checkThreshold: 0.2
+  lifetime: 10
+  impactMask:
+    serializedVersion: 2
+    m_Bits: 8
+  projectilePS: {fileID: 0}
+  hitPS: {fileID: 0}
+  flashEffect: {fileID: 0}
+  lightSource: {fileID: 0}
+--- !u!65 &8570515338777215232
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8400439964703580493}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5485852, y: 2.5485852, z: 2.5487504}
+  m_Center: {x: 0, y: 0, z: 0.000100016594}
 --- !u!1 &8400666525559629973
 GameObject:
   m_ObjectHideFlags: 0

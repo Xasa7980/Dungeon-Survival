@@ -14,7 +14,13 @@ Material:
   - _CRACKSENABLED_ON
   - _LAVANOISEENABLED_ON
   - _SURFACENOISEENABLED_ON
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _DISSOLVETEXTUREFLIP1_ON
+  - _DISSOLVETEXTUREFLIP_ON
+  - _KEYWORD0_ON
+  - _SECONDMASKPROFILEENABLED_ON
+  - _TEST_ON
+  - _VALLEYSEMISSIONBOOSTENABLED_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -281,7 +287,7 @@ Material:
     - _AlbedoColor2: {r: 0, g: 0, b: 0, a: 1}
     - _Color0: {r: 1, g: 0, b: 0.08737848, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RampColorTint: {r: 1, g: 0.38039201, b: 0.38039201, a: 1}
+    - _RampColorTint: {r: 0.3301887, g: 0.040334966, b: 0.016820906, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5806438837181310623
 MonoBehaviour:

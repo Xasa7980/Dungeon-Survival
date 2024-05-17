@@ -13,7 +13,11 @@ Material:
   m_ValidKeywords:
   - _RAMPENABLED_ON
   - _RIMMASKENABLED_ON
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _CAMERADEPTHFADEENABLED_ON
+  - _DEPTHFADEFLIP_ON
+  - _DEPTHFADEMAXMODE_ON
+  - _DISSOLVENOISEFLIP_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

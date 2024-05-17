@@ -32,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 652511989517223487}
+  - {fileID: 7321979925442783222}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -96,10 +97,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activationDelay: 0
   shootPoint: {fileID: 652511989517223487}
-  projectile: {fileID: 5981644102760160164, guid: a87ccdb05e027f84aa28fc38e430d48b,
-    type: 3}
+  projectilePool: {fileID: 5186160419509029544}
   preparationTime: 1
   fireInterval: 2
+--- !u!1 &2847232080117387568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7321979925442783222}
+  - component: {fileID: 5186160419509029544}
+  m_Layer: 0
+  m_Name: ArrowPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7321979925442783222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2847232080117387568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 652511989876005987}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5186160419509029544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2847232080117387568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec4f52a1624beb4aaf567f53a1f4166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPool: {fileID: 5061803514162468166, guid: 63b3e7d10c5d0a84d95a269298ad21c7,
+    type: 3}
+  poolSize: 3
 --- !u!1001 &652511989517337205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,6 +200,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 443466, guid: 5b290bad62686f54786d6121cfb82c4a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64506964545415972, guid: 5b290bad62686f54786d6121cfb82c4a,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
