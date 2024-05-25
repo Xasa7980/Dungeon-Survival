@@ -13,6 +13,18 @@ public enum MonsterCategory
     Humanoid,
     Spirit
 }
+public enum MonsterElement
+{
+    None,
+    Water,
+    Fire,
+    Darkness,
+    Light,
+    Thunder,
+    Earth,
+    Wind,
+    Ice
+}
 public enum MonsterRank
 {
     Minion,
@@ -28,6 +40,7 @@ public class MonsterDataSO : ScriptableObject
 {
     public MonsterCategory monsterCategory;
     public MonsterRank monsterRank;
+    public MonsterElement monsterElement;
 
     [Title("$monsterName"), GUIColor(0.3f, 0.8f, 0.8f, 1f)]
     public string monsterName;

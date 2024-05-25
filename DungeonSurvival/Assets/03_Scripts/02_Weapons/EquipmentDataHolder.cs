@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -21,11 +22,11 @@ public class EquipmentDataHolder : MonoBehaviour
     [SerializeField] private EquipmentElement equipmentElement;
     [SerializeField] private EquipmentRank equipmentRank;
     [SerializeField] private ItemCategories equipmentCategory;
-    [ShowIf("@itemCategory == ItemCategories.Weapon"), SerializeField] private WeaponHandler weaponHandlerType;
-    [ShowIf("@itemCategory == ItemCategories.Weapon"), SerializeField] private EquipmentCategory weaponRange;
+    [ShowIf("@equipmentCategory == ItemCategories.Weapon"), SerializeField] private WeaponHandler weaponHandlerType;
+    [ShowIf("@equipmentCategory == ItemCategories.Weapon"), SerializeField] private EquipmentCategory weaponRange;
 
-    [ShowIf("@itemCategory == ItemCategories.Weapon"), SerializeField] public Material slashMaterial;
-    [ShowIf("@itemCategory == ItemCategories.Weapon"), SerializeField] private List<Transform> slashGameObject = new List<Transform>();
+    [ShowIf("@equipmentCategory == ItemCategories.Weapon"), SerializeField] public Material slashMaterial;
+    [ShowIf("@equipmentCategory == ItemCategories.Weapon"), SerializeField] private List<Transform> slashGameObject = new List<Transform>();
 
     private MeleeWeaponTrail weaponTrail;
     private AreaDrawer detectionArea;
@@ -52,7 +53,40 @@ public class EquipmentDataHolder : MonoBehaviour
         equipmentDataSO.equipmentCategory = weaponRange;
         equipmentDataSO.equipmentVisualEffects.slashParticleEffect = slashGameObject;
         slashMaterial = equipmentDataSO.equipmentVisualEffects.weaponSlashMaterial;
+
+
+
+
+
+
+
+        DateTime dt = DateTime.Now;
+        print(dt.Hour);
+        print(dt.Second);
+        print(dt.AddHours(1));
+        var ea = DateTime.DaysInMonth(dt.Year, dt.Month);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
+    
     private void AddChildrenToList ( )
     {
         foreach (Transform child in transform)

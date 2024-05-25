@@ -24,18 +24,19 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 00191177e5fd5c4468ad546ce87ef329,
     type: 3}
   m_ValidKeywords:
+  - _ALPHATEST_ON
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _USEDEPTH_ON
   m_LightmapFlags: 0
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
-  - DepthOnly
   - SHADOWCASTER
+  - DepthOnly
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -121,7 +122,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
+    - _AlphaClip: 1
     - _Blend: 0
     - _Blend2: 1
     - _BumpScale: 1
@@ -132,7 +133,7 @@ Material:
     - _Depthpower: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
-    - _Emission: 2.69
+    - _Emission: 3
     - _GlossMapScale: 1
     - _Glossiness: 0.3
     - _GlossyReflections: 1
