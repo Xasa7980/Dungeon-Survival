@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class EquipmentDataHolder : MonoBehaviour
 {
-    public EquipmentElement GetEquipmentElement => equipmentElement;
+    public Element GetEquipmentElement => equipmentElement;
  
     [SerializeField] private EquipmentDataSO equipmentDataSO;
 
@@ -19,7 +19,7 @@ public class EquipmentDataHolder : MonoBehaviour
     public void SetEquipmentItem(Item item) { _equipmentItem = item; }
 
     [SerializeField] private EquipmentType equipmentType;
-    [SerializeField] private EquipmentElement equipmentElement;
+    [SerializeField] private Element equipmentElement;
     [SerializeField] private EquipmentRank equipmentRank;
     [SerializeField] private ItemCategories equipmentCategory;
     [ShowIf("@equipmentCategory == ItemCategories.Weapon"), SerializeField] private WeaponHandler weaponHandlerType;
@@ -53,38 +53,6 @@ public class EquipmentDataHolder : MonoBehaviour
         equipmentDataSO.equipmentCategory = weaponRange;
         equipmentDataSO.equipmentVisualEffects.slashParticleEffect = slashGameObject;
         slashMaterial = equipmentDataSO.equipmentVisualEffects.weaponSlashMaterial;
-
-
-
-
-
-
-
-        DateTime dt = DateTime.Now;
-        print(dt.Hour);
-        print(dt.Second);
-        print(dt.AddHours(1));
-        var ea = DateTime.DaysInMonth(dt.Year, dt.Month);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
     
     private void AddChildrenToList ( )

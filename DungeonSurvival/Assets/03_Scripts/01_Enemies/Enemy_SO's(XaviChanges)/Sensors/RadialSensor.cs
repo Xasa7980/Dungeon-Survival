@@ -58,7 +58,7 @@ public class RadialSensor : Sensor
             }
         }
     }
-    public override bool ThreatsDetected ( )
+    public override bool ThreatsDetected ( ) //Para atacar
     {
         Collider[] threats = Physics.OverlapSphere(transform.position, detectionRadius, detectionMask);
 
@@ -78,7 +78,7 @@ public class RadialSensor : Sensor
         return false;
     }
 
-    public bool ThreatsOutOfRangeDetected()
+    public bool ThreatsOutOfRangeDetected() //Para Avistar
     {
         Collider[] threats = Physics.OverlapSphere(transform.position, detectionRadius * detectionRadiusMultiplier, detectionMask);
 
@@ -87,7 +87,7 @@ public class RadialSensor : Sensor
             Vector3 threatDir = (threat.transform.position - transform.position).normalized;
             float angle = Vector3.Angle(threatDir, transform.forward);
 
-            if (angle <= 360)
+            if (angle <= detectionAngle / 2)
             {
                 if (DirectLineToTarget(threat.transform.position))
                 {

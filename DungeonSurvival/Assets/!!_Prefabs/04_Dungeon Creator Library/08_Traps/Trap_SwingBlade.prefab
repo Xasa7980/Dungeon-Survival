@@ -50,6 +50,16 @@ MonoBehaviour:
   pendulum: {fileID: 979936839298485378}
   amplitude: 45
   speed: 2
+  damage: 25
+  harmDelay: 0
+  damageArea: {x: 2, y: 1.5, z: 1}
+  position: {x: 0, y: 1, z: 0}
+  threatMask:
+    serializedVersion: 2
+    m_Bits: 0
+  threatMask2:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &979936839298436720
 PrefabInstance:
   m_ObjectHideFlags: 0

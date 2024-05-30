@@ -1,25 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterSpawner : SpawnerManager
 {
-    public enum SpawnerElement
+    public event EventHandler OnRechargedSpawning;
+    private void Update ( )
     {
-        None,
-        Water,
-        Fire,
-        Darkness,
-        Light,
-        Thunder,
-        Earth,
-        Wind,
-        Ice
+        if(TryDetectPlayer(out GameObject player))
+        {
+            Spawn();
+        }
+        else if(!spawnAble)
+        {
+            OnRechargedSpawning?.Invoke ( this, EventArgs.Empty );
+            StartCoroutine(SpawnDelay(spawnDelay));
+        }
     }
-    [SerializeField] private SpawnerElement spawnerElement;
 
-    public override void Spawn ( )
-    {
-        base.Spawn();
-    }
 }

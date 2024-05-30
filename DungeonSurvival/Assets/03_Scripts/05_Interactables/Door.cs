@@ -11,6 +11,7 @@ public class Door : MonoBehaviour
     [SerializeField] bool invertAngle;
     [SerializeField, HideInPlayMode] bool invertGizmo;
 
+    private bool isOpened;
     //public override void FinishInteraction()
     //{
     //    base.FinishInteraction();
@@ -18,16 +19,25 @@ public class Door : MonoBehaviour
     //    _canInteract = false;
     //}
 
-    public void Open()
+    public void OpenOrClose ( )
     {
-        StartCoroutine(_Open());
+        if (isOpened)
+        {
+            isOpened = false;
+            StartCoroutine(_Close());
+        }
+        else if (!isOpened)
+        {
+            isOpened = true;
+            StartCoroutine(_Open());
+        }
     }
 
     IEnumerator _Open()
     {
         float angle = 0;
 
-        while (angle < openAngle)
+        while (angle <= openAngle)
         {
             angle += Time.deltaTime * openSpeed;
             door.localRotation = Quaternion.Euler(Vector3.up * angle * ((invertAngle) ? -1 : 1));
@@ -35,7 +45,18 @@ public class Door : MonoBehaviour
             yield return null;
         }
     }
+    IEnumerator _Close ( )
+    {
+        float angle = openAngle;
 
+        while (angle >= 0)
+        {
+            angle -= Time.deltaTime * openSpeed;
+            door.localRotation = Quaternion.Euler(Vector3.up * angle * ((invertAngle ? -1 : 1)));
+
+            yield return null;
+        }
+    }
     private void OnDrawGizmos()
     {
 #if UNITY_EDITOR

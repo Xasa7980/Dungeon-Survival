@@ -4,18 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EquipmentElement
-{
-    None,
-    Water,
-    Fire,
-    Darkness,
-    Light,
-    Thunder,
-    Earth,
-    Wind,
-    Ice
-}
 public enum EquipmentType
 {
     Axe,
@@ -71,7 +59,7 @@ public class EquipmentDataSO : ScriptableObject
     public string description;
 
     public EquipmentType equipmentType;
-    public EquipmentElement equipmentElement;
+    public Element equipmentElement;
     public EquipmentRank equipmentRank;
 
     [ShowIf("@itemCategory == ItemCategories.Weapon")]
@@ -108,53 +96,53 @@ public class EquipmentDataSO : ScriptableObject
     {
         switch (equipmentElement)
         {
-            case EquipmentElement.None:
+            case Element.None:
 
                 if (equipmentVisualEffects.slashMaterials.Length > 0)
                     equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[0]);
                 break;
-            case EquipmentElement.Water:
+            case Element.Water:
 
                 if (equipmentVisualEffects.slashMaterials.Length > 0)
                     equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[1]);
                 break;
 
-            case EquipmentElement.Fire:
+            case Element.Fire:
 
                 if (equipmentVisualEffects.slashMaterials.Length > 0)
                     equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[2]);
                 break;
 
-            case EquipmentElement.Darkness:
+            case Element.Darkness:
 
                 if (equipmentVisualEffects.slashMaterials.Length > 0)
                     equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[3]);
                 break;
-            case EquipmentElement.Light:
+            case Element.Light:
 
                 if (equipmentVisualEffects.slashMaterials.Length > 0)
                     equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[4]);
                 break;
 
-            case EquipmentElement.Thunder:
+            case Element.Thunder:
 
                 if (equipmentVisualEffects.slashMaterials.Length > 0)
                     equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[5]);
                 break;
 
-            case EquipmentElement.Earth:
+            case Element.Earth:
 
                 if (equipmentVisualEffects.slashMaterials.Length > 0)
                     equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[6]);
                 break;
 
-            case EquipmentElement.Wind:
+            case Element.Wind:
 
                 if (equipmentVisualEffects.slashMaterials.Length > 0)
                     equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[7]);
                 break;
                 
-            case EquipmentElement.Ice:
+            case Element.Ice:
 
                 if (equipmentVisualEffects.slashMaterials.Length > 0)
                     equipmentVisualEffects.SetWeaponSlashMaterial(equipmentVisualEffects.slashMaterials[8]);
@@ -233,7 +221,7 @@ public class EquipmentDataSO : ScriptableObject
         [ShowIf("@itemCategory == ItemCategories.Weapon")] public bool hasSecondaryParticleEffect;
         [ShowIf("@itemCategory == ItemCategories.Weapon")] public bool hasDefaultParticleEffects;
 
-        [InfoBox("It requires an specific order on putting inside the materials, check EquipmentElement list", InfoMessageType.Warning)]
+        [InfoBox("It requires an specific order on putting inside the materials, check Element list", InfoMessageType.Warning)]
         [ShowIf("@itemCategory == ItemCategories.Weapon")] public Material[] slashMaterials;
         [ShowIf("@itemCategory == ItemCategories.Weapon")] public Material weaponSlashMaterial;
 
@@ -306,17 +294,12 @@ public class EquipmentDataSO : ScriptableObject
     public class EquipmentAnimations
     {
         internal ItemCategories equipmentCategory;
+        internal WeaponHandler weaponHandler;
 
-        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] basicAttackClips;
-
-        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] chargedAttackClips;
-        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingChargedAttackClips;
-
-        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] specialAttackClips;
-        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingSpecialAttackClips;
-
-        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] skillAttackClips;
-        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] loadingSkillAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] selectedBasicAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] selectedChargedAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] selectedSpecialAttackClips;
+        [ShowIf("@itemCategory == ItemCategories.Weapon")] public AttacksDataSO[] selectedSkillAttackClips;
     }
 }
 

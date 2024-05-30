@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface iDamageable
 {
-    public void ApplyDamage(int damage, bool arrowHit);
+    public void ApplyDamage(int damage); 
 }

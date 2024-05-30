@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,14 +35,14 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
         animatorOverrideController[RUN_FORWARD_ANIMATION] = runForwardAnimationClip;
         animatorOverrideController[WALK_FORWARD_ANIMATION] = walkForwardAnimationClip;
     }
-    public void ChangeCurretCombatAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
+    public void WeaponChangeOverride ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
     {
-        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.basicAttackClips);
-        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.chargedAttackClips);
-        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.specialAttackClips);
-        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, equipmentDataSO.equipmentAnimationClips.skillAttackClips);
+        LoadBasicAttackAnimationsOnOverride(animatorOverrideController, allBasicAttacks, equipmentDataSO);
+        LoadChargedAttackAnimationsOnOverride(animatorOverrideController, allChargedAttacks, equipmentDataSO);
+        LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, allSpecialAttacks, equipmentDataSO);
+        LoadSkillAttackAnimationsOnOverride(animatorOverrideController, allSkillAttacks, equipmentDataSO);
     }
-    public void DualSwordOverride ( AnimatorOverrideController animatorOverrideController )
+    public void DualSwordOverride ( AnimatorOverrideController animatorOverrideController)
     {
 
         LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackDualSwordWeapon);
@@ -49,7 +50,7 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
         LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackDualSwordWeapon);
         LoadSkillAttackAnimationsOnOverride(animatorOverrideController, skillAttackDualSwordWeapon);
     }
-    public void DualDaggerOverride ( AnimatorOverrideController animatorOverrideController )
+    public void DualDaggerOverride ( AnimatorOverrideController animatorOverrideController)
     {
 
         LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackDualDaggerWeapon);
@@ -57,7 +58,7 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
         LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackDualDaggerWeapon);
         LoadSkillAttackAnimationsOnOverride(animatorOverrideController, skillAttackDualDaggerWeapon);
     }
-    public void ShieldOverride ( AnimatorOverrideController animatorOverrideController )
+    public void ShieldOverride ( AnimatorOverrideController animatorOverrideController)
     {
 
         LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackShield);
@@ -65,7 +66,7 @@ public class PlayerAnimationContainerSO : AnimationClipContainerSO
         LoadSpecialAttackAnimationsOnOverride(animatorOverrideController, specialAttackShield);
         LoadSkillAttackAnimationsOnOverride(animatorOverrideController, skillAttackShield);
     }
-    public void NoWeaponOverride ( AnimatorOverrideController animatorOverrideController )
+    public void NoWeaponOverride ( AnimatorOverrideController animatorOverrideController)
     {
 
         LoadBasicAttackAnimationsOnOverride(animatorOverrideController, basicAttackNoWeapons);

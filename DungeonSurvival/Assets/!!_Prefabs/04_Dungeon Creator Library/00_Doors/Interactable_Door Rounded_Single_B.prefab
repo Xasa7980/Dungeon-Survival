@@ -137,7 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1361657526e5afd40ab9bf6c8f087e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lockInteraction: 0
   _priority: 0
+  _interactionHits: 0
+  _interactionObject: 0
   _interactionType: 0
   _interactionTime: 3
   _disallowRootMotion: 0

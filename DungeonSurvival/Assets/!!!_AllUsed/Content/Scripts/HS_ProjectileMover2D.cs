@@ -8,6 +8,7 @@ public class HS_ProjectileMover2D : MonoBehaviour
     public float hitOffset = 0f;
     public bool UseFirePointRotation;
     public Vector3 rotationOffset = new Vector3(0, 0, 0);
+
     public GameObject hit;
     public GameObject flash;
     private Rigidbody2D rb;

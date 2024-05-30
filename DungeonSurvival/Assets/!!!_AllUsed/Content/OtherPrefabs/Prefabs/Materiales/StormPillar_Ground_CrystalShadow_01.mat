@@ -170,7 +170,7 @@ Material:
     - _DistortionMaskNegate: 0
     - _DistortionMaskVSMoveU: 0
     - _DistortionMaskVSMoveV: 0
-    - _DistortionPower: 0.5
+    - _DistortionPower: -0.475
     - _DistortionRemapMax: 1
     - _DistortionRemapMin: 0
     - _DistortionScaleU: 0.75
@@ -182,11 +182,11 @@ Material:
     - _DistortionUseOldMethod: 1
     - _DistortionV: 1
     - _EMISSIONVERTEXSTREAMENABLED: 1
-    - _FinalOpacityExp: 1
+    - _FinalOpacityExp: 1.02
     - _FinalOpacityExp1: 1
-    - _FinalOpacityPower: 2
-    - _FinalPower: 0
-    - _MainMaskExp: 1
+    - _FinalOpacityPower: 1.72
+    - _FinalPower: 60
+    - _MainMaskExp: 3.87
     - _MainMaskScaleU: 1
     - _MainMaskScaleV: 1
     - _MainMaskScrollSpeedU: 0
@@ -238,8 +238,8 @@ Material:
     m_Colors:
     - _CustomColorMaskChannels: {r: 1, g: 0, b: 0, a: 0}
     - _CustomColorMaskChannels1: {r: 1, g: 0, b: 0, a: 0}
-    - _FinalColor: {r: 1, g: 0.10620204, b: 0, a: 1}
+    - _FinalColor: {r: 0.028408667, g: 0.073519856, b: 0.26415092, a: 1}
     - _MainMaskChannelsMultiply: {r: 1, g: 0, b: 0, a: 0}
     - _Noise01ScrollSpeedUV: {r: 1, g: 1, b: 0, a: 0}
-    - _RampColorTint: {r: 1, g: 0.13679248, b: 0.13679248, a: 1}
+    - _RampColorTint: {r: 0.1372549, g: 0.22891913, b: 1, a: 1}
   m_BuildTextureStacks: []

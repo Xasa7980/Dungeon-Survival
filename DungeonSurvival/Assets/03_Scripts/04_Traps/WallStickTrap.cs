@@ -18,6 +18,9 @@ public class WallStickTrap : ActivableTrap
     [SerializeField] float deactivateTime;
     [SerializeField] float returnSpeed = 0.3f;
 
+    [SerializeField] int damage = 25;
+    [SerializeField] GameObject flashHit;
+
     private void Start()
     {
         startPos = movingPart.position;
@@ -45,7 +48,13 @@ public class WallStickTrap : ActivableTrap
 
     //Gizmos.DrawCube(center, size);
     //}
-
+    private void OnTriggerEnter ( Collider other )
+    {
+        if(other.TryGetComponent<iDamageable>(out iDamageable iDamageable))
+        {
+            iDamageable.ApplyDamage(damage);
+        }
+    }
     protected override IEnumerator _activate()
     {
         yield return base._activate();

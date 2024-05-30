@@ -53,6 +53,14 @@ MonoBehaviour:
   timeOffset: 0
   amplitude: 1
   speed: 2
+  damage: 10
+  damageArea: {x: 1, y: 3, z: 3}
+  threatMask:
+    serializedVersion: 2
+    m_Bits: 0
+  threatMask2:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &4604760783209460479
 PrefabInstance:
   m_ObjectHideFlags: 0

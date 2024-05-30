@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    public List<GameObject> poolingObjectsList {  get { return _poolingObjectsList; } }
+    private List<GameObject> _poolingObjectsList = new List<GameObject>();
+
     [SerializeField] private GameObject prefabPool;
     [SerializeField] private int poolSize = 10;
-    private List<GameObject> _poolingObjectsList = new List<GameObject>();
-    public List<GameObject> poolingObjectsList {  get { return _poolingObjectsList; } }
     private void Start ( )
     {
         if (prefabPool != null)

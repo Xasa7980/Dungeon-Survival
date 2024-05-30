@@ -8,6 +8,12 @@ using static UnityEditor.Progress;
 
 public class PlayerInventory : MonoBehaviour, iInventory
 {
+    public event EventHandler<OnChangeWeaponEventArgs> OnChangeWeapon;
+    public class OnChangeWeaponEventArgs : EventArgs
+    {
+        public EquipmentDataSO equipmentDataSO;
+    }
+
     public static PlayerInventory current { get; private set; }
     public event EventHandler OnEquipBackpack;
     public event EventHandler OnUnequipBackpack;
@@ -29,8 +35,11 @@ public class PlayerInventory : MonoBehaviour, iInventory
     public PlayerLocomotion playerLocomotion => playerLocomotion;
     private PlayerLocomotion _playerLocomotion;
 
-    [SerializeField] private EquipedItem_UI_Layout mainWeaponSlot;
-    [SerializeField] private EquipedItem_UI_Layout secondaryWeaponSlot;
+    public EquipedItem_UI_Layout mainWeaponSlot => _mainWeaponSlot;
+    [SerializeField] private EquipedItem_UI_Layout _mainWeaponSlot;
+    public EquipedItem_UI_Layout secondaryWeaponSlot => _secondaryWeaponSlot;
+    [SerializeField] private EquipedItem_UI_Layout _secondaryWeaponSlot;
+
     [SerializeField] private EquipedItem_UI_Layout helmetSlot;
     [SerializeField] private EquipedItem_UI_Layout chestSlot;
     [SerializeField] private EquipedItem_UI_Layout glovesSlot;
@@ -147,7 +156,7 @@ public class PlayerInventory : MonoBehaviour, iInventory
                 UnequipWeaponsIfNeeded(equipedItem_UI_Layout);
                 holsterToUse = mainWeaponSlot.targetHolster;
                 EquipWeapon(item, mainWeaponSlot, holsterToUse);
-                if(equipedItem_UI_Layout == secondaryWeaponSlot)secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
+                if (equipedItem_UI_Layout == secondaryWeaponSlot)secondaryWeaponSlot.TransferItemToAnotherSlot(mainWeaponSlot);
             }
             else if (item.equipmentDataSO.weaponHandlerType == WeaponHandler.Hand_1)
             {
@@ -192,6 +201,11 @@ public class PlayerInventory : MonoBehaviour, iInventory
     private void EquipWeapon ( Item item, EquipedItem_UI_Layout layout, Transform holster )
     {
         Item equipItemInstance = item.CreateInstance() as Item;
+        
+        OnChangeWeapon?.Invoke(this, new OnChangeWeaponEventArgs
+        {
+            equipmentDataSO = item.equipmentDataSO
+        });
 
         layout.EquipUI(equipItemInstance);
         equipItemInstance.EquipVisuals(holster);
@@ -207,6 +221,11 @@ public class PlayerInventory : MonoBehaviour, iInventory
 
     public void UnequipItem ( Item item, EquipedItem_UI_Layout equipedItem_UI_Layout )
     {
+        OnChangeWeapon?.Invoke(this, new OnChangeWeaponEventArgs
+        {
+            equipmentDataSO = item.equipmentDataSO
+        });
+
         if (equipSlots.TryGetValue(equipedItem_UI_Layout, out Transform holster) && holster.childCount > 0)
         {
             if (item.equipmentDataSO.equipmentCategory == EquipmentCategory.Armor)
@@ -372,5 +391,40 @@ public class PlayerInventory : MonoBehaviour, iInventory
         }
         else
             return false;
+    }
+}
+public static class PlayerEquipmentInventory
+{
+    public static bool PlayerHasAnyWeapon (this PlayerInventory playerInventory )
+    {
+        if (!PlayerInventory.current.mainWeaponSlot.empty && !PlayerHasDoubleWeapon(playerInventory))
+        {
+            return true;
+        }
+        return false;
+    }
+    public static bool PlayerHasDoubleWeapon ( this PlayerInventory playerInventory )
+    {
+        if (!PlayerInventory.current.secondaryWeaponSlot.empty)
+        {
+            return true;
+        }
+        return false;
+    }
+    public static Item TryGetMainWeapon (this PlayerInventory playerInventory)
+    {
+        if(PlayerHasAnyWeapon(playerInventory))
+        {
+            return PlayerInventory.current.mainWeaponSlot.item;
+        }
+        return null;
+    }
+    public static Item TryGetSecondaryWeapon (this PlayerInventory playerInventory )
+    {
+        if(PlayerHasDoubleWeapon(playerInventory))
+        {
+            return PlayerInventory.current.secondaryWeaponSlot.item;
+        }
+        return null;
     }
 }

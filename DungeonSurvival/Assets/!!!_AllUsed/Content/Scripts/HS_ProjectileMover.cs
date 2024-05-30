@@ -25,7 +25,7 @@ public class HS_ProjectileMover : MonoBehaviour
 
     [Header("SubEffects")]
     
-    [SerializeField, ShowIf("@hitPS != null")] private ParticleSystem hitPS;
+    [SerializeField] private ParticleSystem hitPS;
     [SerializeField] private GameObject flashEffect;
     [SerializeField] private Light lightSource;
 
@@ -34,10 +34,6 @@ public class HS_ProjectileMover : MonoBehaviour
         projectileCollider = GetComponent<Collider>();
         parentCollider = transform.parent?.GetComponentInParent<Collider>();
 
-        if(GetComponent<ParticleSystem>() != null )
-        {
-            projectilePS = GetComponent<ParticleSystem>();
-        }
         // Ignorar colisiones entre el proyectil y el padre
         if (parentCollider != null && projectileCollider != null)
         {
@@ -51,7 +47,7 @@ public class HS_ProjectileMover : MonoBehaviour
             flashEffect.transform.parent = null;
         }
 
-        // Iniciar temporizador para la autodestrucción o desactivación
+        // Iniciar temporizador para la desactivación o autodestrucción
         if (!isDestroyable)
         {
             StartCoroutine(DisableTimer(5));
@@ -116,7 +112,7 @@ public class HS_ProjectileMover : MonoBehaviour
         Vector3 pos = contact.point + contact.normal * hitOffset;
         if (collision.gameObject.TryGetComponent(out iDamageable damageable))
         {
-            damageable.ApplyDamage(damage, true);
+            damageable.ApplyDamage(damage);
         }
 
         // Generar el efecto de impacto

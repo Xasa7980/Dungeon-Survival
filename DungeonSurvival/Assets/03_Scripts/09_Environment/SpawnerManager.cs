@@ -2,6 +2,8 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class SpawnerManager : MonoBehaviour
@@ -11,6 +13,7 @@ public class SpawnerManager : MonoBehaviour
 
     public float spawnRadius;
     public float spawnOffset;
+    public float detectionRadius;
     
     public bool hasSpawnLimit = false;
     public bool hasRandomAmountToSpawn = false;
@@ -21,8 +24,11 @@ public class SpawnerManager : MonoBehaviour
     [SerializeField, ShowIf("@hasRandomAmountToSpawn")] private int minAmountToSpawn = 1;
     [SerializeField, ShowIf("@hasRandomAmountToSpawn")] private int maxAmountToSpawn = 1;
 
-    [SerializeField] private float spawnDelay;
-    private bool spawnAble;
+    public float spawnDelay {  get { return _spawnDelay; } set { _spawnDelay = value; } }
+    [SerializeField] private float _spawnDelay;
+
+    public bool spawnAble => _spawnAble;
+    public bool _spawnAble;
 
     private int spawnedAmount;
     private int amountToSpawn => SetRandomAmountToSpawn(minAmountToSpawn,maxAmountToSpawn);
@@ -49,9 +55,19 @@ public class SpawnerManager : MonoBehaviour
                 randomSpawnPosition.z += spawnOffset;
                 gO.transform.position = randomSpawnPosition;
             }
-            spawnAble = false;
-            StartCoroutine(SpawnDelay(spawnDelay));
+            _spawnAble = false;
         }
+    }
+    public bool TryDetectPlayer ( out GameObject player )
+    {
+        Collider[] cols = Physics.OverlapSphere(transform.position, spawnRadius, 3);
+        if(cols.Length > 0)
+        {
+            player = cols.Where(p => p.GetComponent<PlayerComponents>()).First().gameObject;
+            return true;
+        }
+        player = null;
+        return false;
     }
     private int SetRandomAmountToSpawn ( int min, int max )
     {
@@ -68,6 +84,14 @@ public class SpawnerManager : MonoBehaviour
     public IEnumerator SpawnDelay ( float time )
     {
         yield return new WaitForSeconds(spawnDelay);
-        spawnAble = true;
+        _spawnAble = true;
     }
+    private void OnDrawGizmos ( )
+    {
+        Handles.color = Color.yellow;
+        Handles.DrawWireDisc(transform.position, transform.up, spawnRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+
 }

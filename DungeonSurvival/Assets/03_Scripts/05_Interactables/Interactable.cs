@@ -29,7 +29,7 @@ public abstract class Interactable : MonoBehaviour
     [Tooltip("Prioridad de la interaccion. Determina si sera mas deseable para el personaje que otra." +
         "A menor valor mayor prioridad")]
     [FoldoutGroup("Interactable"), SerializeField, Range(0, 100)] int _priority = 0;
-    [FoldoutGroup("Interactable"), SerializeField, Range(0, 100)] int _interactionHits = 1;
+    [FoldoutGroup("Interactable"), SerializeField, Range(0, 100)] int _interactionHits = 0;
     public int priority => _priority;
     public int interactionHits { get { return _interactionHits; } set { _interactionHits = value; } }
 

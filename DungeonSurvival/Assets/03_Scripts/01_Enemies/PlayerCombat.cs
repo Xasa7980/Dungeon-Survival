@@ -162,11 +162,11 @@ public class PlayerCombat : MonoBehaviour, ICombatBehaviour
         {
             if (rightDetection.Length > 0)
             {
-                CheckAndDamageEnemies(rightDetection, playerStats.EquipmentDataHolder_RightHand);
+                CheckAndDamageEnemies(rightDetection, playerStats.equipmentDataHolder_RightHand);
             }
             else if (leftDetection.Length > 0)
             {
-                CheckAndDamageEnemies(leftDetection, playerStats.EquipmentDataHolder_LeftHand);
+                CheckAndDamageEnemies(leftDetection, playerStats.equipmentDataHolder_LeftHand);
             }
         }
         else

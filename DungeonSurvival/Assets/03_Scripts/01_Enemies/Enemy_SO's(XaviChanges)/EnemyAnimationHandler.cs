@@ -62,7 +62,7 @@ public class EnemyAnimationHandler : MonoBehaviour
             }
             else
             {
-                animationClipContainerSO.GetEnemyAnimationClipContainer(animationClipContainerSO).ChangeCurretCombatAnimations(animatorOverrideController,
+                animationClipContainerSO.GetEnemyAnimationClipContainer(animationClipContainerSO).WeaponChangeOverride(animatorOverrideController,
                 monsterStats.EquipmentDataHolder_RightHand.GetEquipmentDataSO());
             }
         }

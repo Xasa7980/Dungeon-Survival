@@ -23,52 +23,52 @@ public class PlayerAnimationHandler : MonoBehaviour
     private void Start ( )
     {
         GetAnimationsToOverride();
-        ChangeCurrentCombatAnimations(animatorOverrideController);
-        playerStats.OnWeaponChanged += PlayerStats_OnWeaponChanged;
-        Debug.Log(animatorOverrideController["LoadingChargedAttack_Animation_01"]);
+        PlayerInventory.current.OnChangeWeapon += PlayerInventory_OnChangeWeapon;
+        Debug.Log(animatorOverrideController["LoadingBasicAttack_Animation_01"]);
         Debug.Log(animatorOverrideController["LoadingChargedAttack_Animation_02"]);
         Debug.Log(animatorOverrideController["ChargedAttack_Animation_01"]);
         Debug.Log(animatorOverrideController["ChargedAttack_Animation_02"]);
 
     }
 
-    private void PlayerStats_OnWeaponChanged ( object sender, System.EventArgs e )
+    private void PlayerInventory_OnChangeWeapon ( object sender, PlayerInventory.OnChangeWeaponEventArgs e )
     {
-        ChangeCurrentCombatAnimations(animatorOverrideController);
+        ChangeCurrentCombatAnimations(animatorOverrideController, e.equipmentDataSO);
     }
+
     private void GetAnimationsToOverride ( )
     {
 
         animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ChangeCurrentBasicAnimations(animatorOverrideController);
     }
 
-    private void ChangeCurrentCombatAnimations ( AnimatorOverrideController animatorOverrideController )
+    private void ChangeCurrentCombatAnimations ( AnimatorOverrideController animatorOverrideController, EquipmentDataSO equipmentDataSO )
     {
-        if (playerStats.noWeaponsEquiped)
+        if (!PlayerInventory.current.PlayerHasAnyWeapon())
         {
             animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).NoWeaponOverride(animatorOverrideController);
         }
         else
         {
-            if (playerStats.IsDualWeaponWielding)
+            if(PlayerInventory.current.PlayerHasAnyWeapon())
             {
-                if (playerStats.EquipmentDataHolder_RightHand.GetEquipmentType() == EquipmentType.Sword)
+                animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).WeaponChangeOverride(animatorOverrideController, 
+                    PlayerInventory.current.TryGetMainWeapon().equipmentDataSO );
+            }
+            else if (PlayerInventory.current.PlayerHasDoubleWeapon())
+            {
+                if (PlayerInventory.current.TryGetSecondaryWeapon().equipmentDataSO.equipmentType == EquipmentType.Sword)
                 {
                     animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).DualSwordOverride(animatorOverrideController);
                 }
-                else if (playerStats.EquipmentDataHolder_RightHand.GetEquipmentType() == EquipmentType.Dagger)
+                else if (PlayerInventory.current.TryGetSecondaryWeapon().equipmentDataSO.equipmentType == EquipmentType.Dagger)
                 {
                     animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).DualDaggerOverride(animatorOverrideController);
                 }
-                else if (playerStats.EquipmentDataHolder_LeftHand.GetEquipmentType() == EquipmentType.Shield)
+                else if (PlayerInventory.current.TryGetSecondaryWeapon().equipmentDataSO.equipmentType == EquipmentType.Shield)
                 {
                     animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ShieldOverride(animatorOverrideController);
                 }
-            }
-            else
-            {
-                animationClipContainerSO.GetPlayerAnimationContainer(animationClipContainerSO).ChangeCurretCombatAnimations(animatorOverrideController,
-                playerStats.EquipmentDataHolder_RightHand.GetEquipmentDataSO());
             }
         }
     }

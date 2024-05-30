@@ -15,6 +15,14 @@ public enum AttackCategory
 
 public class AnimationClipContainerSO : ScriptableObject
 {
+    public AttacksDataSO[] allBasicAttacks;
+    public AttacksDataSO[] allChargedAttacks;
+    public AttacksDataSO[] allLoadingChargedAttacks;
+    public AttacksDataSO[] allSpecialAttacks;
+    public AttacksDataSO[] allLoadingSpecialAttacks;
+    public AttacksDataSO[] allSkillAttacks;
+    public AttacksDataSO[] allLoadingSkillAttacks;
+
     public const string ATTACK_BASIC_1 = "BasicAttack_Animation_01";
     public const string ATTACK_BASIC_2 = "BasicAttack_Animation_02";
     public const string ATTACK_BASIC_3 = "BasicAttack_Animation_03";
@@ -199,7 +207,7 @@ public class AnimationClipContainerSO : ScriptableObject
         
     }
     public List<AttacksDataSO> basicAttacksSO_List = new List<AttacksDataSO>();
-    public void LoadBasicAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackBasicAnimationClips )
+    public void LoadBasicAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackBasicAnimationClips, EquipmentDataSO equipmentDataSO = default )
     {
         if(attackBasicAnimationClips.Length > 0)
         {
@@ -213,6 +221,12 @@ public class AnimationClipContainerSO : ScriptableObject
             {
                 attackClips[i] = attackBasicAnimationClips[randomIndices[i]].release_Attack_Animation_Clip;
                 basicAttacksSO_List.Add(attackBasicAnimationClips[randomIndices[i]]);
+                
+                if(equipmentDataSO != null)
+                {
+                    equipmentDataSO.equipmentAnimationClips.selectedBasicAttackClips = basicAttacksSO_List.ToArray();
+                }
+
                 animatorOverrideController[attackClipKeys[i]] = attackClips[i];
             }
         }
@@ -223,7 +237,7 @@ public class AnimationClipContainerSO : ScriptableObject
         }
     }
     public List<AttacksDataSO> chargedAttacksSO_List = new List<AttacksDataSO>();
-    public void LoadChargedAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackChargedAnimationClips )
+    public void LoadChargedAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackChargedAnimationClips, EquipmentDataSO equipmentDataSO = default )
     {
         if (attackChargedAnimationClips.Length > 0)
         {
@@ -250,6 +264,12 @@ public class AnimationClipContainerSO : ScriptableObject
                     animatorOverrideController[animationLoadingChargedClipKeys[i]] = loadingClips[i];
                 }
 
+                if (equipmentDataSO != null)
+                {
+                    equipmentDataSO.equipmentAnimationClips.selectedChargedAttackClips = chargedAttacksSO_List.ToArray();
+                }
+
+                equipmentDataSO.equipmentAnimationClips.selectedChargedAttackClips = chargedAttacksSO_List.ToArray();
                 animatorOverrideController[animationChargedClipKeys[i]] = chargedClips[i];
             }
         }
@@ -261,7 +281,7 @@ public class AnimationClipContainerSO : ScriptableObject
         }
     }
     public List<AttacksDataSO> specialAttacksSO_List = new List<AttacksDataSO>();
-    public void LoadSpecialAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackSpecialAnimationClips )
+    public void LoadSpecialAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackSpecialAnimationClips, EquipmentDataSO equipmentDataSO = default )
     {
         if (attackSpecialAnimationClips.Length > 0)
         {
@@ -284,6 +304,12 @@ public class AnimationClipContainerSO : ScriptableObject
                     animatorOverrideController[animationSpecialLoadingClipKeys[i]] = specialLoadingClips[i];
                 }
                 specialAttacksSO_List.Add(attackSpecialAnimationClips[randomIndices[i]]);
+
+                if (equipmentDataSO != null)
+                {
+                    equipmentDataSO.equipmentAnimationClips.selectedSpecialAttackClips = specialAttacksSO_List.ToArray();
+                }
+
                 animatorOverrideController[animationSpecialClipKeys[i]] = specialClips[i];
             }
         }
@@ -294,7 +320,7 @@ public class AnimationClipContainerSO : ScriptableObject
     }
 
     public List<AttacksDataSO> skillAttacksSO_List = new List<AttacksDataSO>();
-    public void LoadSkillAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackSkillAnimationClips )
+    public void LoadSkillAttackAnimationsOnOverride ( AnimatorOverrideController animatorOverrideController, AttacksDataSO[] attackSkillAnimationClips, EquipmentDataSO equipmentDataSO = default )
     {
         if (attackSkillAnimationClips.Length > 0)
         {
@@ -316,6 +342,12 @@ public class AnimationClipContainerSO : ScriptableObject
                     animatorOverrideController[animationCastingClipKeys[i]] = loadingClips[i];
                 }
                 skillAttacksSO_List.Add(attackSkillAnimationClips[randomIndices[i]]);
+
+                if (equipmentDataSO != null)
+                {
+                    equipmentDataSO.equipmentAnimationClips.selectedSkillAttackClips = skillAttacksSO_List.ToArray();
+                }
+
                 animatorOverrideController[animationSkillClipKeys[i]] = skillClips[i];
             }
         }

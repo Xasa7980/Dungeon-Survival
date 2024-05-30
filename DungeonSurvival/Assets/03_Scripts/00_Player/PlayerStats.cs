@@ -7,12 +7,8 @@ using static EquipmentDataSO;
 
 public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
 {
-    public event EventHandler OnWeaponChanged;
     public event EventHandler OnGetHurted;
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-
-    public bool IsDualWeaponWielding => equipmentDataHolder_RightHand != null && equipmentDataHolder_RightHand.GetEquipmentType() != EquipmentType.Shield &&
-    equipmentDataHolder_LeftHand != null && !equipmentDataHolder_LeftHand.Is2HandWeapon;
 
     [SerializeField] private PlayerDataSO playerDataSO;
 
@@ -53,23 +49,17 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
 
     [SerializeField] private GameObject rightWeaponHandler;
     [SerializeField] private GameObject leftWeaponHandler;
-    internal EquipmentDataHolder EquipmentDataHolder_LeftHand => equipmentDataHolder_LeftHand;
-    private EquipmentDataHolder equipmentDataHolder_LeftHand;
-    private EquipmentDataHolder prev_EquipmentDataHolder_LeftHand;
-    internal EquipmentDataHolder EquipmentDataHolder_RightHand => equipmentDataHolder_RightHand;
-    private EquipmentDataHolder equipmentDataHolder_RightHand;
-    private EquipmentDataHolder prev_EquipmentDataHolder_RightHand;
-    internal EquipmentDataSO EquipmentDataSO_RightHand => equipmentDataSO_LeftHand;
-    private EquipmentDataSO equipmentDataSO_RightHand;
-    internal EquipmentDataSO EquipmentDataSO_LeftHand => equipmentDataSO_LeftHand;
-    private EquipmentDataSO equipmentDataSO_LeftHand;
+
+    public EquipmentDataHolder equipmentDataHolder_RightHand => equipmentDataHolder_RightHand;
+    private EquipmentDataHolder _equipmentDataHolder_RightHand;
+    public EquipmentDataHolder equipmentDataHolder_LeftHand => _equipmentDataHolder_LeftHand;
+    private EquipmentDataHolder _equipmentDataHolder_LeftHand;
     internal AreaDrawer LeftDetectionArea => leftDetectionArea;
     private AreaDrawer leftDetectionArea;
     internal AreaDrawer RightDetectionArea => rightDetectionArea;
     private AreaDrawer rightDetectionArea;
     #endregion
     private bool death => healthPoints <= 0 ? true : false;
-    public bool noWeaponsEquiped => EquipmentDataSO_RightHand == null && equipmentDataHolder_LeftHand == null;
     private void Awake ( )
     {
         InitializeStats();
@@ -108,32 +98,30 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
 
     private void Start ( )
     {
+        this.enabled = true;
     }
     private void InitializeWeaponProperties ( )
     {
-        equipmentDataHolder_RightHand = rightWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
-        equipmentDataHolder_LeftHand = leftWeaponHandler.transform.GetChild(0).GetComponent<EquipmentDataHolder>();
+        _equipmentDataHolder_RightHand = PlayerHolsterHandler.current.weaponHolster[0].transform.GetChild(0).GetComponent<EquipmentDataHolder>();
+        _equipmentDataHolder_LeftHand = PlayerHolsterHandler.current.weaponHolster[1].transform.GetChild(0).GetComponent<EquipmentDataHolder>();
 
-        equipmentDataSO_RightHand = equipmentDataHolder_RightHand.GetEquipmentDataSO(); //HACER UNO PARA LOS RANGES QUE NO TENDRÁN AREA DRAWER EN EL ARCO SI NO EN LA FLECHA, LA FLECHA CALCULA DISTANCIAS ONTRIGGER ENTTER
-        equipmentDataSO_LeftHand = equipmentDataHolder_LeftHand.GetEquipmentDataSO();
-
-        if(equipmentDataHolder_RightHand.GetDetectionArea() == null)
+        if(_equipmentDataHolder_RightHand.GetDetectionArea() == null)
         {
             return;
         }
-        rightDetectionArea = equipmentDataHolder_RightHand.GetDetectionArea();
-        leftDetectionArea = equipmentDataHolder_LeftHand.GetDetectionArea();
+        rightDetectionArea = _equipmentDataHolder_RightHand.GetDetectionArea();
+        leftDetectionArea = _equipmentDataHolder_LeftHand.GetDetectionArea();
     }
     private void Update ( )
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            //GetDamage(5);
+            ApplyDamage(5);
         }
     }
-    public void ApplyDamage ( int dmg, bool arrowHit )
+    public void ApplyDamage ( int dmg )
     {
-        int damage = arrowHit ? CalculateDamage(Mathf.Pow(attackPoints,0.3f) * dmg) : CalculateDamage(dmg);
+        //int damage = arrowHit ? CalculateDamage(Mathf.Pow(attackPoints,0.3f) * dmg) : CalculateDamage(dmg);
         healthPoints -= dmg;
 
         OnChangeProgress();
@@ -141,7 +129,7 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
     }
     private DamageType GetDamageType ( EquipmentDataHolder equipmentDataHolder )
     {
-        if (equipmentDataHolder.GetEquipmentElement == EquipmentElement.None)
+        if (equipmentDataHolder.GetEquipmentElement == Element.None)
             if (criticalRate < UnityEngine.Random.Range(0, 100))
             {
                 return DamageType.CriticalDamage;
@@ -156,7 +144,7 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
         textPosition.y = 2; // Mantén la altura del jugador si solo te interesa el plano XZ.
 
         GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder),damage, textPosition);
-        monsterStats.ApplyDamage(damage, false);
+        monsterStats.ApplyDamage(damage);
     }
     private int CalculateDamage ( float damage )
     {
@@ -246,42 +234,10 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
             _ => 1f,
         };
     }
-    //public void Equip ( Item item, EquipmentDataHolder newEquipmentDataHolder )
-    //{
-    //    if (PlayerInventory.current.item.equipable)
-    //    {
-    //        PlayerInventory.current.TryRemoveItem(item);
-    //        PlayerInventory_UI_Manager.current.
-    //    }
-    //}
-    public void OnEquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
-    {
-        prev_EquipmentDataHolder_RightHand = EquipmentDataHolder_RightHand;
-        equipmentDataHolder_RightHand = newEquipmentDataHolder;
 
-        if (equipmentDataHolder_RightHand != prev_EquipmentDataHolder_RightHand)
-        {
-            UpdateEquipmentStats(prev_EquipmentDataHolder_RightHand, equipmentDataHolder_RightHand, ref prev_EquipmentDataHolder_RightHand);
-        }
-        else return;
-    }
-    public void OnEquipLeftWeapon ( EquipmentDataHolder newEquipmentDataHolder )
-    {
-        if (equipmentDataHolder_RightHand.Is2HandWeapon)
-        {
-            return;
-        }
-        prev_EquipmentDataHolder_LeftHand = equipmentDataHolder_LeftHand;
-        equipmentDataHolder_LeftHand = newEquipmentDataHolder;
-
-        if (equipmentDataHolder_LeftHand != prev_EquipmentDataHolder_RightHand)
-        {
-            UpdateEquipmentStats(prev_EquipmentDataHolder_LeftHand, equipmentDataHolder_LeftHand, ref prev_EquipmentDataHolder_LeftHand);
-        }
-    }
     private void UpdateEquipmentStats ( EquipmentDataHolder prevEquipment, EquipmentDataHolder newEquipment, ref EquipmentDataHolder currentEquipmentHolder )
     {
-        float multiplier = IsDualWeaponWielding ? 1.3f : 1f;
+        float multiplier = PlayerInventory.current.PlayerHasDoubleWeapon()? 1.3f : 1f;
         if(newEquipment != null)
         {
             if (prevEquipment != newEquipment)
@@ -300,7 +256,6 @@ public class PlayerStats : MonoBehaviour, IHasProgress, iDamageable
             }
             currentEquipmentHolder = newEquipment;
         }
-        OnWeaponChanged?.Invoke(this, EventArgs.Empty);
     }
     private void AddStatsPoints(EquipmentStats equipmentStats, float multiplier )
     {

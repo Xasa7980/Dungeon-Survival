@@ -152,17 +152,17 @@ public class MonsterStats : MonoBehaviour,IHasProgress, iDamageable
             aI_MainCore.SetState(State.Death);
         }
     }
-    public void ApplyDamage ( int dmg, bool arrowHit )
+    public void ApplyDamage ( int dmg)
     {
-        int damage = arrowHit ? CalculateDamage(Mathf.Pow(attackPoints, 0.3f) * dmg) : CalculateDamage(dmg);
+        //int damage = arrowHit ? CalculateDamage(Mathf.Pow(attackPoints, 0.3f) * dmg) : CalculateDamage(dmg);
 
-        healthPoints -= damage;
+        //healthPoints -= damage;
         OnChangeProgress();
         OnGetHurted?.Invoke(this, EventArgs.Empty);
     }
     private DamageType GetDamageType ( EquipmentDataHolder equipmentDataHolder )
     {
-        if (equipmentDataHolder.GetEquipmentElement == EquipmentElement.None)
+        if (equipmentDataHolder.GetEquipmentElement == Element.None)
             if (criticalRate < UnityEngine.Random.Range(0, 100))
             {
                 return DamageType.CriticalDamage;
@@ -178,7 +178,7 @@ public class MonsterStats : MonoBehaviour,IHasProgress, iDamageable
 
         GUI_Pool_Manager.Instance.CreateNumberTexts(GetDamageType(equipmentDataHolder), damage, textPosition);
 
-        playerStats.ApplyDamage(damage, false);
+        playerStats.ApplyDamage(damage);
     }
     public void OnEquipRightWeapon ( EquipmentDataHolder newEquipmentDataHolder )
     {

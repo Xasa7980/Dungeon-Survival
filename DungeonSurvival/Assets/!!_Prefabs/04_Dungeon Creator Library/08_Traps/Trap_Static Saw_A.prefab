@@ -46,12 +46,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 350
-  saw: {fileID: 8715295423973058567}
+  saw: {fileID: 0}
   move: 0
   randomOffset: 1
   timeOffset: 0
   amplitude: 4
   speed: 2
+  damage: 0
+  damageArea: {x: 1, y: 3, z: 2}
+  threatMask:
+    serializedVersion: 2
+    m_Bits: 0
+  threatMask2:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &8715295423973472995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,12 +117,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0fd0f7701890024daee0118098286c8, type: 3}
---- !u!4 &8715295423973058567 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 447204, guid: d0fd0f7701890024daee0118098286c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 8715295423973472995}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8715295424161061121
 PrefabInstance:
   m_ObjectHideFlags: 0
